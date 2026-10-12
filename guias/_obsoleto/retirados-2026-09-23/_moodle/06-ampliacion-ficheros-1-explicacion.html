@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ampliación: buscar, encadenar y empaquetar en GNU/Linux</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="ampliación-buscar-encadenar-y-empaquetar-en-gnulinux" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Ampliación: buscar, encadenar y empaquetar en GNU/Linux</h1><div><span style="display:inline-block;background:#1d4ed8;color:#fff;border:1px solid #1d4ed8;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Explicación</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 2 · Intermedio</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 06</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM3, CM4</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> a tu ritmo</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H4 (terminal Linux y Bash)</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #475569;background:#f1f5f9;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧭 <strong style="color:#475569">Antes de empezar.</strong> Ampliación <strong>voluntaria</strong>. Da por hecho que dominas la <a href="04-comandos-y-ficheros-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía básica de comandos y ficheros</a>. Es para quien vaya rápido, y es la base
+que dan por sabida la <a href="10-trucos-consola-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de trucos de la consola</a>
+y la de <a href="13-scripting-bash-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">scripting</a>. La tabla de
+<a href="06-ampliacion-ficheros-2-chuleta.html#equivalencias-con-windows" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">equivalencias con CMD y PowerShell</a> está en la chuleta.</p>
+</div>
+<h2 id="índice" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Índice</h2>
+<ul style="background:#f6f7f9;border:1px solid #e2e5e9;border-radius:8px;padding:14px 18px 14px 34px;font-size:.93em">
+<li><a href="#ampliación-buscar-encadenar-y-empaquetar-en-gnulinux" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Ampliación: buscar, encadenar y empaquetar en GNU/Linux</a>
+<ul style="padding-left:18px">
+<li><a href="#índice" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Índice</a></li>
+<li><a href="#1-más-opciones-de-los-comandos-básicos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">1. Más opciones de los comandos básicos</a>
+<ul style="padding-left:18px">
+<li><a href="#más-ayuda" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Más ayuda</a></li>
+<li><a href="#más-opciones-de-ls-y-tree" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Más opciones de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tree</code></a></li>
+<li><a href="#escribir-varias-líneas-de-golpe-y-otros-editores" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Escribir varias líneas de golpe y otros editores</a></li>
+<li><a href="#seguir-un-fichero-en-vivo-y-saber-qué-es" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Seguir un fichero en vivo y saber qué es</a></li>
+<li><a href="#copiar-sin-perder-nada" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Copiar sin perder nada</a></li>
+<li><a href="#más-sobre-comodines" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Más sobre comodines</a></li>
+<li><a href="#rutas-en-los-scripts" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Rutas en los scripts</a></li>
+<li><a href="#todo-es-un-fichero-de-verdad" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Todo es un fichero, de verdad</a></li>
+</ul>
+</li>
+<li><a href="#2-buscar-ficheros-find" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">2. Buscar ficheros: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">find</code></a></li>
+<li><a href="#3-buscar-dentro-de-los-ficheros-grep" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">3. Buscar dentro de los ficheros: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">grep</code></a></li>
+<li><a href="#4-redirección-y-tuberías" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">4. Redirección y tuberías</a>
+<ul style="padding-left:18px">
+<li><a href="#las-piezas-que-se-encadenan" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Las piezas que se encadenan</a></li>
+</ul>
+</li>
+<li><a href="#5-enlaces-duros-y-simbólicos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">5. Enlaces duros y simbólicos</a></li>
+<li><a href="#6-metadatos-y-atributos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6. Metadatos y atributos</a></li>
+<li><a href="#7-comprimir-y-empaquetar" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">7. Comprimir y empaquetar</a></li>
+<li><a href="#8-copias-de-seguridad-con-rsync" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">8. Copias de seguridad con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync</code></a></li>
+<li><a href="#9-espacio-en-disco" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">9. Espacio en disco</a></li>
+</ul>
+</li>
+</ul>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0"/>
+<h2 id="1-más-opciones-de-los-comandos-básicos" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">1. Más opciones de los comandos básicos</h2>
+<p>Lo que se quedó fuera de la guía básica. No hace falta aprenderlo de memoria: tenlo a mano.</p>
+<h3 id="más-ayuda" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Más ayuda</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #f8f8f2">help</span> <span style="color: #f8f8f2">cd</span> <span style="color: #75715e"># para comandos internos del shell (cd, export, alias...)</span>
+apropos permisos    <span style="color: #75715e"># buscar comandos por tema</span>
+<span style="color: #f8f8f2">type</span> ls             <span style="color: #75715e"># ¿qué es esto: programa, alias o interno?</span>
+which ls            <span style="color: #75715e"># ¿en qué carpeta está el programa?</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Por qué <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">type</code> importa.</strong> Cuando personalices el terminal vas a poner alias. A partir de ahí, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls</code> puede no
+ser el <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls</code> real sino tu alias. <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">type ls</code> te lo dice, y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">\ls</code> ejecuta el original.</p>
+</div>
+<p>Y para cuando el manual es demasiado:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo apt install tldr     <span style="color: #75715e"># Mint</span>
+sudo pacman -S tealdeer   <span style="color: #75715e"># Arch</span>
+tldr --update
+tldr tar                  <span style="color: #75715e"># ejemplos prácticos en vez de 400 líneas de manual</span>
+</code></pre>
+<h3 id="más-opciones-de-ls-y-tree" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Más opciones de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tree</code></h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">ls -t               <span style="color: #75715e"># ordena por fecha de modificación, del más nuevo al más viejo</span>
+ls -S               <span style="color: #75715e"># ordena por tamaño</span>
+ls -r               <span style="color: #75715e"># invierte el orden</span>
+ls -R               <span style="color: #75715e"># recursivo: entra en los subdirectorios</span>
+ls -d carpeta       <span style="color: #75715e"># información DE la carpeta, no de su contenido</span>
+ls -i               <span style="color: #75715e"># muestra el número de inodo</span>
+
+ls -lt              <span style="color: #75715e"># lo más reciente arriba: "¿qué he tocado hace un rato?"</span>
+ls -lhS             <span style="color: #75715e"># lo más grande arriba: "¿qué me está llenando el disco?"</span>
+
+tree -d             <span style="color: #75715e"># sólo directorios</span>
+tree -a             <span style="color: #75715e"># incluye ocultos</span>
+</code></pre>
+<h3 id="escribir-varias-líneas-de-golpe-y-otros-editores" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Escribir varias líneas de golpe y otros editores</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">cat &gt; lista.txt <span style="color: #e6db74">&lt;&lt; 'FIN'</span>
+<span style="color: #e6db74">manzana</span>
+<span style="color: #e6db74">pera</span>
+<span style="color: #e6db74">plátano</span>
+<span style="color: #e6db74">FIN</span>
+</code></pre>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Editor</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Cómo salir</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Nota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nano fichero</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code>+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">O</code> guarda, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code>+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code> sale</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">El de la guía básica</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">micro fichero</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code>+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">S</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code>+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Q</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Como nano pero con los atajos de siempre (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo apt install micro</code>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">vim fichero</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code> y luego <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">:q!</code> (salir sin guardar) o <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">:wq</code> (guardar y salir)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Te lo vas a encontrar sin querer en muchos servidores</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="seguir-un-fichero-en-vivo-y-saber-qué-es" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Seguir un fichero en vivo y saber qué es</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">tail -f /var/log/apt/history.log   <span style="color: #75715e"># SEGUIR el fichero en vivo. Ctrl+C para parar</span>
+file fichero                        <span style="color: #75715e"># ¿qué tipo de fichero es realmente?</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tail -f</code> es el comando del administrador de sistemas.</strong> Lo dejas corriendo sobre un registro
+mientras provocas el error, y ves aparecer el mensaje en el momento. Pruébalo: abre dos
+terminales, en uno <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tail -f /var/log/apt/history.log</code> y en el otro instala un paquete con
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo apt install</code>.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">file</code> mira dentro, no la extensión.</strong> En Windows un fichero es una imagen porque se llama
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.jpg</code>. En Linux, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">file</code> lee los primeros bytes y te dice qué es de verdad. Renombra una imagen
+a <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.txt</code> y pruébalo: seguirá diciendo que es un JPEG.</p>
+</div>
+<h3 id="copiar-sin-perder-nada" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Copiar sin perder nada</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">cp -v origen destino               <span style="color: #75715e"># -v: dice lo que va haciendo</span>
+cp -u origen destino               <span style="color: #75715e"># -u: sólo si el origen es más nuevo</span>
+cp -a carpeta/ /destino/           <span style="color: #75715e"># -a: archivo — conserva permisos, fechas y enlaces</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">💡 <strong style="color:#1c6b4a"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cp -a</code> es el que quieres para copias de seguridad.</strong> Un <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cp -r</code> normal copia el contenido
+pero <strong>pierde los permisos y las fechas originales</strong>. Si copias <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/home</code> con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cp -r</code>, todos los
+ficheros pasan a ser tuyos y con fecha de hoy. Con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-a</code>, no.</p>
+</div>
+<h3 id="más-sobre-comodines" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Más sobre comodines</h3>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Comodín</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Casa con</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">[!abc]</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Cualquier carácter <strong>menos</strong> ésos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">[!t]*</code> → todo lo que no empieza por <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">t</code></td>
+</tr>
+</tbody>
+</table></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Los comodines los expande el shell, no el comando.</strong> Cuando escribes <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rm *.txt</code>, Bash
+sustituye <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">*.txt</code> por la lista real de ficheros <strong>antes</strong> de llamar a <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rm</code>. Por eso <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">echo *.txt</code>
+te enseña lo que va a pasar.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Si ningún fichero casa, Bash pasa el comodín tal cual.</strong> <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls *.xyz</code> sin ficheros <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.xyz</code>
+da el error «no existe *.xyz». No es un fallo tuyo: es que el shell no encontró nada que
+sustituir.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Los comodines no son expresiones regulares.</strong> En comodines <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">*</code> significa «lo que sea»; en
+expresiones regulares (las de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">grep</code>, <a href="#3-buscar-dentro-de-los-ficheros-grep" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 3</a>) <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">*</code>
+significa «cero o más veces lo anterior». Se parecen y no lo son.</p>
+</div>
+<h3 id="rutas-en-los-scripts" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Rutas en los scripts</h3>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Cuándo usar cada tipo de ruta.</strong> En un <strong>script</strong> usa siempre rutas absolutas: el script puede
+ejecutarse desde cualquier directorio, y desde <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cron</code> se ejecuta desde uno que no esperas
+(lo verás en la <a href="13-scripting-bash-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de scripting</a>). Escribiendo a mano, las relativas son mucho más cómodas.</p>
+</div>
+<h3 id="todo-es-un-fichero-de-verdad" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Todo es un fichero, de verdad</h3>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">❗ <strong style="color:#b45309">Todo es un fichero.</strong> Tu disco duro es un fichero (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/sda</code>). El teclado es un fichero. La
+temperatura de la CPU se lee de un fichero en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/sys</code>. Incluso «la nada» es un fichero
+(<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/null</code>). Esto no es una metáfora: puedes hacer <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cat /dev/urandom</code> y ver qué pasa (después
+pulsa <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">C</code>). Es la idea central del diseño de Unix, y explica por qué basta con saber
+manejar ficheros para administrar todo el sistema.</p>
+</div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">cat /proc/cpuinfo <span style="color: #f8f8f2">|</span> head -n <span style="color: #ae81ff">20</span>
+cat /proc/meminfo <span style="color: #f8f8f2">|</span> head -n <span style="color: #ae81ff">5</span>
+</code></pre>
+<h2 id="2-buscar-ficheros-find" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">2. Buscar ficheros: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">find</code></h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">find <span style="color: #f92672">[</span>dónde<span style="color: #f92672">]</span> <span style="color: #f92672">[</span>criterios<span style="color: #f92672">]</span> <span style="color: #f92672">[</span>qué hacer<span style="color: #f92672">]</span>
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">find . -name <span style="color: #e6db74">"*.txt"</span> <span style="color: #75715e"># por nombre, desde aquí hacia abajo</span>
+find /home -iname <span style="color: #e6db74">"informe*"</span> <span style="color: #75715e"># -i: sin distinguir mayúsculas</span>
+find . -type f                        <span style="color: #75715e"># sólo ficheros</span>
+find . -type d                        <span style="color: #75715e"># sólo directorios</span>
+find . -type l                        <span style="color: #75715e"># sólo enlaces simbólicos</span>
+
+find . -size +10M                     <span style="color: #75715e"># de más de 10 megas</span>
+find . -size -1k                      <span style="color: #75715e"># de menos de 1 kilo</span>
+find . -empty                         <span style="color: #75715e"># vacíos</span>
+
+find . -mtime -7                      <span style="color: #75715e"># modificados en los últimos 7 días</span>
+find . -mtime +30                     <span style="color: #75715e"># sin tocar desde hace más de 30 días</span>
+find . -mmin -10                      <span style="color: #75715e"># modificados en los últimos 10 minutos</span>
+
+find . -user alumno                   <span style="color: #75715e"># de un usuario</span>
+find . -perm <span style="color: #ae81ff">777</span> <span style="color: #75715e"># con esos permisos exactos</span>
+find . -perm -o+w                     <span style="color: #75715e"># que "otros" puedan escribir (ver permisos)</span>
+</code></pre>
+<p>Combinar criterios:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">find . -name <span style="color: #e6db74">"*.log"</span> -size +1M                    <span style="color: #75715e"># las dos cosas (Y implícito)</span>
+find . -name <span style="color: #e6db74">"*.jpg"</span> -o -name <span style="color: #e6db74">"*.png"</span> <span style="color: #75715e"># -o: o una o la otra</span>
+find . -type f ! -name <span style="color: #e6db74">"*.txt"</span> <span style="color: #75715e"># !: negación</span>
+find /var/log -type f -name <span style="color: #e6db74">"*.log"</span> -mtime +30    <span style="color: #75715e"># registros viejos</span>
+</code></pre>
+<p>Hacer algo con lo encontrado:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">find . -name <span style="color: #e6db74">"*.tmp"</span> -delete                       <span style="color: #75715e"># borrarlos</span>
+find . -name <span style="color: #e6db74">"*.txt"</span> -exec cat <span style="color: #f92672">{}</span> <span style="color: #ae81ff">\;</span> <span style="color: #75715e"># ejecutar un comando con cada uno</span>
+find . -name <span style="color: #e6db74">"*.txt"</span> -exec cp <span style="color: #f92672">{}</span> /copia/ <span style="color: #ae81ff">\;</span> <span style="color: #75715e"># copiarlos</span>
+find . -name <span style="color: #e6db74">"*.sh"</span> -exec chmod +x <span style="color: #f92672">{}</span> +            <span style="color: #75715e"># + agrupa: más rápido que \;</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ En <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-exec</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">{}</code> se sustituye por cada fichero encontrado. <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">\;</code> ejecuta el comando una vez por
+fichero; <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">+</code> lo ejecuta una sola vez con todos como argumentos, que es mucho más rápido.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-delete</code> va siempre al final</strong> y se comprueba primero <strong>sin él</strong>. <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">find . -delete -name "*.tmp"</code> borra el directorio entero antes de mirar el nombre. Ejecuta primero
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">find . -name "*.tmp"</code>, mira la lista, y sólo entonces añade <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-delete</code>.</p>
+</div>
+<p>Alternativa rápida cuando sólo buscas por nombre:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo updatedb          <span style="color: #75715e"># actualizar la base de datos</span>
+locate informe.pdf     <span style="color: #75715e"># instantáneo, pero usa un índice que puede estar desfasado</span>
+</code></pre>
+<h2 id="3-buscar-dentro-de-los-ficheros-grep" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">3. Buscar dentro de los ficheros: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">grep</code></h2>
+<p><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">find</code> busca ficheros <strong>por su nombre</strong>. <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">grep</code> busca <strong>dentro</strong> de ellos.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">grep <span style="color: #e6db74">"error"</span> registro.log            <span style="color: #75715e"># líneas que contienen "error"</span>
+grep -i <span style="color: #e6db74">"error"</span> registro.log         <span style="color: #75715e"># sin distinguir mayúsculas</span>
+grep -n <span style="color: #e6db74">"error"</span> registro.log         <span style="color: #75715e"># con número de línea</span>
+grep -c <span style="color: #e6db74">"error"</span> registro.log         <span style="color: #75715e"># sólo cuántas veces aparece</span>
+grep -v <span style="color: #e6db74">"error"</span> registro.log         <span style="color: #75715e"># las líneas que NO lo contienen</span>
+grep -w <span style="color: #e6db74">"red"</span> fichero                <span style="color: #75715e"># la palabra entera (no "redirigir")</span>
+grep -r <span style="color: #e6db74">"TODO"</span> .                     <span style="color: #75715e"># recursivo por todo el árbol</span>
+grep -l <span style="color: #e6db74">"clave"</span> *.conf               <span style="color: #75715e"># sólo los NOMBRES de los ficheros que casan</span>
+grep -A <span style="color: #ae81ff">3</span> -B <span style="color: #ae81ff">3</span> <span style="color: #e6db74">"error"</span> log           <span style="color: #75715e"># 3 líneas de contexto antes y después</span>
+</code></pre>
+<p>Expresiones regulares básicas:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Patrón</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Casa con</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">^texto</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Líneas que <strong>empiezan</strong> por «texto»</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">texto$</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Líneas que <strong>terminan</strong> en «texto»</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Un carácter cualquiera</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">[0-9]</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Un dígito</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">+</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Una o más veces lo anterior (con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-E</code>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">|</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">O lógico (con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-E</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">grep <span style="color: #e6db74">"^alumno"</span> /etc/passwd                  <span style="color: #75715e"># líneas que empiezan por alumno</span>
+grep -E <span style="color: #e6db74">"error|fallo|warning"</span> registro.log  <span style="color: #75715e"># cualquiera de las tres</span>
+grep -E <span style="color: #e6db74">"^[0-9]+</span>$<span style="color: #e6db74">"</span> datos.txt                <span style="color: #75715e"># líneas que son sólo números</span>
+</code></pre>
+<p>Combinado con lo anterior:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">grep -rn <span style="color: #e6db74">"contraseña"</span> /etc/ <span style="color: #ae81ff">2</span>&gt;/dev/null     <span style="color: #75715e"># buscar en toda la configuración</span>
+ls -l <span style="color: #f8f8f2">|</span> grep <span style="color: #e6db74">"^d"</span> <span style="color: #75715e"># sólo directorios</span>
+ps aux <span style="color: #f8f8f2">|</span> grep firefox                       <span style="color: #75715e"># ver la guía de procesos</span>
+</code></pre>
+<h2 id="4-redirección-y-tuberías" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">4. Redirección y tuberías</h2>
+<p>Aquí es donde el terminal deja de ser un explorador de archivos incómodo y se convierte en otra
+cosa.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #6b3fa0;background:#f5f0fb;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧩 <strong style="color:#6b3fa0">Analogía.</strong> Cada comando es una máquina con una entrada y dos salidas: la buena y la de los
+errores. Una <strong>tubería</strong> conecta la salida buena de una máquina con la entrada de la siguiente.
+Encadenando máquinas simples montas una fábrica que hace algo que ninguna sabe hacer sola.
+Ésa es la filosofía Unix: programas pequeños que hacen una cosa bien y se pueden encadenar.</p>
+</div>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Símbolo</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&gt;</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Salida a fichero, <strong>sobrescribiendo</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&gt;&gt;</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Salida a fichero, <strong>añadiendo al final</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">2&gt;</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sólo los <strong>errores</strong> a un fichero</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&amp;&gt;</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Salida y errores al mismo fichero</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">2&gt;/dev/null</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Descartar los errores</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&lt;</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Leer la entrada desde un fichero</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">|</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Conectar la salida de uno con la entrada del siguiente</td>
+</tr>
+</tbody>
+</table></div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">ls -l &gt; listado.txt
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"más"</span> &gt;&gt; listado.txt
+find / -name <span style="color: #e6db74">"*.conf"</span> <span style="color: #ae81ff">2</span>&gt;/dev/null      <span style="color: #75715e"># buscar ignorando los "permiso denegado"</span>
+comando <span style="color: #f8f8f2">&amp;</span>&gt; todo.log
+</code></pre>
+<h3 id="las-piezas-que-se-encadenan" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Las piezas que se encadenan</h3>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Comando</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sort</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Ordena líneas (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-n</code> numérico, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-r</code> inverso, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-u</code> sin repetidos)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">uniq</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Quita repetidos consecutivos (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-c</code> los cuenta)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">wc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Cuenta líneas (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-l</code>), palabras (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-w</code>), caracteres (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-c</code>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cut</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Extrae columnas (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-d:</code> separador, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-f1</code> campo)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tr</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sustituye o borra caracteres</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">head</code> / <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tail</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Los primeros / últimos</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tee</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Guarda en un fichero <strong>y</strong> deja pasar el flujo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ejemplos que hacen algo útil de verdad:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e"># Los 5 ficheros más grandes de mi carpeta</span>
+ls -lhS ~ <span style="color: #f8f8f2">|</span> head -n <span style="color: #ae81ff">6</span>
+<span style="color: #75715e"># Los usuarios del sistema, ordenados</span>
+cut -d: -f1 /etc/passwd <span style="color: #f8f8f2">|</span> sort
+
+<span style="color: #75715e"># ¿Qué shells usa la gente y cuántos cada uno?</span>
+cut -d: -f7 /etc/passwd <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq -c <span style="color: #f8f8f2">|</span> sort -rn
+
+<span style="color: #75715e"># Cuántos ficheros .md hay en total</span>
+find . -name <span style="color: #e6db74">"*.md"</span> <span style="color: #f8f8f2">|</span> wc -l
+
+<span style="color: #75715e"># Las 10 IP que más aparecen en un registro</span>
+cut -d<span style="color: #e6db74">' '</span> -f1 acceso.log <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq -c <span style="color: #f8f8f2">|</span> sort -rn <span style="color: #f8f8f2">|</span> head
+
+<span style="color: #75715e"># Ver el resultado Y guardarlo a la vez</span>
+ls -lh <span style="color: #f8f8f2">|</span> tee listado.txt
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sort | uniq -c | sort -rn</code> es la receta más útil de todo Unix</strong>: cuenta cuántas veces aparece
+cada cosa y las ordena de más a menos. Sirve para registros, para usuarios, para extensiones,
+para lo que sea. Memorízala.</p>
+</div>
+<h2 id="5-enlaces-duros-y-simbólicos" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">5. Enlaces duros y simbólicos</h2>
+<p>Para entenderlo hace falta saber qué es un <strong>inodo</strong>: la ficha donde el sistema guarda los datos
+reales de un fichero (permisos, propietario, fechas y dónde están los bloques en el disco). <strong>El
+nombre del fichero no está en el inodo</strong>: está en el directorio, apuntando al número de inodo.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #6b3fa0;background:#f5f0fb;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧩 <strong style="color:#6b3fa0">Analogía.</strong> El inodo es la vivienda; el nombre en el directorio es una entrada en el listín
+telefónico. Un <strong>enlace duro</strong> es otra entrada del listín que apunta a la misma vivienda: si
+borras una entrada, la vivienda sigue ahí mientras quede otra. Un <strong>enlace simbólico</strong> es una
+nota que dice «vive en la calle Mayor 3»: si el vecino se muda, la nota queda apuntando a una
+casa vacía.</p>
+</div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">ln fichero.txt enlace_duro          <span style="color: #75715e"># enlace duro</span>
+ln -s fichero.txt enlace_blando     <span style="color: #75715e"># enlace simbólico (el habitual)</span>
+ls -li                              <span style="color: #75715e"># -i muestra el inodo</span>
+</code></pre>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Enlace duro</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Enlace simbólico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Comparte inodo</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sí</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">No, tiene el suyo</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Si borras el original</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Sigue funcionando</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Se rompe (queda «colgado»)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Entre discos distintos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>No</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sí</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">A directorios</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>No</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Sí</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Se ve en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls -l</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Como un fichero normal</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lrwxrwxrwx ... enlace -&gt; destino</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Pruébalo, que es la única forma de que se entienda:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"contenido"</span> &gt; original.txt
+ln original.txt duro.txt
+ln -s original.txt blando.txt
+ls -li                              <span style="color: #75715e"># duro.txt y original.txt comparten inodo</span>
+
+rm original.txt
+cat duro.txt                        <span style="color: #75715e"># sigue funcionando</span>
+cat blando.txt                      <span style="color: #75715e"># error: enlace roto</span>
+ls -l blando.txt                    <span style="color: #75715e"># se ve en rojo: apunta a la nada</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ En el escritorio de Windows los «accesos directos» son enlaces simbólicos, y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mklink</code> es el
+equivalente en CMD. La diferencia es que en Linux los enlaces simbólicos son parte del sistema
+de ficheros y funcionan para cualquier programa, no sólo para el explorador.</p>
+</div>
+<h2 id="6-metadatos-y-atributos" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">6. Metadatos y atributos</h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">stat fichero.txt
+</code></pre>
+<p>Te da inodo, tamaño, permisos en octal y simbólico, propietario, y <strong>tres fechas</strong>:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Fecha</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué es</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><em>Access</em></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Última vez que se <strong>leyó</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><em>Modify</em></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Última vez que cambió el <strong>contenido</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><em>Change</em></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Última vez que cambiaron los <strong>metadatos</strong> (permisos, nombre, propietario)</td>
+</tr>
+</tbody>
+</table></div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">touch -d <span style="color: #e6db74">"2026-01-15 10:00"</span> fichero.txt    <span style="color: #75715e"># cambiar la fecha a mano</span>
+lsattr fichero.txt                          <span style="color: #75715e"># atributos extendidos</span>
+sudo chattr +i fichero.txt                  <span style="color: #75715e"># hacerlo inmutable</span>
+</code></pre>
+<p>Los atributos y los permisos se ven a fondo en la <a href="09-permisos-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de permisos</a>.
+Aquí basta con saber leerlos:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">ls -l
+<span style="color: #75715e"># -rw-r--r--  1  alumno  alumno  1024  9 sep 10:24  nota.txt</span>
+<span style="color: #75715e">#  │└┬┘└┬┘└┬┘     └──┬─┘  └──┬─┘  └─┬┘  └────┬────┘</span>
+<span style="color: #75715e">#  │ u   g   o       │       │      │        └── fecha de modificación</span>
+<span style="color: #75715e">#  │                 │       │      └── tamaño en bytes</span>
+<span style="color: #75715e">#  │                 │       └── grupo</span>
+<span style="color: #75715e">#  │                 └── propietario</span>
+<span style="color: #75715e">#  └── tipo: - fichero · d directorio · l enlace</span>
+</code></pre>
+<h2 id="7-comprimir-y-empaquetar" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">7. Comprimir y empaquetar</h2>
+<p>En Linux son <strong>dos operaciones distintas</strong>: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tar</code> empaqueta (mete muchos ficheros en uno) y
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">gzip</code> comprime (hace pequeño un fichero). El <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.tar.gz</code> es hacer las dos.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">tar -czvf copia.tar.gz carpeta/       <span style="color: #75715e"># crear</span>
+tar -xzvf copia.tar.gz                <span style="color: #75715e"># extraer</span>
+tar -tzvf copia.tar.gz                <span style="color: #75715e"># ver el contenido SIN extraer</span>
+tar -xzvf copia.tar.gz -C /destino/   <span style="color: #75715e"># extraer en otro sitio</span>
+</code></pre>
+<p>Las letras, que es lo único que hay que memorizar:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Letra</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">c</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><em>create</em> — crear</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">x</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><em>extract</em> — extraer</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">t</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><em>list</em> — listar</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">z</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">comprimir con gzip</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">j</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">comprimir con bzip2 (más lento, más pequeño)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">v</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><em>verbose</em> — ir diciendo qué hace</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">f</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><em>file</em> — <strong>el nombre del fichero va justo después</strong>. Siempre la última</td>
+</tr>
+</tbody>
+</table></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">💡 <strong style="color:#1c6b4a">Regla nemotécnica:</strong> <em>«<strong>C</strong>rear <strong>Z</strong>ipeado <strong>V</strong>iendo el <strong>F</strong>ichero»</em> → <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">czvf</code>.
+Y para extraer, la <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">c</code> se convierte en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">x</code>: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">xzvf</code>.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tar -tzvf</code> antes de extraer.</strong> Un <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.tar.gz</code> mal hecho puede desparramar cientos de
+ficheros en tu carpeta actual en lugar de crear una subcarpeta. Listar primero cuesta un
+segundo.</p>
+</div>
+<p>Otros formatos:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">gzip fichero.txt          <span style="color: #75715e"># comprime y BORRA el original (queda fichero.txt.gz)</span>
+gunzip fichero.txt.gz     <span style="color: #75715e"># descomprime</span>
+zip -r copia.zip carpeta/ <span style="color: #75715e"># zip, por compatibilidad con Windows</span>
+unzip copia.zip
+</code></pre>
+<h2 id="8-copias-de-seguridad-con-rsync" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">8. Copias de seguridad con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync</code></h2>
+<p><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync</code> es <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cp</code> con memoria: sólo copia <strong>lo que ha cambiado</strong>. La primera vez tarda lo mismo;
+las siguientes, segundos.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">rsync -avh origen/ destino/
+</code></pre>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Opción</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-a</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><em>archive</em>: recursivo y conservando permisos, fechas, enlaces y propietarios</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-v</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Va diciendo qué copia</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-h</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Tamaños legibles</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--delete</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Borra en el destino lo que ya no está en el origen (<strong>espejo exacto</strong>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--dry-run</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Simula</strong>: dice qué haría, sin tocar nada</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--progress</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Barra de progreso</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--exclude</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Excluye un patrón</td>
+</tr>
+</tbody>
+</table></div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e"># Simular SIEMPRE antes de una copia con --delete</span>
+rsync -avh --delete --dry-run ~/documentos/ /copia/documentos/
+
+<span style="color: #75715e"># Y sólo entonces, ejecutarla</span>
+rsync -avh --delete ~/documentos/ /copia/documentos/
+
+<span style="color: #75715e"># Excluyendo cosas</span>
+rsync -avh --exclude<span style="color: #f92672">=</span><span style="color: #e6db74">"*.tmp"</span> --exclude<span style="color: #f92672">=</span><span style="color: #e6db74">"cache/"</span> ~/proyecto/ /copia/
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">La barra final cambia el resultado.</strong> <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync origen/ destino/</code> copia <strong>el contenido</strong> de
+origen dentro de destino. <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync origen destino/</code> copia <strong>la carpeta origen entera</strong> dentro de
+destino, creando <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">destino/origen/</code>. Es la trampa clásica de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync</code>: pruébalo con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--dry-run</code>.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync -avh --delete</code> es el equivalente de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">robocopy /MIR</code> en Windows.</p>
+</div>
+<h2 id="9-espacio-en-disco" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">9. Espacio en disco</h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">df -h                    <span style="color: #75715e"># espacio libre por sistema de archivos montado</span>
+df -h /home              <span style="color: #75715e"># sólo el de una ruta</span>
+du -sh carpeta/          <span style="color: #75715e"># cuánto ocupa esa carpeta en total</span>
+du -sh */                <span style="color: #75715e"># cuánto ocupa cada subcarpeta</span>
+du -h --max-depth<span style="color: #f92672">=</span><span style="color: #ae81ff">1</span> ~ <span style="color: #f8f8f2">|</span> sort -rh <span style="color: #f8f8f2">|</span> head    <span style="color: #75715e"># el ranking de lo que más ocupa</span>
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo apt install ncdu     <span style="color: #75715e"># en Arch: sudo pacman -S ncdu</span>
+ncdu /                   <span style="color: #75715e"># explorador interactivo: navegas y borras desde ahí</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">df</code> mira las particiones, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">du</code> mira las carpetas.</strong> Cuando el disco se llena, el orden es:
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">df -h</code> para saber <strong>qué partición</strong> está llena, y después <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">du</code> o <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ncdu</code> para saber <strong>qué
+carpeta</strong> la ha llenado. Si <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">df</code> dice que está lleno y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">du</code> no encuentra nada, suele ser un
+fichero borrado que un proceso sigue teniendo abierto: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lsof +L1</code>.</p>
+</div>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Explicación</p></div>
+</body>
+</html>

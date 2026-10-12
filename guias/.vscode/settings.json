@@ -1,0 +1,7 @@
+{
+    // Las capturas pegadas con Ctrl+V van a la carpeta images/ del tema que estás editando
+    "markdown.copyFiles.destination": {
+        "**/*.md": "images/"
+    },
+    "markdown.updateLinksOnFileMove.enabled": "prompt"
+}

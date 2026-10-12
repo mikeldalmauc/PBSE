@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Registrar la clave de Ventoy en MokManager</title>
+  <desc id="d">Seis pantallas azules en orden: 1, aviso Verification failed 0x1A, pulsa OK; 2, pulsa una tecla antes de que acabe la cuenta atrás; 3, elige Enroll key from disk; 4, entra en VTOYEFI y elige ENROLL_THIS_KEY_IN_MOKMANAGER.cer; 5, Continue y luego Yes; 6, Reboot.</desc>
+  <rect x="0.5" y="0.5" width="899" height="419" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">La pantalla azul de MOK, paso a paso (sólo la primera vez)</text>
+
+  <g fill="#1d3aa6">
+    <rect x="34" y="58" width="268" height="124" rx="6"/>
+    <rect x="316" y="58" width="268" height="124" rx="6"/>
+    <rect x="598" y="58" width="268" height="124" rx="6"/>
+    <rect x="34" y="244" width="268" height="124" rx="6"/>
+    <rect x="316" y="244" width="268" height="124" rx="6"/>
+    <rect x="598" y="244" width="268" height="124" rx="6"/>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#e6e9ee" text-anchor="middle">
+    <!-- 1 -->
+    <text x="168" y="96">Verification failed:</text>
+    <text x="168" y="114">(0x1A) Security Violation</text>
+    <rect x="138" y="134" width="60" height="22" fill="#e6e9ee"/>
+    <text x="168" y="150" fill="#0b0b0b" font-weight="700">OK</text>
+    <!-- 2 -->
+    <text x="450" y="90">Shim UEFI key management</text>
+    <text x="450" y="118">Press any key to perform</text>
+    <text x="450" y="134">MOK management</text>
+    <text x="450" y="164" fill="#fdd36a">Booting in 10 seconds</text>
+    <!-- 3 -->
+    <text x="732" y="84">Perform MOK management</text>
+    <text x="732" y="114">Continue boot</text>
+    <rect x="636" y="122" width="192" height="20" fill="#e6e9ee"/>
+    <text x="732" y="137" fill="#0b0b0b" font-weight="700">Enroll key from disk</text>
+    <text x="732" y="160">Enroll hash from disk</text>
+    <!-- 4 -->
+    <text x="168" y="270">Select Key</text>
+    <text x="168" y="298">VTOYEFI/</text>
+    <rect x="44" y="310" width="248" height="20" fill="#e6e9ee"/>
+    <text x="168" y="325" fill="#0b0b0b" font-weight="700" font-size="11">ENROLL_THIS_KEY_IN_MOKMANAGER.cer</text>
+    <!-- 5 -->
+    <text x="450" y="270">[Enroll MOK]</text>
+    <text x="450" y="292">View key 0</text>
+    <rect x="400" y="300" width="100" height="20" fill="#e6e9ee"/>
+    <text x="450" y="315" fill="#0b0b0b" font-weight="700">Continue</text>
+    <text x="450" y="342">Enroll the key(s)?  No  </text>
+    <rect x="524" y="329" width="40" height="18" fill="#e6e9ee"/>
+    <text x="544" y="343" fill="#0b0b0b" font-weight="700">Yes</text>
+    <!-- 6 -->
+    <text x="732" y="270">Perform MOK management</text>
+    <rect x="672" y="290" width="120" height="20" fill="#e6e9ee"/>
+    <text x="732" y="305" fill="#0b0b0b" font-weight="700">Reboot</text>
+    <text x="732" y="334">Enroll key from disk</text>
+    <text x="732" y="352">Enroll hash from disk</text>
+  </g>
+
+  <g font-size="15" font-weight="700" fill="#0b0b0b">
+    <text x="34" y="204">1 · Es lo esperado</text>
+    <text x="316" y="204">2 · ¡Rápido!</text>
+    <text x="598" y="204">3 · Registrar desde el disco</text>
+    <text x="34" y="390">4 · Elige el certificado</text>
+    <text x="316" y="390">5 · Confirma</text>
+    <text x="598" y="390">6 · Reinicia</text>
+  </g>
+  <g font-size="12.5" fill="#52514e">
+    <text x="34" y="222">Pulsa Enter sobre OK.</text>
+    <text x="316" y="222">Pulsa una tecla antes de que acabe el tiempo.</text>
+    <text x="598" y="222">Baja con las flechas y pulsa Enter.</text>
+    <text x="34" y="408">Entra en VTOYEFI y elige el fichero .cer.</text>
+    <text x="316" y="408">Continue y, cuando pregunte, Yes.</text>
+    <text x="598" y="408">Vuelve a elegir el pincho: ahora sí, Ventoy.</text>
+  </g>
+</svg>

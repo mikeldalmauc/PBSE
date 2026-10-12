@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="350" viewBox="0 0 900 350" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Las hojas de la navaja suiza</title>
+  <desc id="d">Las ISO del pincho en cuatro grupos. Instalar: Windows 11, Ubuntu, Linux Mint y Arch Linux. Rescatar: Hiren's BootCD PE y SystemRescue. Discos: Clonezilla, Rescuezilla, GParted Live, Memtest86+ y ShredOS. Seguridad y red: Kali Linux y netboot.xyz.</desc>
+  <rect x="0.5" y="0.5" width="899" height="349" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Las hojas de tu navaja suiza</text>
+
+  <!-- pincho -->
+  <rect x="380" y="56" width="120" height="44" rx="10" fill="#1e2227"/>
+  <rect x="500" y="66" width="22" height="24" rx="3" fill="#ffffff" stroke="#1e2227" stroke-width="2"/>
+  <text x="440" y="84" font-size="15" font-weight="700" text-anchor="middle" fill="#ffffff">Ventoy</text>
+  <g stroke="#1e2227" stroke-width="2" fill="none">
+    <path d="M440 100 V 116"/>
+    <path d="M126 116 H 774"/>
+    <path d="M126 116 V 130"/><path d="M342 116 V 130"/><path d="M558 116 V 130"/><path d="M774 116 V 130"/>
+  </g>
+
+  <g stroke-width="2">
+    <rect x="24" y="130" width="204" height="196" rx="12" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="240" y="130" width="204" height="196" rx="12" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="456" y="130" width="204" height="196" rx="12" fill="#d3f2e6" stroke="#1baf7a"/>
+    <rect x="672" y="130" width="204" height="196" rx="12" fill="#e4e0f8" stroke="#6250d6"/>
+  </g>
+  <g font-size="16" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="158">Instalar</text>
+    <text x="256" y="158">Rescatar</text>
+    <text x="472" y="158">Discos y hardware</text>
+    <text x="688" y="158">Seguridad y red</text>
+  </g>
+  <g font-size="12" fill="#52514e">
+    <text x="40" y="176">poner un sistema nuevo</text>
+    <text x="256" y="176">salvar un equipo que no arranca</text>
+    <text x="472" y="176">clonar, particionar, probar, borrar</text>
+    <text x="688" y="176">auditar y arrancar por red</text>
+  </g>
+  <g font-size="14" fill="#0b0b0b">
+    <text x="40" y="206">• Windows 11</text>
+    <text x="40" y="230">• Ubuntu</text>
+    <text x="40" y="254">• Linux Mint</text>
+    <text x="40" y="278">• Arch Linux</text>
+
+    <text x="256" y="206">• Hiren's BootCD PE</text>
+    <text x="256" y="230">• SystemRescue</text>
+
+    <text x="472" y="206">• Clonezilla</text>
+    <text x="472" y="230">• Rescuezilla</text>
+    <text x="472" y="254">• GParted Live</text>
+    <text x="472" y="278">• Memtest86+</text>
+    <text x="472" y="302">• ShredOS</text>
+
+    <text x="688" y="206">• Kali Linux (Live)</text>
+    <text x="688" y="230">• netboot.xyz</text>
+  </g>
+</svg>

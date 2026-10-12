@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Los estados de un proceso</title>
+  <desc id="d">Nuevo pasa a Listo. Listo pasa a En ejecución cuando el planificador lo elige. En ejecución vuelve a Listo si se acaba su turno, pasa a Bloqueado si pide entrada o salida, y a Terminado cuando acaba. Bloqueado vuelve a Listo cuando llega el dato.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="899" height="399" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Los estados de un proceso</text>
+  <text x="24" y="62" font-size="14" fill="#52514e">En cada núcleo de la CPU sólo UN proceso está «en ejecución». Todos los demás esperan.</text>
+
+  <!-- Flechas -->
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M144 196 H 238" marker-end="url(#flecha)"/>
+    <path d="M330 168 C 352 104, 570 104, 592 166" marker-end="url(#flecha)"/>
+    <path d="M512 196 H 398" marker-end="url(#flecha)"/>
+    <path d="M684 196 H 754" marker-end="url(#flecha)"/>
+    <path d="M574 224 L 512 304" marker-end="url(#flecha)"/>
+    <path d="M412 304 L 344 228" marker-end="url(#flecha)"/>
+  </g>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="191" y="186" text-anchor="middle">admitido</text>
+    <text x="461" y="106" text-anchor="middle" font-weight="600">el planificador lo elige</text>
+    <text x="455" y="188" text-anchor="middle">se acaba su turno</text>
+    <text x="719" y="186" text-anchor="middle">acaba</text>
+    <text x="566" y="276">pide algo de E/S</text>
+    <text x="566" y="294" fill="#52514e">(disco, teclado, red…)</text>
+    <text x="364" y="276" text-anchor="end">llega lo que</text>
+    <text x="364" y="294" text-anchor="end">esperaba</text>
+  </g>
+
+  <!-- Estados -->
+  <rect x="24" y="168" width="120" height="56" rx="12" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+  <text x="84" y="192" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">Nuevo</text>
+  <text x="84" y="212" font-size="12" text-anchor="middle" fill="#52514e">se está creando</text>
+
+  <rect x="240" y="168" width="156" height="56" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="318" y="192" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">Listo</text>
+  <text x="318" y="212" font-size="12" text-anchor="middle" fill="#52514e">espera su turno</text>
+
+  <rect x="514" y="168" width="170" height="56" rx="12" fill="#d6efd6" stroke="#008300" stroke-width="2"/>
+  <text x="599" y="192" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">En ejecución</text>
+  <text x="599" y="212" font-size="12" text-anchor="middle" fill="#52514e">usando la CPU ahora</text>
+
+  <rect x="756" y="168" width="120" height="56" rx="12" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+  <text x="816" y="192" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">Terminado</text>
+  <text x="816" y="212" font-size="12" text-anchor="middle" fill="#52514e">ha acabado</text>
+
+  <rect x="384" y="306" width="156" height="56" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <text x="462" y="330" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">Bloqueado</text>
+  <text x="462" y="350" font-size="12" text-anchor="middle" fill="#52514e">esperando algo externo</text>
+
+  <text x="24" y="388" font-size="13" fill="#52514e">Fíjate: desde «Bloqueado» no se vuelve directamente a la CPU. Primero pasa a «Listo» y espera su turno.</text>
+</svg>

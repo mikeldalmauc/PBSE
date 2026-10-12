@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chuleta · Trucos y superpoderes de la consola</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="chuleta--trucos-y-superpoderes-de-la-consola" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Chuleta · Trucos y superpoderes de la consola</h1><div><span style="display:inline-block;background:#1c6b4a;color:#fff;border:1px solid #1c6b4a;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Chuleta</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 3 · Avanzado</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 10</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM4</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 2-3 h, o repartido en sesiones de 20 minutos</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H4 (terminal Linux y Bash)</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Nota.</strong> Esta página acompaña a la <a href="10-trucos-consola-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">explicación del tema</a>. Tenla a mano mientras trabajas.</p>
+</div>
+<h2 id="quince-recetas-de-una-línea" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Quince recetas de una línea</h2>
+<p>Cópialas, pruébalas y, sobre todo, <strong>desármalas</strong>: quita la última parte de la tubería y mira qué
+sale, luego la anterior, y así. Es la mejor forma de entender cómo funcionan.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e"># 1. Los 10 ficheros más grandes de aquí hacia abajo</span>
+find . -type f -exec du -h <span style="color: #f92672">{}</span> + <span style="color: #f8f8f2">|</span> sort -rh <span style="color: #f8f8f2">|</span> head
+
+<span style="color: #75715e"># 2. Qué carpeta me está llenando el disco</span>
+du -h --max-depth<span style="color: #f92672">=</span><span style="color: #ae81ff">1</span> / <span style="color: #ae81ff">2</span>&gt;/dev/null <span style="color: #f8f8f2">|</span> sort -rh <span style="color: #f8f8f2">|</span> head
+
+<span style="color: #75715e"># 3. Cuántos ficheros hay de cada extensión</span>
+find . -type f <span style="color: #f8f8f2">|</span> grep -o <span style="color: #e6db74">'\.[^./]*$'</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq -c <span style="color: #f8f8f2">|</span> sort -rn
+
+<span style="color: #75715e"># 4. Los 10 comandos que más uso</span>
+<span style="color: #f8f8f2">history</span> <span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">'{print $2}'</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq -c <span style="color: #f8f8f2">|</span> sort -rn <span style="color: #f8f8f2">|</span> head
+
+<span style="color: #75715e"># 5. Los 5 procesos que más memoria consumen</span>
+ps aux --sort<span style="color: #f92672">=</span>-%mem <span style="color: #f8f8f2">|</span> head -n <span style="color: #ae81ff">6</span>
+<span style="color: #75715e"># 6. Buscar y reemplazar en todos los ficheros de un tipo</span>
+grep -rl <span style="color: #e6db74">"viejo"</span> --include<span style="color: #f92672">=</span><span style="color: #e6db74">"*.txt"</span> . <span style="color: #f8f8f2">|</span> xargs sed -i.bak <span style="color: #e6db74">'s/viejo/nuevo/g'</span>
+<span style="color: #75715e"># 7. Ficheros modificados en la última hora</span>
+find . -type f -mmin -60
+
+<span style="color: #75715e"># 8. Borrar ficheros vacíos</span>
+find . -type f -empty -delete
+
+<span style="color: #75715e"># 9. Copia de seguridad con la fecha en el nombre</span>
+tar -czf copia-<span style="color: #66d9ef">$(</span>date +%Y%m%d-%H%M<span style="color: #66d9ef">)</span>.tar.gz ~/documentos
+
+<span style="color: #75715e"># 10. Los usuarios que pueden iniciar sesión de verdad</span>
+grep -v -e <span style="color: #e6db74">"/nologin</span>$<span style="color: #e6db74">"</span> -e <span style="color: #e6db74">"/false</span>$<span style="color: #e6db74">"</span> /etc/passwd <span style="color: #f8f8f2">|</span> cut -d: -f1
+
+<span style="color: #75715e"># 11. Cuántas líneas de código hay en un proyecto</span>
+find . -name <span style="color: #e6db74">"*.sh"</span> -exec cat <span style="color: #f92672">{}</span> + <span style="color: #f8f8f2">|</span> wc -l
+
+<span style="color: #75715e"># 12. Renombrar en lote: quitar espacios de los nombres</span>
+<span style="color: #66d9ef">for</span> f <span style="color: #66d9ef">in</span> *<span style="color: #ae81ff">\ </span>*<span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">do</span> mv <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$f</span><span style="color: #e6db74">"</span> <span style="color: #e6db74">"${</span><span style="color: #f8f8f2">f// /_</span><span style="color: #e6db74">}"</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">done</span>
+<span style="color: #75715e"># 13. Ver un registro en vivo filtrando sólo los errores</span>
+tail -f /var/log/syslog <span style="color: #f8f8f2">|</span> grep --line-buffered -i error
+
+<span style="color: #75715e"># 14. Comprobar qué puertos están abiertos</span>
+ss -tulpn <span style="color: #f8f8f2">|</span> column -t
+
+<span style="color: #75715e"># 15. Contar cuántas veces aparece cada palabra en un texto</span>
+tr -s <span style="color: #e6db74">'[:space:]'</span> <span style="color: #e6db74">'\n'</span> &lt; texto.txt <span style="color: #f8f8f2">|</span> tr <span style="color: #e6db74">'A-Z'</span> <span style="color: #e6db74">'a-z'</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq -c <span style="color: #f8f8f2">|</span> sort -rn <span style="color: #f8f8f2">|</span> head
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">La receta 12 merece un vistazo.</strong> <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">${f// /_}</code> es una <strong>expansión de parámetro</strong>: sustituye
+todos los espacios por guiones bajos sin llamar a ningún programa externo. Bash tiene una
+familia entera de estas: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">${f%.txt}</code> quita el sufijo, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">${f#pre}</code> quita el prefijo,
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">${f^^}</code> pasa a mayúsculas. Son más rápidas que <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sed</code> y no crean procesos.</p>
+</div>
+<h2 id="atajos-de-teclado" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Atajos de teclado</h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">EDITAR LA LÍNEA                  HISTORIAL
+  Ctrl+A   principio               !!        comando anterior
+  Ctrl+E   final                   !$        último argumento
+  Ctrl+W   borrar palabra          sudo !!   repetir con sudo
+  Ctrl+U   borrar hasta inicio     Ctrl+R    buscar hacia atrás
+  Ctrl+K   borrar hasta final      ^a^b      corregir y repetir
+  Ctrl+Y   pegar                   history | grep x
+  Ctrl+L   limpiar pantalla        Alt+.     último argumento
+  Tab      completar               Tab Tab   ver opciones
+
+CONTROL                          ENCADENAR
+  Ctrl+C   interrumpir              ;    siempre
+  Ctrl+Z   pausar                   &amp;&amp;   si el anterior fue bien
+  Ctrl+D   fin de entrada / salir   ||   si el anterior falló
+  Ctrl+S   congelar salida          &amp;    en segundo plano
+  Ctrl+Q   descongelar              |    tubería
+
+EXPANSIONES                      TMUX  (prefijo Ctrl+B)
+  {1..5}      1 2 3 4 5            d   salir dejándolo vivo
+  {a,b}       dos cadenas          c   nueva ventana
+  f{,.bak}    f f.bak              %   dividir vertical
+  $(cmd)      salida del comando   "   dividir horizontal
+  $((2+2))    aritmética           [   desplazarse
+  ~           mi carpeta           ?   ayuda
+  echo X      ¡probar antes!
+</code></pre>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Chuleta</p></div>
+</body>
+</html>

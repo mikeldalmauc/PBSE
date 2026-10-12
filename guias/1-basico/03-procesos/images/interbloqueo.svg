@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="330" viewBox="0 0 860 330" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Interbloqueo</title>
+  <desc id="d">A la izquierda, dos coches frente a frente en un puente de un solo carril: ninguno retrocede. A la derecha, el mismo problema en el ordenador: P1 tiene R1 y pide R2; P2 tiene R2 y pide R1. Es una espera circular.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="329" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Interbloqueo: todos esperan, nadie avanza</text>
+
+  <!-- Izquierda: puente -->
+  <text x="212" y="76" font-size="14" font-weight="700" text-anchor="middle" fill="#52514e">EN LA CARRETERA</text>
+  <rect x="24" y="220" width="376" height="56" rx="6" fill="#cde2fb"/>
+  <path d="M40 244 q12 -8 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0" fill="none" stroke="#86b6ef" stroke-width="2"/>
+  <rect x="24" y="186" width="376" height="20" fill="#8a8f98"/>
+  <rect x="24" y="206" width="376" height="8" fill="#6b7078"/>
+  <g fill="#6b7078"><rect x="70" y="214" width="14" height="40"/><rect x="200" y="214" width="14" height="40"/><rect x="330" y="214" width="14" height="40"/></g>
+  <!-- coche azul (mira a la derecha) -->
+  <rect x="104" y="152" width="92" height="28" rx="8" fill="#2a78d6"/>
+  <path d="M122 152 l10 -16 h36 l12 16 z" fill="#2a78d6"/>
+  <path d="M136 150 l6 -10 h22 l7 10 z" fill="#cde2fb"/>
+  <circle cx="126" cy="182" r="9" fill="#2b2d31"/><circle cx="176" cy="182" r="9" fill="#2b2d31"/>
+  <!-- coche naranja (mira a la izquierda) -->
+  <rect x="226" y="152" width="92" height="28" rx="8" fill="#eb6834"/>
+  <path d="M242 152 l12 -16 h36 l10 16 z" fill="#eb6834"/>
+  <path d="M251 150 l7 -10 h22 l6 10 z" fill="#fde4d8"/>
+  <circle cx="246" cy="182" r="9" fill="#2b2d31"/><circle cx="296" cy="182" r="9" fill="#2b2d31"/>
+  <!-- bocadillos -->
+  <rect x="44" y="92" width="128" height="30" rx="10" fill="#ffffff" stroke="#c9ccd1"/>
+  <path d="M120 122 l8 14 l4 -14 z" fill="#ffffff" stroke="#c9ccd1"/>
+  <text x="108" y="112" font-size="13" text-anchor="middle" fill="#0b0b0b">¡Retrocede tú!</text>
+  <rect x="252" y="92" width="128" height="30" rx="10" fill="#ffffff" stroke="#c9ccd1"/>
+  <path d="M296 122 l-4 14 l12 -14 z" fill="#ffffff" stroke="#c9ccd1"/>
+  <text x="316" y="112" font-size="13" text-anchor="middle" fill="#0b0b0b">¡No, tú!</text>
+  <text x="212" y="304" font-size="13" text-anchor="middle" fill="#52514e">Puente de un solo carril: el puente no se libera solo</text>
+
+  <!-- Derecha: grafo -->
+  <text x="640" y="76" font-size="14" font-weight="700" text-anchor="middle" fill="#52514e">EN EL ORDENADOR</text>
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M730 120 H 556" marker-end="url(#flecha)"/>
+    <path d="M520 152 V 210" stroke-dasharray="6 5" marker-end="url(#flecha)"/>
+    <path d="M550 242 H 726" marker-end="url(#flecha)"/>
+    <path d="M760 210 V 152" stroke-dasharray="6 5" marker-end="url(#flecha)"/>
+  </g>
+  <circle cx="520" cy="120" r="30" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="520" y="126" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">P1</text>
+  <circle cx="760" cy="242" r="30" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <text x="760" y="248" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">P2</text>
+  <rect x="732" y="92" width="56" height="56" rx="6" fill="#eef0f3" stroke="#52514e" stroke-width="2"/>
+  <text x="760" y="126" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">R1</text>
+  <rect x="492" y="214" width="56" height="56" rx="6" fill="#eef0f3" stroke="#52514e" stroke-width="2"/>
+  <text x="520" y="248" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">R2</text>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="642" y="110" text-anchor="middle">P1 tiene R1</text>
+    <text x="508" y="186" text-anchor="end">y pide R2</text>
+    <text x="638" y="234" text-anchor="middle">P2 tiene R2</text>
+    <text x="772" y="186">y pide R1</text>
+  </g>
+  <text x="640" y="186" font-size="13" font-style="italic" text-anchor="middle" fill="#6250d6">espera circular</text>
+  <g font-size="12" fill="#52514e">
+    <line x1="470" y1="300" x2="500" y2="300" stroke="#52514e" stroke-width="2"/><text x="506" y="304">lo tiene (recurso → proceso)</text>
+    <line x1="674" y1="300" x2="704" y2="300" stroke="#52514e" stroke-width="2" stroke-dasharray="6 5"/><text x="710" y="304">lo está pidiendo</text>
+  </g>
+</svg>

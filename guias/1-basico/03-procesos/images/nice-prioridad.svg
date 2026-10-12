@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="236" viewBox="0 0 860 236" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El valor nice</title>
+  <desc id="d">Escala de -20 a +19. -20 es la máxima prioridad y sólo root puede ponerla. 0 es el valor normal. +19 es la mínima prioridad: el proceso más amable, que cede la CPU a los demás.</desc>
+  <defs>
+    <linearGradient id="escala" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#e34948"/>
+      <stop offset="0.513" stop-color="#f0efec"/>
+      <stop offset="1" stop-color="#2a78d6"/>
+    </linearGradient>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="235" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El valor nice: cuanto más alto, más «amable»</text>
+
+  <rect x="60" y="100" width="740" height="26" rx="13" fill="url(#escala)" stroke="#c9ccd1"/>
+  <g stroke="#52514e" stroke-width="2">
+    <line x1="60" y1="94" x2="60" y2="132"/>
+    <line x1="440" y1="90" x2="440" y2="136"/>
+    <line x1="800" y1="94" x2="800" y2="132"/>
+  </g>
+  <g font-size="22" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="60" y="84">−20</text>
+    <text x="440" y="82">0</text>
+    <text x="800" y="84">+19</text>
+  </g>
+
+  <g font-size="14" fill="#0b0b0b">
+    <text x="60" y="160" font-weight="700">Máxima prioridad</text>
+    <text x="60" y="180" fill="#52514e">se queda con más CPU</text>
+    <text x="60" y="200" fill="#52514e">sólo root puede bajar de 0</text>
+
+    <text x="440" y="160" font-weight="700" text-anchor="middle">Normal</text>
+    <text x="440" y="180" fill="#52514e" text-anchor="middle">lo que tiene cualquier</text>
+    <text x="440" y="200" fill="#52514e" text-anchor="middle">programa por defecto</text>
+
+    <text x="800" y="160" font-weight="700" text-anchor="end">Mínima prioridad</text>
+    <text x="800" y="180" fill="#52514e" text-anchor="end">cede la CPU a los demás</text>
+    <text x="800" y="200" fill="#52514e" text-anchor="end">cualquiera puede subir su nice</text>
+  </g>
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M400 58 H 180" marker-end="url(#flecha)"/>
+    <path d="M480 58 H 680" marker-end="url(#flecha)"/>
+  </g>
+  <text x="290" y="52" font-size="12" text-anchor="middle" fill="#52514e">más «egoísta»</text>
+  <text x="580" y="52" font-size="12" text-anchor="middle" fill="#52514e">más «amable» (nice)</text>
+</svg>

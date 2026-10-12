@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ejercicios · Scripting básico en Bash</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:"Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="ejercicios--scripting-básico-en-bash" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Ejercicios · Scripting básico en Bash</h1><div><span style="display:inline-block;background:#b45309;color:#fff;border:1px solid #b45309;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Ejercicios</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 3 · Avanzado</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 13</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM4</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 10 h</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H2 (CMD/PowerShell), H4 (terminal Linux y Bash)</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Nota.</strong> Esta página acompaña a la <a href="13-scripting-bash-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">explicación del tema</a>. Léela antes de ponerte con los ejercicios.</p>
+</div>
+<h2 id="índice" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Índice</h2>
+<ul style="background:#f6f7f9;border:1px solid #e2e5e9;border-radius:8px;padding:14px 18px 14px 34px;font-size:.93em">
+<li><a href="#ejercicios--scripting-básico-en-bash" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Ejercicios · Scripting básico en Bash</a>
+<ul style="padding-left:18px">
+<li><a href="#índice" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Índice</a></li>
+<li><a href="#cómo-trabajar-y-cómo-entregar" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Cómo trabajar y cómo entregar</a></li>
+<li><a href="#ejercicios" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Ejercicios</a>
+<ul style="padding-left:18px">
+<li><a href="#parte-1" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 1</a></li>
+<li><a href="#parte-2" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 2</a></li>
+</ul>
+</li>
+<li><a href="#proyecto-final-de-la-unidad" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Proyecto final de la unidad</a>
+<ul style="padding-left:18px">
+<li><a href="#parte-a--script-de-altas-repaso-de-usuarios-y-permisos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte A — Script de altas (repaso de usuarios y permisos)</a></li>
+<li><a href="#parte-b--copia-de-seguridad-con-rotación" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte B — Copia de seguridad con rotación</a></li>
+<li><a href="#parte-c--equivalente-en-powershell" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte C — Equivalente en PowerShell</a></li>
+</ul>
+</li>
+<li><a href="#entregables" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Entregables</a>
+<ul style="padding-left:18px">
+<li><a href="#cómo-se-corrige-el-código" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Cómo se corrige el código</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0"/>
+<h2 id="cómo-trabajar-y-cómo-entregar" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Cómo trabajar y cómo entregar</h2>
+<p><strong>Entorno de trabajo.</strong> Escribe los scripts en <strong>Visual Studio Code</strong> desde Windows y ejecútalos
+en la máquina virtual, usando la <strong>carpeta compartida</strong> que configuraste al instalar Mint.</p>
+<ol>
+<li>En VS Code, abre tu carpeta de trabajo y crea dentro una carpeta <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>scripts</code>.</li>
+<li>En VirtualBox, con la máquina apagada: <strong>Configuración → Carpetas compartidas → +</strong>, elige la
+carpeta <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>scripts</code>, nombre <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>scripts</code>, marca <strong>Automontar</strong> y <strong>Hacer permanente</strong>.</li>
+<li>En la máquina virtual, la carpeta aparece en <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>/media/sf_scripts</code>. Recuerda que tu usuario
+tiene que estar en el grupo <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>vboxsf</code>.</li>
+<li>Extensiones recomendadas de VS Code: <strong>Bash IDE</strong> y <strong>ShellCheck</strong>.</li>
+</ol>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Los ficheros creados desde Windows pueden tener finales de línea de Windows</strong> (<code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>CRLF</code>).
+Bash falla con un mensaje muy confuso: <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>bad interpreter: /bin/bash^M</code>. En VS Code, abajo a la
+derecha, cambia <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>CRLF</code> por <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>LF</code>. O arréglalo en Linux con <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>dos2unix script.sh</code>.</p>
+</div>
+<p><strong>Entrega en Moodle.</strong> Un único fichero <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>.zip</code> con:</p>
+<ul>
+<li>Los scripts (<code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>ejercicio1.sh</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>ejercicio2.sh</code>, …) probados y con permisos de ejecución.</li>
+<li>Un documento con, por cada ejercicio: el enunciado, el código, una captura de la ejecución y
+una explicación breve de cómo lo has resuelto.</li>
+</ul>
+<h2 id="ejercicios" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Ejercicios</h2>
+<h3 id="parte-1" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Parte 1</h3>
+<p><strong>Ejercicio 1 — Quién soy</strong>
+Un script que limpie la pantalla y muestre qué usuario eres y en qué directorio estás.
+<em>Comandos: <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>clear</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>whoami</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>pwd</code>.</em></p>
+<p><strong>Ejercicio 2 — Calendario</strong>
+Pide un mes y un año y muestra el calendario de esa fecha. Comprueba que el mes esté entre 1 y 12
+y avisa si no.
+<em>Comando: <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>cal</code>.</em></p>
+<p><strong>Ejercicio 3 — ¿Iguales?</strong>
+Pide dos nombres y dice si son iguales o distintos. Amplíalo para que no distinga mayúsculas de
+minúsculas.</p>
+<p><strong>Ejercicio 4 — Calculadora</strong>
+Pide un número, la operación (<code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>+</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>-</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>*</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>/</code>) y otro número, y muestra el resultado.
+Usa <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>case</code>. Controla la división por cero.
+<em>Pista: <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>*</code> hay que entrecomillarlo o el shell lo expande a la lista de ficheros.</em></p>
+<p><strong>Ejercicio 5 — Permisos</strong>
+Recibe el nombre de un fichero <strong>como argumento</strong> y dice si tienes permiso de lectura, escritura
+y ejecución sobre él. Si no existe, sal con <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>exit 1</code> y un mensaje.</p>
+<h3 id="parte-2" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Parte 2</h3>
+<p><strong>Ejercicio 6 — Ficheros</strong>
+Recibe <strong>varios</strong> nombres de fichero como argumentos. Para cada uno, comprueba si existe y, si
+existe, muestra su contenido. Si no existe, avísalo y sigue con el siguiente.
+<em>Pista: <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>for F in "$@"; do</code></em></p>
+<p><strong>Ejercicio 7 — Menú</strong>
+Un programa que limpie la pantalla, muestre un menú y repita hasta que se elija salir:</p>
+<pre style='background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word'><code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;background:none;color:inherit'>  1. Ver el tamaño de una carpeta
+  2. Listar ficheros
+  3. Crear un fichero
+  4. Crear una carpeta
+  5. Borrar ficheros y carpetas
+  6. Salir
+</code></pre>
+<p>Cada opción debe pedir los datos que necesite y comprobarlos. <strong>La opción 5 debe pedir
+confirmación</strong> antes de borrar nada.
+<em>Comandos: <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>du -sh</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>ls -lh</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>touch</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>mkdir -p</code>, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>rm -i</code>.</em></p>
+<p><strong>Ejercicio 8 — Auditoría de permisos</strong>
+Recorre un directorio y lista los ficheros con permisos excesivos (777 o escritura para
+«otros»). Une los permisos con los bucles.
+<em>Pista: <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>find "$DIR" -type f -perm -o+w</code></em></p>
+<h2 id="proyecto-final-de-la-unidad" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Proyecto final de la unidad</h2>
+<p>Es el entregable principal de la guía y una pieza del reto ETHAZI.</p>
+<h3 id="parte-a--script-de-altas-repaso-de-usuarios-y-permisos" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Parte A — Script de altas (repaso de usuarios y permisos)</h3>
+<p>Un script que, ejecutado como root, prepare el puesto de un alumno y un profesor:</p>
+<ul>
+<li>Crea los usuarios que reciba como argumentos: <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>./altas.sh &lt;alumno&gt; &lt;profesor&gt;</code></li>
+<li>Crea los grupos <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>alumnos</code> y <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>profesores</code> si no existen.</li>
+<li>Crea en el <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>home</code> del alumno la estructura:</li>
+</ul>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Carpeta</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Propietario</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Grupo</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Requisito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>ejercicios</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">el profesor</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>profesores</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">el alumno <strong>no</strong> puede editar</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>examenes</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">el profesor</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>alumnos</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">los profesores no editan; los alumnos sí, sin ser propietarios</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>apuntes</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">el alumno</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>alumnos</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">los alumnos tienen todos los permisos</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Crea un enlace simbólico en <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>/home</code> que apunte a la carpeta <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>apuntes</code> del alumno.</li>
+<li><strong>Comprueba antes de crear</strong>: si el usuario ya existe, avisa y no falles.</li>
+<li>Registra en un log cada acción realizada.</li>
+</ul>
+<h3 id="parte-b--copia-de-seguridad-con-rotación" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Parte B — Copia de seguridad con rotación</h3>
+<p>Un script <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>copia.sh &lt;origen&gt; &lt;destino&gt;</code> que:</p>
+<ol>
+<li>Compruebe que recibe dos argumentos y que el origen existe.</li>
+<li>Cree en el destino una carpeta o un <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>.tar.gz</code> con la <strong>fecha y la hora en el nombre</strong>.</li>
+<li>Registre inicio, fin, tamaño y resultado en un fichero de log con marca de tiempo.</li>
+<li><strong>Rote</strong>: conserve sólo las <strong>7 copias más recientes</strong> y borre las anteriores.</li>
+<li>Devuelva <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>exit 0</code> si todo fue bien y un código distinto si algo falló.</li>
+<li>Se programe con <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>cron</code> para ejecutarse todos los días a las 3:00.</li>
+</ol>
+<p>Verificación exigida:</p>
+<pre style='background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word'><code class="language-bash" style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;background:none;color:inherit'>crontab -l
+ls -lh /ruta/destino
+tail -n <span style="color: #ae81ff">20</span> /ruta/del/log
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Comprueba la rotación de verdad</strong>: ejecuta el script nueve veces seguidas cambiando la fecha
+del nombre a mano si hace falta, y demuestra con capturas que sólo quedan siete copias.
+«Debería funcionar» no es una comprobación.</p>
+</div>
+<h3 id="parte-c--equivalente-en-powershell" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Parte C — Equivalente en PowerShell</h3>
+<p>Los ejercicios 5 y 7 y la parte B, en PowerShell, sobre la máquina virtual de Windows,
+programados con el <strong>Programador de tareas</strong> en lugar de con cron.</p>
+<h2 id="entregables" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Entregables</h2>
+<p><strong>Parte 1 — Tarea Moodle: «Tres scripts comentados y probados»</strong>
+Ejercicios 1 a 5 en Bash + los ejercicios 5 y 7 en PowerShell.
+Calificación de 0 a 10 · Se aprueba con 5.
+<em>Instrumento: rúbrica de código — funcionamiento, claridad y comentarios.</em></p>
+<p><strong>Parte 2 — Tarea Moodle: «Script de copia de seguridad automatizado»</strong>
+Ejercicios 6 a 8 + el proyecto final completo (partes A, B y C).
+Calificación de 0 a 10 · Se aprueba con 5.
+<em>Instrumento: prueba práctica T3 + rúbrica de código.</em></p>
+<h3 id="cómo-se-corrige-el-código" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Cómo se corrige el código</h3>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Criterio</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Peso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Funciona</strong> y hace lo que pide el enunciado</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">40 %</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Controla los errores</strong>: argumentos, ficheros que no existen, división por cero, confirmaciones</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">25 %</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Está bien escrito</strong>: comillas en las variables, <code style='font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em'>local</code> en las funciones, nombres claros, sin código repetido</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">20 %</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Está documentado</strong>: cabecera, comentarios que explican el <em>por qué</em>, mensaje de uso</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">15 %</td>
+</tr>
+</tbody>
+</table></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ Un script que funciona pero que se rompe en cuanto le pasas un nombre con un espacio no está
+terminado. Prueba siempre tus scripts con: ningún argumento, argumentos de más, un fichero que
+no existe, y un nombre con espacios.</p>
+</div>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Ejercicios</p></div>
+</body>
+</html>

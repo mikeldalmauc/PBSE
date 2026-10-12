@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="344" viewBox="0 0 860 344" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Secure Boot, el portero con lista</title>
+  <desc id="d">Secure Boot sólo deja pasar programas firmados con una clave de su lista. Windows, firmado por Microsoft, pasa. Linux con shim, avalado por Microsoft, pasa. Ventoy no está en la lista de fábrica: la primera vez sale Security Violation y hay que registrar su clave MOK; desde entonces pasa siempre en ese equipo.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="343" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Secure Boot: el portero de la discoteca con lista</text>
+
+  <!-- candidatos -->
+  <g stroke-width="2">
+    <rect x="24" y="72" width="176" height="56" rx="10" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="24" y="152" width="176" height="56" rx="10" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="24" y="232" width="176" height="56" rx="10" fill="#e4e0f8" stroke="#6250d6"/>
+  </g>
+  <g font-size="15" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="96">Windows</text>
+    <text x="40" y="176">Linux con shim</text>
+    <text x="40" y="256">Ventoy</text>
+  </g>
+  <g font-size="12" fill="#52514e">
+    <text x="40" y="116">firmado por Microsoft</text>
+    <text x="40" y="196">shim avalado por Microsoft</text>
+    <text x="40" y="276">firmado con su propia clave</text>
+  </g>
+
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M202 100 C 250 100, 260 140, 296 160" marker-end="url(#flecha)"/>
+    <path d="M202 180 H 296" marker-end="url(#flecha)"/>
+    <path d="M202 260 C 250 260, 260 220, 296 200" marker-end="url(#flecha)"/>
+  </g>
+
+  <!-- portero -->
+  <rect x="300" y="64" width="240" height="232" rx="14" fill="#1e2227"/>
+  <path d="M420 82 l-22 8 v20 c0 16 11 27 22 32 c11 -5 22 -16 22 -32 v-20 z" fill="#3a3f47" stroke="#ffffff" stroke-width="2"/>
+  <text x="420" y="120" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">✓</text>
+  <text x="420" y="168" font-size="15" font-weight="700" text-anchor="middle" fill="#ffffff">SECURE BOOT</text>
+  <text x="420" y="188" font-size="12" text-anchor="middle" fill="#c9ccd1">sólo pasa quien está en la lista</text>
+  <rect x="320" y="200" width="200" height="84" rx="8" fill="#ffffff"/>
+  <g font-size="12" fill="#0b0b0b">
+    <text x="332" y="220" font-weight="700">La lista</text>
+    <text x="332" y="238">✓ Microsoft (de fábrica)</text>
+    <text x="332" y="256">✓ quien Microsoft avala</text>
+    <text x="332" y="274">+ claves MOK del dueño</text>
+  </g>
+
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M542 140 C 580 120, 590 100, 620 100" marker-end="url(#flecha)"/>
+    <path d="M542 180 H 618" marker-end="url(#flecha)"/>
+    <path d="M542 220 C 580 240, 590 260, 620 260" marker-end="url(#flecha)"/>
+  </g>
+
+  <!-- resultados -->
+  <g stroke-width="2">
+    <rect x="624" y="72" width="212" height="56" rx="10" fill="#d6efd6" stroke="#008300"/>
+    <rect x="624" y="152" width="212" height="56" rx="10" fill="#d6efd6" stroke="#008300"/>
+    <rect x="624" y="232" width="212" height="76" rx="10" fill="#fdefcc" stroke="#eda100"/>
+  </g>
+  <g font-size="14" font-weight="700" fill="#0b0b0b">
+    <text x="640" y="105">✓ Arranca</text>
+    <text x="640" y="185">✓ Arranca</text>
+    <text x="640" y="256">✕ 1.ª vez: error 0x1A</text>
+  </g>
+  <g font-size="12" fill="#52514e">
+    <text x="640" y="276">registras su clave MOK (6.2)</text>
+    <text x="640" y="294">y desde entonces ✓ arranca</text>
+  </g>
+  <text x="24" y="330" font-size="12" fill="#52514e">MOK = Machine Owner Key: la clave que añade el dueño de la máquina. Se registra una vez por equipo.</text>
+</svg>

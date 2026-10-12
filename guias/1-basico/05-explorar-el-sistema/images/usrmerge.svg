@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">/bin es un enlace a /usr/bin</title>
+  <desc id="d">En Linux Mint, /bin, /sbin, /lib y /lib64 son enlaces simbólicos: atajos que apuntan a /usr/bin, /usr/sbin, /usr/lib y /usr/lib64, que son las carpetas de verdad.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2a78d6"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="299" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">¿Carpeta o atajo? Lo que ves con <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace">ls -l /</tspan></text>
+
+  <text x="24" y="74" font-size="12" font-weight="700" letter-spacing="1.5" fill="#52514e">ENLACES (ATAJOS)</text>
+  <text x="520" y="74" font-size="12" font-weight="700" letter-spacing="1.5" fill="#52514e">CARPETAS DE VERDAD</text>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="16" font-weight="700" fill="#0b0b0b">
+    <rect x="24" y="88" width="120" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2" stroke-dasharray="6 4"/><text x="84" y="111" text-anchor="middle">/bin</text>
+    <rect x="24" y="136" width="120" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2" stroke-dasharray="6 4"/><text x="84" y="159" text-anchor="middle">/sbin</text>
+    <rect x="24" y="184" width="120" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2" stroke-dasharray="6 4"/><text x="84" y="207" text-anchor="middle">/lib</text>
+    <rect x="24" y="232" width="120" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2" stroke-dasharray="6 4"/><text x="84" y="255" text-anchor="middle">/lib64</text>
+
+    <rect x="508" y="80" width="328" height="196" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <text x="822" y="108" font-size="20" text-anchor="end">/usr</text>
+    <rect x="560" y="88" width="150" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/><text x="635" y="111" text-anchor="middle">/usr/bin</text>
+    <rect x="560" y="136" width="150" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/><text x="635" y="159" text-anchor="middle">/usr/sbin</text>
+    <rect x="560" y="184" width="150" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/><text x="635" y="207" text-anchor="middle">/usr/lib</text>
+    <rect x="560" y="232" width="150" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/><text x="635" y="255" text-anchor="middle">/usr/lib64</text>
+  </g>
+  <g stroke="#2a78d6" stroke-width="2" fill="none">
+    <path d="M146 105 H 556" marker-end="url(#flecha)"/>
+    <path d="M146 153 H 556" marker-end="url(#flecha)"/>
+    <path d="M146 201 H 556" marker-end="url(#flecha)"/>
+    <path d="M146 249 H 556" marker-end="url(#flecha)"/>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="13" fill="#52514e" text-anchor="middle">
+    <text x="350" y="98">lrwxrwxrwx … bin -&gt; usr/bin</text>
+    <text x="350" y="146">sbin -&gt; usr/sbin</text>
+    <text x="350" y="194">lib -&gt; usr/lib</text>
+    <text x="350" y="242">lib64 -&gt; usr/lib64</text>
+  </g>
+  <text x="724" y="160" font-size="13" fill="#52514e">aquí están</text>
+  <text x="724" y="178" font-size="13" fill="#52514e">los ficheros</text>
+  <text x="724" y="196" font-size="13" fill="#52514e">de verdad</text>
+</svg>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S13 · Comandos y gestión de ficheros en GNU/Linux</title>
+<style>
+:root{
+  --tinta:#1c1e21; --suave:#5b6168; --linea:#e2e5e9; --fondo:#ffffff;
+  --papel:#f6f7f9; --acento:#7a3e1d; --acento-claro:#fbf3ec;
+  --aviso:#b3261e; --aviso-fondo:#fdf1f0; --consejo:#1c6b4a; --consejo-fondo:#eff7f2;
+  --codigo:#f3f4f6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:16px/1.65 "Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;}
+.hoja{max-width:900px;margin:0 auto;background:var(--fondo);padding:0 clamp(18px,5vw,64px) 72px;
+  box-shadow:0 0 0 1px var(--linea);}
+header.portada{border-bottom:3px solid var(--acento);padding:44px 0 24px;margin-bottom:8px}
+header.portada .modulo{font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--acento);font-weight:700;margin:0 0 10px}
+header.portada h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:0 0 18px;letter-spacing:-.01em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--papel);border:1px solid var(--linea);border-radius:999px;
+  padding:4px 12px;font-size:.8rem;color:var(--suave)}
+.chip b{color:var(--tinta);font-weight:600}
+h1,h2,h3,h4{line-height:1.25;letter-spacing:-.01em}
+h2{font-size:1.5rem;margin:2.4em 0 .7em;padding-bottom:.3em;border-bottom:1px solid var(--linea)}
+h3{font-size:1.18rem;margin:2em 0 .6em}
+h4{font-size:1rem;margin:1.6em 0 .5em;color:var(--acento)}
+p,li{font-size:1rem}
+a{color:var(--acento);text-decoration:none;border-bottom:1px solid rgba(122,62,29,.28)}
+a:hover{border-bottom-color:var(--acento)}
+hr{border:0;border-top:1px solid var(--linea);margin:2.6em 0}
+code{background:var(--codigo);border:1px solid var(--linea);border-radius:4px;
+  padding:.1em .35em;font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em}
+pre{background:#1e2227;color:#e6e9ee;border-radius:8px;padding:16px 18px;overflow-x:auto;
+  font-size:.86rem;line-height:1.55}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre-wrap;word-break:break-word}
+table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:.94rem}
+th,td{border:1px solid var(--linea);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--papel);font-weight:600}
+tbody tr:nth-child(even){background:#fbfbfc}
+td.vacia{min-width:130px;height:2.4em;background:repeating-linear-gradient(
+  135deg,#fff,#fff 6px,#fafafa 6px,#fafafa 12px)}
+blockquote{margin:1.3em 0;padding:12px 18px;border-left:4px solid var(--linea);
+  background:var(--papel);border-radius:0 6px 6px 0}
+blockquote p{margin:.4em 0}
+blockquote.aviso{border-left-color:var(--aviso);background:var(--aviso-fondo)}
+blockquote.consejo{border-left-color:var(--consejo);background:var(--consejo-fondo)}
+blockquote.analogia{border-left-color:var(--acento);background:var(--acento-claro)}
+blockquote.situacion{border-left-color:var(--acento);background:var(--acento-claro);
+  font-size:.92rem;color:var(--suave)}
+blockquote.situacion strong{color:var(--tinta)}
+img{max-width:100%;height:auto;display:block;margin:1.4em auto;border:1px solid var(--linea);
+  border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+#indice-lista{background:var(--papel);border:1px solid var(--linea);border-radius:8px;padding:14px 18px}
+h2#índice + ul{background:var(--papel);border:1px solid var(--linea);border-radius:8px;
+  padding:16px 18px 16px 34px;font-size:.94rem}
+h2#índice + ul ul{border:0;background:none;padding:2px 0 2px 18px}
+footer.pie{margin-top:56px;padding-top:18px;border-top:1px solid var(--linea);
+  font-size:.82rem;color:var(--suave)}
+@media print{
+  body{background:#fff}
+  .hoja{box-shadow:none;max-width:none;padding:0}
+  pre{background:#f3f4f6;color:#111;border:1px solid #ccc}
+  h2{break-after:avoid}
+  table,blockquote,img{break-inside:avoid}
+  a{color:inherit;border:0}
+}
+
+/* extras guia-markdown */
+.tabla{overflow-x:auto;margin:1.2em 0}
+.tabla table{margin:0}
+pre code{white-space:pre;word-break:normal}
+kbd{display:inline-block;font:600 .8em/1 "Segoe UI",Arial,sans-serif;padding:3px 7px;border:1px solid #c9ced6;
+  border-bottom-width:2px;border-radius:4px;background:#fff;color:var(--tinta)}
+li.tarea{list-style:none;margin-left:-1.3em}
+li.tarea input{margin:0 .45em 0 0;vertical-align:-1px}
+del{color:var(--suave)}
+.ejemplo{margin:1.2em 0 1.6em;border:1px solid var(--linea);border-radius:10px;overflow:hidden}
+.ejemplo pre.fuente{margin:0;border-radius:0;position:relative;padding-top:30px}
+.ejemplo pre.fuente::before{content:"Escribes";position:absolute;top:8px;left:18px;font:700 .68rem/1 "Segoe UI",Arial,sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;color:#9aa3ad}
+.resultado{position:relative;padding:30px 20px 6px;background:#fff}
+.resultado::before{content:"Se ve así";position:absolute;top:10px;left:20px;font:700 .68rem/1 "Segoe UI",Arial,sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--acento)}
+.resultado > :first-child{margin-top:.2em}
+.resultado .tabla{margin-top:.4em}
+@media print{pre code{white-space:pre-wrap;word-break:break-word}.tabla{overflow:visible}.ejemplo{break-inside:avoid}}
+
+/* comentarios en bloques de bash */
+.com{color:#8b949e}
+.nw{white-space:nowrap}
+@media print{.com{color:#6b7280}}
+</style>
+</head>
+<body>
+<div class="hoja">
+  <header class="portada">
+    <p class="modulo">Sistemas Operativos Monopuesto (SMR 1.º)</p>
+    <h1>Comandos y gestión de ficheros en GNU/Linux</h1>
+    <div class="chips">
+      <span class="chip"><b>Semana</b> 13 · se apoya en la 11 y se retoma en la 22 y en la 31</span>
+      <span class="chip"><b>Trimestre</b> T1</span>
+      <span class="chip"><b>Bloque</b> 4. Explotación</span>
+      <span class="chip"><b>CM</b> CM3, CM4</span>
+      <span class="chip"><b>Duración</b> 5 h</span>
+      <span class="chip"><b>Herramientas</b> H4 (terminal Linux y Bash)</span>
+    </div>
+  </header>
+<h1 id="comandos-y-gestión-de-ficheros-en-gnulinux" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Comandos y gestión de ficheros en GNU/Linux</h1>
+<blockquote class="situacion">
+<p><strong>Dónde estamos.</strong> Semana 13 · 1.er trimestre · Bloque 4 (Explotación) · <strong>CM3</strong> y <strong>CM4</strong>.
+Lo mínimo para trabajar en el terminal: moverte, crear, ver, copiar, mover y borrar ficheros.
+Todo se hace en tu máquina virtual de Linux Mint (<code>Mint-SMR</code>).
+Cuando lo domines, sigue con la <a href="s13-ampliacion-ficheros-linux.html">guía de ampliación</a>: buscar
+ficheros, tuberías, comprimir y la tabla de equivalencias con CMD y PowerShell.</p>
+</blockquote>
+<blockquote class="analogia">
+<p><strong>Analogía.</strong> El explorador de archivos es como pedir la comida señalando la carta con el dedo:
+funciona, pero sólo puedes pedir lo que está en la foto. El terminal es hablar el idioma: al
+principio cuesta más, pero puedes pedir «todos los platos sin gluten de menos de 10 euros,
+ordenados por precio». Eso, señalando la carta, no hay manera.</p>
+</blockquote>
+<h2 id="índice">Índice</h2>
+<ul>
+<li><a href="#1-cómo-se-escribe-un-comando">1. Cómo se escribe un comando</a></li>
+<li><a href="#2-pedir-ayuda">2. Pedir ayuda</a></li>
+<li><a href="#3-el-árbol-de-directorios">3. El árbol de directorios</a></li>
+<li><a href="#4-moverse-pwd-cd-ls">4. Moverse: <code>pwd</code>, <code>cd</code>, <code>ls</code></a></li>
+<li><a href="#5-rutas-absolutas-y-relativas">5. Rutas absolutas y relativas</a></li>
+<li><a href="#6-crear-ficheros-y-carpetas">6. Crear ficheros y carpetas</a></li>
+<li><a href="#7-ver-el-contenido-de-un-fichero">7. Ver el contenido de un fichero</a></li>
+<li><a href="#8-copiar-mover-y-borrar">8. Copiar, mover y borrar</a></li>
+<li><a href="#9-comodines">9. Comodines</a></li>
+<li><a href="#10-chuleta">10. Chuleta</a></li>
+<li><a href="#ejercicios">Ejercicios</a></li>
+<li><a href="#reto-el-laberinto">Reto: el laberinto</a></li>
+<li><a href="#entregable">Entregable</a></li>
+</ul>
+<hr />
+<h2 id="1-cómo-se-escribe-un-comando">1. Cómo se escribe un comando</h2>
+<pre><code>comando  -opciones  argumentos
+   │         │           │
+   │         │           └── sobre qué actúa: un fichero, una carpeta...
+   │         └── cómo lo hace; empiezan por guion
+   └── el programa que se ejecuta
+</code></pre>
+<pre><code class="language-bash">ls -l /etc       <span class="com"># comando ls, opción -l, argumento /etc</span>
+ls -l -a /etc    <span class="com"># dos opciones</span>
+ls -la /etc      <span class="com"># las mismas dos opciones, juntas: es lo mismo</span>
+</code></pre>
+<p>Cuatro reglas que ahorran disgustos:</p>
+<ol>
+<li><strong>Mayúsculas y minúsculas son distintas.</strong> <code>Documentos</code> y <code>documentos</code> son dos carpetas
+diferentes.</li>
+<li><strong>Los espacios separan.</strong> Si un nombre tiene espacios, va entre comillas:
+<code>cat &quot;mi informe.txt&quot;</code>. Mejor todavía: no pongas espacios en los nombres.</li>
+<li><strong>No hay papelera.</strong> Lo que borras con <code>rm</code> desaparece para siempre.</li>
+<li><strong>Si no dice nada, ha ido bien.</strong> <code>cp</code> o <code>mkdir</code> no responden nada cuando funcionan. Si algo
+falla, te lo dicen.</li>
+</ol>
+<p>Las teclas que vas a usar todo el rato:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Tecla</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Tab</code></td>
+<td>Completa nombres de comandos, ficheros y carpetas. Dos veces: enseña las opciones</td>
+</tr>
+<tr>
+<td><code>↑</code> / <code>↓</code></td>
+<td>Recupera los comandos que ya has escrito</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>C</code></td>
+<td>Para un comando que no termina</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>L</code></td>
+<td>Limpia la pantalla (lo mismo que <code>clear</code>)</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>Shift</code>+<code>C</code> / <code>V</code></td>
+<td>Copiar / pegar <strong>dentro del terminal</strong> (sin <code>Shift</code> no funciona)</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="nota">
+<p><strong>El tabulador es un corrector gratis.</strong> Si pulsas <code>Tab</code> y no completa, es que ese fichero no
+existe o no estás en la carpeta que crees. Acostúmbrate a escribir tres letras y pulsar <code>Tab</code>.</p>
+</blockquote>
+<hr />
+<h2 id="2-pedir-ayuda">2. Pedir ayuda</h2>
+<pre><code class="language-bash">ls --help      <span class="com"># resumen rápido de las opciones</span>
+man ls         <span class="com"># el manual completo</span>
+</code></pre>
+<p>Dentro de <code>man</code>:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Tecla</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Espacio</code> / <code>b</code></td>
+<td>Página siguiente / anterior</td>
+</tr>
+<tr>
+<td><code>/palabra</code></td>
+<td>Buscar esa palabra</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>Siguiente resultado de la búsqueda</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td><strong>Salir</strong></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="nota">
+<p>Si te quedas «atrapado» dentro de algo que ocupa toda la pantalla (<code>man</code>, <code>less</code>), prueba <code>q</code>.
+Si es un comando que no termina, <code>Ctrl</code>+<code>C</code>.</p>
+</blockquote>
+<hr />
+<h2 id="3-el-árbol-de-directorios">3. El árbol de directorios</h2>
+<p>En Windows hay varios árboles: <code>C:\</code>, <code>D:\</code>, <code>E:\</code>. En Linux hay <strong>uno solo</strong>, que empieza en <code>/</code>
+(la <strong>raíz</strong>), y todo cuelga de ahí, también los pendrives: cuando conectas uno, aparece como una
+carpeta dentro de <code>/media</code>.</p>
+<pre><code>/
+├── bin      → programas básicos
+├── boot     → arranque del sistema
+├── dev      → dispositivos: tu disco es /dev/sda
+├── etc      → la configuración del sistema
+├── home     → carpetas personales: /home/alumno
+├── media    → pendrives y discos que conectas
+├── root     → carpeta personal del administrador
+├── tmp      → temporales; se vacía al reiniciar
+├── usr      → programas instalados
+└── var      → datos que cambian, como los registros (/var/log)
+</code></pre>
+<p>Esta organización es casi igual en todas las distribuciones: lo que aprendas en Mint te sirve en
+Arch dentro de unas semanas.</p>
+<blockquote class="nota">
+<p><strong>En Linux casi todo es un fichero.</strong> Tu disco es un fichero (<code>/dev/sda</code>) y la información del
+procesador se lee de otro (<code>/proc/cpuinfo</code>). Por eso, sabiendo manejar ficheros, puedes
+administrar todo el sistema.</p>
+</blockquote>
+<p>Compruébalo:</p>
+<pre><code class="language-bash">ls /
+ls /home
+head /proc/cpuinfo
+</code></pre>
+<hr />
+<h2 id="4-moverse-pwd-cd-ls">4. Moverse: <code>pwd</code>, <code>cd</code>, <code>ls</code></h2>
+<pre><code class="language-bash">pwd        <span class="com"># ¿dónde estoy?</span>
+cd /etc    <span class="com"># ir a /etc</span>
+cd         <span class="com"># volver a mi carpeta personal</span>
+cd ..      <span class="com"># subir un nivel</span>
+cd -       <span class="com"># volver a la carpeta en la que estaba antes</span>
+</code></pre>
+<p>Para ver qué hay en una carpeta:</p>
+<pre><code class="language-bash">ls         <span class="com"># lo que hay aquí</span>
+ls -l      <span class="com"># en lista: permisos, propietario, tamaño y fecha</span>
+ls -a      <span class="com"># también los ficheros ocultos</span>
+ls -lh     <span class="com"># tamaños fáciles de leer (K, M, G)</span>
+ls -lah    <span class="com"># todo junto: la que más vas a usar</span>
+ls /etc    <span class="com"># lo que hay en otra carpeta, sin moverte de donde estás</span>
+</code></pre>
+<blockquote class="nota">
+<p><strong>Ficheros ocultos.</strong> En Linux un fichero está oculto si <strong>su nombre empieza por punto</strong>, por
+ejemplo <code>.bashrc</code>. No es un permiso especial, sólo una costumbre: <code>ls</code> no los enseña si no le
+pones <code>-a</code>.</p>
+</blockquote>
+<p>Para ver las carpetas en forma de árbol:</p>
+<pre><code class="language-bash">sudo apt install tree   <span class="com"># se instala una sola vez</span>
+tree                    <span class="com"># el árbol desde donde estás</span>
+tree -L 2               <span class="com"># sólo dos niveles de profundidad</span>
+</code></pre>
+<hr />
+<h2 id="5-rutas-absolutas-y-relativas">5. Rutas absolutas y relativas</h2>
+<p>Una <strong>ruta</strong> es la dirección de un fichero o de una carpeta.</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Empieza por</th>
+<th>Ejemplo</th>
+<th>Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Absoluta</strong></td>
+<td><code>/</code></td>
+<td><code>/home/alumno/docs/a.txt</code></td>
+<td>Desde la raíz. Vale estés donde estés</td>
+</tr>
+<tr>
+<td><strong>Relativa</strong></td>
+<td>cualquier otra cosa</td>
+<td><code>docs/a.txt</code></td>
+<td>Desde la carpeta en la que estás ahora</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td>La carpeta en la que estoy</td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td>La carpeta de arriba (la «madre»)</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>Mi carpeta personal (<code>/home/alumno</code>)</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>La raíz del sistema</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="analogia">
+<p><strong>Analogía.</strong> Una ruta absoluta es una dirección completa: «calle Mayor 3, Zornotza». Llega el
+cartero salga de donde salga. Una ruta relativa es «dos portales más abajo»: es más corta, pero
+sólo sirve si sabes desde dónde sales.</p>
+</blockquote>
+<p>Ejemplo: estás en <code>/home/alumno/proyectos/web</code> y quieres ver <code>/home/alumno/docs/informe.txt</code>.</p>
+<pre><code class="language-bash">cat /home/alumno/docs/informe.txt   <span class="com"># absoluta</span>
+cat ../../docs/informe.txt          <span class="com"># relativa: subo dos niveles y bajo a docs</span>
+cat ~/docs/informe.txt              <span class="com"># con el atajo ~</span>
+</code></pre>
+<p>Las tres hacen lo mismo. Si no sabes dónde estás, <code>pwd</code>.</p>
+<hr />
+<h2 id="6-crear-ficheros-y-carpetas">6. Crear ficheros y carpetas</h2>
+<pre><code class="language-bash">touch nota.txt                 <span class="com"># crear un fichero vacío</span>
+touch a.txt b.txt c.txt        <span class="com"># varios a la vez</span>
+mkdir proyecto                 <span class="com"># crear una carpeta</span>
+mkdir -p proyecto/src/css      <span class="com"># crear la ruta entera, aunque falten carpetas por el camino</span>
+</code></pre>
+<blockquote class="nota">
+<p>Usa <code>mkdir -p</code> casi siempre: crea las carpetas que falten por el camino y no da error si la
+carpeta ya existe.</p>
+</blockquote>
+<p>Con <strong>llaves</strong> puedes crear muchas cosas de golpe:</p>
+<pre><code class="language-bash">mkdir -p informes/{2025,2026,2027}   <span class="com"># tres carpetas: informes/2025, informes/2026...</span>
+touch prueba{1..5}.txt               <span class="com"># prueba1.txt, prueba2.txt ... prueba5.txt</span>
+</code></pre>
+<p>Escribir en un fichero sin abrir un editor:</p>
+<pre><code class="language-bash">echo "Hola" &gt; nota.txt           <span class="com"># escribe en el fichero (lo que hubiera antes, se pierde)</span>
+echo "Otra línea" &gt;&gt; nota.txt    <span class="com"># añade al final</span>
+</code></pre>
+<blockquote class="aviso">
+<p>⚠️ <strong>Un <code>&gt;</code> borra, dos <code>&gt;&gt;</code> añaden.</strong> Si te equivocas y pones uno solo, el contenido anterior
+del fichero desaparece. Sin preguntar.</p>
+</blockquote>
+<p>Para editar un fichero de verdad, <strong>nano</strong>:</p>
+<pre><code class="language-bash">nano nota.txt    <span class="com"># Ctrl+O guarda (y Enter para confirmar), Ctrl+X sale</span>
+</code></pre>
+<blockquote class="nota">
+<p>Si algún día te encuentras sin querer dentro de <strong>vim</strong> (una pantalla de la que no sabes salir):
+pulsa <code>Esc</code>, escribe <code>:q!</code> y pulsa <code>Enter</code>. Sales sin guardar nada.</p>
+</blockquote>
+<hr />
+<h2 id="7-ver-el-contenido-de-un-fichero">7. Ver el contenido de un fichero</h2>
+<pre><code class="language-bash">cat nota.txt             <span class="com"># todo de golpe (para ficheros cortos)</span>
+cat -n nota.txt          <span class="com"># con el número de cada línea</span>
+less /etc/passwd         <span class="com"># página a página (para ficheros largos)</span>
+head /etc/passwd         <span class="com"># las 10 primeras líneas</span>
+head -n 3 /etc/passwd    <span class="com"># las 3 primeras</span>
+tail -n 3 /etc/passwd    <span class="com"># las 3 últimas</span>
+wc -l /etc/passwd        <span class="com"># cuántas líneas tiene</span>
+</code></pre>
+<blockquote class="nota">
+<p><code>less</code> usa las mismas teclas que <code>man</code>: <code>Espacio</code> para avanzar, <code>/palabra</code> para buscar y <code>q</code>
+para salir. Si un fichero no cabe en la pantalla, usa <code>less</code> y no <code>cat</code>.</p>
+</blockquote>
+<hr />
+<h2 id="8-copiar-mover-y-borrar">8. Copiar, mover y borrar</h2>
+<h3 id="copiar">Copiar</h3>
+<pre><code class="language-bash">cp origen.txt copia.txt       <span class="com"># copiar un fichero</span>
+cp a.txt b.txt carpeta/       <span class="com"># copiar varios a una carpeta</span>
+cp -r carpeta/ copia/         <span class="com"># copiar una carpeta entera: hace falta -r</span>
+cp -i origen.txt copia.txt    <span class="com"># -i: pregunta antes de machacar un fichero que ya existe</span>
+</code></pre>
+<h3 id="mover-y-renombrar">Mover y renombrar</h3>
+<p>En Linux <strong>mover y renombrar es el mismo comando</strong>: <code>mv</code>.</p>
+<pre><code class="language-bash">mv viejo.txt nuevo.txt        <span class="com"># renombrar</span>
+mv fichero.txt carpeta/       <span class="com"># mover</span>
+mv carpeta1 carpeta2          <span class="com"># con las carpetas no hace falta -r</span>
+</code></pre>
+<h3 id="borrar">Borrar</h3>
+<pre><code class="language-bash">rm fichero.txt        <span class="com"># borrar un fichero</span>
+rm -i fichero.txt     <span class="com"># preguntando antes</span>
+rm -r carpeta/        <span class="com"># borrar una carpeta con todo lo que tenga dentro</span>
+rmdir carpeta         <span class="com"># borrar una carpeta, pero SÓLO si está vacía</span>
+</code></pre>
+<blockquote class="aviso">
+<p>⚠️ <strong><code>rm</code> no tiene papelera ni «deshacer».</strong> Dos costumbres que te van a salvar alguna vez:</p>
+<ol>
+<li><strong>Antes de borrar, lista.</strong> Cambia <code>rm</code> por <code>ls</code> en el mismo comando. Si <code>ls</code> te enseña lo
+que esperabas, entonces sí, <code>rm</code>.</li>
+<li><strong>Mira los espacios.</strong> <code>rm -r ~/tmp</code> y <code>rm -r ~/ tmp</code> se parecen mucho, pero el segundo
+borra <strong>todo lo que hay en tu carpeta personal</strong>.</li>
+</ol>
+<p>Si ves <code>rm -rf</code> en internet, no lo copies sin entender qué borra: no pregunta nada.</p>
+</blockquote>
+<hr />
+<h2 id="9-comodines">9. Comodines</h2>
+<p>Los comodines sirven para elegir muchos ficheros a la vez sin escribir sus nombres.</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Comodín</th>
+<th>Significa</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>Cualquier cosa (también nada)</td>
+<td><code>*.txt</code> → todos los que terminan en <code>.txt</code></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td><strong>Un</strong> carácter, ni más ni menos</td>
+<td><code>foto?.jpg</code> → <code>foto1.jpg</code>, pero no <code>foto10.jpg</code></td>
+</tr>
+<tr>
+<td><code><span class="nw">[0-9]</span></code></td>
+<td>Un carácter de ese rango</td>
+<td><code><span class="nw">informe[0-9].pdf</span></code></td>
+</tr>
+<tr>
+<td><code>{a,b}</code></td>
+<td>Cada una de las opciones</td>
+<td><code>*.{jpg,png}</code> → los <code>.jpg</code> y los <code>.png</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Antes de usar un comodín para borrar o mover, pruébalo con <code>echo</code> o con <code>ls</code>:</strong></p>
+<pre><code class="language-bash">echo *.txt          <span class="com"># te enseña exactamente qué ficheros va a coger</span>
+rm *.txt            <span class="com"># ahora sí, sabiendo lo que haces</span>
+</code></pre>
+<p>Ejemplos:</p>
+<pre><code class="language-bash">ls *.txt                  <span class="com"># todos los .txt</span>
+cp *.jpg imagenes/        <span class="com"># todas las imágenes a una carpeta</span>
+ls foto?.jpg              <span class="com"># foto1.jpg, foto2.jpg... pero no foto10.jpg</span>
+rm *.tmp                  <span class="com"># borrar todos los temporales</span>
+</code></pre>
+<hr />
+<h2 id="10-chuleta">10. Chuleta</h2>
+<pre><code>AYUDA                               VER
+  cmd --help    resumen               cat f         todo de golpe
+  man cmd       manual (q=salir)      less f        página a página
+  Tab           completar             head -n 5 f   primeras líneas
+  ↑             comando anterior      tail -n 5 f   últimas líneas
+  Ctrl+C        parar                 wc -l f       contar líneas
+
+NAVEGAR                             CREAR
+  pwd           dónde estoy           touch f       fichero vacío
+  cd ruta       ir                    mkdir -p a/b  carpetas
+  cd            a mi carpeta          echo x &gt; f    escribir (borra)
+  cd ..         subir                 echo x &gt;&gt; f   añadir al final
+  cd -          volver                nano f        editar
+  ls -lah       listar todo
+  tree -L 2     árbol
+
+COPIAR / MOVER / BORRAR             COMODINES
+  cp o d        copiar                *             lo que sea
+  cp -r o d     copiar carpeta        ?             un carácter
+  mv o d        mover o renombrar     [0-9]         un dígito
+  rm -i f       borrar preguntando    {a,b}         varias opciones
+  rm -r c       borrar carpeta        echo *.txt    ¡probar antes!
+  rmdir c       borrar si está vacía
+</code></pre>
+<hr />
+<h2 id="ejercicios">Ejercicios</h2>
+<p>Trabaja en tu máquina virtual <code>Mint-SMR</code>, en el terminal. Anota el comando <strong>y</strong> lo que sale.</p>
+<h3 id="bloque-a--moverse-y-rutas">Bloque A — Moverse y rutas</h3>
+<ol>
+<li>Averigua en qué carpeta estás. Ve a <code>/etc</code>, vuelve a tu carpeta personal y regresa a <code>/etc</code>
+con el comando más corto posible.</li>
+<li>Lista el contenido de <code>/var/log</code> enseñando los ficheros ocultos y con los tamaños fáciles de
+leer.</li>
+<li>Crea con <strong>un solo comando</strong> las carpetas <code>~/proyectos/web</code> y <code>~/docs</code>. Entra en
+<code>~/proyectos/web</code> y, sin salir de ahí, lista <code>~/docs</code> de <strong>tres formas</strong>: con ruta absoluta,
+con ruta relativa y con <code>~</code>.</li>
+</ol>
+<h3 id="bloque-b--crear-y-organizar">Bloque B — Crear y organizar</h3>
+<ol start="4">
+<li>En tu carpeta personal, crea esta estructura con <strong>un solo comando</strong> y compruébala con <code>tree</code>:</li>
+</ol>
+<pre><code>practica/
+├── documentos/
+│   ├── 2025/
+│   ├── 2026/
+│   └── 2027/
+├── imagenes/
+└── scripts/
+</code></pre>
+<ol start="5">
+<li>Crea de una vez los ficheros <code>nota1.txt</code> … <code>nota5.txt</code> dentro de <code>practica/documentos/2026/</code>.</li>
+<li>Escribe tres líneas de texto en <code>nota1.txt</code> sin abrir ningún editor y muéstralas numeradas.</li>
+<li>Copia <code>nota1.txt</code> a la carpeta <code>2027</code>. Después renombra <code>nota5.txt</code> a <code>final.txt</code>. Por último
+borra la carpeta <code>2025</code> con el comando que <strong>sólo</strong> borra carpetas vacías.</li>
+</ol>
+<h3 id="bloque-c--ver-ficheros">Bloque C — Ver ficheros</h3>
+<ol start="8">
+<li>Muestra las 5 primeras líneas de <code>/etc/passwd</code> y después las 3 últimas. ¿Cuántas líneas tiene
+en total?</li>
+<li>Abre <code>/etc/passwd</code> con <code>less</code>, busca la palabra <code>alumno</code> y sal. Escribe qué teclas has usado.</li>
+</ol>
+<h3 id="bloque-d--comodines">Bloque D — Comodines</h3>
+<ol start="10">
+<li>
+<p>Dentro de <code>practica/imagenes/</code> crea <code>foto1.jpg</code>, <code>foto2.jpg</code>, <code>foto10.jpg</code>, <code>doc1.pdf</code> y
+<code>doc2.pdf</code>. Escribe el comodín que elige:</p>
+<ul>
+<li>sólo las tres imágenes</li>
+<li><code>foto1.jpg</code> y <code>foto2.jpg</code>, pero <strong>no</strong> <code>foto10.jpg</code></li>
+<li>todo lo que empieza por <code>doc</code></li>
+</ul>
+<p>Compruébalos <strong>con <code>echo</code></strong> antes de dar la respuesta, y pega lo que sale.</p>
+</li>
+<li>
+<p>Mueve los dos PDF a <code>practica/documentos/</code> con un solo comando y un comodín.</p>
+</li>
+</ol>
+<h3 id="bloque-e--ayuda">Bloque E — Ayuda</h3>
+<ol start="12">
+<li>Con <code>man ls</code> averigua qué hacen las opciones <code>-S</code> y <code>-r</code>. Úsalas para listar <code>/etc</code> del
+fichero más pequeño al más grande.</li>
+</ol>
+<hr />
+<h2 id="reto-el-laberinto">Reto: el laberinto</h2>
+<p>Descarga <code>s13-laberinto.sh</code> de Moodle. El navegador lo guarda en <code>~/Descargas</code>: muévelo a tu
+carpeta personal con <code>mv</code> y ejecútalo desde allí:</p>
+<pre><code class="language-bash">bash s13-laberinto.sh
+</code></pre>
+<p>Te crea la carpeta <code>~/laberinto</code>, con un tesoro escondido. Para empezar:</p>
+<pre><code class="language-bash">cat ~/laberinto/entrada/LEEME.txt
+</code></pre>
+<p>Sigue las pistas. Sólo necesitas comandos de esta guía. Cuando encuentres el tesoro, <strong>cópialo a
+tu carpeta personal</strong> con el nombre <code>tesoro-TUNOMBRE.txt</code>.</p>
+<p><em>Cada vez que ejecutas el script, la clave del tesoro cambia: no sirve copiar la de un compañero.</em></p>
+<hr />
+<h2 id="entregable">Entregable</h2>
+<p><strong>Tarea Moodle: «Cuestionario de consola + práctica de gestión de ficheros»</strong>
+Calificación de 0 a 10 · Se aprueba con 5 · Finalización automática por nota de aprobado.</p>
+<p>Un documento Markdown exportado a PDF con:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>Qué entregas</th>
+<th>Puntos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ejercicios</td>
+<td>Los 12 ejercicios: comando <strong>y</strong> salida, en bloque de código (no en captura)</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Reto</td>
+<td>Los comandos que has usado en el laberinto, en orden, y la clave del tesoro</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Chuleta</td>
+<td><strong>Tu propia chuleta</strong>: los 15 comandos que más vas a usar, con una línea cada uno. Hazla tú, no la copies de aquí: es la que podrás usar en la prueba práctica</td>
+<td>2</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="nota">
+<p><strong>Cómo pasar la salida al documento.</strong> Selecciona el texto en el terminal, <code>Ctrl</code>+<code>Shift</code>+<code>C</code>,
+y pégalo en VS Code dentro de un bloque de código. Sale limpio y se lee mejor que una captura.</p>
+</blockquote>
+<p><em>Instrumento de evaluación: cuestionario autocorregible + prueba práctica en consola.</em></p>
+  <footer class="pie">
+    Sistemas Operativos Monopuesto · SMR 1.º · Versión HTML de <code>s13-comandos-y-gestion-de-ficheros-linux.md</code>
+  </footer>
+</div>
+</body>
+</html>

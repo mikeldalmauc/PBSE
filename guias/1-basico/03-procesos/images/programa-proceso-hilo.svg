@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="370" viewBox="0 0 860 370" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Programa, proceso e hilo</title>
+  <desc id="d">Un programa es un fichero en el disco. Al ejecutarlo dos veces aparecen dos procesos en la RAM, cada uno con su memoria propia y varios hilos que comparten esa memoria.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="369" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Programa → proceso → hilo</text>
+
+  <!-- Disco -->
+  <rect x="24" y="60" width="210" height="262" rx="12" fill="#eef0f3" stroke="#c9ccd1"/>
+  <text x="40" y="86" font-size="12" font-weight="700" letter-spacing="1.5" fill="#52514e">EN EL DISCO</text>
+  <path d="M94 110 h50 l20 20 v68 h-70 z" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <path d="M144 110 v20 h20" fill="none" stroke="#2a78d6" stroke-width="2"/>
+  <text x="129" y="170" font-size="14" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">firefox</text>
+  <text x="129" y="236" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">Programa</text>
+  <text x="129" y="258" font-size="13" text-anchor="middle" fill="#52514e">un fichero quieto</text>
+  <text x="129" y="278" font-size="13" text-anchor="middle" fill="#52514e">con código dentro</text>
+  <text x="129" y="302" font-size="13" text-anchor="middle" font-style="italic" fill="#52514e">(la receta del libro)</text>
+
+  <!-- Flechas ejecutar -->
+  <text x="267" y="160" font-size="12" text-anchor="middle" fill="#52514e">lo ejecutas</text>
+  <text x="267" y="176" font-size="12" text-anchor="middle" fill="#52514e">2 veces</text>
+  <path d="M238 192 H 296" stroke="#52514e" stroke-width="2" fill="none" marker-end="url(#flecha)"/>
+
+  <!-- RAM -->
+  <rect x="300" y="60" width="536" height="262" rx="12" fill="#f7f8fa" stroke="#c9ccd1"/>
+  <text x="316" y="86" font-size="12" font-weight="700" letter-spacing="1.5" fill="#52514e">EN LA RAM (EJECUTÁNDOSE)</text>
+
+  <!-- Proceso 1 -->
+  <rect x="316" y="98" width="244" height="208" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <text x="332" y="124" font-size="16" font-weight="700" fill="#0b0b0b">Proceso 1</text>
+  <text x="544" y="124" font-size="13" text-anchor="end" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">PID 2150</text>
+  <rect x="332" y="136" width="212" height="40" rx="8" fill="#ffffff" stroke="#eb6834" stroke-dasharray="5 4"/>
+  <text x="438" y="161" font-size="13" text-anchor="middle" fill="#0b0b0b">memoria propia</text>
+  <path d="M340 176 V 266" stroke="#6250d6" stroke-width="2" stroke-dasharray="3 3"/>
+  <g fill="none" stroke="#6250d6" stroke-width="2.5" stroke-linecap="round">
+    <path d="M340 206 q8 -8 16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+    <path d="M340 236 q8 -8 16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+    <path d="M340 266 q8 -8 16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+  </g>
+  <g fill="#6250d6"><circle cx="340" cy="206" r="4"/><circle cx="340" cy="236" r="4"/><circle cx="340" cy="266" r="4"/></g>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="448" y="211">hilo: dibuja</text>
+    <text x="448" y="241">hilo: descarga</text>
+    <text x="448" y="271">hilo: vídeo</text>
+  </g>
+
+  <!-- Proceso 2 -->
+  <rect x="576" y="98" width="244" height="208" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <text x="592" y="124" font-size="16" font-weight="700" fill="#0b0b0b">Proceso 2</text>
+  <text x="804" y="124" font-size="13" text-anchor="end" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">PID 2210</text>
+  <rect x="592" y="136" width="212" height="40" rx="8" fill="#ffffff" stroke="#eb6834" stroke-dasharray="5 4"/>
+  <text x="698" y="161" font-size="13" text-anchor="middle" fill="#0b0b0b">memoria propia</text>
+  <path d="M600 176 V 236" stroke="#6250d6" stroke-width="2" stroke-dasharray="3 3"/>
+  <g fill="none" stroke="#6250d6" stroke-width="2.5" stroke-linecap="round">
+    <path d="M600 206 q8 -8 16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+    <path d="M600 236 q8 -8 16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+  </g>
+  <g fill="#6250d6"><circle cx="600" cy="206" r="4"/><circle cx="600" cy="236" r="4"/></g>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="708" y="211">hilo: dibuja</text>
+    <text x="708" y="241">hilo: descarga</text>
+  </g>
+
+  <text x="430" y="350" font-size="13" text-anchor="middle" fill="#52514e">Un proceso no puede tocar la memoria de otro · Los hilos de un mismo proceso sí la comparten</text>
+</svg>

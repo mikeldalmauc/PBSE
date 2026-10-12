@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Comandos y gesti&oacute;n de ficheros en GNU&sol;Linux</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <span id="markdown-mermaid" aria-hidden="true" data-config="{&quot;darkModeTheme&quot;:&quot;vscode&quot;,&quot;lightModeTheme&quot;:&quot;vscode&quot;,&quot;maxTextSize&quot;:50000,&quot;clickDrag&quot;:&quot;alt&quot;,&quot;showControls&quot;:&quot;onHoverOrFocus&quot;,&quot;resizable&quot;:true,&quot;maxHeight&quot;:&quot;&quot;}"></span>
+				<hr>
+<h2 id="modulo-sistemas-operativos-monopuesto-smr-1ºnivel-1--básicotema-04tipo-explicacióncompetencias-cm3-cm4herramientas-h4-terminal-linux-y-bashduracion-5-h">modulo: Sistemas Operativos Monopuesto (SMR 1.º)
+nivel: 1 · Básico
+tema: &quot;04&quot;
+tipo: Explicación
+competencias: CM3, CM4
+herramientas: H4 (terminal Linux y Bash)
+duracion: 5 h</h2>
+<h1 id="comandos-y-gestión-de-ficheros-en-gnulinux">Comandos y gestión de ficheros en GNU/Linux</h1>
+<blockquote>
+<p><strong>Antes de empezar.</strong> Lo mínimo para trabajar en el terminal: moverte, crear, ver, copiar, mover y borrar ficheros.
+Todo se hace en tu máquina virtual de Linux Mint (<code>Mint-SMR</code>).</p>
+</blockquote>
+<blockquote>
+<p><strong>Analogía.</strong> El explorador de archivos es como pedir la comida señalando la carta con el dedo:
+funciona, pero sólo puedes pedir lo que está en la foto. El terminal es hablar el idioma: al
+principio cuesta más, pero puedes pedir «todos los platos sin gluten de menos de 10 euros,
+ordenados por precio». Eso, señalando la carta, no hay manera.</p>
+</blockquote>
+<h2 id="índice">Índice</h2>
+<ul>
+<li><a href="#comandos-y-gesti%C3%B3n-de-ficheros-en-gnulinux">Comandos y gestión de ficheros en GNU/Linux</a>
+<ul>
+<li><a href="#%C3%ADndice">Índice</a></li>
+<li><a href="#1-c%C3%B3mo-se-escribe-un-comando">1. Cómo se escribe un comando</a></li>
+<li><a href="#2-pedir-ayuda">2. Pedir ayuda</a></li>
+<li><a href="#3-el-%C3%A1rbol-de-directorios">3. El árbol de directorios</a></li>
+<li><a href="#4-moverse-pwd-cd-ls">4. Moverse: <code>pwd</code>, <code>cd</code>, <code>ls</code></a></li>
+<li><a href="#5-rutas-absolutas-y-relativas">5. Rutas absolutas y relativas</a></li>
+<li><a href="#6-crear-ficheros-y-carpetas">6. Crear ficheros y carpetas</a></li>
+<li><a href="#7-ver-el-contenido-de-un-fichero">7. Ver el contenido de un fichero</a></li>
+<li><a href="#8-copiar-mover-y-borrar">8. Copiar, mover y borrar</a>
+<ul>
+<li><a href="#copiar">Copiar</a></li>
+<li><a href="#mover-y-renombrar">Mover y renombrar</a></li>
+<li><a href="#borrar">Borrar</a></li>
+</ul>
+</li>
+<li><a href="#9-comodines">9. Comodines</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1-cómo-se-escribe-un-comando">1. Cómo se escribe un comando</h2>
+<pre><code>comando  -opciones  argumentos
+   │         │           │
+   │         │           └── sobre qué actúa: un fichero, una carpeta...
+   │         └── cómo lo hace; empiezan por guion
+   └── el programa que se ejecuta
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span> -l /etc       <span class="hljs-comment"># comando ls, opción -l, argumento /etc</span>
+<span class="hljs-built_in">ls</span> -l -a /etc    <span class="hljs-comment"># dos opciones</span>
+<span class="hljs-built_in">ls</span> -la /etc      <span class="hljs-comment"># las mismas dos opciones, juntas: es lo mismo</span>
+</code></pre>
+<p>Cuatro reglas que ahorran disgustos:</p>
+<ol>
+<li><strong>Mayúsculas y minúsculas son distintas.</strong> <code>Documentos</code> y <code>documentos</code> son dos carpetas
+diferentes.</li>
+<li><strong>Los espacios separan.</strong> Si un nombre tiene espacios, va entre comillas:
+<code>cat &quot;mi informe.txt&quot;</code>. Mejor todavía: no pongas espacios en los nombres.</li>
+<li><strong>No hay papelera.</strong> Lo que borras con <code>rm</code> desaparece para siempre.</li>
+<li><strong>Si no dice nada, ha ido bien.</strong> <code>cp</code> o <code>mkdir</code> no responden nada cuando funcionan. Si algo
+falla, te lo dicen.</li>
+</ol>
+<p>Las teclas que vas a usar todo el rato:</p>
+<table>
+<thead>
+<tr>
+<th>Tecla</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Tab</code></td>
+<td>Completa nombres de comandos, ficheros y carpetas. Dos veces: enseña las opciones</td>
+</tr>
+<tr>
+<td><code>↑</code> / <code>↓</code></td>
+<td>Recupera los comandos que ya has escrito</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>C</code></td>
+<td>Para un comando que no termina</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>L</code></td>
+<td>Limpia la pantalla (lo mismo que <code>clear</code>)</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>Shift</code>+<code>C</code> / <code>V</code></td>
+<td>Copiar / pegar <strong>dentro del terminal</strong> (sin <code>Shift</code> no funciona)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>El tabulador es un corrector gratis.</strong> Si pulsas <code>Tab</code> y no completa, es que ese fichero no
+existe o no estás en la carpeta que crees. Acostúmbrate a escribir tres letras y pulsar <code>Tab</code>.</p>
+</blockquote>
+<h2 id="2-pedir-ayuda">2. Pedir ayuda</h2>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span> --<span class="hljs-built_in">help</span>      <span class="hljs-comment"># resumen rápido de las opciones</span>
+man <span class="hljs-built_in">ls</span>         <span class="hljs-comment"># el manual completo</span>
+</code></pre>
+<p>Dentro de <code>man</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Tecla</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Espacio</code> / <code>b</code></td>
+<td>Página siguiente / anterior</td>
+</tr>
+<tr>
+<td><code>/palabra</code></td>
+<td>Buscar esa palabra</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>Siguiente resultado de la búsqueda</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td><strong>Salir</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Si te quedas «atrapado» dentro de algo que ocupa toda la pantalla (<code>man</code>, <code>less</code>), prueba <code>q</code>.
+Si es un comando que no termina, <code>Ctrl</code>+<code>C</code>.</p>
+</blockquote>
+<h2 id="3-el-árbol-de-directorios">3. El árbol de directorios</h2>
+<p>En Windows hay varios árboles: <code>C:\</code>, <code>D:\</code>, <code>E:\</code>. En Linux hay <strong>uno solo</strong>, que empieza en <code>/</code>
+(la <strong>raíz</strong>), y todo cuelga de ahí, también los pendrives: cuando conectas uno, aparece como una
+carpeta dentro de <code>/media</code>.</p>
+<pre><code>/
+├── bin      → programas básicos
+├── boot     → arranque del sistema
+├── dev      → dispositivos: tu disco es /dev/sda
+├── etc      → la configuración del sistema
+├── home     → carpetas personales: /home/alumno
+├── media    → pendrives y discos que conectas
+├── root     → carpeta personal del administrador
+├── tmp      → temporales; se vacía al reiniciar
+├── usr      → programas instalados
+└── var      → datos que cambian, como los registros (/var/log)
+</code></pre>
+<p>Esta organización es casi igual en todas las distribuciones: lo que aprendas en Mint te sirve en
+Arch dentro de unas semanas.</p>
+<blockquote>
+<p><strong>En Linux casi todo es un fichero.</strong> Tu disco es un fichero (<code>/dev/sda</code>) y la información del
+procesador se lee de otro (<code>/proc/cpuinfo</code>). Por eso, sabiendo manejar ficheros, puedes
+administrar todo el sistema.</p>
+</blockquote>
+<p>Compruébalo:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span> /
+<span class="hljs-built_in">ls</span> /home
+<span class="hljs-built_in">head</span> /proc/cpuinfo
+</code></pre>
+<h2 id="4-moverse-pwd-cd-ls">4. Moverse: <code>pwd</code>, <code>cd</code>, <code>ls</code></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">pwd</span>        <span class="hljs-comment"># ¿dónde estoy?</span>
+<span class="hljs-built_in">cd</span> /etc    <span class="hljs-comment"># ir a /etc</span>
+<span class="hljs-built_in">cd</span>         <span class="hljs-comment"># volver a mi carpeta personal</span>
+<span class="hljs-built_in">cd</span> ..      <span class="hljs-comment"># subir un nivel</span>
+<span class="hljs-built_in">cd</span> -       <span class="hljs-comment"># volver a la carpeta en la que estaba antes</span>
+</code></pre>
+<p>Para ver qué hay en una carpeta:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span>         <span class="hljs-comment"># lo que hay aquí</span>
+<span class="hljs-built_in">ls</span> -l      <span class="hljs-comment"># en lista: permisos, propietario, tamaño y fecha</span>
+<span class="hljs-built_in">ls</span> -a      <span class="hljs-comment"># también los ficheros ocultos</span>
+<span class="hljs-built_in">ls</span> -lh     <span class="hljs-comment"># tamaños fáciles de leer (K, M, G)</span>
+<span class="hljs-built_in">ls</span> -lah    <span class="hljs-comment"># todo junto: la que más vas a usar</span>
+<span class="hljs-built_in">ls</span> /etc    <span class="hljs-comment"># lo que hay en otra carpeta, sin moverte de donde estás</span>
+</code></pre>
+<blockquote>
+<p><strong>Ficheros ocultos.</strong> En Linux un fichero está oculto si <strong>su nombre empieza por punto</strong>, por
+ejemplo <code>.bashrc</code>. No es un permiso especial, sólo una costumbre: <code>ls</code> no los enseña si no le
+pones <code>-a</code>.</p>
+</blockquote>
+<p>Para ver las carpetas en forma de árbol:</p>
+<pre><code class="language-bash">sudo apt install tree   <span class="hljs-comment"># se instala una sola vez</span>
+tree                    <span class="hljs-comment"># el árbol desde donde estás</span>
+tree -L 2               <span class="hljs-comment"># sólo dos niveles de profundidad</span>
+</code></pre>
+<h2 id="5-rutas-absolutas-y-relativas">5. Rutas absolutas y relativas</h2>
+<p>Una <strong>ruta</strong> es la dirección de un fichero o de una carpeta.</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Empieza por</th>
+<th>Ejemplo</th>
+<th>Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Absoluta</strong></td>
+<td><code>/</code></td>
+<td><code>/home/alumno/docs/a.txt</code></td>
+<td>Desde la raíz. Vale estés donde estés</td>
+</tr>
+<tr>
+<td><strong>Relativa</strong></td>
+<td>cualquier otra cosa</td>
+<td><code>docs/a.txt</code></td>
+<td>Desde la carpeta en la que estás ahora</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td>La carpeta en la que estoy</td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td>La carpeta de arriba (la «madre»)</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>Mi carpeta personal (<code>/home/alumno</code>)</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>La raíz del sistema</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Analogía.</strong> Una ruta absoluta es una dirección completa: «calle Mayor 3, Zornotza». Llega el
+cartero salga de donde salga. Una ruta relativa es «dos portales más abajo»: es más corta, pero
+sólo sirve si sabes desde dónde sales.</p>
+</blockquote>
+<p>Ejemplo: estás en <code>/home/alumno/proyectos/web</code> y quieres ver <code>/home/alumno/docs/informe.txt</code>.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> /home/alumno/docs/informe.txt   <span class="hljs-comment"># absoluta</span>
+<span class="hljs-built_in">cat</span> ../../docs/informe.txt          <span class="hljs-comment"># relativa: subo dos niveles y bajo a docs</span>
+<span class="hljs-built_in">cat</span> ~/docs/informe.txt              <span class="hljs-comment"># con el atajo ~</span>
+</code></pre>
+<p>Las tres hacen lo mismo. Si no sabes dónde estás, <code>pwd</code>.</p>
+<h2 id="6-crear-ficheros-y-carpetas">6. Crear ficheros y carpetas</h2>
+<pre><code class="language-bash"><span class="hljs-built_in">touch</span> nota.txt                 <span class="hljs-comment"># crear un fichero vacío</span>
+<span class="hljs-built_in">touch</span> a.txt b.txt c.txt        <span class="hljs-comment"># varios a la vez</span>
+<span class="hljs-built_in">mkdir</span> proyecto                 <span class="hljs-comment"># crear una carpeta</span>
+<span class="hljs-built_in">mkdir</span> -p proyecto/src/css      <span class="hljs-comment"># crear la ruta entera, aunque falten carpetas por el camino</span>
+</code></pre>
+<blockquote>
+<p>Usa <code>mkdir -p</code> casi siempre: crea las carpetas que falten por el camino y no da error si la
+carpeta ya existe.</p>
+</blockquote>
+<p>Con <strong>llaves</strong> puedes crear muchas cosas de golpe:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">mkdir</span> -p informes/{2025,2026,2027}   <span class="hljs-comment"># tres carpetas: informes/2025, informes/2026...</span>
+<span class="hljs-built_in">touch</span> prueba{1..5}.txt               <span class="hljs-comment"># prueba1.txt, prueba2.txt ... prueba5.txt</span>
+</code></pre>
+<p>Escribir en un fichero sin abrir un editor:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hola&quot;</span> &gt; nota.txt           <span class="hljs-comment"># escribe en el fichero (lo que hubiera antes, se pierde)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Otra línea&quot;</span> &gt;&gt; nota.txt    <span class="hljs-comment"># añade al final</span>
+</code></pre>
+<blockquote>
+<p>⚠️ <strong>Un <code>&gt;</code> borra, dos <code>&gt;&gt;</code> añaden.</strong> Si te equivocas y pones uno solo, el contenido anterior
+del fichero desaparece. Sin preguntar.</p>
+</blockquote>
+<p>Para editar un fichero de verdad, <strong>nano</strong>:</p>
+<pre><code class="language-bash">nano nota.txt    <span class="hljs-comment"># Ctrl+O guarda (y Enter para confirmar), Ctrl+X sale</span>
+</code></pre>
+<blockquote>
+<p>Si algún día te encuentras sin querer dentro de <strong>vim</strong> (una pantalla de la que no sabes salir):
+pulsa <code>Esc</code>, escribe <code>:q!</code> y pulsa <code>Enter</code>. Sales sin guardar nada.</p>
+</blockquote>
+<h2 id="7-ver-el-contenido-de-un-fichero">7. Ver el contenido de un fichero</h2>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> nota.txt             <span class="hljs-comment"># todo de golpe (para ficheros cortos)</span>
+<span class="hljs-built_in">cat</span> -n nota.txt          <span class="hljs-comment"># con el número de cada línea</span>
+less /etc/passwd         <span class="hljs-comment"># página a página (para ficheros largos)</span>
+<span class="hljs-built_in">head</span> /etc/passwd         <span class="hljs-comment"># las 10 primeras líneas</span>
+<span class="hljs-built_in">head</span> -n 3 /etc/passwd    <span class="hljs-comment"># las 3 primeras</span>
+<span class="hljs-built_in">tail</span> -n 3 /etc/passwd    <span class="hljs-comment"># las 3 últimas</span>
+<span class="hljs-built_in">wc</span> -l /etc/passwd        <span class="hljs-comment"># cuántas líneas tiene</span>
+</code></pre>
+<blockquote>
+<p><code>less</code> usa las mismas teclas que <code>man</code>: <code>Espacio</code> para avanzar, <code>/palabra</code> para buscar y <code>q</code>
+para salir. Si un fichero no cabe en la pantalla, usa <code>less</code> y no <code>cat</code>.</p>
+</blockquote>
+<h2 id="8-copiar-mover-y-borrar">8. Copiar, mover y borrar</h2>
+<h3 id="copiar">Copiar</h3>
+<pre><code class="language-bash"><span class="hljs-built_in">cp</span> origen.txt copia.txt       <span class="hljs-comment"># copiar un fichero</span>
+<span class="hljs-built_in">cp</span> a.txt b.txt carpeta/       <span class="hljs-comment"># copiar varios a una carpeta</span>
+<span class="hljs-built_in">cp</span> -r carpeta/ copia/         <span class="hljs-comment"># copiar una carpeta entera: hace falta -r</span>
+<span class="hljs-built_in">cp</span> -i origen.txt copia.txt    <span class="hljs-comment"># -i: pregunta antes de machacar un fichero que ya existe</span>
+</code></pre>
+<h3 id="mover-y-renombrar">Mover y renombrar</h3>
+<p>En Linux <strong>mover y renombrar es el mismo comando</strong>: <code>mv</code>.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">mv</span> viejo.txt nuevo.txt        <span class="hljs-comment"># renombrar</span>
+<span class="hljs-built_in">mv</span> fichero.txt carpeta/       <span class="hljs-comment"># mover</span>
+<span class="hljs-built_in">mv</span> carpeta1 carpeta2          <span class="hljs-comment"># con las carpetas no hace falta -r</span>
+</code></pre>
+<h3 id="borrar">Borrar</h3>
+<pre><code class="language-bash"><span class="hljs-built_in">rm</span> fichero.txt        <span class="hljs-comment"># borrar un fichero</span>
+<span class="hljs-built_in">rm</span> -i fichero.txt     <span class="hljs-comment"># preguntando antes</span>
+<span class="hljs-built_in">rm</span> -r carpeta/        <span class="hljs-comment"># borrar una carpeta con todo lo que tenga dentro</span>
+<span class="hljs-built_in">rmdir</span> carpeta         <span class="hljs-comment"># borrar una carpeta, pero SÓLO si está vacía</span>
+</code></pre>
+<blockquote>
+<p>⚠️ <strong><code>rm</code> no tiene papelera ni «deshacer».</strong> Dos costumbres que te van a salvar alguna vez:</p>
+<ol>
+<li><strong>Antes de borrar, lista.</strong> Cambia <code>rm</code> por <code>ls</code> en el mismo comando. Si <code>ls</code> te enseña lo
+que esperabas, entonces sí, <code>rm</code>.</li>
+<li><strong>Mira los espacios.</strong> <code>rm -r ~/tmp</code> y <code>rm -r ~/ tmp</code> se parecen mucho, pero el segundo
+borra <strong>todo lo que hay en tu carpeta personal</strong>.</li>
+</ol>
+<p>Si ves <code>rm -rf</code> en internet, no lo copies sin entender qué borra: no pregunta nada.</p>
+</blockquote>
+<h2 id="9-comodines">9. Comodines</h2>
+<p>Los comodines sirven para elegir muchos ficheros a la vez sin escribir sus nombres.</p>
+<table>
+<thead>
+<tr>
+<th>Comodín</th>
+<th>Significa</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>Cualquier cosa (también nada)</td>
+<td><code>*.txt</code> → todos los que terminan en <code>.txt</code></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td><strong>Un</strong> carácter, ni más ni menos</td>
+<td><code>foto?.jpg</code> → <code>foto1.jpg</code>, pero no <code>foto10.jpg</code></td>
+</tr>
+<tr>
+<td><code>[0-9]</code></td>
+<td>Un carácter de ese rango</td>
+<td><code>informe[0-9].pdf</code></td>
+</tr>
+<tr>
+<td><code>{a,b}</code></td>
+<td>Cada una de las opciones</td>
+<td><code>*.{jpg,png}</code> → los <code>.jpg</code> y los <code>.png</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Antes de usar un comodín para borrar o mover, pruébalo con <code>echo</code> o con <code>ls</code>:</strong></p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> *.txt          <span class="hljs-comment"># te enseña exactamente qué ficheros va a coger</span>
+<span class="hljs-built_in">rm</span> *.txt            <span class="hljs-comment"># ahora sí, sabiendo lo que haces</span>
+</code></pre>
+<p>Ejemplos:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span> *.txt                  <span class="hljs-comment"># todos los .txt</span>
+<span class="hljs-built_in">cp</span> *.jpg imagenes/        <span class="hljs-comment"># todas las imágenes a una carpeta</span>
+<span class="hljs-built_in">ls</span> foto?.jpg              <span class="hljs-comment"># foto1.jpg, foto2.jpg... pero no foto10.jpg</span>
+<span class="hljs-built_in">rm</span> *.tmp                  <span class="hljs-comment"># borrar todos los temporales</span>
+</code></pre>
+
+            
+            
+        </body>
+        </html>

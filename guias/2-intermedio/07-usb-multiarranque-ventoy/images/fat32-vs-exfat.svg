@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="330" viewBox="0 0 860 330" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Tamaño de algunas ISO frente al límite de FAT32</title>
+  <desc id="d">Windows 11 ocupa unos 7 GB, Ubuntu 6 GB, Kali 4,5 GB, Hiren's 3,1 GB, Linux Mint 2,8 GB y Arch 1,5 GB. FAT32 no admite ficheros de 4 GB o más, así que las tres primeras no cabrían; exFAT no tiene ese límite.</desc>
+  <rect x="0.5" y="0.5" width="859" height="329" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">¿Por qué exFAT? Algunas ISO pasan de 4 GB</text>
+  <text x="24" y="60" font-size="13" fill="#52514e">Tamaño aproximado de cada ISO, en GB</text>
+
+  <!-- rejilla: x = 200 + GB*75 -->
+  <g stroke="#e2e5e9" stroke-width="1">
+    <line x1="275" y1="76" x2="275" y2="292"/><line x1="350" y1="76" x2="350" y2="292"/><line x1="425" y1="76" x2="425" y2="292"/>
+    <line x1="575" y1="76" x2="575" y2="292"/><line x1="650" y1="76" x2="650" y2="292"/><line x1="725" y1="76" x2="725" y2="292"/>
+    <line x1="800" y1="76" x2="800" y2="292"/>
+  </g>
+  <line x1="200" y1="76" x2="200" y2="292" stroke="#8a8f98" stroke-width="1"/>
+
+  <g fill="#2a78d6">
+    <path d="M200 90 H721 Q725 90 725 94 V108 Q725 112 721 112 H200 Z"/>
+    <path d="M200 124 H646 Q650 124 650 128 V142 Q650 146 646 146 H200 Z"/>
+    <path d="M200 158 H533.5 Q537.5 158 537.5 162 V176 Q537.5 180 533.5 180 H200 Z"/>
+    <path d="M200 192 H428.5 Q432.5 192 432.5 196 V210 Q432.5 214 428.5 214 H200 Z"/>
+    <path d="M200 226 H406 Q410 226 410 230 V244 Q410 248 406 248 H200 Z"/>
+    <path d="M200 260 H308.5 Q312.5 260 312.5 264 V278 Q312.5 282 308.5 282 H200 Z"/>
+  </g>
+  <g font-size="14" fill="#0b0b0b" text-anchor="end">
+    <text x="190" y="106">Windows 11</text>
+    <text x="190" y="140">Ubuntu 26.04</text>
+    <text x="190" y="174">Kali Linux</text>
+    <text x="190" y="208">Hiren's BootCD PE</text>
+    <text x="190" y="242">Linux Mint 22.3</text>
+    <text x="190" y="276">Arch Linux</text>
+  </g>
+  <g font-size="13" font-weight="700" fill="#0b0b0b">
+    <text x="733" y="106">7</text>
+    <text x="658" y="140">6</text>
+    <text x="545" y="174">4,5</text>
+    <text x="440" y="208">3,1</text>
+    <text x="418" y="242">2,8</text>
+    <text x="320" y="276">1,5</text>
+  </g>
+  <!-- marca de «no cabe» -->
+  <g fill="#d03b3b">
+    <circle cx="758" cy="101" r="8"/><circle cx="688" cy="135" r="8"/><circle cx="584" cy="169" r="8"/>
+  </g>
+  <g stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+    <path d="M754 97 l8 8 M762 97 l-8 8"/><path d="M684 131 l8 8 M692 131 l-8 8"/><path d="M580 165 l8 8 M588 165 l-8 8"/>
+  </g>
+
+  <!-- límite FAT32 -->
+  <line x1="500" y1="72" x2="500" y2="292" stroke="#d03b3b" stroke-width="2"/>
+  <text x="508" y="84" font-size="12" font-weight="700" fill="#0b0b0b">límite de FAT32: 4 GB por fichero</text>
+
+  <g font-size="12" fill="#52514e" text-anchor="middle">
+    <text x="200" y="308">0</text><text x="275" y="308">1</text><text x="350" y="308">2</text><text x="425" y="308">3</text>
+    <text x="500" y="308">4</text><text x="575" y="308">5</text><text x="650" y="308">6</text><text x="725" y="308">7</text><text x="800" y="308">8 GB</text>
+  </g>
+  <circle cx="30" cy="318" r="6" fill="#d03b3b"/>
+  <path d="M27 315 l6 6 M33 315 l-6 6" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+  <text x="42" y="322" font-size="12" fill="#52514e">= no se podría copiar a un pincho FAT32</text>
+</svg>

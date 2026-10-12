@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="320" viewBox="0 0 860 320" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Pincho clásico frente a Ventoy</title>
+  <desc id="d">Con Rufus, balenaEtcher o dd grabas una ISO y el pincho se convierte en ella: para tres sistemas necesitas tres pinchos. Con Ventoy copias muchas ISO en el mismo pincho y al arrancar eliges una en un menú.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="319" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Un pincho, un sistema… o un pincho, todos</text>
+
+  <!-- Izquierda -->
+  <rect x="24" y="58" width="370" height="242" rx="12" fill="#f7f8fa" stroke="#c9ccd1"/>
+  <text x="40" y="84" font-size="12" font-weight="700" letter-spacing="1.5" fill="#52514e">RUFUS · BALENAETCHER · dd</text>
+  <g font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <rect x="60" y="102" width="150" height="40" rx="8" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/><rect x="210" y="112" width="20" height="20" rx="2" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/><text x="135" y="127">Windows 11</text>
+    <rect x="60" y="156" width="150" height="40" rx="8" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/><rect x="210" y="166" width="20" height="20" rx="2" fill="#ffffff" stroke="#eb6834" stroke-width="2"/><text x="135" y="181">Ubuntu</text>
+    <rect x="60" y="210" width="150" height="40" rx="8" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/><rect x="210" y="220" width="20" height="20" rx="2" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/><text x="135" y="235">Hiren's</text>
+  </g>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="250" y="122">grabas una ISO</text>
+    <text x="250" y="140">y el pincho</text>
+    <text x="250" y="158" font-weight="700">SE CONVIERTE</text>
+    <text x="250" y="176">en ella</text>
+  </g>
+  <text x="40" y="284" font-size="13" fill="#52514e">¿Tres sistemas? Tres pinchos. Como un DVD.</text>
+
+  <!-- Derecha -->
+  <rect x="410" y="58" width="426" height="242" rx="12" fill="#f7f8fa" stroke="#c9ccd1"/>
+  <text x="426" y="84" font-size="12" font-weight="700" letter-spacing="1.5" fill="#52514e">VENTOY</text>
+  <rect x="430" y="100" width="180" height="160" rx="12" fill="#e4e0f8" stroke="#6250d6" stroke-width="2"/>
+  <rect x="610" y="164" width="20" height="32" rx="3" fill="#ffffff" stroke="#6250d6" stroke-width="2"/>
+  <g font-size="12" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <rect x="444" y="112" width="152" height="22" rx="5" fill="#ffffff" stroke="#2a78d6"/><text x="452" y="127">win11.iso</text>
+    <rect x="444" y="140" width="152" height="22" rx="5" fill="#ffffff" stroke="#eb6834"/><text x="452" y="155">ubuntu.iso</text>
+    <rect x="444" y="168" width="152" height="22" rx="5" fill="#ffffff" stroke="#1baf7a"/><text x="452" y="183">hirens.iso</text>
+    <rect x="444" y="196" width="152" height="22" rx="5" fill="#ffffff" stroke="#eda100"/><text x="452" y="211">mint.iso</text>
+    <rect x="444" y="224" width="152" height="22" rx="5" fill="#ffffff" stroke="#e87ba4"/><text x="452" y="239">memtest.iso …</text>
+  </g>
+  <path d="M636 180 H 670" stroke="#52514e" stroke-width="2" fill="none" marker-end="url(#flecha)"/>
+  <rect x="674" y="100" width="146" height="160" rx="8" fill="#1e2227"/>
+  <text x="747" y="122" font-size="12" font-weight="700" text-anchor="middle" fill="#ffffff">Ventoy 1.1.17</text>
+  <g font-size="11.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#c9ccd1">
+    <text x="686" y="148">win11.iso</text>
+    <rect x="680" y="156" width="134" height="20" rx="3" fill="#ffffff"/>
+    <text x="686" y="170" fill="#0b0b0b" font-weight="700">ubuntu.iso</text>
+    <text x="686" y="194">hirens.iso</text>
+    <text x="686" y="216">mint.iso</text>
+    <text x="686" y="238">memtest.iso</text>
+  </g>
+  <text x="426" y="284" font-size="13" fill="#52514e">Copias las ISO como fotos y eliges una en el menú al encender.</text>
+</svg>

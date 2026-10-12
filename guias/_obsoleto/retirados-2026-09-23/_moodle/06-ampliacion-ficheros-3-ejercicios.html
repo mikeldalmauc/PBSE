@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ejercicios · Ampliación: buscar, encadenar y empaquetar en GNU/Linux</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="ejercicios--ampliación-buscar-encadenar-y-empaquetar-en-gnulinux" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Ejercicios · Ampliación: buscar, encadenar y empaquetar en GNU/Linux</h1><div><span style="display:inline-block;background:#b45309;color:#fff;border:1px solid #b45309;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Ejercicios</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 2 · Intermedio</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 06</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM3, CM4</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> a tu ritmo</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H4 (terminal Linux y Bash)</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Nota.</strong> Esta página acompaña a la <a href="06-ampliacion-ficheros-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">explicación del tema</a>. Léela antes de ponerte con los ejercicios.</p>
+</div>
+<h2 id="ejercicios" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Ejercicios</h2>
+<p>Trabaja en tu máquina virtual <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Mint-SMR</code>. Anota el comando <strong>y</strong> su salida. Varios ejercicios
+usan la carpeta <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">practica/</code> que creaste en la guía básica.</p>
+<h3 id="bloque-a--buscar" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Bloque A — Buscar</h3>
+<ol>
+<li>Encuentra todos los ficheros <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.conf</code> de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code> modificados en los últimos 30 días, sin que
+aparezcan los errores de «permiso denegado».</li>
+<li>¿Cuántas veces aparece la palabra <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">root</code> en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/passwd</code>?</li>
+<li>Muestra las líneas de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/passwd</code> que <strong>no</strong> terminan en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/bin/false</code> ni en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/usr/sbin/nologin</code>.</li>
+<li>Encuentra los cinco ficheros más grandes de tu carpeta personal.</li>
+<li>Busca en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code> todos los ficheros en los que aparezca la palabra <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">network</code>, mostrando el
+nombre del fichero y el número de línea.</li>
+</ol>
+<h3 id="bloque-b--tuberías" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Bloque B — Tuberías</h3>
+<ol start="6">
+<li>Averigua cuántos usuarios del sistema tienen <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/bin/bash</code> como shell.</li>
+<li>Saca la lista de extensiones de fichero que hay en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code>, con cuántos ficheros hay de cada
+una, ordenada de más a menos.
+<em>Pista: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls /etc | grep "\." | rev | cut -d. -f1 | rev | sort | uniq -c | sort -rn</code></em>
+Escríbelo tú primero y luego compáralo.</li>
+<li>Guarda en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">informe.txt</code> el listado de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/var/log</code> <strong>y</strong> muéstralo por pantalla a la vez.</li>
+</ol>
+<h3 id="bloque-c--enlaces" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Bloque C — Enlaces</h3>
+<ol start="9">
+<li>Reproduce el experimento del <a href="06-ampliacion-ficheros-1-explicacion.html#5-enlaces-duros-y-simbólicos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 5</a> y explica con tus
+palabras por qué el enlace duro sobrevive y el simbólico no.</li>
+<li>Intenta crear un enlace duro a un <strong>directorio</strong>. ¿Qué error da? ¿Por qué crees que no está
+permitido?</li>
+</ol>
+<h3 id="bloque-d--copias" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Bloque D — Copias</h3>
+<ol start="11">
+<li>Empaqueta y comprime <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">practica/</code> en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">copia-practica.tar.gz</code>. Lista su contenido sin
+extraerlo. Extráelo en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/tmp/prueba/</code>.</li>
+<li>Haz una copia con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync</code> de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">practica/</code> a <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/tmp/espejo/</code>. Después borra un fichero del
+original y vuelve a lanzar <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rsync</code>, primero con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--dry-run</code> y luego con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--delete</code>. Explica
+qué cambia.</li>
+<li>¿Cuánto ocupa <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">practica/</code> en total? ¿Y cada una de sus subcarpetas?</li>
+</ol>
+<h3 id="bloque-e--windows" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Bloque E — Windows</h3>
+<ol start="14">
+<li>Rellena <strong>de memoria</strong> la <a href="06-ampliacion-ficheros-2-chuleta.html#equivalencias-con-windows" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">tabla de equivalencias</a> (tapa las
+columnas de CMD y PowerShell) y luego corrígela con la guía, marcando lo que habías fallado.</li>
+</ol>
+<h3 id="reto-final--el-laberinto" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Reto final — El laberinto</h3>
+<p>El profesor deja en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/tmp/laberinto/</code> un árbol de carpetas con cientos de ficheros. Escondido hay
+<strong>un único fichero</strong> que cumple las tres condiciones a la vez:</p>
+<ul>
+<li>pesa más de 1 MB,</li>
+<li>se modificó hace menos de 2 días,</li>
+<li>contiene en su interior la palabra <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">TESORO</code>.</li>
+</ul>
+<p><strong>Encuéntralo con un solo comando</strong> y di qué pone en la línea siguiente a <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">TESORO</code>.</p>
+<p><em>(Se puede resolver con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">find</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-exec grep</code>, o con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">find</code> + tubería + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">xargs</code>. Las dos valen.)</em></p>
+<h2 id="entrega" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Entrega</h2>
+<p><strong>Voluntaria.</strong> Mismo formato que la guía básica: Markdown exportado a PDF, con comando <strong>y</strong>
+salida en bloques de código (no en captura), las respuestas razonadas de los ejercicios 9, 10 y 12,
+y el reto final con el comando exacto y el resultado.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Aviso sobre la prueba práctica.</strong> Se hace con los comandos estándar (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cat</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">grep</code>,
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">find</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cp</code>), <strong>no</strong> con los sustitutos modernos (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">eza</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">bat</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fd</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rg</code>) de la <a href="11-terminal-zsh-p10k-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de personalización del terminal</a>.
+Los sustitutos son cómodos, pero no están instalados en el 99 % de los servidores del mundo.</p>
+</div>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Ejercicios</p></div>
+</body>
+</html>

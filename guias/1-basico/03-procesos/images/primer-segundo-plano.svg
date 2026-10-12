@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="312" viewBox="0 0 860 312" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Primer y segundo plano en el terminal</title>
+  <desc id="d">Un comando normal se ejecuta en primer plano y ocupa el terminal. Con Ctrl+Z se detiene. Con bg sigue trabajando en segundo plano. Con fg vuelve a primer plano. Un comando con &amp; al final empieza directamente en segundo plano. Ctrl+C lo termina.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="311" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Primer y segundo plano en el terminal</text>
+
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M26 160 H 98" marker-end="url(#flecha)"/>
+    <path d="M834 160 H 762" marker-end="url(#flecha)"/>
+    <path d="M620 128 C 570 66, 290 66, 240 128" marker-end="url(#flecha)"/>
+    <path d="M282 190 L 328 218" marker-end="url(#flecha)"/>
+    <path d="M532 218 L 578 190" marker-end="url(#flecha)"/>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="14" font-weight="700" fill="#0b0b0b">
+    <text x="62" y="148" text-anchor="middle">comando</text>
+    <text x="798" y="148" text-anchor="middle">comando &amp;</text>
+    <text x="430" y="70" text-anchor="middle">fg</text>
+    <text x="316" y="240" text-anchor="end">Ctrl + Z</text>
+    <text x="552" y="240">bg</text>
+  </g>
+
+  <rect x="100" y="130" width="200" height="60" rx="12" fill="#d6efd6" stroke="#008300" stroke-width="2"/>
+  <text x="200" y="156" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">Primer plano</text>
+  <text x="200" y="176" font-size="12" text-anchor="middle" fill="#52514e">ocupa el terminal</text>
+
+  <rect x="330" y="206" width="200" height="60" rx="12" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <text x="430" y="232" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">Detenido</text>
+  <text x="430" y="252" font-size="12" text-anchor="middle" fill="#52514e">congelado, no gasta CPU</text>
+
+  <rect x="560" y="130" width="200" height="60" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="660" y="156" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">Segundo plano</text>
+  <text x="660" y="176" font-size="12" text-anchor="middle" fill="#52514e">trabaja y el terminal queda libre</text>
+
+  <text x="100" y="212" font-size="13" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">Ctrl + C</tspan> lo termina</text>
+  <text x="24" y="296" font-size="13" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">jobs</tspan> lista los trabajos de este terminal · <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">fg</tspan> también despierta a uno detenido · <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">nohup comando &amp;</tspan> sobrevive al cerrar el terminal</text>
+</svg>

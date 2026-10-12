@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ejercicios · Trucos y superpoderes de la consola</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="ejercicios--trucos-y-superpoderes-de-la-consola" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Ejercicios · Trucos y superpoderes de la consola</h1><div><span style="display:inline-block;background:#b45309;color:#fff;border:1px solid #b45309;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Ejercicios</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 3 · Avanzado</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 10</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM4</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 2-3 h, o repartido en sesiones de 20 minutos</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H4 (terminal Linux y Bash)</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Nota.</strong> Esta página acompaña a la <a href="10-trucos-consola-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">explicación del tema</a>. Léela antes de ponerte con los ejercicios.</p>
+</div>
+<h2 id="el-desafío-de-la-consola" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">El desafío de la consola</h2>
+<p>Actividad de aula por equipos, cronometrada. Cada reto vale un punto; gana el equipo que más
+consigue en 30 minutos. <strong>Sólo vale una línea de comandos por reto.</strong></p>
+<ol>
+<li>Crea 100 ficheros llamados <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">dato001.txt</code> … <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">dato100.txt</code> de una sola vez.</li>
+<li>Borra sólo los que tengan número par. <em>(pista: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">{002..100..2}</code>)</em></li>
+<li>Cuenta cuántos usuarios del sistema tienen su carpeta personal dentro de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/home</code>.</li>
+<li>Muestra las 5 extensiones de fichero más frecuentes de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code>.</li>
+<li>Encuentra el fichero más grande de todo <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/var</code>, ignorando los errores de permisos.</li>
+<li>Escribe un comando que muestre <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">CORRECTO</code> si <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/passwd</code> existe y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">FALLO</code> si no.</li>
+<li>Renombra todos los <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.txt</code> de una carpeta a <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.md</code> conservando el nombre.</li>
+<li>Muestra la lista de procesos ordenada por consumo de CPU, sólo el nombre y el porcentaje, los
+5 primeros.</li>
+<li>Cuenta cuántas líneas en total tienen todos los ficheros <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.conf</code> de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code>.</li>
+<li>Sin usar <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nano</code> ni ningún editor, crea un fichero con tres líneas de texto.</li>
+<li>Averigua qué día de la semana caerá el 1 de enero de 2030.</li>
+<li>Copia <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/passwd</code> a tu carpeta añadiéndole la fecha de hoy al nombre, en un solo comando.</li>
+<li>Muestra la diferencia entre el listado de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/bin</code> y el de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/usr/bin</code> sin crear ficheros
+temporales.</li>
+<li>Deja corriendo un comando que te muestre cada 2 segundos cuántos ficheros hay en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/tmp</code>.</li>
+<li><strong>Reto final:</strong> de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/passwd</code>, saca la lista de shells distintos que se usan, cuántos
+usuarios usan cada uno, ordenado de más a menos, y guárdalo en un fichero <strong>y</strong> muéstralo por
+pantalla al mismo tiempo.</li>
+</ol>
+<h2 id="entregable" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Entregable</h2>
+<p><strong>Tarea Moodle: «Trucos de consola»</strong> — se puede plantear como actividad de ampliación o
+integrarla en el entregable del taller de personalización.
+Calificación de 0 a 10 · Se aprueba con 5.</p>
+<ol>
+<li>Los 15 retos del desafío resueltos: comando y salida.</li>
+<li><strong>Desarma tres recetas</strong> del <a href="10-trucos-consola-2-chuleta.html#quince-recetas-de-una-línea" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 9</a> a tu elección:
+ejecuta la tubería quitando un eslabón cada vez, pega la salida de cada paso y explica qué
+aporta cada trozo.</li>
+<li>Captura de una sesión de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tmux</code> con la pantalla dividida en al menos dos paneles, y
+demostración de que sobrevive a cerrar el terminal (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tmux ls</code> después de cerrarlo).</li>
+<li><strong>Tus cinco atajos favoritos</strong> de este documento, con una frase explicando en qué situación
+real te han ahorrado tiempo esta semana. Tienen que ser situaciones tuyas, no inventadas.</li>
+</ol>
+<p><em>Instrumento de evaluación: lista de cotejo de los retos + observación en el aula durante el
+desafío.</em></p>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Ejercicios</p></div>
+</body>
+</html>

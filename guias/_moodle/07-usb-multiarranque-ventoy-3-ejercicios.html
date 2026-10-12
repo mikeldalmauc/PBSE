@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ejercicios · USB multiarranque con Ventoy: la navaja suiza del técnico</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="ejercicios--usb-multiarranque-con-ventoy-la-navaja-suiza-del-técnico" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Ejercicios · USB multiarranque con Ventoy: la navaja suiza del técnico</h1><div><span style="display:inline-block;background:#b45309;color:#fff;border:1px solid #b45309;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Ejercicios</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 2 · Intermedio</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 07</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM2 (particiones y sistemas de archivos, en un disco real)</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 5 h (2 sesiones en el aula + descargas)</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> Ventoy 1.1.17, H4 (terminal Linux) y PowerShell para las comprobaciones</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Nota.</strong> Esta página acompaña a la <a href="07-usb-multiarranque-ventoy-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">explicación del tema</a>. Léela antes de ponerte con los ejercicios.</p>
+</div>
+<h2 id="entregable" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Entregable</h2>
+<p><strong>Tarea Moodle: «Mi navaja suiza USB»</strong>
+Calificación de 0 a 10 · Se aprueba con 5.</p>
+<p>Entrega un <strong>PDF exportado desde Markdown</strong> (como en la <a href="01-markdown-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de Markdown</a>) con:</p>
+<ol>
+<li><strong>Ficha del pincho</strong>: marca, capacidad anunciada y capacidad real que ve Windows, versión de
+Ventoy, estilo de partición y si tiene Secure Boot activado. Explica la diferencia entre las
+dos capacidades.</li>
+<li><strong>Captura de Administración de discos</strong> (o la salida de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Get-Partition</code> en texto) donde se
+vean las dos particiones, y un párrafo que explique para qué sirve cada una.</li>
+<li><strong>Tabla de ISOs</strong>: nombre, versión, tamaño, web oficial y <strong>resultado de la comprobación
+SHA-256</strong> (la salida de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Get-FileHash</code> en texto, no en captura).</li>
+<li>Tu <strong><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy.json</code></strong> con al menos <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOY_DEFAULT_MENU_MODE</code> y tres <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">menu_alias</code>.</li>
+<li><strong>Prueba de arranque</strong> en un equipo real: foto con el móvil del menú de Ventoy y de las tres
+pantallas del <a href="07-usb-multiarranque-ventoy-1-explicacion.html#63-el-menú-de-ventoy" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 6.3</a>. Indica el modelo del equipo, la tecla del
+menú de arranque y si tuviste que registrar la clave MOK.</li>
+<li><strong>Cuatro preguntas</strong>, con tus palabras:
+<ol>
+<li>¿Por qué Ventoy formatea en exFAT y no en FAT32?</li>
+<li>¿Por qué un pincho con tabla MBR puede arrancar en un equipo UEFI con disco GPT?</li>
+<li>¿Qué es la clave MOK y por qué la pide Ventoy la primera vez?</li>
+<li>Ventoy se salta Secure Boot una vez registrada su clave. ¿Qué riesgo supone eso en los
+equipos de una empresa?</li>
+</ol>
+</li>
+<li><strong>Tres situaciones</strong> que te dará el profesor en Moodle, del estilo de las del
+<a href="07-usb-multiarranque-ventoy-2-chuleta.html#qué-herramienta-saco-en-cada-situación" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 7</a>: qué herramienta sacas y qué pasos
+darías.</li>
+<li><strong>Incidencias</strong>: qué se torció y cómo lo resolviste.</li>
+</ol>
+<p><strong>Rúbrica</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Criterio</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Puntos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Ficha del pincho y explicación de las particiones (1 y 2)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">1,5</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Tabla de ISOs completa y verificada con SHA-256 (3)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">2</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy.json</code> válido y funcionando (4)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">1</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Prueba de arranque documentada (5)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">2</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Respuestas a las cuatro preguntas (6)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">2</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Situaciones resueltas con criterio (7)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">1</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Incidencias y calidad del documento (8, formato, capturas con pie)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">0,5</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Defensa en el aula</strong> (sin nota aparte, pero sin ella no se califica la tarea): el profesor te
+pide una herramienta de la lista y tienes que llegar a su pantalla principal en un equipo del aula
+en menos de <strong>tres minutos</strong>, desde el equipo apagado.</p>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Ejercicios</p></div>
+</body>
+</html>

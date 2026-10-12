@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S13 · Ampliación: buscar, encadenar y empaquetar en GNU/Linux</title>
+<style>
+:root{
+  --tinta:#1c1e21; --suave:#5b6168; --linea:#e2e5e9; --fondo:#ffffff;
+  --papel:#f6f7f9; --acento:#7a3e1d; --acento-claro:#fbf3ec;
+  --aviso:#b3261e; --aviso-fondo:#fdf1f0; --consejo:#1c6b4a; --consejo-fondo:#eff7f2;
+  --codigo:#f3f4f6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:16px/1.65 "Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;}
+.hoja{max-width:900px;margin:0 auto;background:var(--fondo);padding:0 clamp(18px,5vw,64px) 72px;
+  box-shadow:0 0 0 1px var(--linea);}
+header.portada{border-bottom:3px solid var(--acento);padding:44px 0 24px;margin-bottom:8px}
+header.portada .modulo{font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--acento);font-weight:700;margin:0 0 10px}
+header.portada h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:0 0 18px;letter-spacing:-.01em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--papel);border:1px solid var(--linea);border-radius:999px;
+  padding:4px 12px;font-size:.8rem;color:var(--suave)}
+.chip b{color:var(--tinta);font-weight:600}
+h1,h2,h3,h4{line-height:1.25;letter-spacing:-.01em}
+h2{font-size:1.5rem;margin:2.4em 0 .7em;padding-bottom:.3em;border-bottom:1px solid var(--linea)}
+h3{font-size:1.18rem;margin:2em 0 .6em}
+h4{font-size:1rem;margin:1.6em 0 .5em;color:var(--acento)}
+p,li{font-size:1rem}
+a{color:var(--acento);text-decoration:none;border-bottom:1px solid rgba(122,62,29,.28)}
+a:hover{border-bottom-color:var(--acento)}
+hr{border:0;border-top:1px solid var(--linea);margin:2.6em 0}
+code{background:var(--codigo);border:1px solid var(--linea);border-radius:4px;
+  padding:.1em .35em;font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:.88em}
+pre{background:#1e2227;color:#e6e9ee;border-radius:8px;padding:16px 18px;overflow-x:auto;
+  font-size:.86rem;line-height:1.55}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre-wrap;word-break:break-word}
+table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:.94rem}
+th,td{border:1px solid var(--linea);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--papel);font-weight:600}
+tbody tr:nth-child(even){background:#fbfbfc}
+td.vacia{min-width:130px;height:2.4em;background:repeating-linear-gradient(
+  135deg,#fff,#fff 6px,#fafafa 6px,#fafafa 12px)}
+blockquote{margin:1.3em 0;padding:12px 18px;border-left:4px solid var(--linea);
+  background:var(--papel);border-radius:0 6px 6px 0}
+blockquote p{margin:.4em 0}
+blockquote.aviso{border-left-color:var(--aviso);background:var(--aviso-fondo)}
+blockquote.consejo{border-left-color:var(--consejo);background:var(--consejo-fondo)}
+blockquote.analogia{border-left-color:var(--acento);background:var(--acento-claro)}
+blockquote.situacion{border-left-color:var(--acento);background:var(--acento-claro);
+  font-size:.92rem;color:var(--suave)}
+blockquote.situacion strong{color:var(--tinta)}
+img{max-width:100%;height:auto;display:block;margin:1.4em auto;border:1px solid var(--linea);
+  border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+#indice-lista{background:var(--papel);border:1px solid var(--linea);border-radius:8px;padding:14px 18px}
+h2#índice + ul{background:var(--papel);border:1px solid var(--linea);border-radius:8px;
+  padding:16px 18px 16px 34px;font-size:.94rem}
+h2#índice + ul ul{border:0;background:none;padding:2px 0 2px 18px}
+footer.pie{margin-top:56px;padding-top:18px;border-top:1px solid var(--linea);
+  font-size:.82rem;color:var(--suave)}
+@media print{
+  body{background:#fff}
+  .hoja{box-shadow:none;max-width:none;padding:0}
+  pre{background:#f3f4f6;color:#111;border:1px solid #ccc}
+  h2{break-after:avoid}
+  table,blockquote,img{break-inside:avoid}
+  a{color:inherit;border:0}
+}
+
+/* extras guia-markdown */
+.tabla{overflow-x:auto;margin:1.2em 0}
+.tabla table{margin:0}
+pre code{white-space:pre;word-break:normal}
+kbd{display:inline-block;font:600 .8em/1 "Segoe UI",Arial,sans-serif;padding:3px 7px;border:1px solid #c9ced6;
+  border-bottom-width:2px;border-radius:4px;background:#fff;color:var(--tinta)}
+li.tarea{list-style:none;margin-left:-1.3em}
+li.tarea input{margin:0 .45em 0 0;vertical-align:-1px}
+del{color:var(--suave)}
+.ejemplo{margin:1.2em 0 1.6em;border:1px solid var(--linea);border-radius:10px;overflow:hidden}
+.ejemplo pre.fuente{margin:0;border-radius:0;position:relative;padding-top:30px}
+.ejemplo pre.fuente::before{content:"Escribes";position:absolute;top:8px;left:18px;font:700 .68rem/1 "Segoe UI",Arial,sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;color:#9aa3ad}
+.resultado{position:relative;padding:30px 20px 6px;background:#fff}
+.resultado::before{content:"Se ve así";position:absolute;top:10px;left:20px;font:700 .68rem/1 "Segoe UI",Arial,sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--acento)}
+.resultado > :first-child{margin-top:.2em}
+.resultado .tabla{margin-top:.4em}
+@media print{pre code{white-space:pre-wrap;word-break:break-word}.tabla{overflow:visible}.ejemplo{break-inside:avoid}}
+
+/* comentarios en bloques de bash */
+.com{color:#8b949e}
+.nw{white-space:nowrap}
+@media print{.com{color:#6b7280}}
+</style>
+</head>
+<body>
+<div class="hoja">
+  <header class="portada">
+    <p class="modulo">Sistemas Operativos Monopuesto (SMR 1.º)</p>
+    <h1>Ampliación: buscar, encadenar y empaquetar en GNU/Linux</h1>
+    <div class="chips">
+      <span class="chip"><b>Semana</b> 13 (ampliación voluntaria) · se retoma en la 22, la 30 y la 31</span>
+      <span class="chip"><b>Trimestre</b> T1</span>
+      <span class="chip"><b>Bloque</b> 4. Explotación</span>
+      <span class="chip"><b>CM</b> CM3, CM4</span>
+      <span class="chip"><b>Duración</b> a tu ritmo</span>
+      <span class="chip"><b>Herramientas</b> H4 (terminal Linux y Bash)</span>
+    </div>
+  </header>
+<h1 id="ampliación-buscar-encadenar-y-empaquetar-en-gnulinux" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Ampliación: buscar, encadenar y empaquetar en GNU/Linux</h1>
+<blockquote class="situacion">
+<p><strong>Dónde estamos.</strong> Ampliación <strong>voluntaria</strong> de la semana 13 · 1.er trimestre · Bloque 4
+(Explotación). Da por hecho que dominas la <a href="s13-comandos-y-gestion-de-ficheros-linux.html">guía básica de comandos y
+ficheros</a>. Es para quien vaya rápido, y es la base
+que dan por sabida la <a href="s30-trucos-y-superpoderes-de-la-consola.html">guía de trucos de la consola</a>
+y la de scripting (semana 31). Al final tienes la <a href="#10-equivalencias-con-windows">tabla de
+equivalencias</a> con CMD y PowerShell de la semana 12.</p>
+</blockquote>
+<h2 id="índice">Índice</h2>
+<ul>
+<li><a href="#1-más-opciones-de-los-comandos-básicos">1. Más opciones de los comandos básicos</a></li>
+<li><a href="#2-buscar-ficheros-find">2. Buscar ficheros: <code>find</code></a></li>
+<li><a href="#3-buscar-dentro-de-los-ficheros-grep">3. Buscar dentro de los ficheros: <code>grep</code></a></li>
+<li><a href="#4-redirección-y-tuberías">4. Redirección y tuberías</a></li>
+<li><a href="#5-enlaces-duros-y-simbólicos">5. Enlaces duros y simbólicos</a></li>
+<li><a href="#6-metadatos-y-atributos">6. Metadatos y atributos</a></li>
+<li><a href="#7-comprimir-y-empaquetar">7. Comprimir y empaquetar</a></li>
+<li><a href="#8-copias-de-seguridad-con-rsync">8. Copias de seguridad con <code>rsync</code></a></li>
+<li><a href="#9-espacio-en-disco">9. Espacio en disco</a></li>
+<li><a href="#10-equivalencias-con-windows">10. Equivalencias con Windows</a></li>
+<li><a href="#11-chuleta">11. Chuleta</a></li>
+<li><a href="#ejercicios">Ejercicios</a></li>
+<li><a href="#entrega">Entrega</a></li>
+</ul>
+<hr />
+<h2 id="1-más-opciones-de-los-comandos-básicos">1. Más opciones de los comandos básicos</h2>
+<p>Lo que se quedó fuera de la guía básica. No hace falta aprenderlo de memoria: tenlo a mano.</p>
+<h3 id="más-ayuda">Más ayuda</h3>
+<pre><code class="language-bash">help cd             <span class="com"># para comandos internos del shell (cd, export, alias...)</span>
+apropos permisos    <span class="com"># buscar comandos por tema</span>
+type ls             <span class="com"># ¿qué es esto: programa, alias o interno?</span>
+which ls            <span class="com"># ¿en qué carpeta está el programa?</span>
+</code></pre>
+<blockquote class="nota">
+<p><strong>Por qué <code>type</code> importa.</strong> En la semana 29 vas a poner alias. A partir de ahí, <code>ls</code> puede no
+ser el <code>ls</code> real sino tu alias. <code>type ls</code> te lo dice, y <code>\ls</code> ejecuta el original.</p>
+</blockquote>
+<p>Y para cuando el manual es demasiado:</p>
+<pre><code class="language-bash">sudo apt install tldr     <span class="com"># Mint</span>
+sudo pacman -S tealdeer   <span class="com"># Arch</span>
+tldr --update
+tldr tar                  <span class="com"># ejemplos prácticos en vez de 400 líneas de manual</span>
+</code></pre>
+<h3 id="más-opciones-de-ls-y-tree">Más opciones de <code>ls</code> y <code>tree</code></h3>
+<pre><code class="language-bash">ls -t               <span class="com"># ordena por fecha de modificación, del más nuevo al más viejo</span>
+ls -S               <span class="com"># ordena por tamaño</span>
+ls -r               <span class="com"># invierte el orden</span>
+ls -R               <span class="com"># recursivo: entra en los subdirectorios</span>
+ls -d carpeta       <span class="com"># información DE la carpeta, no de su contenido</span>
+ls -i               <span class="com"># muestra el número de inodo</span>
+
+ls -lt              <span class="com"># lo más reciente arriba: "¿qué he tocado hace un rato?"</span>
+ls -lhS             <span class="com"># lo más grande arriba: "¿qué me está llenando el disco?"</span>
+
+tree -d             <span class="com"># sólo directorios</span>
+tree -a             <span class="com"># incluye ocultos</span>
+</code></pre>
+<h3 id="escribir-varias-líneas-de-golpe-y-otros-editores">Escribir varias líneas de golpe y otros editores</h3>
+<pre><code class="language-bash">cat &gt; lista.txt &lt;&lt; 'FIN'
+manzana
+pera
+plátano
+FIN
+</code></pre>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Editor</th>
+<th>Cómo salir</th>
+<th>Nota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nano fichero</code></td>
+<td><code>Ctrl</code>+<code>O</code> guarda, <code>Ctrl</code>+<code>X</code> sale</td>
+<td>El de la guía básica</td>
+</tr>
+<tr>
+<td><code>micro fichero</code></td>
+<td><code>Ctrl</code>+<code>S</code>, <code>Ctrl</code>+<code>Q</code></td>
+<td>Como nano pero con los atajos de siempre (<code>sudo apt install micro</code>)</td>
+</tr>
+<tr>
+<td><code>vim fichero</code></td>
+<td><code>Esc</code> y luego <code>:q!</code> (salir sin guardar) o <code>:wq</code> (guardar y salir)</td>
+<td>Te lo vas a encontrar sin querer en muchos servidores</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="seguir-un-fichero-en-vivo-y-saber-qué-es">Seguir un fichero en vivo y saber qué es</h3>
+<pre><code class="language-bash">tail -f /var/log/apt/history.log   <span class="com"># SEGUIR el fichero en vivo. Ctrl+C para parar</span>
+file fichero                        <span class="com"># ¿qué tipo de fichero es realmente?</span>
+</code></pre>
+<blockquote class="nota">
+<p><strong><code>tail -f</code> es el comando del administrador de sistemas.</strong> Lo dejas corriendo sobre un registro
+mientras provocas el error, y ves aparecer el mensaje en el momento. Pruébalo: abre dos
+terminales, en uno <code>tail -f /var/log/apt/history.log</code> y en el otro instala un paquete con
+<code>sudo apt install</code>.</p>
+</blockquote>
+<blockquote class="nota">
+<p><strong><code>file</code> mira dentro, no la extensión.</strong> En Windows un fichero es una imagen porque se llama
+<code>.jpg</code>. En Linux, <code>file</code> lee los primeros bytes y te dice qué es de verdad. Renombra una imagen
+a <code>.txt</code> y pruébalo: seguirá diciendo que es un JPEG.</p>
+</blockquote>
+<h3 id="copiar-sin-perder-nada">Copiar sin perder nada</h3>
+<pre><code class="language-bash">cp -v origen destino               <span class="com"># -v: dice lo que va haciendo</span>
+cp -u origen destino               <span class="com"># -u: sólo si el origen es más nuevo</span>
+cp -a carpeta/ /destino/           <span class="com"># -a: archivo — conserva permisos, fechas y enlaces</span>
+</code></pre>
+<blockquote class="nota">
+<p><strong><code>cp -a</code> es el que quieres para copias de seguridad.</strong> Un <code>cp -r</code> normal copia el contenido
+pero <strong>pierde los permisos y las fechas originales</strong>. Si copias <code>/home</code> con <code>cp -r</code>, todos los
+ficheros pasan a ser tuyos y con fecha de hoy. Con <code>-a</code>, no.</p>
+</blockquote>
+<h3 id="más-sobre-comodines">Más sobre comodines</h3>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Comodín</th>
+<th>Casa con</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[!abc]</code></td>
+<td>Cualquier carácter <strong>menos</strong> ésos</td>
+<td><code>[!t]*</code> → todo lo que no empieza por <code>t</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="nota">
+<p><strong>Los comodines los expande el shell, no el comando.</strong> Cuando escribes <code>rm *.txt</code>, Bash
+sustituye <code>*.txt</code> por la lista real de ficheros <strong>antes</strong> de llamar a <code>rm</code>. Por eso <code>echo *.txt</code>
+te enseña lo que va a pasar.</p>
+</blockquote>
+<blockquote class="aviso">
+<p>⚠️ <strong>Si ningún fichero casa, Bash pasa el comodín tal cual.</strong> <code>ls *.xyz</code> sin ficheros <code>.xyz</code>
+da el error «no existe *.xyz». No es un fallo tuyo: es que el shell no encontró nada que
+sustituir.</p>
+</blockquote>
+<blockquote class="aviso">
+<p>⚠️ <strong>Los comodines no son expresiones regulares.</strong> En comodines <code>*</code> significa «lo que sea»; en
+expresiones regulares (las de <code>grep</code>, <a href="#3-buscar-dentro-de-los-ficheros-grep">apartado 3</a>) <code>*</code>
+significa «cero o más veces lo anterior». Se parecen y no lo son.</p>
+</blockquote>
+<h3 id="rutas-en-los-scripts">Rutas en los scripts</h3>
+<blockquote class="nota">
+<p><strong>Cuándo usar cada tipo de ruta.</strong> En un <strong>script</strong> usa siempre rutas absolutas: el script puede
+ejecutarse desde cualquier directorio, y desde <code>cron</code> se ejecuta desde uno que no esperas
+(semana 32). Escribiendo a mano, las relativas son mucho más cómodas.</p>
+</blockquote>
+<h3 id="todo-es-un-fichero-de-verdad">Todo es un fichero, de verdad</h3>
+<blockquote class="nota">
+<p><strong>Todo es un fichero.</strong> Tu disco duro es un fichero (<code>/dev/sda</code>). El teclado es un fichero. La
+temperatura de la CPU se lee de un fichero en <code>/sys</code>. Incluso «la nada» es un fichero
+(<code>/dev/null</code>). Esto no es una metáfora: puedes hacer <code>cat /dev/urandom</code> y ver qué pasa (después
+pulsa <code>Ctrl</code> + <code>C</code>). Es la idea central del diseño de Unix, y explica por qué basta con saber
+manejar ficheros para administrar todo el sistema.</p>
+</blockquote>
+<pre><code class="language-bash">cat /proc/cpuinfo | head -n 20
+cat /proc/meminfo | head -n 5
+</code></pre>
+<hr />
+<h2 id="2-buscar-ficheros-find">2. Buscar ficheros: <code>find</code></h2>
+<pre><code class="language-bash">find [dónde] [criterios] [qué hacer]
+</code></pre>
+<pre><code class="language-bash">find . -name "*.txt"                  <span class="com"># por nombre, desde aquí hacia abajo</span>
+find /home -iname "informe*"          <span class="com"># -i: sin distinguir mayúsculas</span>
+find . -type f                        <span class="com"># sólo ficheros</span>
+find . -type d                        <span class="com"># sólo directorios</span>
+find . -type l                        <span class="com"># sólo enlaces simbólicos</span>
+
+find . -size +10M                     <span class="com"># de más de 10 megas</span>
+find . -size -1k                      <span class="com"># de menos de 1 kilo</span>
+find . -empty                         <span class="com"># vacíos</span>
+
+find . -mtime -7                      <span class="com"># modificados en los últimos 7 días</span>
+find . -mtime +30                     <span class="com"># sin tocar desde hace más de 30 días</span>
+find . -mmin -10                      <span class="com"># modificados en los últimos 10 minutos</span>
+
+find . -user alumno                   <span class="com"># de un usuario</span>
+find . -perm 777                      <span class="com"># con esos permisos exactos</span>
+find . -perm -o+w                     <span class="com"># que "otros" puedan escribir (semana 22)</span>
+</code></pre>
+<p>Combinar criterios:</p>
+<pre><code class="language-bash">find . -name "*.log" -size +1M                    <span class="com"># las dos cosas (Y implícito)</span>
+find . -name "*.jpg" -o -name "*.png"             <span class="com"># -o: o una o la otra</span>
+find . -type f ! -name "*.txt"                    <span class="com"># !: negación</span>
+find /var/log -type f -name "*.log" -mtime +30    <span class="com"># registros viejos</span>
+</code></pre>
+<p>Hacer algo con lo encontrado:</p>
+<pre><code class="language-bash">find . -name "*.tmp" -delete                       <span class="com"># borrarlos</span>
+find . -name "*.txt" -exec cat {} \;               <span class="com"># ejecutar un comando con cada uno</span>
+find . -name "*.txt" -exec cp {} /copia/ \;        <span class="com"># copiarlos</span>
+find . -name "*.sh" -exec chmod +x {} +            <span class="com"># + agrupa: más rápido que \;</span>
+</code></pre>
+<blockquote class="nota">
+<p>En <code>-exec</code>, <code>{}</code> se sustituye por cada fichero encontrado. <code>\;</code> ejecuta el comando una vez por
+fichero; <code>+</code> lo ejecuta una sola vez con todos como argumentos, que es mucho más rápido.</p>
+</blockquote>
+<blockquote class="aviso">
+<p>⚠️ <strong><code>-delete</code> va siempre al final</strong> y se comprueba primero <strong>sin él</strong>. <code>find . -delete -name &quot;*.tmp&quot;</code> borra el directorio entero antes de mirar el nombre. Ejecuta primero
+<code>find . -name &quot;*.tmp&quot;</code>, mira la lista, y sólo entonces añade <code>-delete</code>.</p>
+</blockquote>
+<p>Alternativa rápida cuando sólo buscas por nombre:</p>
+<pre><code class="language-bash">sudo updatedb          <span class="com"># actualizar la base de datos</span>
+locate informe.pdf     <span class="com"># instantáneo, pero usa un índice que puede estar desfasado</span>
+</code></pre>
+<hr />
+<h2 id="3-buscar-dentro-de-los-ficheros-grep">3. Buscar dentro de los ficheros: <code>grep</code></h2>
+<p><code>find</code> busca ficheros <strong>por su nombre</strong>. <code>grep</code> busca <strong>dentro</strong> de ellos.</p>
+<pre><code class="language-bash">grep "error" registro.log            <span class="com"># líneas que contienen "error"</span>
+grep -i "error" registro.log         <span class="com"># sin distinguir mayúsculas</span>
+grep -n "error" registro.log         <span class="com"># con número de línea</span>
+grep -c "error" registro.log         <span class="com"># sólo cuántas veces aparece</span>
+grep -v "error" registro.log         <span class="com"># las líneas que NO lo contienen</span>
+grep -w "red" fichero                <span class="com"># la palabra entera (no "redirigir")</span>
+grep -r "TODO" .                     <span class="com"># recursivo por todo el árbol</span>
+grep -l "clave" *.conf               <span class="com"># sólo los NOMBRES de los ficheros que casan</span>
+grep -A 3 -B 3 "error" log           <span class="com"># 3 líneas de contexto antes y después</span>
+</code></pre>
+<p>Expresiones regulares básicas:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Casa con</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^texto</code></td>
+<td>Líneas que <strong>empiezan</strong> por «texto»</td>
+</tr>
+<tr>
+<td><code>texto$</code></td>
+<td>Líneas que <strong>terminan</strong> en «texto»</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>Un carácter cualquiera</td>
+</tr>
+<tr>
+<td><code><span class="nw">[0-9]</span></code></td>
+<td>Un dígito</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>Una o más veces lo anterior (con <code><span class="nw">-E</span></code>)</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>O lógico (con <code><span class="nw">-E</span></code>)</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-bash">grep "^alumno" /etc/passwd                  <span class="com"># líneas que empiezan por alumno</span>
+grep -E "error|fallo|warning" registro.log  <span class="com"># cualquiera de las tres</span>
+grep -E "^[0-9]+$" datos.txt                <span class="com"># líneas que son sólo números</span>
+</code></pre>
+<p>Combinado con lo anterior:</p>
+<pre><code class="language-bash">grep -rn "contraseña" /etc/ 2&gt;/dev/null     <span class="com"># buscar en toda la configuración</span>
+ls -l | grep "^d"                           <span class="com"># sólo directorios</span>
+ps aux | grep firefox                       <span class="com"># procesos (semana 4)</span>
+</code></pre>
+<hr />
+<h2 id="4-redirección-y-tuberías">4. Redirección y tuberías</h2>
+<p>Aquí es donde el terminal deja de ser un explorador de archivos incómodo y se convierte en otra
+cosa.</p>
+<blockquote class="analogia">
+<p><strong>Analogía.</strong> Cada comando es una máquina con una entrada y dos salidas: la buena y la de los
+errores. Una <strong>tubería</strong> conecta la salida buena de una máquina con la entrada de la siguiente.
+Encadenando máquinas simples montas una fábrica que hace algo que ninguna sabe hacer sola.
+Ésa es la filosofía Unix: programas pequeños que hacen una cosa bien y se pueden encadenar.</p>
+</blockquote>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&gt;</code></td>
+<td>Salida a fichero, <strong>sobrescribiendo</strong></td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>Salida a fichero, <strong>añadiendo al final</strong></td>
+</tr>
+<tr>
+<td><code>2&gt;</code></td>
+<td>Sólo los <strong>errores</strong> a un fichero</td>
+</tr>
+<tr>
+<td><code>&amp;&gt;</code></td>
+<td>Salida y errores al mismo fichero</td>
+</tr>
+<tr>
+<td><code>2&gt;/dev/null</code></td>
+<td>Descartar los errores</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>Leer la entrada desde un fichero</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>Conectar la salida de uno con la entrada del siguiente</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-bash">ls -l &gt; listado.txt
+echo "más" &gt;&gt; listado.txt
+find / -name "*.conf" 2&gt;/dev/null      <span class="com"># buscar ignorando los "permiso denegado"</span>
+comando &amp;&gt; todo.log
+</code></pre>
+<h3 id="las-piezas-que-se-encadenan">Las piezas que se encadenan</h3>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sort</code></td>
+<td>Ordena líneas (<code><span class="nw">-n</span></code> numérico, <code><span class="nw">-r</span></code> inverso, <code><span class="nw">-u</span></code> sin repetidos)</td>
+</tr>
+<tr>
+<td><code>uniq</code></td>
+<td>Quita repetidos consecutivos (<code><span class="nw">-c</span></code> los cuenta)</td>
+</tr>
+<tr>
+<td><code>wc</code></td>
+<td>Cuenta líneas (<code><span class="nw">-l</span></code>), palabras (<code><span class="nw">-w</span></code>), caracteres (<code><span class="nw">-c</span></code>)</td>
+</tr>
+<tr>
+<td><code>cut</code></td>
+<td>Extrae columnas (<code><span class="nw">-d:</span></code> separador, <code><span class="nw">-f1</span></code> campo)</td>
+</tr>
+<tr>
+<td><code>tr</code></td>
+<td>Sustituye o borra caracteres</td>
+</tr>
+<tr>
+<td><code>head</code> / <code>tail</code></td>
+<td>Los primeros / últimos</td>
+</tr>
+<tr>
+<td><code>tee</code></td>
+<td>Guarda en un fichero <strong>y</strong> deja pasar el flujo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ejemplos que hacen algo útil de verdad:</p>
+<pre><code class="language-bash"><span class="com"># Los 5 ficheros más grandes de mi carpeta</span>
+ls -lhS ~ | head -n 6
+
+<span class="com"># Los usuarios del sistema, ordenados</span>
+cut -d: -f1 /etc/passwd | sort
+
+<span class="com"># ¿Qué shells usa la gente y cuántos cada uno?</span>
+cut -d: -f7 /etc/passwd | sort | uniq -c | sort -rn
+
+<span class="com"># Cuántos ficheros .md hay en total</span>
+find . -name "*.md" | wc -l
+
+<span class="com"># Las 10 IP que más aparecen en un registro</span>
+cut -d' ' -f1 acceso.log | sort | uniq -c | sort -rn | head
+
+<span class="com"># Ver el resultado Y guardarlo a la vez</span>
+ls -lh | tee listado.txt
+</code></pre>
+<blockquote class="nota">
+<p><strong><code>sort | uniq -c | sort -rn</code> es la receta más útil de todo Unix</strong>: cuenta cuántas veces aparece
+cada cosa y las ordena de más a menos. Sirve para registros, para usuarios, para extensiones,
+para lo que sea. Memorízala.</p>
+</blockquote>
+<hr />
+<h2 id="5-enlaces-duros-y-simbólicos">5. Enlaces duros y simbólicos</h2>
+<p>Para entenderlo hace falta saber qué es un <strong>inodo</strong>: la ficha donde el sistema guarda los datos
+reales de un fichero (permisos, propietario, fechas y dónde están los bloques en el disco). <strong>El
+nombre del fichero no está en el inodo</strong>: está en el directorio, apuntando al número de inodo.</p>
+<blockquote class="analogia">
+<p><strong>Analogía.</strong> El inodo es la vivienda; el nombre en el directorio es una entrada en el listín
+telefónico. Un <strong>enlace duro</strong> es otra entrada del listín que apunta a la misma vivienda: si
+borras una entrada, la vivienda sigue ahí mientras quede otra. Un <strong>enlace simbólico</strong> es una
+nota que dice «vive en la calle Mayor 3»: si el vecino se muda, la nota queda apuntando a una
+casa vacía.</p>
+</blockquote>
+<pre><code class="language-bash">ln fichero.txt enlace_duro          <span class="com"># enlace duro</span>
+ln -s fichero.txt enlace_blando     <span class="com"># enlace simbólico (el habitual)</span>
+ls -li                              <span class="com"># -i muestra el inodo</span>
+</code></pre>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th></th>
+<th>Enlace duro</th>
+<th>Enlace simbólico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comparte inodo</td>
+<td>Sí</td>
+<td>No, tiene el suyo</td>
+</tr>
+<tr>
+<td>Si borras el original</td>
+<td>Sigue funcionando</td>
+<td>Se rompe (queda «colgado»)</td>
+</tr>
+<tr>
+<td>Entre discos distintos</td>
+<td><strong>No</strong></td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>A directorios</td>
+<td><strong>No</strong></td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Se ve en <code>ls <span class="nw">-l</span></code></td>
+<td>Como un fichero normal</td>
+<td><code>lrwxrwxrwx ... enlace <span class="nw">-&gt;</span> destino</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Pruébalo, que es la única forma de que se entienda:</p>
+<pre><code class="language-bash">echo "contenido" &gt; original.txt
+ln original.txt duro.txt
+ln -s original.txt blando.txt
+ls -li                              <span class="com"># duro.txt y original.txt comparten inodo</span>
+
+rm original.txt
+cat duro.txt                        <span class="com"># sigue funcionando</span>
+cat blando.txt                      <span class="com"># error: enlace roto</span>
+ls -l blando.txt                    <span class="com"># se ve en rojo: apunta a la nada</span>
+</code></pre>
+<blockquote class="nota">
+<p>En el escritorio de Windows los «accesos directos» son enlaces simbólicos, y <code>mklink</code> es el
+equivalente en CMD. La diferencia es que en Linux los enlaces simbólicos son parte del sistema
+de ficheros y funcionan para cualquier programa, no sólo para el explorador.</p>
+</blockquote>
+<hr />
+<h2 id="6-metadatos-y-atributos">6. Metadatos y atributos</h2>
+<pre><code class="language-bash">stat fichero.txt
+</code></pre>
+<p>Te da inodo, tamaño, permisos en octal y simbólico, propietario, y <strong>tres fechas</strong>:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Qué es</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Access</em></td>
+<td>Última vez que se <strong>leyó</strong></td>
+</tr>
+<tr>
+<td><em>Modify</em></td>
+<td>Última vez que cambió el <strong>contenido</strong></td>
+</tr>
+<tr>
+<td><em>Change</em></td>
+<td>Última vez que cambiaron los <strong>metadatos</strong> (permisos, nombre, propietario)</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-bash">touch -d "2026-01-15 10:00" fichero.txt    <span class="com"># cambiar la fecha a mano</span>
+lsattr fichero.txt                          <span class="com"># atributos extendidos</span>
+sudo chattr +i fichero.txt                  <span class="com"># hacerlo inmutable</span>
+</code></pre>
+<p>Los atributos y los permisos se ven a fondo en la <a href="s22-permisos-en-linux.html">guía de la semana 22</a>.
+Aquí basta con saber leerlos:</p>
+<pre><code class="language-bash">ls -l
+<span class="com"># -rw-r--r--  1  alumno  alumno  1024  9 sep 10:24  nota.txt</span>
+<span class="com">#  │└┬┘└┬┘└┬┘     └──┬─┘  └──┬─┘  └─┬┘  └────┬────┘</span>
+<span class="com">#  │ u   g   o       │       │      │        └── fecha de modificación</span>
+<span class="com">#  │                 │       │      └── tamaño en bytes</span>
+<span class="com">#  │                 │       └── grupo</span>
+<span class="com">#  │                 └── propietario</span>
+<span class="com">#  └── tipo: - fichero · d directorio · l enlace</span>
+</code></pre>
+<hr />
+<h2 id="7-comprimir-y-empaquetar">7. Comprimir y empaquetar</h2>
+<p>En Linux son <strong>dos operaciones distintas</strong>: <code>tar</code> empaqueta (mete muchos ficheros en uno) y
+<code>gzip</code> comprime (hace pequeño un fichero). El <code>.tar.gz</code> es hacer las dos.</p>
+<pre><code class="language-bash">tar -czvf copia.tar.gz carpeta/       <span class="com"># crear</span>
+tar -xzvf copia.tar.gz                <span class="com"># extraer</span>
+tar -tzvf copia.tar.gz                <span class="com"># ver el contenido SIN extraer</span>
+tar -xzvf copia.tar.gz -C /destino/   <span class="com"># extraer en otro sitio</span>
+</code></pre>
+<p>Las letras, que es lo único que hay que memorizar:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Letra</th>
+<th>Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c</code></td>
+<td><em>create</em> — crear</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td><em>extract</em> — extraer</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td><em>list</em> — listar</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>comprimir con gzip</td>
+</tr>
+<tr>
+<td><code>j</code></td>
+<td>comprimir con bzip2 (más lento, más pequeño)</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td><em>verbose</em> — ir diciendo qué hace</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td><em>file</em> — <strong>el nombre del fichero va justo después</strong>. Siempre la última</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="nota">
+<p><strong>Regla nemotécnica:</strong> <em>«<strong>C</strong>rear <strong>Z</strong>ipeado <strong>V</strong>iendo el <strong>F</strong>ichero»</em> → <code>czvf</code>.
+Y para extraer, la <code>c</code> se convierte en <code>x</code>: <code>xzvf</code>.</p>
+</blockquote>
+<blockquote class="aviso">
+<p>⚠️ <strong><code>tar -tzvf</code> antes de extraer.</strong> Un <code>.tar.gz</code> mal hecho puede desparramar cientos de
+ficheros en tu carpeta actual en lugar de crear una subcarpeta. Listar primero cuesta un
+segundo.</p>
+</blockquote>
+<p>Otros formatos:</p>
+<pre><code class="language-bash">gzip fichero.txt          <span class="com"># comprime y BORRA el original (queda fichero.txt.gz)</span>
+gunzip fichero.txt.gz     <span class="com"># descomprime</span>
+zip -r copia.zip carpeta/ <span class="com"># zip, por compatibilidad con Windows</span>
+unzip copia.zip
+</code></pre>
+<hr />
+<h2 id="8-copias-de-seguridad-con-rsync">8. Copias de seguridad con <code>rsync</code></h2>
+<p><code>rsync</code> es <code>cp</code> con memoria: sólo copia <strong>lo que ha cambiado</strong>. La primera vez tarda lo mismo;
+las siguientes, segundos.</p>
+<pre><code class="language-bash">rsync -avh origen/ destino/
+</code></pre>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code><span class="nw">-a</span></code></td>
+<td><em>archive</em>: recursivo y conservando permisos, fechas, enlaces y propietarios</td>
+</tr>
+<tr>
+<td><code><span class="nw">-v</span></code></td>
+<td>Va diciendo qué copia</td>
+</tr>
+<tr>
+<td><code><span class="nw">-h</span></code></td>
+<td>Tamaños legibles</td>
+</tr>
+<tr>
+<td><code><span class="nw">--delete</span></code></td>
+<td>Borra en el destino lo que ya no está en el origen (<strong>espejo exacto</strong>)</td>
+</tr>
+<tr>
+<td><code><span class="nw">--dry-run</span></code></td>
+<td><strong>Simula</strong>: dice qué haría, sin tocar nada</td>
+</tr>
+<tr>
+<td><code><span class="nw">--progress</span></code></td>
+<td>Barra de progreso</td>
+</tr>
+<tr>
+<td><code><span class="nw">--exclude</span></code></td>
+<td>Excluye un patrón</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-bash"><span class="com"># Simular SIEMPRE antes de una copia con --delete</span>
+rsync -avh --delete --dry-run ~/documentos/ /copia/documentos/
+
+<span class="com"># Y sólo entonces, ejecutarla</span>
+rsync -avh --delete ~/documentos/ /copia/documentos/
+
+<span class="com"># Excluyendo cosas</span>
+rsync -avh --exclude="*.tmp" --exclude="cache/" ~/proyecto/ /copia/
+</code></pre>
+<blockquote class="aviso">
+<p>⚠️ <strong>La barra final cambia el resultado.</strong> <code>rsync origen/ destino/</code> copia <strong>el contenido</strong> de
+origen dentro de destino. <code>rsync origen destino/</code> copia <strong>la carpeta origen entera</strong> dentro de
+destino, creando <code>destino/origen/</code>. Es la trampa clásica de <code>rsync</code>: pruébalo con <code>--dry-run</code>.</p>
+</blockquote>
+<blockquote class="nota">
+<p><code>rsync -avh --delete</code> es el equivalente de <code>robocopy /MIR</code> que usaste en la semana 12. La
+comparación entre los dos está en la ampliación de esa semana.</p>
+</blockquote>
+<hr />
+<h2 id="9-espacio-en-disco">9. Espacio en disco</h2>
+<pre><code class="language-bash">df -h                    <span class="com"># espacio libre por sistema de archivos montado</span>
+df -h /home              <span class="com"># sólo el de una ruta</span>
+du -sh carpeta/          <span class="com"># cuánto ocupa esa carpeta en total</span>
+du -sh */                <span class="com"># cuánto ocupa cada subcarpeta</span>
+du -h --max-depth=1 ~ | sort -rh | head    <span class="com"># el ranking de lo que más ocupa</span>
+</code></pre>
+<pre><code class="language-bash">sudo apt install ncdu     <span class="com"># en Arch: sudo pacman -S ncdu</span>
+ncdu /                   <span class="com"># explorador interactivo: navegas y borras desde ahí</span>
+</code></pre>
+<blockquote class="nota">
+<p><strong><code>df</code> mira las particiones, <code>du</code> mira las carpetas.</strong> Cuando el disco se llena, el orden es:
+<code>df -h</code> para saber <strong>qué partición</strong> está llena, y después <code>du</code> o <code>ncdu</code> para saber <strong>qué
+carpeta</strong> la ha llenado. Si <code>df</code> dice que está lleno y <code>du</code> no encuentra nada, suele ser un
+fichero borrado que un proceso sigue teniendo abierto: <code>lsof +L1</code>.</p>
+</blockquote>
+<hr />
+<h2 id="10-equivalencias-con-windows">10. Equivalencias con Windows</h2>
+<p>Para tenerlo al lado de lo que hiciste en la semana 12.</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Acción</th>
+<th>Linux</th>
+<th>CMD</th>
+<th>PowerShell</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dónde estoy</td>
+<td><code>pwd</code></td>
+<td><code>cd</code></td>
+<td><code><span class="nw">Get-Location</span></code></td>
+</tr>
+<tr>
+<td>Listar</td>
+<td><code>ls <span class="nw">-l</span></code></td>
+<td><code>dir</code></td>
+<td><code><span class="nw">Get-ChildItem</span></code></td>
+</tr>
+<tr>
+<td>Cambiar de carpeta</td>
+<td><code>cd</code></td>
+<td><code>cd</code></td>
+<td><code><span class="nw">Set-Location</span></code></td>
+</tr>
+<tr>
+<td>Crear carpeta</td>
+<td><code>mkdir <span class="nw">-p</span></code></td>
+<td><code>md</code></td>
+<td><code><span class="nw">New-Item</span> <span class="nw">-ItemType</span> Directory</code></td>
+</tr>
+<tr>
+<td>Crear fichero vacío</td>
+<td><code>touch</code></td>
+<td><code>type nul &gt; f</code></td>
+<td><code><span class="nw">New-Item</span></code></td>
+</tr>
+<tr>
+<td>Ver contenido</td>
+<td><code>cat</code> / <code>less</code></td>
+<td><code>type</code> / <code>more</code></td>
+<td><code><span class="nw">Get-Content</span></code></td>
+</tr>
+<tr>
+<td>Copiar</td>
+<td><code>cp <span class="nw">-r</span></code></td>
+<td><code>copy</code> / <code>xcopy</code></td>
+<td><code><span class="nw">Copy-Item</span> <span class="nw">-Recurse</span></code></td>
+</tr>
+<tr>
+<td>Mover / renombrar</td>
+<td><code>mv</code></td>
+<td><code>move</code> / <code>ren</code></td>
+<td><code><span class="nw">Move-Item</span></code> / <code><span class="nw">Rename-Item</span></code></td>
+</tr>
+<tr>
+<td>Borrar</td>
+<td><code>rm</code></td>
+<td><code>del</code></td>
+<td><code><span class="nw">Remove-Item</span></code></td>
+</tr>
+<tr>
+<td>Borrar carpeta</td>
+<td><code>rm <span class="nw">-r</span></code></td>
+<td><code>rd /s</code></td>
+<td><code><span class="nw">Remove-Item</span> <span class="nw">-Recurse</span></code></td>
+</tr>
+<tr>
+<td>Buscar ficheros</td>
+<td><code>find</code></td>
+<td><code>dir /s</code></td>
+<td><code><span class="nw">Get-ChildItem</span> <span class="nw">-Recurse</span></code></td>
+</tr>
+<tr>
+<td>Buscar en el texto</td>
+<td><code>grep</code></td>
+<td><code>findstr</code></td>
+<td><code><span class="nw">Select-String</span></code></td>
+</tr>
+<tr>
+<td>Espejo / sincronizar</td>
+<td><code>rsync <span class="nw">-a</span> <span class="nw">--delete</span></code></td>
+<td><code>robocopy /MIR</code></td>
+<td><code>robocopy /MIR</code></td>
+</tr>
+<tr>
+<td>Comprimir</td>
+<td><code>tar <span class="nw">-czvf</span></code></td>
+<td>—</td>
+<td><code><span class="nw">Compress-Archive</span></code></td>
+</tr>
+<tr>
+<td>Espacio libre</td>
+<td><code>df <span class="nw">-h</span></code></td>
+<td><code>wmic logicaldisk</code></td>
+<td><code><span class="nw">Get-PSDrive</span></code></td>
+</tr>
+<tr>
+<td>Atributos</td>
+<td><code>chattr</code> / <code>lsattr</code></td>
+<td><code>attrib</code></td>
+<td><code><span class="nw">Set-ItemProperty</span></code></td>
+</tr>
+<tr>
+<td>Ayuda</td>
+<td><code>man</code></td>
+<td><code>comando /?</code></td>
+<td><code><span class="nw">Get-Help</span></code></td>
+</tr>
+<tr>
+<td>Enlace simbólico</td>
+<td><code>ln <span class="nw">-s</span></code></td>
+<td><code>mklink</code></td>
+<td><code><span class="nw">New-Item</span> <span class="nw">-ItemType</span> SymbolicLink</code></td>
+</tr>
+<tr>
+<td>Limpiar pantalla</td>
+<td><code>clear</code></td>
+<td><code>cls</code></td>
+<td><code><span class="nw">Clear-Host</span></code></td>
+</tr>
+<tr>
+<td>Comodín «todo»</td>
+<td><code>*</code></td>
+<td><code>*</code></td>
+<td><code>*</code></td>
+</tr>
+<tr>
+<td>Comodín «un carácter»</td>
+<td><code>?</code></td>
+<td><code>?</code></td>
+<td><code>?</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="nota">
+<p><strong>Tres diferencias de fondo</strong>, más allá de los nombres:</p>
+<ol>
+<li>En Windows los comodines los expande <strong>cada programa</strong>; en Linux los expande <strong>el shell</strong>,
+igual para todos.</li>
+<li>PowerShell pasa <strong>objetos</strong> por la tubería; Bash pasa <strong>texto</strong>. Por eso en PowerShell puedes
+hacer <code>Where-Object {$_.Length -gt 1MB}</code> y en Bash tienes que recortar columnas con <code>cut</code>.</li>
+<li>Linux distingue mayúsculas de minúsculas. Windows, no.</li>
+</ol>
+</blockquote>
+<hr />
+<h2 id="11-chuleta">11. Chuleta</h2>
+<pre><code>BUSCAR                                       TUBERÍAS
+  find . -name &quot;*.txt&quot;         por nombre      cmd &gt; f            guardar
+  find . -size +10M            por tamaño      cmd &gt;&gt; f           añadir
+  find . -mtime -7             por fecha       cmd 2&gt;/dev/null    callar errores
+  find . -type f -exec X {} +  con cada uno    a | b              encadenar
+  grep -rn &quot;texto&quot; .           dentro          tee f              guardar y seguir
+  locate nombre                por índice      sort | uniq -c | sort -rn
+
+EMPAQUETAR                                   DISCO Y ENLACES
+  tar -czvf c.tar.gz dir/      crear           df -h              particiones
+  tar -tzvf c.tar.gz           listar          du -sh */          carpetas
+  tar -xzvf c.tar.gz           extraer         ncdu /             interactivo
+  rsync -avh --delete o/ d/    espejo          ln -s dest nombre  simbólico
+  rsync ... --dry-run          simular         ls -li             ver inodos
+</code></pre>
+<hr />
+<h2 id="ejercicios">Ejercicios</h2>
+<p>Trabaja en tu máquina virtual <code>Mint-SMR</code>. Anota el comando <strong>y</strong> su salida. Varios ejercicios
+usan la carpeta <code>practica/</code> que creaste en la guía básica.</p>
+<h3 id="bloque-a--buscar">Bloque A — Buscar</h3>
+<ol>
+<li>Encuentra todos los ficheros <code>.conf</code> de <code>/etc</code> modificados en los últimos 30 días, sin que
+aparezcan los errores de «permiso denegado».</li>
+<li>¿Cuántas veces aparece la palabra <code>root</code> en <code>/etc/passwd</code>?</li>
+<li>Muestra las líneas de <code>/etc/passwd</code> que <strong>no</strong> terminan en <code>/bin/false</code> ni en <code>/usr/sbin/nologin</code>.</li>
+<li>Encuentra los cinco ficheros más grandes de tu carpeta personal.</li>
+<li>Busca en <code>/etc</code> todos los ficheros en los que aparezca la palabra <code>network</code>, mostrando el
+nombre del fichero y el número de línea.</li>
+</ol>
+<h3 id="bloque-b--tuberías">Bloque B — Tuberías</h3>
+<ol start="6">
+<li>Averigua cuántos usuarios del sistema tienen <code>/bin/bash</code> como shell.</li>
+<li>Saca la lista de extensiones de fichero que hay en <code>/etc</code>, con cuántos ficheros hay de cada
+una, ordenada de más a menos.
+<em>Pista: <code>ls /etc | grep &quot;\.&quot; | rev | cut -d. -f1 | rev | sort | uniq -c | sort -rn</code></em>
+Escríbelo tú primero y luego compáralo.</li>
+<li>Guarda en <code>informe.txt</code> el listado de <code>/var/log</code> <strong>y</strong> muéstralo por pantalla a la vez.</li>
+</ol>
+<h3 id="bloque-c--enlaces">Bloque C — Enlaces</h3>
+<ol start="9">
+<li>Reproduce el experimento del <a href="#5-enlaces-duros-y-simbólicos">apartado 5</a> y explica con tus
+palabras por qué el enlace duro sobrevive y el simbólico no.</li>
+<li>Intenta crear un enlace duro a un <strong>directorio</strong>. ¿Qué error da? ¿Por qué crees que no está
+permitido?</li>
+</ol>
+<h3 id="bloque-d--copias">Bloque D — Copias</h3>
+<ol start="11">
+<li>Empaqueta y comprime <code>practica/</code> en <code>copia-practica.tar.gz</code>. Lista su contenido sin
+extraerlo. Extráelo en <code>/tmp/prueba/</code>.</li>
+<li>Haz una copia con <code>rsync</code> de <code>practica/</code> a <code>/tmp/espejo/</code>. Después borra un fichero del
+original y vuelve a lanzar <code>rsync</code>, primero con <code>--dry-run</code> y luego con <code>--delete</code>. Explica
+qué cambia.</li>
+<li>¿Cuánto ocupa <code>practica/</code> en total? ¿Y cada una de sus subcarpetas?</li>
+</ol>
+<h3 id="bloque-e--windows">Bloque E — Windows</h3>
+<ol start="14">
+<li>Rellena <strong>de memoria</strong> la <a href="#10-equivalencias-con-windows">tabla de equivalencias</a> (tapa las
+columnas de CMD y PowerShell) y luego corrígela con la guía, marcando lo que habías fallado.</li>
+</ol>
+<h3 id="reto-final--el-laberinto">Reto final — El laberinto</h3>
+<p>El profesor deja en <code>/tmp/laberinto/</code> un árbol de carpetas con cientos de ficheros. Escondido hay
+<strong>un único fichero</strong> que cumple las tres condiciones a la vez:</p>
+<ul>
+<li>pesa más de 1 MB,</li>
+<li>se modificó hace menos de 2 días,</li>
+<li>contiene en su interior la palabra <code>TESORO</code>.</li>
+</ul>
+<p><strong>Encuéntralo con un solo comando</strong> y di qué pone en la línea siguiente a <code>TESORO</code>.</p>
+<p><em>(Se puede resolver con <code>find</code> + <code>-exec grep</code>, o con <code>find</code> + tubería + <code>xargs</code>. Las dos valen.)</em></p>
+<hr />
+<h2 id="entrega">Entrega</h2>
+<p><strong>Voluntaria.</strong> Mismo formato que la guía básica: Markdown exportado a PDF, con comando <strong>y</strong>
+salida en bloques de código (no en captura), las respuestas razonadas de los ejercicios 9, 10 y 12,
+y el reto final con el comando exacto y el resultado.</p>
+<blockquote class="aviso">
+<p><strong>Aviso sobre la prueba práctica.</strong> Se hace con los comandos estándar (<code>ls</code>, <code>cat</code>, <code>grep</code>,
+<code>find</code>, <code>cp</code>), <strong>no</strong> con los sustitutos modernos (<code>eza</code>, <code>bat</code>, <code>fd</code>, <code>rg</code>) de la semana 29.
+Los sustitutos son cómodos, pero no están instalados en el 99 % de los servidores del mundo.</p>
+</blockquote>
+  <footer class="pie">
+    Sistemas Operativos Monopuesto · SMR 1.º · Versión HTML de <code>s13-ampliacion-ficheros-linux.md</code>
+  </footer>
+</div>
+</body>
+</html>

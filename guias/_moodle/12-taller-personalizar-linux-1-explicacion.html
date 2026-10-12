@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller: personaliza tu Linux</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="taller-personaliza-tu-linux" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Taller: personaliza tu Linux</h1><div><span style="display:inline-block;background:#1d4ed8;color:#fff;border:1px solid #1d4ed8;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Explicación</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 3 · Avanzado</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 12</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM4</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 2 sesiones + trabajo autónomo</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H4 (terminal Linux)</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Carácter</b> TALLER — parte obligatoria (niveles 1 a 3) y parte de ampliación (niveles 4 a 6)</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #475569;background:#f1f5f9;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧭 <strong style="color:#475569">Antes de empezar.</strong> Es la personalización del entorno del usuario en versión taller: se hace, se enseña y se
+compara. Va justo detrás de la <a href="11-terminal-zsh-p10k-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de zsh y Powerlevel10k</a>,
+que se ocupa del <em>prompt</em>. Ésta se ocupa de <strong>todo lo demás</strong>.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Por qué esto no es perder el tiempo.</strong> Configurar un escritorio parece un juego, y en parte lo
+es. Pero por el camino aprendes dónde guarda Linux la configuración, la diferencia entre lo que
+es del usuario y lo que es del sistema, cómo se instalan cosas que no están en los repositorios,
+cómo se automatiza una tarea y cómo se hace reproducible una configuración. Eso es exactamente
+lo que hace un técnico de sistemas cuando prepara veinte puestos iguales para una empresa.</p>
+</div>
+<h2 id="índice" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Índice</h2>
+<ul style="background:#f6f7f9;border:1px solid #e2e5e9;border-radius:8px;padding:14px 18px 14px 34px;font-size:.93em">
+<li><a href="#taller-personaliza-tu-linux" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Taller: personaliza tu Linux</a>
+<ul style="padding-left:18px">
+<li><a href="#índice" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Índice</a></li>
+<li><a href="#las-cuatro-reglas-del-taller" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Las cuatro reglas del taller</a></li>
+<li><a href="#nivel-0-dónde-vive-la-configuración" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Nivel 0: dónde vive la configuración</a></li>
+<li><a href="#nivel-1-el-escritorio" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Nivel 1: el escritorio</a>
+<ul style="padding-left:18px">
+<li><a href="#11-temas-iconos-y-fuentes" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">1.1 Temas, iconos y fuentes</a></li>
+<li><a href="#12-papel-de-pared" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">1.2 Papel de pared</a></li>
+<li><a href="#13-atajos-de-teclado-propios" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">1.3 Atajos de teclado propios</a></li>
+<li><a href="#14-el-panel" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">1.4 El panel</a></li>
+</ul>
+</li>
+<li><a href="#nivel-2-el-terminal-como-panel-de-control" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Nivel 2: el terminal como panel de control</a>
+<ul style="padding-left:18px">
+<li><a href="#21-fastfetch-a-tu-gusto" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">2.1 <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fastfetch</code> a tu gusto</a></li>
+<li><a href="#22-btop" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">2.2 <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">btop</code></a></li>
+<li><a href="#23-conky-información-sobre-el-escritorio" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">2.3 <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">conky</code>: información sobre el escritorio</a></li>
+</ul>
+</li>
+<li><a href="#nivel-3-tu-propio-mensaje-de-bienvenida" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Nivel 3: tu propio mensaje de bienvenida</a>
+<ul style="padding-left:18px">
+<li><a href="#31-el-motd-lo-que-se-ve-al-iniciar-sesión-en-consola" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">3.1 El MOTD: lo que se ve al iniciar sesión en consola</a></li>
+<li><a href="#32-etcissue-lo-que-se-ve-antes-de-iniciar-sesión" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">3.2 <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/issue</code>: lo que se ve <strong>antes</strong> de iniciar sesión</a></li>
+</ul>
+</li>
+<li><a href="#nivel-4-comandos-que-parecen-tontería-y-no-lo-son" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Nivel 4: comandos que parecen tontería y no lo son</a></li>
+<li><a href="#nivel-5-que-se-haga-solo" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Nivel 5: que se haga solo</a>
+<ul style="padding-left:18px">
+<li><a href="#51-fondo-de-pantalla-que-cambia-solo" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">5.1 Fondo de pantalla que cambia solo</a></li>
+<li><a href="#52-aviso-cuando-el-disco-se-llena" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">5.2 Aviso cuando el disco se llena</a></li>
+</ul>
+</li>
+<li><a href="#nivel-6-hazlo-reproducible" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Nivel 6: hazlo reproducible</a>
+<ul style="padding-left:18px">
+<li><a href="#61-reunir-los-dotfiles" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6.1 Reunir los dotfiles</a></li>
+<li><a href="#62-la-lista-de-paquetes" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6.2 La lista de paquetes</a></li>
+<li><a href="#63-el-script-de-instalación" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6.3 El script de instalación</a></li>
+<li><a href="#64-guardarlo-con-git" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6.4 Guardarlo con Git</a></li>
+<li><a href="#65-la-prueba-de-fuego" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6.5 <strong>La prueba de fuego</strong></a></li>
+</ul>
+</li>
+<li><a href="#cómo-deshacerlo-todo" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Cómo deshacerlo todo</a></li>
+<li><a href="#ampliación-gestores-de-ventanas-en-mosaico" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Ampliación: gestores de ventanas en mosaico</a></li>
+</ul>
+</li>
+</ul>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0"/>
+<h2 id="las-cuatro-reglas-del-taller" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Las cuatro reglas del taller</h2>
+<ol>
+<li><strong>Instantánea antes de empezar.</strong> Apaga la máquina y crea la instantánea <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">antes-del-taller</code>.
+Es la única forma de experimentar sin miedo.</li>
+<li><strong>Todo tiene que ser reversible.</strong> Antes de tocar un fichero de configuración,
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cp fichero{,.bak}</code>. Antes de tocar algo de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code>, doblemente.</li>
+<li><strong>Todo tiene que estar documentado.</strong> Si no sabes explicar qué hace una línea que has puesto,
+quítala. Un escritorio precioso que no sabes reconstruir no vale nada.</li>
+<li><strong>Reconstruible en 10 minutos.</strong> El nivel 6 consiste justo en eso: un script que deja la
+máquina como la tienes. Si no puedes, es que no lo has entendido.</li>
+</ol>
+<h2 id="nivel-0-dónde-vive-la-configuración" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Nivel 0: dónde vive la configuración</h2>
+<p>Antes de tocar nada, el mapa. En Linux <strong>la configuración son ficheros de texto</strong>, y sólo hay que
+saber en cuál de estos tres sitios está la que buscas:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Ruta</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué contiene</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">A quién afecta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Configuración del <strong>sistema</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">A todos los usuarios</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.config/</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Configuración de <strong>aplicaciones</strong> del usuario</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Sólo a ti</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.algo</code> (dotfiles)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Configuración de programas «clásicos» del usuario</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sólo a ti</td>
+</tr>
+</tbody>
+</table></div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">ls -a ~              <span style="color: #75715e"># tus ficheros de configuración ocultos</span>
+ls ~/.config         <span style="color: #75715e"># una carpeta por aplicación</span>
+ls /etc <span style="color: #f8f8f2">|</span> head -30   <span style="color: #75715e"># la del sistema</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">❗ <strong style="color:#b45309">La regla de oro: lo del usuario gana.</strong> Si un ajuste está en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code> y también en tu carpeta
+personal, manda el tuyo. Por eso puedes personalizar tu sesión sin ser administrador y sin
+molestar a nadie. Compruébalo al final del taller creando un usuario nuevo: entrará con el
+escritorio de fábrica.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Estándar XDG.</strong> <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.config</code> (configuración), <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.local/share</code> (datos), <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.cache</code> (temporales)
+son un estándar llamado XDG Base Directory, pensado para que tu carpeta personal no se llene de
+ficheros ocultos sueltos. Las aplicaciones modernas lo respetan; las antiguas (como <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.bashrc</code>)
+siguen a la vieja usanza.</p>
+</div>
+<p><strong>Antes de empezar, aprende a buscar paquetes.</strong> No todo está en los repositorios oficiales, así
+que la primera pregunta siempre es «¿existe esto y cómo se llama?»:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">pacman -Ss cowsay          <span style="color: #75715e"># buscar en los repositorios oficiales</span>
+pacman -Si cowsay          <span style="color: #75715e"># información de un paquete</span>
+paru -Ss asciiquarium      <span style="color: #75715e"># buscar también en AUR</span>
+pacman -Qe                 <span style="color: #75715e"># qué he instalado yo explícitamente</span>
+</code></pre>
+<p>En Ubuntu:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">apt search cowsay
+apt show cowsay
+</code></pre>
+<h2 id="nivel-1-el-escritorio" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Nivel 1: el escritorio</h2>
+<p>Sobre la máquina virtual de <strong>Arch con XFCE</strong> de la <a href="08-instalar-arch-uefi-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de instalación de Arch</a>. Si usas GNOME, los conceptos son
+los mismos aunque las ventanas cambien.</p>
+<h3 id="11-temas-iconos-y-fuentes" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">1.1 Temas, iconos y fuentes</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S arc-gtk-theme papirus-icon-theme ttf-jetbrains-mono ttf-jetbrains-mono-nerd
+</code></pre>
+<p>Después, en <strong>Configuración → Apariencia</strong>:</p>
+<ul>
+<li><strong>Estilo:</strong> Arc-Dark (o el que instales)</li>
+<li><strong>Iconos:</strong> Papirus-Dark</li>
+<li><strong>Fuentes:</strong> una fuente legible a 10-11 puntos</li>
+</ul>
+<p>Y en <strong>Configuración → Estilo del gestor de ventanas</strong> eliges el marco de las ventanas, que se
+configura aparte del resto.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Dónde ha ido a parar eso.</strong> Nada de esto es magia: XFCE lo ha escrito en un fichero XML.
+Míralo:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">cat ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+</code></pre>
+<p style="margin:.45em 0">Ése fichero es el que copiarás en el nivel 6 para llevarte tu escritorio a otra máquina.
+También puedes cambiarlo por comandos, sin tocar ninguna ventana:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">xfconf-query -c xsettings -p /Net/ThemeName -s <span style="color: #e6db74">"Arc-Dark"</span>
+xfconf-query -c xsettings -p /Net/IconThemeName -s <span style="color: #e6db74">"Papirus-Dark"</span>
+xfconf-query -c xsettings -l          <span style="color: #75715e"># ver todas las propiedades disponibles</span>
+</code></pre>
+</div>
+<p>Buscar más temas:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">paru -Ss gtk-theme
+paru -Ss icon-theme
+</code></pre>
+<p>Y para instalar uno descargado a mano: los temas van en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.themes/</code> o <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/usr/share/themes/</code>, y
+los iconos en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.icons/</code> o <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/usr/share/icons/</code>. Si lo pones en tu carpeta personal, sólo lo ves
+tú; si lo pones en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/usr/share</code>, lo ven todos los usuarios. Es exactamente la regla del nivel 0.</p>
+<h3 id="12-papel-de-pared" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">1.2 Papel de pared</h3>
+<p><strong>Configuración → Escritorio → Fondo.</strong> O por comandos:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">xfconf-query -c xfce4-desktop -l <span style="color: #f8f8f2">|</span> grep last-image
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image <span style="color: #ae81ff">\</span>
+  -s /home/alumno/imagenes/fondo.jpg
+</code></pre>
+<h3 id="13-atajos-de-teclado-propios" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">1.3 Atajos de teclado propios</h3>
+<p>Ésta es la parte que más productividad da y la que menos gente configura.</p>
+<p><strong>Configuración → Teclado → Atajos de aplicación → Añadir.</strong></p>
+<p>Propuestas que valen la pena:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Atajo</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Comando</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Intro</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">xfce4-terminal</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Abrir un terminal al instante</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">E</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">thunar</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Explorador de archivos</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">B</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">firefox</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Navegador</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">L</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">xflock4</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Bloquear la pantalla</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Impr Pant</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">xfce4-screenshooter</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Captura de pantalla</td>
+</tr>
+</tbody>
+</table></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> es la tecla de Windows. En VirtualBox puede estar capturada por el anfitrión; si un
+atajo no responde, prueba con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Alt</code> en su lugar, o cambia la tecla anfitrión de
+VirtualBox en <strong>Archivo → Preferencias → Entrada</strong>.</p>
+</div>
+<p>En <strong>Configuración → Ventanas → Teclado</strong> tienes además los atajos de gestión de ventanas
+(maximizar, mover a otro escritorio, cambiar de área de trabajo). Configura al menos los de
+cambio de área de trabajo: tener cuatro escritorios y saltar entre ellos con el teclado cambia
+la forma de trabajar.</p>
+<h3 id="14-el-panel" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">1.4 El panel</h3>
+<p>Clic derecho en el panel → <strong>Panel → Preferencias</strong>. Merece la pena añadir:</p>
+<ul>
+<li><strong>Monitor de CPU</strong> y <strong>Monitor de red</strong> (se instalan con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">xfce4-cpugraph-plugin</code> y
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">xfce4-netload-plugin</code>)</li>
+<li><strong>Reloj</strong> con formato personalizado</li>
+<li><strong>Cajón de aplicaciones</strong> con tus programas favoritos</li>
+</ul>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S xfce4-cpugraph-plugin xfce4-netload-plugin xfce4-whiskermenu-plugin
+</code></pre>
+<h2 id="nivel-2-el-terminal-como-panel-de-control" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Nivel 2: el terminal como panel de control</h2>
+<h3 id="21-fastfetch-a-tu-gusto" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">2.1 <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fastfetch</code> a tu gusto</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S fastfetch
+fastfetch --gen-config          <span style="color: #75715e"># crea ~/.config/fastfetch/config.jsonc</span>
+nano ~/.config/fastfetch/config.jsonc
+</code></pre>
+<p>Una configuración compacta para empezar:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-jsonc" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "small",
+    "padding": { "top": 1, "right": 3 }
+  },
+  "display": {
+    "separator": "  ",
+    "color": { "keys": "blue", "title": "cyan" }
+  },
+  "modules": [
+    "title",
+    "separator",
+    { "type": "os",       "key": "  Sistema " },
+    { "type": "kernel",   "key": "  Núcleo  " },
+    { "type": "uptime",   "key": "  Encendido" },
+    { "type": "packages", "key": "  Paquetes" },
+    { "type": "shell",    "key": "  Shell   " },
+    { "type": "wm",       "key": "  Escritorio" },
+    { "type": "terminal", "key": "  Terminal" },
+    { "type": "cpu",      "key": "  CPU     " },
+    { "type": "memory",   "key": "  RAM     " },
+    { "type": "disk",     "key": "  Disco   " },
+    "break",
+    "colors"
+  ]
+}
+</code></pre>
+<p>Y con tu propio dibujo en lugar del logo de la distribución:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">fastfetch --logo-type file --logo ~/.config/fastfetch/logo.txt
+</code></pre>
+<p>Puedes generar el dibujo con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">figlet</code> (nivel 4) o dibujarlo tú en un fichero de texto.</p>
+<h3 id="22-btop" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">2.2 <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">btop</code></h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S btop
+btop
+</code></pre>
+<p>Dentro, pulsa <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code> → <strong>Options</strong> para cambiar el tema, qué gráficas se ven y si aparece la red y
+el disco. Se guarda en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.config/btop/btop.conf</code>.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">btop</code> no es sólo bonito: es la herramienta con la que se hace el diagnóstico de
+«el equipo va lento». Aprender a leerlo es parte del temario, no del taller.</p>
+</div>
+<h3 id="23-conky-información-sobre-el-escritorio" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">2.3 <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">conky</code>: información sobre el escritorio</h3>
+<p><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">conky</code> dibuja información del sistema directamente sobre el fondo de pantalla.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S conky
+cp /etc/conky/conky.conf ~/.config/conky/conky.conf   <span style="color: #75715e"># crea la carpeta si no existe</span>
+nano ~/.config/conky/conky.conf
+</code></pre>
+<p>Una configuración mínima y legible:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-lua" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #f8f8f2">conky.config</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span>
+<span style="color: #f8f8f2">alignment</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">'top_right'</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">gap_x</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">gap_y</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">40</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">minimum_width</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">250</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">own_window</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">own_window_type</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">'desktop'</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">own_window_transparent</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">double_buffer</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">update_interval</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">2.0</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">use_xft</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">font</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">'JetBrains Mono:size=10'</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">default_color</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">'white'</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">conky.text</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">[[</span>
+<span style="color: #e6db74">${color cyan}${time %A %d de %B}${color}</span>
+<span style="color: #e6db74">${color cyan}${time %H:%M:%S}${color}</span>
+<span style="color: #e6db74">${color cyan}SISTEMA${color}</span>
+<span style="color: #e6db74">Equipo    $nodename</span>
+<span style="color: #e6db74">Encendido $uptime</span>
+<span style="color: #e6db74">Núcleo    $kernel</span>
+<span style="color: #e6db74">${color cyan}CPU${color}  ${cpu}%</span>
+<span style="color: #e6db74">${cpubar 6}</span>
+<span style="color: #e6db74">${top name 1}  ${top cpu 1}%</span>
+<span style="color: #e6db74">${top name 2}  ${top cpu 2}%</span>
+<span style="color: #e6db74">${color cyan}RAM${color}  $mem / $memmax</span>
+<span style="color: #e6db74">${membar 6}</span>
+<span style="color: #e6db74">${color cyan}DISCO${color}  ${fs_used /} / ${fs_size /}</span>
+<span style="color: #e6db74">${fs_bar 6 /}</span>
+<span style="color: #e6db74">]]</span>
+</code></pre>
+<p>Arráncalo:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">conky <span style="color: #f8f8f2">&amp;</span>
+</code></pre>
+<p>Y para que arranque solo con la sesión: <strong>Configuración → Sesión e inicio → Autoarranque de
+aplicaciones → Añadir</strong>, con el comando <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">conky</code>.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Lo que has aprendido aquí sin darte cuenta:</strong> dónde se configuran los programas que arrancan
+con la sesión. Es lo mismo que la carpeta de Inicio de Windows y que <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">systemctl enable</code>, pero a
+nivel de sesión gráfica. Ya comparaste el arranque de Windows y Linux; esto es la
+tercera capa.</p>
+</div>
+<h2 id="nivel-3-tu-propio-mensaje-de-bienvenida" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Nivel 3: tu propio mensaje de bienvenida</h2>
+<h3 id="31-el-motd-lo-que-se-ve-al-iniciar-sesión-en-consola" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">3.1 El MOTD: lo que se ve al iniciar sesión en consola</h3>
+<p><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">motd</code> es <em>message of the day</em>. Se muestra <strong>después</strong> de iniciar sesión en una consola de texto
+o por SSH.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo nano /etc/motd
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">===========================================
+  Equipo:  arch-smr
+  Aula:    SMR 1.º — Sistemas Operativos
+  Aviso:   máquina de prácticas. Haz snapshots.
+===========================================
+</code></pre>
+<p>Sal a una consola virtual con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Alt</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F2</code> e inicia sesión para verlo.</p>
+<p>Un MOTD <strong>dinámico</strong>, que se genera cada vez:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo nano /etc/profile.d/bienvenida.sh
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e">#!/bin/bash</span>
+<span style="color: #75715e"># Se ejecuta al iniciar sesión, para TODOS los usuarios</span>
+<span style="color: #f8f8f2">echo</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"  Hola, </span><span style="color: #66d9ef">$(</span>whoami<span style="color: #66d9ef">)</span><span style="color: #e6db74">. Son las </span><span style="color: #66d9ef">$(</span>date <span style="color: #e6db74">'+%H:%M'</span><span style="color: #66d9ef">)</span><span style="color: #e6db74"> del </span><span style="color: #66d9ef">$(</span>date <span style="color: #e6db74">'+%d/%m/%Y'</span><span style="color: #66d9ef">)</span><span style="color: #e6db74">."</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"  Equipo: </span><span style="color: #66d9ef">$(</span>hostname<span style="color: #66d9ef">)</span><span style="color: #e6db74">  ·  Encendido desde hace </span><span style="color: #66d9ef">$(</span>uptime -p <span style="color: #f8f8f2">|</span> sed <span style="color: #e6db74">'s/up //'</span><span style="color: #66d9ef">)</span><span style="color: #e6db74">"</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"  Disco raíz: </span><span style="color: #66d9ef">$(</span>df -h / <span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">'NR==2 {print $3\" de \"$2\" (\"$5\")\"}'</span><span style="color: #66d9ef">)</span><span style="color: #e6db74">"</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"  Usuarios conectados: </span><span style="color: #66d9ef">$(</span>who <span style="color: #f8f8f2">|</span> wc -l<span style="color: #66d9ef">)</span><span style="color: #e6db74">"</span>
+<span style="color: #f8f8f2">echo</span>
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo chmod +x /etc/profile.d/bienvenida.sh
+</code></pre>
+<p>Cierra sesión y vuelve a entrar.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Cuidado con lo que metes en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/profile.d/</code>.</strong> Se ejecuta para <strong>todos</strong> los usuarios en
+<strong>cada</strong> inicio de sesión. Si pones algo lento, todo el mundo espera. Si pones algo con un
+error, puedes dejar el inicio de sesión inutilizable. Es un sitio perfecto para entender por qué
+el principio de mínimo privilegio importa: lo que va en tu <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.zshrc</code> sólo te afecta a ti; lo
+que va en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code> afecta a todos.</p>
+</div>
+<h3 id="32-etcissue-lo-que-se-ve-antes-de-iniciar-sesión" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">3.2 <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/issue</code>: lo que se ve <strong>antes</strong> de iniciar sesión</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo nano /etc/issue
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">Arch Linux \r (\l)
+Aula SMR — acceso restringido a alumnado autorizado
+</code></pre>
+<p><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">\r</code> es la versión del núcleo y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">\l</code> el terminal. Es donde las empresas ponen el aviso legal de
+uso del equipo.</p>
+<h2 id="nivel-4-comandos-que-parecen-tontería-y-no-lo-son" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Nivel 4: comandos que parecen tontería y no lo son</h2>
+<p>Cada uno de estos comandos enseña algo real. La gracia está en usarlos <strong>encadenados</strong>, porque
+así es como se entiende la filosofía de las tuberías.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S cowsay lolcat figlet fortune-mod cmatrix sl
+</code></pre>
+<p><em>(Comprueba antes cuáles existen con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">pacman -Ss nombre</code>. Los que no estén en los repositorios
+oficiales suelen estar en AUR: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">paru -Ss nombre</code>. En Ubuntu, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo apt install cowsay lolcat figlet fortune-mod cmatrix sl</code>.)</em></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Comando</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué hace</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"><strong>Qué enseña de verdad</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cowsay</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Una vaca dice lo que le pases</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Lee de la <strong>entrada estándar</strong>: es el ejemplo perfecto de tubería</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lolcat</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Colorea la salida en arcoíris</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Es un <strong>filtro</strong>: no genera nada, sólo transforma lo que le llega</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">figlet</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Texto en letras gigantes ASCII</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Generador de salida para encadenar</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fortune</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Una cita al azar</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Fuente de datos para una tubería</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cmatrix</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">La lluvia de código de Matrix</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Un proceso que ocupa el terminal: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code>+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">C</code> para matarlo</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sl</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Un tren cruza la pantalla si escribes <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sl</code> en vez de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Existe para castigar la errata. Y para hablar del <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">PATH</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>La tubería obligatoria del taller:</strong></p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">fortune <span style="color: #f8f8f2">|</span> cowsay <span style="color: #f8f8f2">|</span> lolcat
+</code></pre>
+<p>Léela de izquierda a derecha: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fortune</code> <strong>genera</strong> una frase, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cowsay</code> la <strong>transforma</strong> en un
+dibujo, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lolcat</code> la <strong>colorea</strong>. Tres programas que no saben nada el uno del otro, encadenados
+por la salida estándar. Eso es Unix.</p>
+<p>Más combinaciones:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">figlet <span style="color: #e6db74">"SMR 2027"</span> <span style="color: #f8f8f2">|</span> lolcat
+date <span style="color: #f8f8f2">|</span> cowsay -f tux
+ls -l <span style="color: #f8f8f2">|</span> lolcat
+cowsay -l                       <span style="color: #75715e"># ver todas las "vacas" disponibles</span>
+fortune <span style="color: #f8f8f2">|</span> cowsay -f dragon <span style="color: #f8f8f2">|</span> lolcat
+whoami <span style="color: #f8f8f2">|</span> figlet <span style="color: #f8f8f2">|</span> lolcat
+</code></pre>
+<p>Y en tu <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.zshrc</code>, al final, para que salga al abrir el terminal:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-zsh" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">fortune <span style="color: #f8f8f2">|</span> cowsay -f tux <span style="color: #f8f8f2">|</span> lolcat
+</code></pre>
+<p>Otros que suelen estar en AUR y merecen la pena:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">paru -Ss pipes.sh          <span style="color: #75715e"># tuberías de colores creciendo por la pantalla</span>
+paru -Ss asciiquarium      <span style="color: #75715e"># un acuario en ASCII</span>
+paru -Ss tty-clock         <span style="color: #75715e"># un reloj a pantalla completa</span>
+sudo pacman -S cava        <span style="color: #75715e"># visualizador de audio en el terminal</span>
+sudo pacman -S bastet      <span style="color: #75715e"># tetris en el terminal</span>
+sudo pacman -S nsnake      <span style="color: #75715e"># el snake</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Ejercicio real escondido en la broma.</strong> Ejecuta <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">which sl</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">which ls</code>. Están los dos en
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/usr/bin</code>. Ahora crea un script tuyo llamado <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls</code> en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/bin</code>, dale permisos de ejecución, y
+comprueba con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">which ls</code> cuál gana según el orden de tu <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">PATH</code>. Eso explica de una
+vez por qué el directorio actual <strong>no</strong> está en el <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">PATH</code> por defecto.</p>
+</div>
+<h2 id="nivel-5-que-se-haga-solo" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Nivel 5: que se haga solo</h2>
+<p>Aquí se une la personalización con las tareas programadas y el scripting.</p>
+<h3 id="51-fondo-de-pantalla-que-cambia-solo" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">5.1 Fondo de pantalla que cambia solo</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mkdir -p ~/imagenes/fondos ~/bin
+nano ~/bin/cambiar-fondo.sh
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e">#!/bin/bash</span>
+<span style="color: #75715e">#===============================================================</span>
+<span style="color: #75715e"># cambiar-fondo.sh — pone un fondo de pantalla al azar</span>
+<span style="color: #75715e"># Uso: ./cambiar-fondo.sh   (o desde cron)</span>
+<span style="color: #75715e">#===============================================================</span>
+<span style="color: #f8f8f2">set</span> -euo pipefail
+
+<span style="color: #f8f8f2">CARPETA</span><span style="color: #f92672">=</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/imagenes/fondos"</span>
+<span style="color: #f8f8f2">LOG</span><span style="color: #f92672">=</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/.local/share/cambiar-fondo.log"</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f92672">[</span> ! -d <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$CARPETA</span><span style="color: #e6db74">"</span> <span style="color: #f92672">]</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">then</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"No existe </span><span style="color: #f8f8f2">$CARPETA</span><span style="color: #e6db74">"</span> &gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">2</span>
+<span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span>
+<span style="color: #66d9ef">fi</span>
+<span style="color: #f8f8f2">FONDO</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>find <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$CARPETA</span><span style="color: #e6db74">"</span> -type f <span style="color: #ae81ff">\(</span> -name <span style="color: #e6db74">"*.jpg"</span> -o -name <span style="color: #e6db74">"*.png"</span> <span style="color: #ae81ff">\)</span> <span style="color: #f8f8f2">|</span> shuf -n <span style="color: #ae81ff">1</span><span style="color: #66d9ef">)</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f92672">[</span> -z <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$FONDO</span><span style="color: #e6db74">"</span> <span style="color: #f92672">]</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">then</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"No hay imágenes en </span><span style="color: #f8f8f2">$CARPETA</span><span style="color: #e6db74">"</span> &gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">2</span>
+<span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span>
+<span style="color: #66d9ef">fi</span>
+<span style="color: #66d9ef">for</span> PROP <span style="color: #66d9ef">in</span> <span style="color: #66d9ef">$(</span>xfconf-query -c xfce4-desktop -l <span style="color: #f8f8f2">|</span> grep last-image<span style="color: #66d9ef">)</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">do</span>
+    xfconf-query -c xfce4-desktop -p <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$PROP</span><span style="color: #e6db74">"</span> -s <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$FONDO</span><span style="color: #e6db74">"</span>
+<span style="color: #66d9ef">done</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"[</span><span style="color: #66d9ef">$(</span>date <span style="color: #e6db74">'+%F %T'</span><span style="color: #66d9ef">)</span><span style="color: #e6db74">] Fondo: </span><span style="color: #f8f8f2">$FONDO</span><span style="color: #e6db74">"</span> &gt;&gt; <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$LOG</span><span style="color: #e6db74">"</span>
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">chmod +x ~/bin/cambiar-fondo.sh
+~/bin/cambiar-fondo.sh
+</code></pre>
+<p>Y que se ejecute cada hora:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">crontab -e
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">0 * * * * DISPLAY=:0 /home/alumno/bin/cambiar-fondo.sh
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">El <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">DISPLAY=:0</code> no es opcional.</strong> <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cron</code> se ejecuta sin sesión gráfica, así que no sabe a
+qué pantalla dirigirse y el comando falla en silencio. Es el mismo problema de las rutas
+absolutas en scripting: <strong>cron no tiene tu entorno</strong>. Comprueba siempre el log.</p>
+</div>
+<h3 id="52-aviso-cuando-el-disco-se-llena" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">5.2 Aviso cuando el disco se llena</h3>
+<p>Une monitorización, condicionales y notificaciones:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">nano ~/bin/aviso-disco.sh
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e">#!/bin/bash</span>
+<span style="color: #f8f8f2">set</span> -euo pipefail
+
+<span style="color: #f8f8f2">UMBRAL</span><span style="color: #f92672">=</span><span style="color: #ae81ff">80</span>
+<span style="color: #f8f8f2">USO</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>df / --output<span style="color: #f92672">=</span>pcent <span style="color: #f8f8f2">|</span> tail -n1 <span style="color: #f8f8f2">|</span> tr -dc <span style="color: #e6db74">'0-9'</span><span style="color: #66d9ef">)</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f92672">[</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$USO</span><span style="color: #e6db74">"</span> -ge <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$UMBRAL</span><span style="color: #e6db74">"</span> <span style="color: #f92672">]</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">then</span>
+    notify-send -u critical <span style="color: #e6db74">"Disco casi lleno"</span> <span style="color: #e6db74">"La raíz está al ${</span><span style="color: #f8f8f2">USO</span><span style="color: #e6db74">}%"</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"[</span><span style="color: #66d9ef">$(</span>date <span style="color: #e6db74">'+%F %T'</span><span style="color: #66d9ef">)</span><span style="color: #e6db74">] AVISO: disco al ${</span><span style="color: #f8f8f2">USO</span><span style="color: #e6db74">}%"</span> &gt;&gt; <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/.local/share/disco.log"</span>
+<span style="color: #66d9ef">fi</span>
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S libnotify
+chmod +x ~/bin/aviso-disco.sh
+</code></pre>
+<p>Pruébalo bajando el umbral a <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">1</code> para ver la notificación, y súbelo después.</p>
+<h2 id="nivel-6-hazlo-reproducible" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Nivel 6: hazlo reproducible</h2>
+<p>Éste es el nivel que separa un escritorio bonito de una configuración profesional. <strong>El objetivo:
+un solo comando deja una máquina recién instalada exactamente como la tuya.</strong></p>
+<h3 id="61-reunir-los-dotfiles" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6.1 Reunir los dotfiles</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mkdir -p ~/dotfiles/<span style="color: #f92672">{</span>config,scripts<span style="color: #f92672">}</span>
+
+cp ~/.zshrc ~/.p10k.zsh ~/dotfiles/
+cp -r ~/.config/fastfetch ~/dotfiles/config/
+cp -r ~/.config/btop      ~/dotfiles/config/
+cp -r ~/.config/conky     ~/dotfiles/config/
+cp -r ~/.config/xfce4/xfconf ~/dotfiles/config/
+cp ~/bin/*.sh ~/dotfiles/scripts/
+</code></pre>
+<h3 id="62-la-lista-de-paquetes" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6.2 La lista de paquetes</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">pacman -Qqe &gt; ~/dotfiles/paquetes-oficiales.txt      <span style="color: #75715e"># instalados explícitamente</span>
+pacman -Qqm &gt; ~/dotfiles/paquetes-aur.txt            <span style="color: #75715e"># los de AUR</span>
+wc -l ~/dotfiles/paquetes-*.txt
+</code></pre>
+<h3 id="63-el-script-de-instalación" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6.3 El script de instalación</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">nano ~/dotfiles/instalar.sh
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e">#!/bin/bash</span>
+<span style="color: #75715e">#===============================================================</span>
+<span style="color: #75715e"># instalar.sh — deja una máquina nueva con mi configuración</span>
+<span style="color: #75715e"># Uso: ./instalar.sh</span>
+<span style="color: #75715e">#===============================================================</span>
+<span style="color: #f8f8f2">set</span> -euo pipefail
+
+<span style="color: #f8f8f2">DIR</span><span style="color: #f92672">=</span><span style="color: #e6db74">"</span><span style="color: #66d9ef">$(</span><span style="color: #f8f8f2">cd</span> <span style="color: #e6db74">"</span><span style="color: #66d9ef">$(</span>dirname <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$0</span><span style="color: #e6db74">"</span><span style="color: #66d9ef">)</span><span style="color: #e6db74">"</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">pwd</span><span style="color: #66d9ef">)</span><span style="color: #e6db74">"</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"==&gt; Instalando paquetes de los repositorios oficiales"</span>
+sudo pacman -S --needed --noconfirm - &lt; <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$DIR</span><span style="color: #e6db74">/paquetes-oficiales.txt"</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"==&gt; Copiando ficheros de configuración"</span>
+cp <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$DIR</span><span style="color: #e6db74">/.zshrc"</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$DIR</span><span style="color: #e6db74">/.p10k.zsh"</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/"</span>
+mkdir -p <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/.config"</span>
+cp -r <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$DIR</span><span style="color: #e6db74">/config/"</span>* <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/.config/"</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"==&gt; Copiando scripts"</span>
+mkdir -p <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/bin"</span>
+cp <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$DIR</span><span style="color: #e6db74">/scripts/"</span>*.sh <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/bin/"</span>
+chmod +x <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">"</span>/bin/*.sh
+
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"==&gt; Cambiando el shell a zsh"</span>
+chsh -s /bin/zsh
+
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"==&gt; Listo. Cierra sesión y vuelve a entrar."</span>
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">chmod +x ~/dotfiles/instalar.sh
+</code></pre>
+<h3 id="64-guardarlo-con-git" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6.4 Guardarlo con Git</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #f8f8f2">cd</span> ~/dotfiles
+git init
+git add .
+git commit -m <span style="color: #e6db74">"Mi configuración de escritorio y terminal"</span>
+</code></pre>
+<h3 id="65-la-prueba-de-fuego" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6.5 <strong>La prueba de fuego</strong></h3>
+<p>Restaura la instantánea <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">antes-del-taller</code>, copia la carpeta <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">dotfiles</code> a la máquina limpia y
+ejecuta <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">./instalar.sh</code>. Si en diez minutos tienes tu escritorio de vuelta, el taller está
+superado. Si no, el script te dirá exactamente qué te habías dejado sin documentar.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">❗ <strong style="color:#b45309">Esto es literalmente lo que hace un técnico</strong> que tiene que preparar veinte puestos iguales:
+configurar uno, capturar la configuración y automatizar el resto. En el reto ETHAZI se pide
+desplegar varios puestos; llegar con esto hecho te ahorra media sesión.</p>
+</div>
+<h2 id="cómo-deshacerlo-todo" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Cómo deshacerlo todo</h2>
+<p>Por si algo se tuerce, en orden de menos a más drástico:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e"># 1. Volver a la configuración de fábrica de XFCE (sólo tu usuario)</span>
+xfce4-panel --quit <span style="color: #f8f8f2">;</span> pkill xfconfd
+rm -rf ~/.config/xfce4
+xfce4-panel <span style="color: #f8f8f2">&amp;</span>
+<span style="color: #75715e"># 2. Recuperar una copia de seguridad concreta</span>
+cp ~/.zshrc.bak ~/.zshrc
+
+<span style="color: #75715e"># 3. Quitar el script de bienvenida del sistema</span>
+sudo rm /etc/profile.d/bienvenida.sh
+
+<span style="color: #75715e"># 4. Volver a Bash si zsh da problemas</span>
+chsh -s /bin/bash
+
+<span style="color: #75715e"># 5. Desinstalar lo que instalaste</span>
+sudo pacman -Rns cowsay lolcat figlet cmatrix
+
+<span style="color: #75715e"># 6. La opción nuclear: restaurar la instantánea 'antes-del-taller'</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ Si el escritorio no arranca, <strong><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Alt</code> + <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F2</code></strong> te lleva a una consola de texto desde la
+que puedes ejecutar todo lo anterior. Es el mismo rescate de la instalación de Arch.</p>
+</div>
+<h2 id="ampliación-gestores-de-ventanas-en-mosaico" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Ampliación: gestores de ventanas en mosaico</h2>
+<p>Un <strong>gestor de ventanas en mosaico</strong> coloca las ventanas automáticamente sin solaparlas y se
+maneja sólo con el teclado. Es lo que se ve en las capturas espectaculares de internet.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S i3-wm i3status i3lock dmenu
+</code></pre>
+<p>Se elige en la pantalla de inicio de sesión, en el desplegable de sesión.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Aviso honesto, y va en serio.</strong> Esto es un agujero de tiempo. Un i3 usable pide entre 5 y 15
+horas de configuración, y hasta que lo tengas irás <strong>más lento</strong> que con XFCE. Adelante si te
+engancha el tema, pero:</p>
+<ul>
+<li><strong>No lo hagas en la máquina que usas para las prácticas evaluables.</strong> Crea una MV nueva.</li>
+<li><strong>No lo empieces la semana antes del reto.</strong></li>
+<li>Y si lo haces, que sea con la configuración por defecto primero, usándola una semana entera
+antes de tocar nada.</li>
+</ul>
+<p style="margin:.45em 0">La guía del curso anterior proponía el entorno <strong>Yoru</strong> (basado en AwesomeWM). Es precioso y
+tiene decenas de dependencias de AUR que se rompen en cada actualización. Si te tienta, hazlo
+sabiendo dónde te metes y con una instantánea reciente.</p>
+</div>
+<p>Alternativas más suaves si sólo quieres probar la idea: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">xfce4-tiling</code> o los atajos de encaje de
+ventanas del propio XFCE (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + flechas), que ya vienen y no rompen nada.</p>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Explicación</p></div>
+</body>
+</html>

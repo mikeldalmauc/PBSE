@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="270" viewBox="0 0 900 270" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Del botón de encendido al instalador</title>
+  <desc id="d">Seis pasos: pulsas encender; arranca el firmware UEFI; en el menú de arranque eliges el pincho; Secure Boot comprueba la firma; arranca el cargador de Ventoy desde la partición VTOYEFI; en el menú de Ventoy eliges una ISO y arranca el sistema que contiene.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="899" height="269" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Qué pasa entre que pulsas el botón y aparece el instalador</text>
+
+  <g stroke-width="2">
+    <rect x="26" y="62" width="128" height="124" rx="12" fill="#eef0f3" stroke="#8a8f98"/>
+    <rect x="170" y="62" width="128" height="124" rx="12" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="314" y="62" width="128" height="124" rx="12" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="458" y="62" width="128" height="124" rx="12" fill="#e4e0f8" stroke="#6250d6"/>
+    <rect x="602" y="62" width="128" height="124" rx="12" fill="#fdefcc" stroke="#eda100"/>
+    <rect x="746" y="62" width="128" height="124" rx="12" fill="#d6efd6" stroke="#008300"/>
+  </g>
+  <g font-size="22" font-weight="700" fill="#52514e">
+    <text x="38" y="92">1</text><text x="182" y="92">2</text><text x="326" y="92">3</text>
+    <text x="470" y="92">4</text><text x="614" y="92">5</text><text x="758" y="92">6</text>
+  </g>
+  <g font-size="14" font-weight="700" fill="#0b0b0b">
+    <text x="38" y="118">Encender</text>
+    <text x="182" y="118">Firmware</text><text x="182" y="136">UEFI</text>
+    <text x="326" y="118">Menú de</text><text x="326" y="136">arranque</text>
+    <text x="470" y="118">Cargador</text><text x="470" y="136">de Ventoy</text>
+    <text x="614" y="118">Menú de</text><text x="614" y="136">Ventoy</text>
+    <text x="758" y="118">Arranca</text><text x="758" y="136">la ISO</text>
+  </g>
+  <g font-size="12" fill="#52514e">
+    <text x="38" y="160">pulsas el botón</text>
+    <text x="182" y="160">la «BIOS» de hoy:</text><text x="182" y="176">revisa el hardware</text>
+    <text x="326" y="160">F12, F9, F11…</text><text x="326" y="176">eliges «UEFI: pincho»</text>
+    <text x="470" y="160">desde la partición</text><text x="470" y="176">VTOYEFI</text>
+    <text x="614" y="160">eliges la ISO</text><text x="614" y="176">con las flechas</text>
+    <text x="758" y="160">instalador o</text><text x="758" y="176">herramienta</text>
+  </g>
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M154 124 H 168" marker-end="url(#flecha)"/><path d="M298 124 H 312" marker-end="url(#flecha)"/>
+    <path d="M442 124 H 456" marker-end="url(#flecha)"/><path d="M586 124 H 600" marker-end="url(#flecha)"/>
+    <path d="M730 124 H 744" marker-end="url(#flecha)"/>
+  </g>
+
+  <!-- control de Secure Boot entre 3 y 4 -->
+  <path d="M450 192 V 206" stroke="#d03b3b" stroke-width="2"/>
+  <path d="M450 210 l-14 5 v12 c0 10 7 17 14 20 c7 -3 14 -10 14 -20 v-12 z" fill="#fbdcdc" stroke="#d03b3b" stroke-width="2"/>
+  <text x="426" y="226" font-size="13" font-weight="700" text-anchor="end" fill="#0b0b0b">Control de Secure Boot</text>
+  <text x="426" y="244" font-size="12" text-anchor="end" fill="#52514e">¿Está firmado el cargador? La 1.ª vez registras la clave de Ventoy (MOK)</text>
+</svg>

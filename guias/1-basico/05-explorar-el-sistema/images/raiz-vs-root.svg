@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">La raíz no es /root</title>
+  <desc id="d">La barra / es la raíz de todo el sistema. /root es la carpeta personal del administrador, sólo accesible para él. /home/alumno es tu carpeta personal, que también se escribe ~.</desc>
+  <rect x="0.5" y="0.5" width="859" height="299" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Tres cosas que NO son lo mismo</text>
+
+  <g stroke="#8a8f98" stroke-width="2" fill="none">
+    <path d="M70 92 V 236"/>
+    <path d="M70 150 H 110"/>
+    <path d="M70 236 H 110"/>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">
+    <rect x="40" y="58" width="60" height="38" rx="10" fill="#1e2227"/>
+    <text x="70" y="84" font-size="22" text-anchor="middle" fill="#ffffff">/</text>
+    <rect x="110" y="132" width="110" height="36" rx="10" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+    <text x="165" y="156" font-size="17" text-anchor="middle">root</text>
+    <rect x="110" y="218" width="110" height="36" rx="10" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="165" y="242" font-size="17" text-anchor="middle">home</text>
+  </g>
+  <path d="M220 236 H 262" stroke="#8a8f98" stroke-width="2"/>
+  <rect x="262" y="218" width="120" height="36" rx="10" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+  <text x="322" y="242" font-size="17" font-weight="700" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">alumno</text>
+
+  <g font-size="14">
+    <text x="430" y="76" font-weight="700" fill="#0b0b0b"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace">/</tspan>  = la raíz</text>
+    <text x="430" y="96" fill="#52514e">El edificio entero. Todo cuelga de aquí.</text>
+
+    <text x="430" y="146" font-weight="700" fill="#0b0b0b"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace">/root</tspan>  = la casa del administrador</text>
+    <text x="430" y="166" fill="#52514e">Sólo entra root: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace">drwx------ root root</tspan></text>
+
+    <text x="430" y="226" font-weight="700" fill="#0b0b0b"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace">/home/alumno</tspan>  = tu casa</text>
+    <text x="430" y="246" fill="#52514e">También se escribe <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">~</tspan> y es lo que guarda <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">$HOME</tspan></text>
+  </g>
+  <text x="24" y="288" font-size="13" fill="#52514e">Decir «root» por «la raíz» en el documento es un error grave. Di «la raíz» o «/».</text>
+</svg>

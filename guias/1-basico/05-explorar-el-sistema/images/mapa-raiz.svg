@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="528" viewBox="0 0 900 528" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El mapa de la raíz</title>
+  <desc id="d">Los directorios que cuelgan de la raíz agrupados en ocho barrios: programas (/bin, /sbin, /lib, /usr, /opt), configuración (/etc), carpetas personales (/home, /root), datos que cambian (/var, /tmp, /run), núcleo y dispositivos (/dev, /proc, /sys), arranque (/boot), puntos de montaje (/media, /mnt) y otros (/srv, /lost+found).</desc>
+  <rect x="0.5" y="0.5" width="899" height="527" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El mapa de la raíz /</text>
+  <text x="24" y="60" font-size="14" fill="#52514e">Los directorios agrupados por lo que guardan. Tu trabajo: descubrir qué hace cada uno y demostrarlo.</text>
+
+  <rect x="24" y="76" width="852" height="44" rx="10" fill="#1e2227"/>
+  <text x="44" y="107" font-size="26" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#ffffff">/</text>
+  <text x="74" y="104" font-size="14" fill="#c9ccd1">la raíz: de aquí cuelga TODO, incluso los demás discos y pinchos que conectes</text>
+  <g stroke="#1e2227" stroke-width="2">
+    <line x1="126" y1="120" x2="126" y2="136"/><line x1="342" y1="120" x2="342" y2="136"/>
+    <line x1="558" y1="120" x2="558" y2="136"/><line x1="774" y1="120" x2="774" y2="136"/>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="14" text-anchor="middle">
+  <!-- 1 Programas -->
+  <rect x="24" y="136" width="204" height="164" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <rect x="38" y="194" width="84" height="26" rx="13" fill="#ffffff" stroke="#2a78d6"/><text x="80" y="212" fill="#0b0b0b">/bin</text>
+  <rect x="130" y="194" width="84" height="26" rx="13" fill="#ffffff" stroke="#2a78d6"/><text x="172" y="212" fill="#0b0b0b">/sbin</text>
+  <rect x="38" y="228" width="84" height="26" rx="13" fill="#ffffff" stroke="#2a78d6"/><text x="80" y="246" fill="#0b0b0b">/lib</text>
+  <rect x="130" y="228" width="84" height="26" rx="13" fill="#ffffff" stroke="#2a78d6"/><text x="172" y="246" fill="#0b0b0b">/usr</text>
+  <rect x="38" y="262" width="84" height="26" rx="13" fill="#ffffff" stroke="#2a78d6"/><text x="80" y="280" fill="#0b0b0b">/opt</text>
+
+  <!-- 2 Configuración -->
+  <rect x="240" y="136" width="204" height="164" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <rect x="254" y="194" width="84" height="26" rx="13" fill="#ffffff" stroke="#eb6834"/><text x="296" y="212" fill="#0b0b0b">/etc</text>
+
+  <!-- 3 Casas -->
+  <rect x="456" y="136" width="204" height="164" rx="12" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+  <rect x="470" y="194" width="84" height="26" rx="13" fill="#ffffff" stroke="#1baf7a"/><text x="512" y="212" fill="#0b0b0b">/home</text>
+  <rect x="562" y="194" width="84" height="26" rx="13" fill="#ffffff" stroke="#1baf7a"/><text x="604" y="212" fill="#0b0b0b">/root</text>
+
+  <!-- 4 Datos que cambian -->
+  <rect x="672" y="136" width="204" height="164" rx="12" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <rect x="686" y="194" width="84" height="26" rx="13" fill="#ffffff" stroke="#eda100"/><text x="728" y="212" fill="#0b0b0b">/var</text>
+  <rect x="778" y="194" width="84" height="26" rx="13" fill="#ffffff" stroke="#eda100"/><text x="820" y="212" fill="#0b0b0b">/tmp</text>
+  <rect x="686" y="228" width="84" height="26" rx="13" fill="#ffffff" stroke="#eda100"/><text x="728" y="246" fill="#0b0b0b">/run</text>
+
+  <!-- 5 Núcleo y dispositivos -->
+  <rect x="24" y="314" width="204" height="164" rx="12" fill="#e4e0f8" stroke="#6250d6" stroke-width="2"/>
+  <rect x="38" y="372" width="84" height="26" rx="13" fill="#ffffff" stroke="#6250d6"/><text x="80" y="390" fill="#0b0b0b">/dev</text>
+  <rect x="130" y="372" width="84" height="26" rx="13" fill="#ffffff" stroke="#6250d6"/><text x="172" y="390" fill="#0b0b0b">/proc</text>
+  <rect x="38" y="406" width="84" height="26" rx="13" fill="#ffffff" stroke="#6250d6" stroke-dasharray="5 4"/><text x="80" y="424" fill="#0b0b0b">/sys</text>
+
+  <!-- 6 Arranque -->
+  <rect x="240" y="314" width="204" height="164" rx="12" fill="#fbe3ec" stroke="#e87ba4" stroke-width="2"/>
+  <rect x="254" y="372" width="84" height="26" rx="13" fill="#ffffff" stroke="#e87ba4"/><text x="296" y="390" fill="#0b0b0b">/boot</text>
+
+  <!-- 7 Montajes -->
+  <rect x="456" y="314" width="204" height="164" rx="12" fill="#d6efd6" stroke="#008300" stroke-width="2"/>
+  <rect x="470" y="372" width="84" height="26" rx="13" fill="#ffffff" stroke="#008300"/><text x="512" y="390" fill="#0b0b0b">/media</text>
+  <rect x="562" y="372" width="84" height="26" rx="13" fill="#ffffff" stroke="#008300"/><text x="604" y="390" fill="#0b0b0b">/mnt</text>
+
+  <!-- 8 Otros -->
+  <rect x="672" y="314" width="204" height="164" rx="12" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+  <rect x="686" y="372" width="84" height="26" rx="13" fill="#ffffff" stroke="#8a8f98" stroke-dasharray="5 4"/><text x="728" y="390" fill="#0b0b0b">/srv</text>
+  <rect x="686" y="406" width="130" height="26" rx="13" fill="#ffffff" stroke="#8a8f98" stroke-dasharray="5 4"/><text x="751" y="424" fill="#0b0b0b">/lost+found</text>
+  </g>
+
+  <!-- Títulos de cada barrio -->
+  <g fill="#0b0b0b" font-size="15" font-weight="700">
+    <text x="38" y="162">Programas</text>
+    <text x="254" y="162">Configuración</text>
+    <text x="470" y="162">Carpetas personales</text>
+    <text x="686" y="162">Datos que cambian</text>
+    <text x="38" y="340">Núcleo y dispositivos</text>
+    <text x="254" y="340">Arranque</text>
+    <text x="470" y="340">Puntos de montaje</text>
+    <text x="686" y="340">Otros</text>
+  </g>
+  <g fill="#52514e" font-size="12">
+    <text x="38" y="181">lo que se puede ejecutar</text>
+    <text x="254" y="181">los ajustes del sistema</text>
+    <text x="470" y="181">los ficheros de cada usuario</text>
+    <text x="686" y="181">crecen, se renuevan, se borran</text>
+    <text x="38" y="359">no están en el disco de verdad</text>
+    <text x="254" y="359">lo necesario para encender</text>
+    <text x="470" y="359">puertas a otros discos</text>
+    <text x="686" y="359">servidores y rescate</text>
+  </g>
+
+  <rect x="24" y="494" width="38" height="20" rx="10" fill="#ffffff" stroke="#52514e" stroke-dasharray="5 4"/>
+  <text x="70" y="509" font-size="13" fill="#52514e">borde discontinuo = ampliación (voluntario) · los demás son los 16 obligatorios</text>
+</svg>
