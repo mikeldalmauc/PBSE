@@ -24,7 +24,7 @@ No se evalúa que el terminal quede bonito. Se evalúa que sepas responder a est
 4. **¿Sabes explicar lo que has puesto?** Un `.zshrc` copiado de internet que no sabes leer
    vale cero. Cada línea del entregable tiene que llevar un comentario tuyo.
 
-> Trabajamos sobre la **máquina virtual de Arch Linux** de la [guía de instalación de Arch](../../2-intermedio/08-instalar-arch-uefi/1-explicacion.md). Si la tienes rota,
+> Trabajamos sobre la **máquina virtual de Arch Linux** de la [guía de instalación de Arch](../../2-intermedio/08-instalar-arch-uefi/1-guia.md). Si la tienes rota,
 > vuelve a tu instantánea `02-sistema-base`. También funciona todo en Linux Mint cambiando
 > `pacman -S` por `apt install`.
 

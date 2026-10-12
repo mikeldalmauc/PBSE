@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Qué hace arch-chroot</title>
+  <desc id="d">Antes de arch-chroot estás en el sistema de la ISO y tu sistema nuevo se ve como /mnt. Después de arch-chroot /mnt, la raíz / es tu sistema nuevo: /etc es el /etc del sistema instalado.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="299" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">arch-chroot: entrar en la casa que estás construyendo</text>
+
+  <!-- antes -->
+  <text x="24" y="70" font-size="14" font-weight="700" fill="#0b0b0b">Antes</text>
+  <rect x="24" y="80" width="340" height="172" rx="12" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+  <text x="40" y="104" font-size="13" font-weight="700" fill="#52514e">/ = el sistema de la ISO (en la RAM)</text>
+  <rect x="120" y="132" width="200" height="108" rx="10" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <path d="M120 132 L 220 114 L 320 132" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="220" y="170" font-size="14" font-weight="700" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">/mnt</text>
+  <text x="220" y="192" font-size="12" text-anchor="middle" fill="#0b0b0b">tu sistema nuevo,</text>
+  <text x="220" y="208" font-size="12" text-anchor="middle" fill="#0b0b0b">visto desde fuera</text>
+  <rect x="40" y="262" width="324" height="26" rx="6" fill="#1e2227"/>
+  <text x="52" y="280" font-size="13" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#e6e9ee">root@archiso ~ #</text>
+
+  <!-- flecha -->
+  <path d="M380 166 H 476" stroke="#52514e" stroke-width="2" fill="none" marker-end="url(#flecha)"/>
+  <text x="428" y="156" font-size="13" font-weight="700" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">arch-chroot</text>
+  <text x="428" y="186" font-size="13" font-weight="700" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">/mnt</text>
+
+  <!-- después -->
+  <text x="496" y="70" font-size="14" font-weight="700" fill="#0b0b0b">Después</text>
+  <rect x="496" y="80" width="340" height="172" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <path d="M496 112 L 666 84 L 836 112" fill="none" stroke="#2a78d6" stroke-width="2"/>
+  <text x="512" y="134" font-size="13" font-weight="700" fill="#0b0b0b">/ = tu sistema nuevo (en el disco)</text>
+  <g font-size="12.5" fill="#0b0b0b">
+    <text x="512" y="162"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700">/etc</tspan>  es el /etc del sistema instalado</text>
+    <text x="512" y="184"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700">passwd</tspan>  cambia la contraseña de SU root</text>
+    <text x="512" y="206"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700">exit</tspan>  vuelves a la ISO</text>
+  </g>
+  <rect x="512" y="262" width="324" height="26" rx="6" fill="#1e2227"/>
+  <text x="524" y="280" font-size="13" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#e6e9ee">[root@archiso /]#</text>
+</svg>

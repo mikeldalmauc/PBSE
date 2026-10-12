@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Montar el sistema nuevo en /mnt</title>
+  <desc id="d">Primero se monta sda2, la raíz, en /mnt. Después se crea /mnt/boot/efi y se monta ahí sda1. Por último se crea /mnt/home y se monta ahí sda4. Si se monta la raíz al final, tapa lo anterior.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="299" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Montar: primero la raíz, luego lo que cuelga de ella</text>
+
+  <!-- árbol -->
+  <g stroke="#8a8f98" stroke-width="2" fill="none">
+    <path d="M80 94 V 236"/><path d="M80 166 H 120"/><path d="M80 236 H 120"/>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="16" font-weight="700" fill="#0b0b0b">
+    <rect x="40" y="66" width="140" height="34" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/><text x="56" y="89">/mnt</text>
+    <rect x="120" y="148" width="190" height="34" rx="8" fill="#ffffff" stroke="#e87ba4" stroke-width="2"/><text x="136" y="171">/mnt/boot/efi</text>
+    <rect x="120" y="218" width="190" height="34" rx="8" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/><text x="136" y="241">/mnt/home</text>
+  </g>
+
+  <!-- particiones -->
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <rect x="410" y="66" width="100" height="34" rx="8" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/><text x="460" y="89">sda2</text>
+    <rect x="410" y="148" width="100" height="34" rx="8" fill="#fbe3ec" stroke="#e87ba4" stroke-width="2"/><text x="460" y="171">sda1</text>
+    <rect x="410" y="218" width="100" height="34" rx="8" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/><text x="460" y="241">sda4</text>
+  </g>
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M406 83 H 184" marker-end="url(#flecha)"/>
+    <path d="M406 165 H 314" marker-end="url(#flecha)"/>
+    <path d="M406 235 H 314" marker-end="url(#flecha)"/>
+  </g>
+  <g font-size="12" fill="#52514e" text-anchor="middle">
+    <text x="295" y="76">se monta en</text><text x="360" y="158">se monta en</text><text x="360" y="228">se monta en</text>
+  </g>
+
+  <!-- orden -->
+  <rect x="540" y="62" width="296" height="196" rx="12" fill="#1e2227"/>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="13" fill="#e6e9ee">
+    <text x="556" y="90" fill="#86b6ef" font-weight="700"># 1. la raíz</text>
+    <text x="556" y="110">mount /dev/sda2 /mnt</text>
+    <text x="556" y="140" fill="#f4a8c6" font-weight="700"># 2. la EFI</text>
+    <text x="556" y="160">mkdir -p /mnt/boot/efi</text>
+    <text x="556" y="180">mount /dev/sda1 /mnt/boot/efi</text>
+    <text x="556" y="210" fill="#7fe0b6" font-weight="700"># 3. home</text>
+    <text x="556" y="230">mkdir -p /mnt/home</text>
+    <text x="556" y="250">mount /dev/sda4 /mnt/home</text>
+  </g>
+  <text x="24" y="286" font-size="13" fill="#52514e">Si montas la raíz al final, «tapa» las carpetas que habías montado antes: es como poner una caja encima de otras.</text>
+</svg>

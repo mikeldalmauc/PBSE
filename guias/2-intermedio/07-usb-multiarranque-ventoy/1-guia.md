@@ -10,7 +10,7 @@ duracion: 5 h (2 sesiones en el aula + descargas)
 
 # USB multiarranque con Ventoy: la navaja suiza del técnico
 
-> **Antes de empezar.** Es el paso previo a [instalar Arch Linux](../08-instalar-arch-uefi/1-explicacion.md): ahí
+> **Antes de empezar.** Es el paso previo a [instalar Arch Linux](../08-instalar-arch-uefi/1-guia.md): ahí
 > arrancarás desde una ISO, y aquí aprendes qué pasa entre que pulsas el botón de encendido y
 > aparece el instalador.
 
@@ -274,7 +274,7 @@ Versiones vigentes en septiembre de 2026.
 | **Windows 11** | Instalar o reinstalar Windows | ISO multiedición x64, versión 25H2 | ~7 GB | https://www.microsoft.com/es-es/software-download/windows11 → *Descargar imagen de disco (ISO)* |
 | **Ubuntu** | Instalar Ubuntu o probar si el hardware funciona con Linux | `ubuntu-26.04.1-desktop-amd64.iso` | 6,0 GB | https://ubuntu.com/download/desktop |
 | **Linux Mint** | La distribución del curso; ideal para revivir equipos viejos | `linuxmint-22.3-xfce-64bit.iso` | 2,8 GB | https://linuxmint.com/download.php |
-| **Arch Linux** | La [instalación de Arch](../08-instalar-arch-uefi/1-explicacion.md) | `archlinux-2026.09.01-x86_64.iso` (sale una nueva cada mes) | 1,5 GB | https://archlinux.org/download/ |
+| **Arch Linux** | La [instalación de Arch](../08-instalar-arch-uefi/1-guia.md) | `archlinux-2026.09.01-x86_64.iso` (sale una nueva cada mes) | 1,5 GB | https://archlinux.org/download/ |
 
 **🟠 Rescatar y reparar**
 

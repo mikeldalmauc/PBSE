@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Los tres permisos especiales</title>
+  <desc id="d">SUID vale 4 y aparece como s en el propietario: el programa se ejecuta con los permisos de su dueño, como passwd. SGID vale 2 y aparece como s en el grupo: lo que se crea en la carpeta hereda su grupo. Sticky vale 1 y aparece como t en otros: cada uno sólo borra lo suyo, como en /tmp.</desc>
+  <rect x="0.5" y="0.5" width="899" height="319" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Los tres permisos especiales</text>
+
+  <g stroke-width="2">
+    <rect x="24" y="58" width="276" height="220" rx="12" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="312" y="58" width="276" height="220" rx="12" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="600" y="58" width="276" height="220" rx="12" fill="#d3f2e6" stroke="#1baf7a"/>
+  </g>
+  <g font-size="18" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="86">SUID</text><text x="328" y="86">SGID</text><text x="616" y="86">Sticky bit</text>
+  </g>
+  <g font-size="13" font-weight="700" text-anchor="middle">
+    <rect x="236" y="70" width="50" height="24" rx="12" fill="#2a78d6"/><text x="261" y="87" fill="#ffffff">4</text>
+    <rect x="524" y="70" width="50" height="24" rx="12" fill="#eb6834"/><text x="549" y="87" fill="#0b0b0b">2</text>
+    <rect x="812" y="70" width="50" height="24" rx="12" fill="#1baf7a"/><text x="837" y="87" fill="#0b0b0b">1</text>
+  </g>
+
+  <!-- celdas: SUID -rwsr-xr-x (s en la posición 4) -->
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="18" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <g fill="#ffffff" stroke="#8a8f98" stroke-width="1">
+      <rect x="44" y="104" width="22" height="30" rx="3"/><rect x="66" y="104" width="22" height="30" rx="3"/><rect x="88" y="104" width="22" height="30" rx="3"/>
+      <rect x="132" y="104" width="22" height="30" rx="3"/><rect x="154" y="104" width="22" height="30" rx="3"/><rect x="176" y="104" width="22" height="30" rx="3"/>
+      <rect x="198" y="104" width="22" height="30" rx="3"/><rect x="220" y="104" width="22" height="30" rx="3"/><rect x="242" y="104" width="22" height="30" rx="3"/>
+    </g>
+    <rect x="110" y="100" width="22" height="38" rx="4" fill="#2a78d6"/>
+    <text x="55" y="125">-</text><text x="77" y="125">r</text><text x="99" y="125">w</text><text x="121" y="125" fill="#ffffff">s</text>
+    <text x="143" y="125">r</text><text x="165" y="125">-</text><text x="187" y="125">x</text><text x="209" y="125">r</text><text x="231" y="125">-</text><text x="253" y="125">x</text>
+
+    <!-- SGID drwxrwsr-x (s en la posición 7) -->
+    <g fill="#ffffff" stroke="#8a8f98" stroke-width="1">
+      <rect x="332" y="104" width="22" height="30" rx="3"/><rect x="354" y="104" width="22" height="30" rx="3"/><rect x="376" y="104" width="22" height="30" rx="3"/>
+      <rect x="398" y="104" width="22" height="30" rx="3"/><rect x="420" y="104" width="22" height="30" rx="3"/><rect x="442" y="104" width="22" height="30" rx="3"/>
+      <rect x="486" y="104" width="22" height="30" rx="3"/><rect x="508" y="104" width="22" height="30" rx="3"/><rect x="530" y="104" width="22" height="30" rx="3"/>
+    </g>
+    <rect x="464" y="100" width="22" height="38" rx="4" fill="#eb6834"/>
+    <text x="343" y="125">d</text><text x="365" y="125">r</text><text x="387" y="125">w</text><text x="409" y="125">x</text>
+    <text x="431" y="125">r</text><text x="453" y="125">w</text><text x="475" y="125">s</text><text x="497" y="125">r</text><text x="519" y="125">-</text><text x="541" y="125">x</text>
+
+    <!-- Sticky drwxrwxrwt (t en la posición 10) -->
+    <g fill="#ffffff" stroke="#8a8f98" stroke-width="1">
+      <rect x="620" y="104" width="22" height="30" rx="3"/><rect x="642" y="104" width="22" height="30" rx="3"/><rect x="664" y="104" width="22" height="30" rx="3"/>
+      <rect x="686" y="104" width="22" height="30" rx="3"/><rect x="708" y="104" width="22" height="30" rx="3"/><rect x="730" y="104" width="22" height="30" rx="3"/>
+      <rect x="752" y="104" width="22" height="30" rx="3"/><rect x="774" y="104" width="22" height="30" rx="3"/><rect x="796" y="104" width="22" height="30" rx="3"/>
+    </g>
+    <rect x="818" y="100" width="22" height="38" rx="4" fill="#1baf7a"/>
+    <text x="631" y="125">d</text><text x="653" y="125">r</text><text x="675" y="125">w</text><text x="697" y="125">x</text>
+    <text x="719" y="125">r</text><text x="741" y="125">w</text><text x="763" y="125">x</text><text x="785" y="125">r</text><text x="807" y="125">w</text><text x="829" y="125">t</text>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="13" fill="#52514e">
+    <text x="44" y="158">s en el propietario</text>
+    <text x="332" y="158">s en el grupo</text>
+    <text x="620" y="158">t en otros</text>
+  </g>
+  <g font-size="13.5" fill="#0b0b0b">
+    <text x="40" y="186">El programa se ejecuta con los</text>
+    <text x="40" y="204">permisos de su DUEÑO, no con</text>
+    <text x="40" y="222">los de quien lo lanza.</text>
+    <text x="328" y="186">Lo que se crea dentro de la</text>
+    <text x="328" y="204">carpeta hereda su GRUPO.</text>
+    <text x="616" y="186">Todos pueden escribir, pero</text>
+    <text x="616" y="204">cada uno sólo borra LO SUYO.</text>
+  </g>
+  <g font-size="12.5" fill="#52514e">
+    <text x="40" y="258">Ejemplo: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">/usr/bin/passwd</tspan></text>
+    <text x="328" y="258">Ejemplo: carpeta de departamento</text>
+    <text x="616" y="258">Ejemplo: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">/tmp</tspan></text>
+  </g>
+  <text x="24" y="304" font-size="13" fill="#52514e">En octal van en un 4.º dígito, delante: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">4755</tspan>, <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">2770</tspan>, <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">1777</tspan>. Se pueden sumar: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">6755</tspan> = SUID + SGID.</text>
+</svg>

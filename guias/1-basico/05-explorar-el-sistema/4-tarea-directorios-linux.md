@@ -14,7 +14,7 @@ evaluacion: Apto / No apto
 > **Antes de empezar.** Necesitas tu máquina virtual `Mint-SMR` encendida, VS Code con la
 > extensión Markdown All in One (ver la [guía de Markdown](../01-markdown/1-explicacion.md)) y
 > haber hecho la [ficha de exploración](3-ejercicios.md). El árbol de directorios ya salió en la
-> [guía de comandos](../04-comandos-y-ficheros/1-explicacion.md): ahora lo vas a recorrer entero
+> [guía de comandos](../04-comandos-y-ficheros/1-guia.md#3-el-árbol-de-directorios): ahora lo vas a recorrer entero
 > y a documentarlo tú.
 
 En Windows tus cosas están en `C:\Users\tu-nombre` y los programas en `C:\Program Files`. En Linux

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="320" viewBox="0 0 860 320" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Dónde vive la configuración</title>
+  <desc id="d">La configuración del sistema está en /etc, afecta a todos los usuarios y sólo la cambia root. La del usuario está en su carpeta personal: en ~/.config cada aplicación moderna, en ~/.local/share los datos y en ~/.cache lo temporal; los programas clásicos usan ficheros ocultos como ~/.bashrc. Si un ajuste está en los dos sitios, gana el del usuario.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="859" height="319" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">En Linux la configuración son ficheros de texto. ¿Dónde?</text>
+
+  <!-- sistema -->
+  <rect x="24" y="60" width="290" height="230" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <text x="40" y="92" font-size="24" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">/etc</text>
+  <text x="40" y="118" font-size="14" font-weight="700" fill="#0b0b0b">Configuración del SISTEMA</text>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="40" y="146">👥 afecta a todos los usuarios</text>
+    <text x="40" y="170">🔐 sólo la cambia root (sudo)</text>
+    <text x="40" y="194">📄 son los valores por defecto</text>
+  </g>
+  <g font-size="12" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#52514e">
+    <text x="40" y="228">/etc/motd</text><text x="40" y="246">/etc/issue</text><text x="40" y="264">/etc/profile.d/*.sh</text>
+  </g>
+
+  <!-- usuario -->
+  <rect x="420" y="60" width="416" height="230" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="436" y="92" font-size="24" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">~</text>
+  <text x="462" y="92" font-size="14" font-weight="700" fill="#0b0b0b">tu carpeta personal: SÓLO TÚ</text>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="14" font-weight="700" fill="#0b0b0b">
+    <rect x="436" y="108" width="186" height="40" rx="8" fill="#ffffff" stroke="#2a78d6"/><text x="448" y="133">.config/</text>
+    <rect x="436" y="156" width="186" height="40" rx="8" fill="#ffffff" stroke="#2a78d6"/><text x="448" y="181">.local/share/</text>
+    <rect x="436" y="204" width="186" height="40" rx="8" fill="#ffffff" stroke="#2a78d6"/><text x="448" y="229">.cache/</text>
+    <rect x="636" y="108" width="186" height="136" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-dasharray="5 4"/>
+    <text x="648" y="133">.bashrc</text><text x="648" y="157">.zshrc</text><text x="648" y="181">.p10k.zsh</text>
+  </g>
+  <g font-size="11.5" fill="#52514e">
+    <text x="540" y="133">ajustes</text><text x="555" y="181">datos</text><text x="520" y="229">temporal</text>
+    <text x="648" y="208">«dotfiles» clásicos,</text><text x="648" y="224">ocultos con un punto</text>
+  </g>
+  <text x="436" y="270" font-size="12" fill="#52514e">Las tres carpetas de la izquierda siguen el estándar XDG.</text>
+
+  <path d="M318 175 H 414" stroke="#52514e" stroke-width="2.5" fill="none" marker-end="url(#flecha)"/>
+  <text x="366" y="160" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">si está</text>
+  <text x="366" y="198" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">en los dos,</text>
+  <text x="366" y="214" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">gana el tuyo</text>
+  <text x="24" y="310" font-size="12.5" fill="#52514e">Por eso puedes personalizar tu sesión sin ser administrador y sin molestar a nadie.</text>
+</svg>

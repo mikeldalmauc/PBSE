@@ -216,7 +216,8 @@ def convertir(ruta_md, avisos):
     # portada
     h1 = soup.find('h1')
     titulo = h1.get_text() if h1 else os.path.basename(ruta_md)
-    colores_tipo = {'Explicación': '#1d4ed8', 'Chuleta': '#1c6b4a', 'Ejercicios': '#b45309'}
+    colores_tipo = {'Explicación': '#1d4ed8', 'Chuleta': '#1c6b4a', 'Ejercicios': '#b45309',
+                    'Guía': '#6b3fa0', 'Tarea': '#0e7490'}
     tipo = meta.get('tipo', '')
     chips = []
     for k, etq in (('tipo', 'Tipo'), ('nivel', 'Nivel'), ('tema', 'Tema'), ('competencias', 'CM'), ('duracion', 'Duración'), ('herramientas', 'Herramientas'), ('caracter', 'Carácter')):

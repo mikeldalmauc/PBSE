@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">La umask tapa permisos</title>
+  <desc id="d">Los ficheros parten de 666 y los directorios de 777. La umask 022 tapa el permiso de escritura del grupo y de otros. Resultado: ficheros 644 y directorios 755.</desc>
+  <rect x="0.5" y="0.5" width="859" height="299" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">umask: la cinta adhesiva que tapa permisos</text>
+  <g font-size="12" font-weight="700" letter-spacing="1" fill="#52514e" text-anchor="middle"><text x="225" y="80">DE PARTIDA</text><text x="475" y="80">UMASK 022 (TAPA)</text><text x="725" y="80">RESULTADO</text></g>
+  <text x="24" y="118" font-size="15" font-weight="700" fill="#0b0b0b">Ficheros</text>
+  <text x="24" y="208" font-size="15" font-weight="700" fill="#0b0b0b">Carpetas</text>
+<rect x='120' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='131' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='142' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='153' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>w</text>
+<rect x='164' y='96' width='22' height='30' rx='3' fill='#eef0f3' stroke='#c9ccd1'/><text x='175' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' text-anchor='middle' fill='#8a8f98'>-</text>
+<rect x='192' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='203' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='214' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='225' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>w</text>
+<rect x='236' y='96' width='22' height='30' rx='3' fill='#eef0f3' stroke='#c9ccd1'/><text x='247' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' text-anchor='middle' fill='#8a8f98'>-</text>
+<rect x='264' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='275' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='286' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='297' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>w</text>
+<rect x='308' y='96' width='22' height='30' rx='3' fill='#eef0f3' stroke='#c9ccd1'/><text x='319' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' text-anchor='middle' fill='#8a8f98'>-</text>
+<rect x='370' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='392' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='414' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='442' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='464' y='96' width='22' height='30' rx='3' fill='#1e2227'/><text x='475' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#ffffff'>w</text>
+<rect x='486' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='514' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='536' y='96' width='22' height='30' rx='3' fill='#1e2227'/><text x='547' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#ffffff'>w</text>
+<rect x='558' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='620' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='631' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='642' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='653' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>w</text>
+<rect x='664' y='96' width='22' height='30' rx='3' fill='#eef0f3' stroke='#c9ccd1'/><text x='675' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' text-anchor='middle' fill='#8a8f98'>-</text>
+<rect x='692' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='703' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='714' y='96' width='22' height='30' rx='3' fill='#fbdcdc' stroke='#d03b3b'/><text x='725' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>-</text>
+<rect x='736' y='96' width='22' height='30' rx='3' fill='#eef0f3' stroke='#c9ccd1'/><text x='747' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' text-anchor='middle' fill='#8a8f98'>-</text>
+<rect x='764' y='96' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='775' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='786' y='96' width='22' height='30' rx='3' fill='#fbdcdc' stroke='#d03b3b'/><text x='797' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>-</text>
+<rect x='808' y='96' width='22' height='30' rx='3' fill='#eef0f3' stroke='#c9ccd1'/><text x='819' y='117' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' text-anchor='middle' fill='#8a8f98'>-</text>
+<rect x='120' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='131' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='142' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='153' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>w</text>
+<rect x='164' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='175' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>x</text>
+<rect x='192' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='203' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='214' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='225' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>w</text>
+<rect x='236' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='247' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>x</text>
+<rect x='264' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='275' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='286' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='297' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>w</text>
+<rect x='308' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='319' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>x</text>
+<rect x='370' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='392' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='414' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='442' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='464' y='186' width='22' height='30' rx='3' fill='#1e2227'/><text x='475' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#ffffff'>w</text>
+<rect x='486' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='514' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='536' y='186' width='22' height='30' rx='3' fill='#1e2227'/><text x='547' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#ffffff'>w</text>
+<rect x='558' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#c9ccd1' stroke-dasharray='3 3'/>
+<rect x='620' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='631' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='642' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='653' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>w</text>
+<rect x='664' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='675' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>x</text>
+<rect x='692' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='703' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='714' y='186' width='22' height='30' rx='3' fill='#fbdcdc' stroke='#d03b3b'/><text x='725' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>-</text>
+<rect x='736' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='747' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>x</text>
+<rect x='764' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='775' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>r</text>
+<rect x='786' y='186' width='22' height='30' rx='3' fill='#fbdcdc' stroke='#d03b3b'/><text x='797' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>-</text>
+<rect x='808' y='186' width='22' height='30' rx='3' fill='#ffffff' stroke='#8a8f98'/><text x='819' y='207' font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size='16' font-weight='700' text-anchor='middle' fill='#0b0b0b'>x</text>
+  <g font-size="26" font-weight="700" text-anchor="middle" fill="#52514e"><text x="350" y="120">−</text><text x="600" y="120">=</text><text x="350" y="210">−</text><text x="600" y="210">=</text></g>
+  <g font-size="15" font-weight="700" text-anchor="middle" fill="#0b0b0b"><text x="225" y="148">666</text><text x="475" y="148">022</text><text x="725" y="148">644</text><text x="225" y="238">777</text><text x="475" y="238">022</text><text x="725" y="238">755</text></g>
+  <rect x="24" y="258" width="22" height="16" rx="3" fill="#fbdcdc" stroke="#d03b3b"/><text x="54" y="271" font-size="12.5" fill="#52514e">= permiso que la máscara ha tapado</text>
+  <text x="24" y="290" font-size="12.5" fill="#52514e">Los ficheros parten de 666 (sin x) a propósito: nada recién creado debería poder ejecutarse.</text>
+</svg>

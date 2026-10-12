@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="428" viewBox="0 0 900 428" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Copiar, mover y borrar: qué queda después</title>
+  <desc id="d">Tres casos con el fichero informe.txt en la carpeta actual y una carpeta docs. Con cp informe.txt docs/ el original se queda y aparece una copia en docs: hay dos. Con mv informe.txt docs/ el fichero se va de la carpeta actual y aparece en docs; con un nombre nuevo en lugar de una carpeta, lo renombra. Con rm informe.txt el fichero desaparece para siempre, sin papelera. Abajo: si el destino es una carpeta que ya existe, lo que copias o mueves entra dentro. cp -r fotos copia crea copia si no existe, pero si ya existe deja la copia en copia/fotos.</desc>
+  <rect x="0.5" y="0.5" width="899" height="427" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Copiar, mover y borrar: qué queda después</text>
+
+  <rect x="24" y="56" width="268" height="272" rx="12" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+  <rect x="36" y="68" width="244" height="34" rx="7" fill="#1e2227"/>
+  <text x="48" y="90" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="14.5" fill="#e6e9ee">cp informe.txt docs/</text>
+  <text x="40" y="124" font-size="12" font-weight="700" fill="#52514e">antes</text>
+  <text x="40" y="206" font-size="12" font-weight="700" fill="#52514e">después</text>
+  <rect x="38" y="128" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="38" y="134" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="46" y="149" font-size="12" fill="#52514e">aquí</text>
+  <rect x="164" y="128" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="164" y="134" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="172" y="149" font-size="12" fill="#52514e">docs/</text>
+  <rect x="38" y="210" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="38" y="216" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="46" y="231" font-size="12" fill="#52514e">aquí</text>
+  <rect x="164" y="210" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="164" y="216" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="172" y="231" font-size="12" fill="#52514e">docs/</text>
+  <rect x="47" y="156" width="96" height="22" rx="5" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="95" y="172" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">informe.txt</text>
+  <rect x="47" y="238" width="96" height="22" rx="5" fill="#cde2fb" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="95" y="254" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">informe.txt</text>
+  <rect x="173" y="238" width="96" height="22" rx="5" fill="#cde2fb" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="221" y="254" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">informe.txt</text>
+
+  <rect x="316" y="56" width="268" height="272" rx="12" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/>
+  <rect x="328" y="68" width="244" height="34" rx="7" fill="#1e2227"/>
+  <text x="340" y="90" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="14.5" fill="#e6e9ee">mv informe.txt docs/</text>
+  <text x="332" y="124" font-size="12" font-weight="700" fill="#52514e">antes</text>
+  <text x="332" y="206" font-size="12" font-weight="700" fill="#52514e">después</text>
+  <rect x="330" y="128" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="330" y="134" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="338" y="149" font-size="12" fill="#52514e">aquí</text>
+  <rect x="456" y="128" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="456" y="134" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="464" y="149" font-size="12" fill="#52514e">docs/</text>
+  <rect x="330" y="210" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="330" y="216" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="338" y="231" font-size="12" fill="#52514e">aquí</text>
+  <rect x="456" y="210" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="456" y="216" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="464" y="231" font-size="12" fill="#52514e">docs/</text>
+  <rect x="339" y="156" width="96" height="22" rx="5" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="387" y="172" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">informe.txt</text>
+  <rect x="465" y="238" width="96" height="22" rx="5" fill="#d3f2e6" stroke="#1baf7a" stroke-width="1.5"/>
+  <text x="513" y="254" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">informe.txt</text>
+
+  <rect x="608" y="56" width="268" height="272" rx="12" fill="#ffffff" stroke="#eb6834" stroke-width="2"/>
+  <rect x="620" y="68" width="244" height="34" rx="7" fill="#1e2227"/>
+  <text x="632" y="90" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="14.5" fill="#e6e9ee">rm informe.txt</text>
+  <text x="624" y="124" font-size="12" font-weight="700" fill="#52514e">antes</text>
+  <text x="624" y="206" font-size="12" font-weight="700" fill="#52514e">después</text>
+  <rect x="622" y="128" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="622" y="134" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="630" y="149" font-size="12" fill="#52514e">aquí</text>
+  <rect x="748" y="128" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="748" y="134" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="756" y="149" font-size="12" fill="#52514e">docs/</text>
+  <rect x="622" y="210" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="622" y="216" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="630" y="231" font-size="12" fill="#52514e">aquí</text>
+  <rect x="748" y="210" width="40" height="10" rx="3" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <rect x="748" y="216" width="114" height="52" rx="6" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="756" y="231" font-size="12" fill="#52514e">docs/</text>
+  <rect x="631" y="156" width="96" height="22" rx="5" fill="#eef0f3" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="679" y="172" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">informe.txt</text>
+  <rect x="631" y="238" width="96" height="22" rx="5" fill="none" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="679" y="254" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" text-anchor="middle" fill="#52514e">informe.txt</text>
+  <line x1="639" y1="250" x2="719" y2="250" stroke="#52514e" stroke-width="1.5"/>
+
+  <g font-size="12.5" fill="#52514e">
+    <text x="40" y="292">El original se queda donde estaba.</text>
+    <text x="40" y="310">Ahora hay dos ficheros iguales.</text>
+    <text x="332" y="292">Se va de aquí y aparece en docs/.</text>
+    <text x="332" y="310">Con un nombre nuevo, lo renombra.</text>
+    <text x="624" y="292">Desaparece para siempre:</text>
+    <text x="624" y="310">sin papelera y sin deshacer.</text>
+  </g>
+
+  <line x1="24" y1="344" x2="876" y2="344" stroke="#e2e5e9"/>
+  <text x="24" y="368" font-size="14" font-weight="700" fill="#0b0b0b">Ojo con el destino: si es una carpeta que ya existe, lo que copias o mueves entra dentro.</text>
+  <text x="24" y="392" font-size="13" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">cp -r fotos copia</tspan>  →  si <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">copia</tspan> no existe, la crea: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">copia</tspan> es un duplicado de <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">fotos</tspan>.</text>
+  <text x="24" y="414" font-size="13" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">cp -r fotos copia</tspan>  →  si <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">copia</tspan> ya existe, la copia queda dentro: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">copia/fotos</tspan>. Con <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">mv</tspan> pasa igual.</text>
+</svg>

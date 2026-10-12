@@ -271,7 +271,7 @@ arch-chroot /mnt
 
 ## 7. Configuración dentro del chroot
 
-Igual que en la [guía de instalación normal](../../2-intermedio/08-instalar-arch-uefi/1-explicacion.md), resumido:
+Igual que en la [guía de instalación normal](../../2-intermedio/08-instalar-arch-uefi/1-guia.md), resumido:
 
 ```bash
 ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime

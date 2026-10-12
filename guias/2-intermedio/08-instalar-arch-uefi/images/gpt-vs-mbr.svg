@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="350" viewBox="0 0 900 350" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">MBR frente a GPT</title>
+  <desc id="d">MBR guarda la tabla en un solo sector al principio del disco, admite sólo 4 particiones primarias y discos de hasta 2 TiB. GPT tiene un MBR protector, una cabecera y una tabla al principio y una copia al final, admite 128 particiones, discos enormes, y cada partición lleva un tipo y un nombre.</desc>
+  <rect x="0.5" y="0.5" width="899" height="349" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">MBR (lo antiguo) frente a GPT (lo que usamos)</text>
+
+  <!-- MBR -->
+  <text x="24" y="72" font-size="15" font-weight="700" fill="#0b0b0b">MBR · BIOS antiguas</text>
+  <g stroke-width="2">
+    <rect x="40" y="84" width="72" height="44" fill="#eef0f3" stroke="#8a8f98"/>
+    <rect x="114" y="84" width="180" height="44" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="296" y="84" width="180" height="44" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="478" y="84" width="180" height="44" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="660" y="84" width="200" height="44" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="672" y="92" width="84" height="28" rx="4" fill="#ffffff" stroke="#eb6834" stroke-width="1"/>
+    <rect x="764" y="92" width="84" height="28" rx="4" fill="#ffffff" stroke="#eb6834" stroke-width="1"/>
+  </g>
+  <g font-size="12.5" text-anchor="middle" fill="#0b0b0b">
+    <text x="76" y="111" font-weight="700">MBR</text>
+    <text x="204" y="111">primaria 1</text><text x="386" y="111">primaria 2</text><text x="568" y="111">primaria 3</text>
+    <text x="714" y="110" font-size="11.5">lógica 5</text><text x="806" y="110" font-size="11.5">lógica 6</text>
+  </g>
+  <g font-size="12" fill="#52514e">
+    <text x="40" y="146">1 sector: arranque + tabla</text>
+    <text x="660" y="146">la 4.ª, «extendida», hace de caja</text>
+  </g>
+  <g font-size="13" fill="#0b0b0b">
+    <circle cx="48" cy="170" r="8" fill="#d03b3b"/><path d="M44 166 l8 8 M52 166 l-8 8" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <text x="62" y="175">sólo 4 particiones primarias</text>
+    <circle cx="298" cy="170" r="8" fill="#d03b3b"/><path d="M294 166 l8 8 M302 166 l-8 8" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <text x="312" y="175">discos de hasta 2 TiB</text>
+    <circle cx="518" cy="170" r="8" fill="#d03b3b"/><path d="M514 166 l8 8 M522 166 l-8 8" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <text x="532" y="175">una sola copia de la tabla: si se estropea…</text>
+  </g>
+
+  <!-- GPT -->
+  <text x="24" y="218" font-size="15" font-weight="700" fill="#0b0b0b">GPT · UEFI (equipos actuales)</text>
+  <g stroke-width="2">
+    <rect x="40" y="230" width="36" height="44" fill="#eef0f3" stroke="#8a8f98"/>
+    <rect x="78" y="230" width="70" height="44" fill="#e4e0f8" stroke="#6250d6"/>
+    <rect x="150" y="230" width="70" height="44" fill="#fbe3ec" stroke="#e87ba4"/>
+    <rect x="222" y="230" width="300" height="44" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="524" y="230" width="90" height="44" fill="#fdefcc" stroke="#eda100"/>
+    <rect x="616" y="230" width="172" height="44" fill="#d3f2e6" stroke="#1baf7a"/>
+    <rect x="790" y="230" width="70" height="44" fill="#e4e0f8" stroke="#6250d6"/>
+  </g>
+  <g font-size="12" text-anchor="middle" fill="#0b0b0b">
+    <text x="58" y="256" font-size="10.5">MBR</text>
+    <text x="113" y="250" font-size="11">cabecera</text><text x="113" y="264" font-size="11">+ tabla</text>
+    <text x="185" y="257" font-weight="700">EFI</text>
+    <text x="372" y="257" font-weight="700">raíz /</text>
+    <text x="569" y="257" font-weight="700">swap</text>
+    <text x="702" y="257" font-weight="700">/home</text>
+    <text x="825" y="250" font-size="11">copia de</text><text x="825" y="264" font-size="11">la tabla</text>
+  </g>
+  <g font-size="12" fill="#52514e">
+    <text x="40" y="292">protector: avisa a programas viejos de que el disco está en uso</text>
+  </g>
+  <g font-size="13" fill="#0b0b0b">
+    <circle cx="48" cy="318" r="8" fill="#0ca30c"/><path d="M44 318 l3 3 l6 -6" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="62" y="323">hasta 128 particiones</text>
+    <circle cx="238" cy="318" r="8" fill="#0ca30c"/><path d="M234 318 l3 3 l6 -6" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="252" y="323">discos enormes</text>
+    <circle cx="398" cy="318" r="8" fill="#0ca30c"/><path d="M394 318 l3 3 l6 -6" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="412" y="323">copia de seguridad al final</text>
+    <circle cx="616" cy="318" r="8" fill="#0ca30c"/><path d="M612 318 l3 3 l6 -6" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="630" y="323">cada partición: tipo + nombre</text>
+  </g>
+</svg>

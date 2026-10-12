@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="320" viewBox="0 0 860 320" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Cómo se lee una línea de cron</title>
+  <desc id="d">Una línea de crontab tiene cinco campos de tiempo y después la orden: minuto de 0 a 59, hora de 0 a 23, día del mes de 1 a 31, mes de 1 a 12 y día de la semana de 0 a 7. Un asterisco significa cualquiera. Ejemplos: 0 * * * * cada hora en punto; */30 * * * * cada media hora; 0 8 * * 1-5 a las ocho de lunes a viernes; @reboot al arrancar.</desc>
+  <rect x="0.5" y="0.5" width="859" height="319" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Cómo se lee una línea de cron</text>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="30" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <rect x="40" y="58" width="56" height="52" rx="8" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/><text x="68" y="95">0</text>
+    <rect x="106" y="58" width="56" height="52" rx="8" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/><text x="134" y="97">*</text>
+    <rect x="172" y="58" width="56" height="52" rx="8" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/><text x="200" y="97">*</text>
+    <rect x="238" y="58" width="56" height="52" rx="8" fill="#fdefcc" stroke="#eda100" stroke-width="2"/><text x="266" y="97">*</text>
+    <rect x="304" y="58" width="56" height="52" rx="8" fill="#fbe3ec" stroke="#e87ba4" stroke-width="2"/><text x="332" y="97">*</text>
+  </g>
+  <rect x="372" y="58" width="464" height="52" rx="8" fill="#1e2227"/>
+  <text x="386" y="90" font-size="14" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#e6e9ee">DISPLAY=:0 /home/alumno/bin/cambiar-fondo.sh</text>
+
+  <g stroke="#9aa0a6" stroke-width="1">
+    <line x1="68" y1="110" x2="68" y2="132"/><line x1="134" y1="110" x2="134" y2="178"/>
+    <line x1="200" y1="110" x2="200" y2="132"/><line x1="266" y1="110" x2="266" y2="178"/>
+    <line x1="332" y1="110" x2="332" y2="132"/><line x1="604" y1="110" x2="604" y2="132"/>
+  </g>
+  <g font-size="13" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="68" y="148">minuto</text><text x="200" y="148">día del mes</text><text x="332" y="148">día semana</text>
+    <text x="134" y="194">hora</text><text x="266" y="194">mes</text>
+    <text x="604" y="148">la orden (con ruta absoluta)</text>
+  </g>
+  <g font-size="12" text-anchor="middle" fill="#52514e">
+    <text x="68" y="164">0-59</text><text x="200" y="164">1-31</text><text x="332" y="164">0-7 (0 y 7 = dom.)</text>
+    <text x="134" y="210">0-23</text><text x="266" y="210">1-12</text>
+    <text x="604" y="164">cron no tiene tu entorno: dile la pantalla</text>
+  </g>
+
+  <text x="24" y="240" font-size="12" font-weight="700" letter-spacing="1" fill="#52514e">EJEMPLOS · «*» = cualquiera</text>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="24" y="266"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700">0 * * * *</tspan>   cada hora en punto</text>
+    <text x="24" y="290"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700">*/30 * * * *</tspan>   cada media hora</text>
+    <text x="440" y="266"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700">0 8 * * 1-5</tspan>   a las 8:00 de lunes a viernes</text>
+    <text x="440" y="290"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700">@reboot</tspan>   cada vez que arranca el equipo</text>
+  </g>
+</svg>

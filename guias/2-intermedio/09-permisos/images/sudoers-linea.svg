@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="350" viewBox="0 0 860 350" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Cómo se lee una línea de sudoers</title>
+  <desc id="d">La línea %wheel ALL=(ALL:ALL) ALL se lee: quién, el grupo wheel; dónde, desde cualquier equipo; como quién, cualquier usuario y grupo; qué, cualquier comando. Una línea más fina: patxi ALL=(root) NOPASSWD: /usr/bin/systemctl restart apache2 sólo deja reiniciar apache2.</desc>
+  <rect x="0.5" y="0.5" width="859" height="349" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Cómo se lee una línea de /etc/sudoers</text>
+
+  <rect x="24" y="56" width="500" height="54" rx="10" fill="#1e2227"/>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="26" font-weight="700" fill="#ffffff">
+    <text x="50" y="92">%wheel</text><text x="180" y="92">ALL</text><text x="240" y="92">=</text>
+    <text x="270" y="92">(ALL:ALL)</text><text x="440" y="92">ALL</text>
+  </g>
+  <rect x="50" y="116" width="86" height="5" rx="2" fill="#2a78d6"/>
+  <rect x="180" y="116" width="43" height="5" rx="2" fill="#eb6834"/>
+  <rect x="270" y="116" width="129" height="5" rx="2" fill="#1baf7a"/>
+  <rect x="440" y="116" width="43" height="5" rx="2" fill="#6250d6"/>
+  <g stroke="#9aa0a6" stroke-width="1">
+    <line x1="93" y1="121" x2="93" y2="134"/><line x1="334" y1="121" x2="334" y2="134"/>
+    <line x1="201" y1="121" x2="201" y2="184"/><line x1="461" y1="121" x2="461" y2="184"/>
+  </g>
+  <g font-size="12" font-weight="700" letter-spacing="1" text-anchor="middle" fill="#0b0b0b">
+    <text x="93" y="150">QUIÉN</text><text x="334" y="150">COMO QUIÉN</text>
+    <text x="201" y="200">DÓNDE</text><text x="461" y="200">QUÉ</text>
+  </g>
+  <g font-size="13" text-anchor="middle" fill="#52514e">
+    <text x="93" y="168">el grupo wheel (% = grupo)</text>
+    <text x="334" y="168">cualquier usuario : grupo</text>
+    <text x="201" y="218">desde cualquier equipo</text>
+    <text x="461" y="218">cualquier comando</text>
+  </g>
+
+  <rect x="548" y="56" width="288" height="170" rx="12" fill="#f7f8fa" stroke="#c9ccd1"/>
+  <text x="564" y="82" font-size="13" font-weight="700" fill="#52514e">Se lee así:</text>
+  <g font-size="14" font-style="italic" fill="#0b0b0b">
+    <text x="564" y="108">«Los miembros del grupo wheel,</text>
+    <text x="564" y="128">desde cualquier equipo, pueden</text>
+    <text x="564" y="148">ejecutar cualquier comando</text>
+    <text x="564" y="168">como cualquier usuario</text>
+    <text x="564" y="188">y cualquier grupo.»</text>
+  </g>
+
+  <text x="24" y="258" font-size="14" font-weight="700" fill="#0b0b0b">Más fino (lo que se hace en una empresa):</text>
+  <rect x="24" y="268" width="812" height="36" rx="8" fill="#1e2227"/>
+  <text x="38" y="291" font-size="14" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#e6e9ee"><tspan fill="#86b6ef" font-weight="700">patxi</tspan> ALL=(root) <tspan fill="#ffb27a" font-weight="700">NOPASSWD:</tspan> <tspan fill="#7fe0b6" font-weight="700">/usr/bin/systemctl restart apache2</tspan></text>
+  <text x="24" y="330" font-size="13" fill="#52514e">patxi, en cualquier equipo, como root, sin pedirle contraseña, puede ejecutar SÓLO ese comando. Nada más.</text>
+</svg>

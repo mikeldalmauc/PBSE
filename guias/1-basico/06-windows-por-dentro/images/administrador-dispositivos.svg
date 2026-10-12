@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El Administrador de dispositivos</title>
+  <desc id="d">Esquema del Administrador de dispositivos de una máquina virtual: un árbol de categorías con un dispositivo en Otros dispositivos marcado con un triángulo amarillo, que indica que falta el controlador, y una unidad de CD con una flecha hacia abajo, que indica que está deshabilitada. Con clic derecho aparecen Actualizar controlador, Deshabilitar dispositivo, Desinstalar el dispositivo, Buscar cambios de hardware y Propiedades.</desc>
+  <rect x="0.5" y="0.5" width="899" height="419" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El Administrador de dispositivos (devmgmt.msc)</text>
+
+  <rect x="24" y="56" width="440" height="348" rx="8" fill="#ffffff" stroke="#8a8f98"/>
+  <path d="M24 64 a8 8 0 0 1 8 -8 h424 a8 8 0 0 1 8 8 v22 h-440 z" fill="#eef0f3"/>
+  <text x="40" y="76" font-size="12.5" fill="#0b0b0b">Administrador de dispositivos</text>
+
+  <g font-size="13" fill="#0b0b0b">
+    <text x="40" y="108">▾ WIN-SMR</text>
+    <text x="60" y="132">▸ Adaptadores de pantalla</text>
+    <text x="60" y="156">▾ Adaptadores de red</text>
+    <text x="100" y="180">Intel(R) PRO/1000 MT Desktop Adapter</text>
+    <text x="60" y="204">▸ Controladoras de almacenamiento</text>
+    <text x="60" y="228">▸ Dispositivos de interfaz humana (HID)</text>
+    <text x="60" y="252">▾ Otros dispositivos</text>
+    <text x="100" y="276" font-weight="700">Dispositivo del sistema base</text>
+    <text x="60" y="300">▸ Procesadores</text>
+    <text x="60" y="324">▾ Unidades de DVD o CD-ROM</text>
+    <text x="100" y="348" font-weight="700">VBOX CD-ROM ATA Device</text>
+    <text x="60" y="372">▾ Unidades de disco</text>
+    <text x="100" y="396">VBOX HARDDISK ATA Device</text>
+  </g>
+  <!-- iconos de aviso -->
+  <path d="M84 264 l8 14 h-16 z" fill="#fab219" stroke="#7a5200" stroke-width="1"/>
+  <text x="84" y="276" font-size="9" font-weight="700" text-anchor="middle" fill="#0b0b0b">!</text>
+  <circle cx="84" cy="344" r="7" fill="#ffffff" stroke="#0b0b0b" stroke-width="1.2"/>
+  <path d="M84 340 v6 M81 343 l3 4 l3 -4" stroke="#0b0b0b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- leyenda -->
+  <text x="488" y="76" font-size="14" font-weight="700" fill="#0b0b0b">Los iconos que tienes que reconocer</text>
+  <path d="M498 94 l9 16 h-18 z" fill="#fab219" stroke="#7a5200" stroke-width="1"/>
+  <text x="498" y="108" font-size="10" font-weight="700" text-anchor="middle" fill="#0b0b0b">!</text>
+  <text x="520" y="107" font-size="13" fill="#0b0b0b"><tspan font-weight="700">Triángulo amarillo:</tspan> falta el controlador o falla</text>
+  <circle cx="498" cy="132" r="8" fill="#ffffff" stroke="#0b0b0b" stroke-width="1.2"/>
+  <path d="M498 127 v7 M495 131 l3 4 l3 -4" stroke="#0b0b0b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <text x="520" y="137" font-size="13" fill="#0b0b0b"><tspan font-weight="700">Flecha abajo:</tspan> dispositivo deshabilitado</text>
+  <rect x="490" y="152" width="16" height="16" rx="3" fill="#eef0f3" stroke="#8a8f98"/>
+  <text x="498" y="165" font-size="11" font-weight="700" text-anchor="middle" fill="#0b0b0b">?</text>
+  <text x="520" y="165" font-size="13" fill="#0b0b0b"><tspan font-weight="700">«Otros dispositivos»:</tspan> Windows no sabe qué es</text>
+
+  <text x="488" y="206" font-size="14" font-weight="700" fill="#0b0b0b">Clic derecho sobre un dispositivo</text>
+  <rect x="488" y="218" width="250" height="150" rx="6" fill="#f3f3f3" stroke="#c9ccd1"/>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="504" y="242">Actualizar controlador</text>
+    <text x="504" y="266">Deshabilitar dispositivo</text>
+    <text x="504" y="290">Desinstalar el dispositivo</text>
+    <text x="504" y="320">Buscar cambios de hardware</text>
+    <text x="504" y="350" font-weight="700">Propiedades</text>
+  </g>
+  <g stroke="#c9ccd1"><line x1="496" y1="302" x2="730" y2="302"/><line x1="496" y1="332" x2="730" y2="332"/></g>
+  <text x="488" y="392" font-size="12" fill="#52514e">Propiedades → Controlador: versión, «Revertir al controlador anterior».</text>
+  <text x="488" y="408" font-size="12" fill="#52514e">Propiedades → Detalles → Id. de hardware: para buscar el controlador.</text>
+</svg>

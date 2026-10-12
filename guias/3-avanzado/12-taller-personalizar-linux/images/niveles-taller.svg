@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="250" viewBox="0 0 900 250" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El mapa del taller</title>
+  <desc id="d">Siete niveles. Obligatorios: nivel 0, dónde vive la configuración; nivel 1, el escritorio; nivel 2, el terminal; nivel 3, el mensaje de bienvenida. Ampliación: nivel 4, tuberías y comandos curiosos; nivel 5, tareas automáticas con cron; nivel 6, hacerlo reproducible. Al final, el concurso de escritorios.</desc>
+  <rect x="0.5" y="0.5" width="899" height="249" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El mapa del taller: 7 niveles y un concurso</text>
+
+  <rect x="24" y="56" width="432" height="26" rx="13" fill="#d6efd6" stroke="#008300"/>
+  <text x="240" y="74" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">OBLIGATORIO · niveles 0 a 3 · hasta 7 puntos</text>
+  <rect x="468" y="56" width="312" height="26" rx="13" fill="#e4e0f8" stroke="#6250d6"/>
+  <text x="624" y="74" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0b0b0b">AMPLIACIÓN · niveles 4 a 6 · hasta 3 puntos</text>
+
+  <path d="M64 130 H 790" stroke="#c9ccd1" stroke-width="6" stroke-linecap="round"/>
+  <g stroke-width="3">
+    <circle cx="64" cy="130" r="28" fill="#cde2fb" stroke="#2a78d6"/>
+    <circle cx="176" cy="130" r="28" fill="#cde2fb" stroke="#2a78d6"/>
+    <circle cx="288" cy="130" r="28" fill="#cde2fb" stroke="#2a78d6"/>
+    <circle cx="400" cy="130" r="28" fill="#cde2fb" stroke="#2a78d6"/>
+    <circle cx="512" cy="130" r="28" fill="#e4e0f8" stroke="#6250d6" stroke-dasharray="6 4"/>
+    <circle cx="624" cy="130" r="28" fill="#e4e0f8" stroke="#6250d6" stroke-dasharray="6 4"/>
+    <circle cx="736" cy="130" r="28" fill="#e4e0f8" stroke="#6250d6" stroke-dasharray="6 4"/>
+  </g>
+  <g font-size="22" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="64" y="138">0</text><text x="176" y="138">1</text><text x="288" y="138">2</text><text x="400" y="138">3</text>
+    <text x="512" y="138">4</text><text x="624" y="138">5</text><text x="736" y="138">6</text>
+  </g>
+
+  <!-- meta -->
+  <rect x="790" y="104" width="88" height="52" rx="10" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <path d="M834 112 l4 8 l9 1 l-7 6 l2 9 l-8 -5 l-8 5 l2 -9 l-7 -6 l9 -1 z" fill="#eda100"/>
+  <text x="834" y="150" font-size="11" font-weight="700" text-anchor="middle" fill="#0b0b0b">Concurso</text>
+
+  <g font-size="13" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="64" y="184">Dónde vive</text><text x="176" y="184">El escritorio</text><text x="288" y="184">El terminal</text><text x="400" y="184">Bienvenida</text>
+    <text x="512" y="184">Tuberías</text><text x="624" y="184">Que se haga</text><text x="736" y="184">Hazlo</text>
+  </g>
+  <g font-size="12" text-anchor="middle" fill="#52514e">
+    <text x="64" y="202">la configuración</text><text x="176" y="202">temas y atajos</text><text x="288" y="202">fastfetch, btop</text><text x="400" y="202">motd, issue</text>
+    <text x="512" y="202">cowsay, lolcat</text><text x="624" y="202">solo (cron)</text><text x="736" y="202">reproducible</text>
+    <text x="834" y="184">de escritorios</text>
+  </g>
+  <text x="24" y="236" font-size="12.5" fill="#52514e">Regla del juego: no pasas de nivel si no sabes explicar en qué fichero ha cambiado cada cosa.</text>
+</svg>

@@ -11,7 +11,7 @@ origen: traducción y ampliación de «Linux Konfigurazioak.md» (curso anterior
 # Ejercicios · Ejercicios de consola: explorar el sistema desde el terminal
 
 > **Antes de empezar.** Ficha corta de exploración guiada sobre tu máquina virtual de Linux Mint (`Mint-SMR`). Da por
-> hecha la [guía de comandos y ficheros](../04-comandos-y-ficheros/1-explicacion.md). Varios de
+> hecha la [guía de comandos y ficheros](../04-comandos-y-ficheros/1-guia.md). Varios de
 > estos ficheros vuelven a salir al gestionar cuentas de usuario y al
 > [configurar el shell](../../3-avanzado/11-terminal-zsh-p10k/1-explicacion.md), así que guarda las respuestas.
 
@@ -109,7 +109,7 @@ Elige **cuatro ficheros** y rellena:
 |---|---|---|---|---|
 | | | | | |
 
-*(La columna de permisos se estudia a fondo en la [guía de permisos](../../2-intermedio/09-permisos/1-explicacion.md); aquí basta con leerla.)*
+*(La columna de permisos se estudia a fondo en la [guía de permisos](../../2-intermedio/09-permisos/1-guia.md); aquí basta con leerla.)*
 
 ## Encadenar comandos con `;`
 

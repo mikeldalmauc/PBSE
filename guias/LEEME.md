@@ -13,6 +13,7 @@ recomendado.
   - [Itinerario del terminal](#itinerario-del-terminal)
   - [Convenciones comunes](#convenciones-comunes)
   - [Cuadros de colores](#cuadros-de-colores)
+  - [Diagramas y autocomprobación](#diagramas-y-autocomprobación)
   - [Exportar a Moodle](#exportar-a-moodle)
   - [Añadir un tema nuevo](#añadir-un-tema-nuevo)
 
@@ -24,11 +25,14 @@ recomendado.
 guias/
 ├── LEEME.md                  ← este fichero
 ├── 1-basico/
+│   ├── 02-instalar-mint-virtualbox/
+│   │   ├── 1-explicacion.md  ← la teoría y los pasos
+│   │   ├── 2-chuleta.md      ← resumen para tener al lado
+│   │   ├── 3-ejercicios.md   ← ejercicios, prácticas y entregable
+│   │   └── images/           ← capturas del tema
 │   └── 03-procesos/
-│       ├── 1-explicacion.md  ← la teoría y los pasos
-│       ├── 2-chuleta.md      ← resumen para tener al lado
-│       ├── 3-ejercicios.md   ← ejercicios, prácticas y entregable
-│       └── images/           ← capturas del tema
+│       ├── 1-guia.md         ← guía única: aprende, chuleta, practica y entrega
+│       └── images/           ← capturas y diagramas SVG del tema
 ├── 2-intermedio/
 ├── 3-avanzado/
 ├── _moodle/                  ← HTML generados, listos para subir (no se editan a mano)
@@ -37,8 +41,15 @@ guias/
 └── _obsoleto/                ← versiones anteriores
 ```
 
-Cada tema es una carpeta autocontenida: sus tres páginas y sus imágenes. En Moodle, un tema
-encaja como **una sección** con dos Páginas (explicación y chuleta) y una Tarea (ejercicios).
+Cada tema es una carpeta autocontenida: sus páginas y sus imágenes. Hay dos formatos:
+
+- **Tres páginas** (`1-explicacion`, `2-chuleta`, `3-ejercicios`). En Moodle, un tema encaja como
+  **una sección** con dos Páginas (explicación y chuleta) y una Tarea (ejercicios).
+- **Guía única** (`1-guia.md`), en los temas 03, 04, 06, 07, 08, 09 y 12. Todo va en un fichero
+  dividido en partes: *Aprende*, *Chuleta*, *Practica* y *Entrega* (en la de Arch, las tres partes
+  de la instalación, la chuleta y la entrega), con diagramas SVG, cuadros de colores y preguntas de
+  autocomprobación. En Moodle: una Página con la guía y una Tarea con la entrega copiada en la
+  descripción.
 
 Los ficheros `notas-docente.md` que hay en algunos temas son para el profesor y **no se exportan**.
 
@@ -49,23 +60,25 @@ Los ficheros `notas-docente.md` que hay en algunos temas son para el profesor y 
 | **Nivel 1 · Básico** | | | | | |
 | 01 | Markdown para documentar | [explicación](1-basico/01-markdown/1-explicacion.md) | [chuleta](1-basico/01-markdown/2-chuleta.md) | [práctica](1-basico/01-markdown/3-ejercicios.md) | transversal |
 | 02 | Instalar Linux Mint en VirtualBox | [explicación](1-basico/02-instalar-mint-virtualbox/1-explicacion.md) | [chuleta](1-basico/02-instalar-mint-virtualbox/2-chuleta.md) | [entregable](1-basico/02-instalar-mint-virtualbox/3-ejercicios.md) | CM1 |
-| 03 | Procesos, hilos y planificación | [explicación](1-basico/03-procesos/1-explicacion.md) | [chuleta](1-basico/03-procesos/2-chuleta.md) | [ejercicios](1-basico/03-procesos/3-ejercicios.md) | — |
-| 04 | Comandos y ficheros en Linux | [explicación](1-basico/04-comandos-y-ficheros/1-explicacion.md) | [chuleta](1-basico/04-comandos-y-ficheros/2-chuleta.md) | [ejercicios](1-basico/04-comandos-y-ficheros/3-ejercicios.md) | CM3, CM4 |
+| 03 | Procesos, hilos y planificación | [guía única](1-basico/03-procesos/1-guia.md) | [↳ parte 2](1-basico/03-procesos/1-guia.md#parte-2--chuleta) | [↳ partes 3 y 4](1-basico/03-procesos/1-guia.md#parte-3--practica) | — |
+| 04 | Comandos y ficheros en Linux | [guía única](1-basico/04-comandos-y-ficheros/1-guia.md) | [↳ parte 2](1-basico/04-comandos-y-ficheros/1-guia.md#parte-2--chuleta) | [↳ partes 3 y 4](1-basico/04-comandos-y-ficheros/1-guia.md#parte-3--practica) | CM3, CM4 |
 | 05 | Explorar el sistema desde el terminal | — | — | [ficha](1-basico/05-explorar-el-sistema/3-ejercicios.md) · [tarea: mapa de directorios](1-basico/05-explorar-el-sistema/4-tarea-directorios-linux.md) | CM3, CM4 |
+| 06 | Windows por dentro: diferencias con Linux y herramientas | [guía única](1-basico/06-windows-por-dentro/1-guia.md) | [↳ parte 2](1-basico/06-windows-por-dentro/1-guia.md#parte-2--chuleta) | [↳ partes 3 y 4](1-basico/06-windows-por-dentro/1-guia.md#parte-3--practica) | — |
 | **Nivel 2 · Intermedio** | | | | | |
-| 07 | USB multiarranque con Ventoy | [explicación](2-intermedio/07-usb-multiarranque-ventoy/1-explicacion.md) | [chuleta](2-intermedio/07-usb-multiarranque-ventoy/2-chuleta.md) | [entregable](2-intermedio/07-usb-multiarranque-ventoy/3-ejercicios.md) | CM2 |
-| 08 | Instalar Arch Linux (UEFI + GPT) | [explicación](2-intermedio/08-instalar-arch-uefi/1-explicacion.md) | [chuleta](2-intermedio/08-instalar-arch-uefi/2-chuleta.md) | [entregables](2-intermedio/08-instalar-arch-uefi/3-ejercicios.md) | CM1, CM2 |
-| 09 | Permisos en Linux, root y sudo | [explicación](2-intermedio/09-permisos/1-explicacion.md) | [chuleta](2-intermedio/09-permisos/2-chuleta.md) | [ejercicios](2-intermedio/09-permisos/3-ejercicios.md) | CM6 |
+| 07 | USB multiarranque con Ventoy | [guía única](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md) | [↳ parte 2](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md#parte-2--chuleta) | [↳ entregable](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md#parte-4--entrega) | CM2 |
+| 08 | Instalar Arch Linux (UEFI + GPT) | [guía única](2-intermedio/08-instalar-arch-uefi/1-guia.md) | [↳ parte 4](2-intermedio/08-instalar-arch-uefi/1-guia.md#parte-4--chuleta) | [↳ entregables](2-intermedio/08-instalar-arch-uefi/1-guia.md#parte-5--entrega) | CM1, CM2 |
+| 09 | Permisos en Linux, root y sudo | [guía única](2-intermedio/09-permisos/1-guia.md) | [↳ parte 2](2-intermedio/09-permisos/1-guia.md#parte-2--chuleta) | [↳ partes 3 y 4](2-intermedio/09-permisos/1-guia.md#parte-3--practica) | CM6 |
 | **Nivel 3 · Avanzado** | | | | | |
 | 11 | Personalizar el terminal (zsh + Powerlevel10k) | [explicación](3-avanzado/11-terminal-zsh-p10k/1-explicacion.md) | [chuleta](3-avanzado/11-terminal-zsh-p10k/2-chuleta.md) | [entregable](3-avanzado/11-terminal-zsh-p10k/3-ejercicios.md) | CM4 |
-| 12 | Taller: personaliza tu Linux | [explicación](3-avanzado/12-taller-personalizar-linux/1-explicacion.md) | [chuleta](3-avanzado/12-taller-personalizar-linux/2-chuleta.md) | [entregable](3-avanzado/12-taller-personalizar-linux/3-ejercicios.md) | CM4 |
+| 12 | Taller: personaliza tu Linux | [guía única](3-avanzado/12-taller-personalizar-linux/1-guia.md) | [↳ parte 2](3-avanzado/12-taller-personalizar-linux/1-guia.md#parte-2--chuleta) | [↳ concurso y entrega](3-avanzado/12-taller-personalizar-linux/1-guia.md#parte-3--practica-el-concurso-de-escritorios) | CM4 |
 | 13 | Scripting básico en Bash | [explicación](3-avanzado/13-scripting-bash/1-explicacion.md) | [chuleta](3-avanzado/13-scripting-bash/2-chuleta.md) | [ejercicios y proyecto](3-avanzado/13-scripting-bash/3-ejercicios.md) | CM4 |
 | 14 | Arch Linux sobre RAID 0 (opcional) | [explicación](3-avanzado/14-arch-sobre-raid0/1-explicacion.md) | [chuleta](3-avanzado/14-arch-sobre-raid0/2-chuleta.md) | [entregable](3-avanzado/14-arch-sobre-raid0/3-ejercicios.md) | CM2 |
 
-> **Nota.** Los temas 06 (ampliación de ficheros), 10 (trucos de la consola) y 15 (SSH y FTP) se
-> han retirado del módulo: los dos primeros por resultar demasiado complejos para el nivel y el
-> tercero por pertenecer a otro módulo. El material se conserva en
-> `_obsoleto/retirados-2026-09-23/` por si vuelve a hacer falta, y por eso la numeración salta.
+> **Nota.** Los temas 10 (trucos de la consola) y 15 (SSH y FTP) se han retirado del módulo: el
+> primero por resultar demasiado complejo para el nivel y el segundo por pertenecer a otro módulo.
+> También se retiró el antiguo 06 (ampliación de ficheros); su número lo ocupa ahora la guía de
+> Windows. El material retirado se conserva en `_obsoleto/retirados-2026-09-23/` por si vuelve a
+> hacer falta, y por eso la numeración salta.
 
 ## Itinerario del terminal
 
@@ -93,7 +106,7 @@ Cabecera YAML de cada página:
 modulo: Sistemas Operativos Monopuesto (SMR 1.º)
 nivel: 2 · Intermedio
 tema: "09"
-tipo: Explicación          # Explicación | Chuleta | Ejercicios
+tipo: Explicación          # Explicación | Chuleta | Ejercicios | Guía | Tarea
 competencias: CM6
 herramientas: H4 (terminal Linux)
 duracion: 5 h
@@ -132,6 +145,30 @@ También funciona la sintaxis de GitHub, útil cuando el cuadro no lleva etiquet
 Tipos admitidos: `NOTE`/`NOTA`, `TIP`/`CONSEJO`, `IMPORTANT`/`IMPORTANTE`, `WARNING`/`CAUTION`/`AVISO`,
 `ANALOGIA`, `AMPLIACION`, `EJEMPLO` y `ANTES`.
 
+> **Ojo.** GitHub no muestra los `[!TIP]` que van **dentro de una lista**. Ahí usa la etiqueta en
+> negrita (`> **Consejo.** …`), que funciona en todas partes.
+
+## Diagramas y autocomprobación
+
+Las guías únicas y la tarea del tema 05 usan **diagramas SVG** guardados en `images/` del
+tema, junto a las capturas. Se enlazan como cualquier imagen y el exportador los incrusta igual:
+
+```markdown
+![Texto alternativo que describe el diagrama](images/estados-proceso.svg)
+```
+
+Normas para que se vean bien en VS Code (tema claro u oscuro), en GitHub y en Moodle:
+
+- Fondo propio claro (`#fcfcfb`) y borde suave: el diagrama no depende del fondo de la página.
+- Sin fuentes externas ni scripts: `Segoe UI`/`Roboto` para el texto y `Consolas` para el código.
+- Paleta común en este orden: azul `#2a78d6`, naranja `#eb6834`, aqua `#1baf7a`, amarillo
+  `#eda100`, rosa `#e87ba4`, verde `#008300`, violeta `#6250d6`; el texto siempre en negro o gris.
+- `<title>` y `<desc>` dentro del SVG, y texto alternativo completo en el Markdown.
+
+Las preguntas **«🧠 ¿Lo has pillado?»** llevan la respuesta plegada con `<details>`. Si Moodle
+elimina esa etiqueta al pegar, la respuesta queda visible justo debajo: por eso sólo se usa en
+preguntas de repaso, nunca en las que puntúan.
+
 ## Exportar a Moodle
 
 El exportador genera **un HTML por página**, con las imágenes incrustadas en base64 y todo el
@@ -141,11 +178,12 @@ estilo **en línea** (Moodle elimina los `<style>` al pegar en una Página, pero
 ```bash
 pip install markdown-it-py beautifulsoup4 pygments      # una vez
 python3 _herramientas/md2html.py --todo .                # regenera todo en _moodle/
-python3 _herramientas/md2html.py 2-intermedio/09-permisos/2-chuleta.md -o chuleta.html   # una sola
+python3 _herramientas/md2html.py 2-intermedio/09-permisos/1-guia.md -o permisos.html   # una sola
 ```
 
-Los ficheros salen con nombre único y ordenado: `09-permisos-1-explicacion.html`,
-`09-permisos-2-chuleta.html`, `09-permisos-3-ejercicios.html`.
+Los ficheros salen con nombre único y ordenado: `02-instalar-mint-virtualbox-1-explicacion.html`,
+`02-instalar-mint-virtualbox-2-chuleta.html`, `02-instalar-mint-virtualbox-3-ejercicios.html`.
+Una guía única sale como `09-permisos-1-guia.html`.
 
 Para publicarlos:
 

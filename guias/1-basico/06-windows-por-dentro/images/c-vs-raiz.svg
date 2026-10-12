@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="412" viewBox="0 0 900 412" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Dónde está cada cosa en Windows y en Linux</title>
+  <desc id="d">El sistema: C:\Windows en Windows; /usr y /boot en Linux. Los programas: C:\Program Files; /usr/bin y /opt. La configuración de todo el equipo: el Registro HKLM y C:\ProgramData; /etc. Las carpetas de los usuarios: C:\Users\alumno; /home/alumno. La configuración de cada usuario: AppData y el Registro HKCU; ~/.config. Otros discos: una letra cada uno, D: o E:; carpetas dentro del árbol como /media/alumno.</desc>
+  <rect x="0.5" y="0.5" width="899" height="411" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Las mismas cosas, en otro sitio</text>
+
+  <g font-size="15" font-weight="700" fill="#0b0b0b">
+    <rect x="250" y="56" width="300" height="30" rx="8" fill="#cde2fb"/><text x="400" y="77" text-anchor="middle">Windows</text>
+    <rect x="576" y="56" width="300" height="30" rx="8" fill="#fde4d8"/><text x="726" y="77" text-anchor="middle">Linux</text>
+  </g>
+
+  <!-- marcadores de fila -->
+  <g>
+    <rect x="24" y="98" width="6" height="40" rx="3" fill="#2a78d6"/>
+    <rect x="24" y="146" width="6" height="40" rx="3" fill="#eb6834"/>
+    <rect x="24" y="194" width="6" height="40" rx="3" fill="#1baf7a"/>
+    <rect x="24" y="242" width="6" height="40" rx="3" fill="#eda100"/>
+    <rect x="24" y="290" width="6" height="40" rx="3" fill="#e87ba4"/>
+    <rect x="24" y="338" width="6" height="40" rx="3" fill="#6250d6"/>
+  </g>
+  <g font-size="13.5" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="123">El sistema</text>
+    <text x="40" y="171">Los programas</text>
+    <text x="40" y="212">Configuración de</text><text x="40" y="228">todo el equipo</text>
+    <text x="40" y="267">Carpetas personales</text>
+    <text x="40" y="308">Configuración de</text><text x="40" y="324">cada usuario</text>
+    <text x="40" y="363">Otros discos y pinchos</text>
+  </g>
+
+  <g fill="#ffffff" stroke="#c9ccd1">
+    <rect x="250" y="98" width="300" height="40" rx="8"/><rect x="576" y="98" width="300" height="40" rx="8"/>
+    <rect x="250" y="146" width="300" height="40" rx="8"/><rect x="576" y="146" width="300" height="40" rx="8"/>
+    <rect x="250" y="194" width="300" height="40" rx="8"/><rect x="576" y="194" width="300" height="40" rx="8"/>
+    <rect x="250" y="242" width="300" height="40" rx="8"/><rect x="576" y="242" width="300" height="40" rx="8"/>
+    <rect x="250" y="290" width="300" height="40" rx="8"/><rect x="576" y="290" width="300" height="40" rx="8"/>
+    <rect x="250" y="338" width="300" height="40" rx="8"/><rect x="576" y="338" width="300" height="40" rx="8"/>
+  </g>
+  <g font-size="14" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="264" y="123">C:\Windows</text>                 <text x="590" y="123">/usr   /boot</text>
+    <text x="264" y="171">C:\Program Files</text>           <text x="590" y="171">/usr/bin   /opt</text>
+    <text x="264" y="219">Registro (HKLM), ProgramData</text> <text x="590" y="219">/etc</text>
+    <text x="264" y="267">C:\Users\alumno</text>            <text x="590" y="267">/home/alumno</text>
+    <text x="264" y="315">AppData, Registro (HKCU)</text>    <text x="590" y="315">~/.config   ~/.local</text>
+    <text x="264" y="363">D:  E:  (una letra cada uno)</text> <text x="590" y="363">/media/alumno/…</text>
+  </g>
+  <g font-size="16" font-weight="700" text-anchor="middle" fill="#8a8f98">
+    <text x="563" y="124">≈</text><text x="563" y="172">≈</text><text x="563" y="220">≈</text>
+    <text x="563" y="268">≈</text><text x="563" y="316">≈</text><text x="563" y="364">≈</text>
+  </g>
+  <text x="24" y="402" font-size="12" fill="#52514e">Windows: una letra por disco y «\» como separador. Linux: un único árbol desde «/» y «/» como separador.</text>
+</svg>

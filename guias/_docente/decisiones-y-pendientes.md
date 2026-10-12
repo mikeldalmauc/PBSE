@@ -47,6 +47,24 @@ cambian el comportamiento de `pacman`.
 
 **SSH y FTP fuera del módulo** (2026-09-23): son servicios de red y pertenecen a otros módulos del ciclo. El material está en `_obsoleto/retirados-2026-09-23/`.
 
+**Guía única en los temas 03, 07 y 09** (2026-10-12). Explicación, chuleta y ejercicios se han
+unido en `1-guia.md`, dividido en *Aprende*, *Chuleta*, *Practica* y *Entrega*, con diagramas SVG
+propios, cuadros de colores y preguntas de autocomprobación. La tarea 05-4 (mapa de directorios) se
+ha rehecho más guiada: ocho misiones con comandos y experimentos por directorio, tabla de referencia
+y la plantilla del documento, que faltaba. Se añadió el criterio 5 (tabla de referencia completa).
+Las versiones anteriores están en `_obsoleto/antes-de-unificar-2026-10-12/`.
+
+**Guía única también en 04, 08 y 12, y guía nueva de Windows (06)** (2026-10-12). En la de
+comandos (04) cada apartado acaba con su «Pruébalo» y enlaza con su ejercicio; los 12 ejercicios
+y la evaluación no cambian, y las pruebas se hacen en `~/arenero`. Se separaron las llaves `{}` de
+los comodines (no lo son) y se añadió que `*` no coge ocultos. La de Arch ya
+instalaba en GPT; ahora lo explica (MBR frente a GPT), lo comprueba (`fdisk -l`, `lsblk -o
+PARTTYPENAME`, `efibootmgr -v`) y enseña a rehacerlo con `wipefs` si se elige `dos`. El apartado
+de entorno gráfico ofrece siete opciones (XFCE recomendado, KDE Plasma, GNOME, Cinnamon, MATE,
+LXQt e i3) y el taller da equivalencias para todas. El número 06, libre desde que se retiró la
+ampliación de ficheros, lo ocupa «Windows por dentro» (diferencias con Linux y herramientas de
+administración), con entrega Apto / No apto y competencias por asignar.
+
 **La guía de comandos se redujo al mínimo** (navegar, rutas, crear, ver, copiar/mover/borrar,
 comodines, ayuda). `find`, `grep`, tuberías, enlaces, `tar`, `rsync`, disco y equivalencias con
 Windows se retiraron a `_obsoleto/retirados-2026-09-23/` (tema 06), junto con los trucos de la
@@ -69,6 +87,14 @@ consola (tema 10), por resultar demasiado complejos para el nivel.
 | Permisos | Atributo `e` = «sobrescribe con ceros» | Eso es `s`. `e` = *extent format* |
 | Permisos | No distinguía `s`/`S` ni `t`/`T` | Añadida la tabla |
 | Procesos | `killid id` | `kill PID` |
+| Procesos | Diagrama de estados: «Bloqueado → En ejecución» y flecha «fin» hacia «Listo» | Bloqueado → **Listo**; En ejecución → **Terminado** |
+| Permisos | `r--rws--T` → 460 → 3460 | La `s` minúscula lleva `x`: base **470** → **3470** |
+| Ventoy | Faltaba el apartado 7 (saltaba del 6 al 8) | Las situaciones de la chuleta pasan a ser el apartado 7 |
+| Taller | `awk 'NR==2 {print $3\" de \"$2…}'` dentro de `$(…)` | Las `\"` llegaban a `awk` y daba error: `print $3 " de " $2 …` |
+| Taller | `crontab -e` sin más en Arch | Arch no trae cron: `pacman -S cronie` y `systemctl enable --now cronie` |
+| Taller | Cron con sólo `DISPLAY=:0` | `xfconf-query`, `gsettings` y `notify-send` necesitan también `DBUS_SESSION_BUS_ADDRESS` |
+| Taller | `pacman -Qqe` para la lista de paquetes oficiales | Incluye los de AUR y `pacman -S` falla: `-Qqen` (oficiales) y `-Qqem` (AUR) |
+| Taller | Copiaba `~/.config/xfce4/xfconf` y lo restauraba en `~/.config/xfconf` | Se copia `~/.config/xfce4` entero |
 | Scripting | `elif [$ADINA -ge 18]` | `elif [ "$EDAD" -ge 18 ]` |
 | Scripting | `eq`, `ne`, `lt`… | `-eq`, `-ne`, `-lt`… |
 | Scripting | Variables sin comillas | Regla de entrecomillar y su motivo |

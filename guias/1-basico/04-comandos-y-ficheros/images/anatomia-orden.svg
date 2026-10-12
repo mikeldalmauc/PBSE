@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="376" viewBox="0 0 900 376" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Anatomía de una orden en el terminal</title>
+  <desc id="d">La línea alumno@mint-smr:~$ ls -la /etc. El prompt lo escribe el sistema: alumno es tu usuario, mint-smr el equipo, ~ la carpeta en la que estás y $ indica que eres un usuario normal. Detrás va tu orden: ls es el comando, -la son las opciones y /etc es el argumento. Las opciones cortas se pueden juntar (ls -l -a es lo mismo que ls -la) y muchas tienen una versión larga con dos guiones (ls -a es lo mismo que ls --all).</desc>
+  <rect x="0.5" y="0.5" width="899" height="375" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Anatomía de una orden</text>
+  <text x="24" y="62" font-size="14" fill="#52514e">El prompt lo escribe el sistema y te dice quién eres y dónde estás. Lo que va detrás lo escribes tú.</text>
+
+  <!-- la línea del terminal -->
+  <rect x="24" y="78" width="852" height="52" rx="10" fill="#1e2227"/>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="22" fill="#e6e9ee">
+    <text x="44" y="112">alumno@mint-smr:~$</text>
+    <text x="306" y="112">ls</text>
+    <text x="352" y="112">-la</text>
+    <text x="404" y="112">/etc</text>
+  </g>
+  <rect x="44" y="138" width="218" height="5" rx="2" fill="#8a8f98"/>
+  <rect x="306" y="138" width="26" height="5" rx="2" fill="#2a78d6"/>
+  <rect x="352" y="138" width="38" height="5" rx="2" fill="#eb6834"/>
+  <rect x="404" y="138" width="50" height="5" rx="2" fill="#1baf7a"/>
+
+  <!-- el prompt -->
+  <text x="24" y="182" font-size="15" font-weight="700" fill="#0b0b0b">El prompt · lo pone el sistema</text>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">
+    <rect x="24" y="196" width="96" height="36" rx="8" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="72" y="220">alumno</text>
+    <text x="133" y="220" fill="#52514e">@</text>
+    <rect x="146" y="196" width="110" height="36" rx="8" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="201" y="220">mint-smr</text>
+    <text x="268" y="220" fill="#52514e">:</text>
+    <rect x="280" y="196" width="44" height="36" rx="8" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="302" y="220">~</text>
+    <rect x="352" y="196" width="44" height="36" rx="8" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="374" y="220">$</text>
+  </g>
+  <g font-size="12.5" fill="#52514e" text-anchor="middle">
+    <text x="72" y="252">tu usuario</text>
+    <text x="201" y="252">el equipo</text>
+    <text x="302" y="252">dónde</text><text x="302" y="268">estás</text>
+    <text x="374" y="252">usuario</text><text x="374" y="268">normal</text>
+  </g>
+  <g font-size="12.5" fill="#52514e">
+    <text x="24" y="294"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">~</tspan> es tu carpeta personal: /home/alumno</text>
+    <text x="24" y="312">Si fueras el administrador (root) verías <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">#</tspan> y no <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">$</tspan></text>
+  </g>
+
+  <!-- tu orden -->
+  <text x="460" y="182" font-size="15" font-weight="700" fill="#0b0b0b">Tu orden · la escribes tú</text>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">
+    <rect x="460" y="196" width="104" height="44" rx="10" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <text x="512" y="225">ls</text>
+    <rect x="580" y="196" width="104" height="44" rx="10" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+    <text x="632" y="225">-la</text>
+    <rect x="700" y="196" width="176" height="44" rx="10" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="788" y="225">/etc</text>
+  </g>
+  <g font-size="14" font-weight="700" fill="#0b0b0b" text-anchor="middle">
+    <text x="512" y="262">comando</text>
+    <text x="632" y="262">opciones</text>
+    <text x="788" y="262">argumento</text>
+  </g>
+  <g font-size="12.5" fill="#52514e" text-anchor="middle">
+    <text x="512" y="280">qué programa</text>
+    <text x="632" y="280">cómo lo hace</text>
+    <text x="632" y="296">empiezan por -</text>
+    <text x="788" y="280">sobre qué actúa:</text>
+    <text x="788" y="296">un fichero, una carpeta…</text>
+  </g>
+
+  <line x1="24" y1="322" x2="876" y2="322" stroke="#e2e5e9"/>
+  <g font-size="13" fill="#52514e">
+    <text x="24" y="344"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">ls -l -a</tspan> = <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">ls -la</tspan> = <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">ls -al</tspan> · Las opciones cortas (un guion y una letra) se pueden juntar, en cualquier orden.</text>
+    <text x="24" y="364"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">ls -a</tspan> = <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">ls --all</tspan> · Muchas tienen versión larga, con dos guiones y una palabra. Entre pieza y pieza, siempre un espacio.</text>
+  </g>
+</svg>

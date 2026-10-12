@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="270" viewBox="0 0 900 270" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Cómo arranca tu Arch en UEFI</title>
+  <desc id="d">El firmware UEFI tiene en su memoria NVRAM una entrada llamada GRUB que apunta al fichero EFI/GRUB/grubx64.efi de la partición EFI. GRUB lee /boot/grub/grub.cfg, carga el núcleo vmlinuz-linux y el initramfs, y el núcleo arranca systemd, que muestra el inicio de sesión.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="899" height="269" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Cómo arranca tu Arch: la cadena UEFI → GRUB → Linux</text>
+
+  <g stroke-width="2">
+    <rect x="26" y="60" width="160" height="110" rx="12" fill="#eef0f3" stroke="#8a8f98"/>
+    <rect x="206" y="60" width="160" height="110" rx="12" fill="#fbe3ec" stroke="#e87ba4"/>
+    <rect x="386" y="60" width="160" height="110" rx="12" fill="#e4e0f8" stroke="#6250d6"/>
+    <rect x="566" y="60" width="160" height="110" rx="12" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="746" y="60" width="128" height="110" rx="12" fill="#d6efd6" stroke="#008300"/>
+  </g>
+  <g font-size="14" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="84">Firmware UEFI</text>
+    <text x="220" y="84">Partición EFI</text>
+    <text x="400" y="84">GRUB</text>
+    <text x="580" y="84">Núcleo Linux</text>
+    <text x="760" y="84">systemd</text>
+  </g>
+  <g font-size="12" fill="#52514e">
+    <text x="40" y="106">en su NVRAM guarda</text><text x="40" y="122">una entrada «GRUB»</text><text x="40" y="138">que apunta a…</text>
+    <text x="220" y="106">el fichero</text>
+    <text x="400" y="106">lee su menú en</text>
+    <text x="580" y="106">carga el núcleo y</text><text x="580" y="122">el initramfs desde</text><text x="580" y="138">/boot</text>
+    <text x="760" y="106">PID 1: arranca</text><text x="760" y="122">los servicios y</text><text x="760" y="138">el inicio de sesión</text>
+  </g>
+  <g font-size="11.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="220" y="128">EFI/GRUB/</text><text x="220" y="144">grubx64.efi</text>
+    <text x="400" y="128">/boot/grub/</text><text x="400" y="144">grub.cfg</text>
+  </g>
+  <g stroke="#52514e" stroke-width="2" fill="none">
+    <path d="M186 115 H 204" marker-end="url(#flecha)"/><path d="M366 115 H 384" marker-end="url(#flecha)"/>
+    <path d="M546 115 H 564" marker-end="url(#flecha)"/><path d="M726 115 H 744" marker-end="url(#flecha)"/>
+  </g>
+
+  <text x="24" y="200" font-size="12" font-weight="700" letter-spacing="1" fill="#52514e">QUÉ COMANDO LO PREPARA (Y CÓMO LO COMPRUEBAS)</text>
+  <g font-size="11.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="26" y="222">efibootmgr -v</text>
+    <text x="206" y="222">grub-install</text><text x="206" y="238">--target=x86_64-efi</text>
+    <text x="386" y="222">grub-mkconfig</text><text x="386" y="238">-o /boot/grub/grub.cfg</text>
+    <text x="566" y="222">pacstrap … linux</text>
+    <text x="746" y="222">systemctl enable</text>
+  </g>
+  <text x="24" y="260" font-size="12" fill="#52514e">En BIOS/MBR se escribía en el primer sector del disco. En UEFI se copia un fichero .efi y se registra en el firmware.</text>
+</svg>

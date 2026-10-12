@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="432" viewBox="0 0 900 432" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Cómo leer una página del manual</title>
+  <desc id="d">Pantalla de man ls. Arriba, NAME (NOMBRE) dice qué hace el comando en una línea. SYNOPSIS (SINOPSIS) dice cómo se escribe: lo que va entre corchetes es opcional y los tres puntos indican que puedes poner varios. DESCRIPTION (DESCRIPCIÓN) explica cada opción, como -a, --all o -l. La última línea recuerda que se sale con q. Teclas: Espacio página siguiente, b anterior, /texto buscar, n siguiente resultado, q salir.</desc>
+  <rect x="0.5" y="0.5" width="899" height="431" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Cómo leer una página del manual</text>
+  <text x="24" y="62" font-size="14" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">man ls</tspan> abre el manual de ls a pantalla completa. Casi siempre te basta con mirar tres partes.</text>
+
+  <!-- pantalla de man -->
+  <rect x="24" y="78" width="500" height="308" rx="10" fill="#1e2227"/>
+  <rect x="30" y="118" width="4" height="40" rx="2" fill="#2a78d6"/>
+  <rect x="30" y="167" width="4" height="40" rx="2" fill="#eb6834"/>
+  <rect x="30" y="216" width="4" height="130" rx="2" fill="#1baf7a"/>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="13.5" fill="#e6e9ee">
+    <text x="44" y="102">LS(1)</text>
+    <text x="274" y="102" text-anchor="middle">User Commands</text>
+    <text x="508" y="102" text-anchor="end">LS(1)</text>
+    <text x="44" y="134" font-weight="700">NAME</text>
+    <text x="80" y="153">ls - list directory contents</text>
+    <text x="44" y="183" font-weight="700">SYNOPSIS</text>
+    <text x="80" y="202">ls [OPTION]... [FILE]...</text>
+    <text x="44" y="232" font-weight="700">DESCRIPTION</text>
+    <text x="80" y="251">List information about the FILEs (the</text>
+    <text x="80" y="270">current directory by default).</text>
+    <text x="80" y="296" font-weight="700">-a, --all</text>
+    <text x="116" y="315">do not ignore entries starting with .</text>
+    <text x="80" y="341" font-weight="700">-l</text>
+    <text x="116" y="341">use a long listing format</text>
+  </g>
+  <rect x="32" y="356" width="484" height="22" fill="#e6e9ee"/>
+  <text x="38" y="372" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="13" fill="#0b0b0b">Manual page ls(1) line 1 (press h for help or q to quit)</text>
+
+  <!-- explicaciones -->
+  <rect x="548" y="114" width="328" height="46" rx="10" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="562" y="134" font-size="13.5" font-weight="700" fill="#0b0b0b">NAME (NOMBRE)</text>
+  <text x="562" y="151" font-size="12.5" fill="#52514e">Qué hace el comando, en una línea.</text>
+
+  <rect x="548" y="166" width="328" height="64" rx="10" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <text x="562" y="186" font-size="13.5" font-weight="700" fill="#0b0b0b">SYNOPSIS (SINOPSIS)</text>
+  <text x="562" y="203" font-size="12.5" fill="#52514e">Cómo se escribe la orden.</text>
+  <text x="562" y="220" font-size="12.5" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">[ ]</tspan> = opcional · <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">...</tspan> = puedes poner varios</text>
+
+  <rect x="548" y="236" width="328" height="80" rx="10" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+  <text x="562" y="256" font-size="13.5" font-weight="700" fill="#0b0b0b">DESCRIPTION (DESCRIPCIÓN)</text>
+  <text x="562" y="273" font-size="12.5" fill="#52514e">Qué hace cada opción. No la leas entera:</text>
+  <text x="562" y="290" font-size="12.5" fill="#52514e">busca la que necesitas con <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">/</tspan>, por ejemplo</text>
+  <text x="562" y="307" font-size="12.5" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">/--all</tspan> y <tspan font-weight="700" fill="#0b0b0b">Enter</tspan></text>
+
+  <rect x="548" y="350" width="328" height="34" rx="10" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+  <text x="562" y="372" font-size="12.5" fill="#52514e">La última línea te lo recuerda: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">q</tspan> para salir.</text>
+
+  <g stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="3 3">
+    <line x1="536" y1="137" x2="546" y2="137"/>
+    <line x1="536" y1="198" x2="546" y2="198"/>
+    <line x1="536" y1="276" x2="546" y2="276"/>
+    <line x1="526" y1="367" x2="546" y2="367"/>
+  </g>
+
+  <text x="24" y="414" font-size="13" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">Espacio</tspan> página siguiente · <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">b</tspan> anterior · <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">/texto</tspan> buscar · <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">n</tspan> siguiente resultado · <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">q</tspan> salir. Si el manual sale en inglés, las opciones son las mismas.</text>
+</svg>

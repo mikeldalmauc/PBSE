@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Windows tiene una letra por disco; Linux tiene un solo árbol</title>
+  <desc id="d">A la izquierda, Windows: cada disco es un árbol aparte con su letra, C:, D: y E: para el pendrive. A la derecha, Linux: un solo árbol que empieza en la raíz /, con bin, etc, home, media, tmp, usr y var. Tu carpeta personal es /home/alumno y el pendrive aparece como una carpeta más en /media/alumno/PENDRIVE.</desc>
+  <rect x="0.5" y="0.5" width="899" height="399" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Windows: una letra por disco. Linux: un solo árbol</text>
+
+  <!-- Windows -->
+  <rect x="24" y="56" width="330" height="300" rx="12" fill="#ffffff" stroke="#e2e5e9"/>
+  <text x="40" y="84" font-size="16" font-weight="700" fill="#0b0b0b">Windows</text>
+  <text x="40" y="104" font-size="12.5" fill="#52514e">Cada disco es un árbol aparte, con su letra.</text>
+  <g font-size="12" fill="#52514e" text-anchor="middle">
+    <text x="90" y="136">disco 1</text>
+    <text x="190" y="136">disco 2</text>
+    <text x="290" y="136">pendrive</text>
+  </g>
+  <g stroke="#8a8f98" stroke-width="2" fill="none">
+    <path d="M70 178 V 236 M70 208 H 82 M70 236 H 82"/>
+    <path d="M170 178 V 208 H 182"/>
+    <path d="M270 178 V 208 H 282"/>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">
+    <rect x="54" y="144" width="72" height="34" rx="8" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="90" y="167">C:\</text>
+    <rect x="154" y="144" width="72" height="34" rx="8" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="190" y="167">D:\</text>
+    <rect x="254" y="144" width="72" height="34" rx="8" fill="#fbe3ec" stroke="#e87ba4" stroke-width="2"/>
+    <text x="290" y="167">E:\</text>
+  </g>
+  <g font-size="14" fill="#0b0b0b">
+    <text x="86" y="213">Users</text>
+    <text x="86" y="241">Windows</text>
+    <text x="186" y="213">Datos</text>
+    <text x="286" y="213">fotos</text>
+  </g>
+  <text x="40" y="290" font-size="12.5" fill="#52514e">Conectas un pendrive y aparece</text>
+  <text x="40" y="308" font-size="12.5" fill="#52514e">una letra nueva.</text>
+
+  <!-- Linux -->
+  <rect x="370" y="56" width="506" height="300" rx="12" fill="#ffffff" stroke="#e2e5e9"/>
+  <text x="386" y="84" font-size="16" font-weight="700" fill="#0b0b0b">Linux</text>
+  <text x="386" y="104" font-size="12.5" fill="#52514e">Todo cuelga de <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">/</tspan> (la raíz), también lo que conectas.</text>
+
+  <g stroke="#8a8f98" stroke-width="2" fill="none">
+    <path d="M408 152 V 329"/>
+    <path d="M408 173 H 424 M408 199 H 424 M408 225 H 424 M408 251 H 424 M408 277 H 424 M408 303 H 424 M408 329 H 424"/>
+    <path d="M474 225 H 504"/>
+    <path d="M484 251 H 504 M588 251 H 604"/>
+  </g>
+  <rect x="386" y="120" width="44" height="32" rx="8" fill="#1e2227"/>
+  <text x="408" y="143" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="20" font-weight="700" text-anchor="middle" fill="#e6e9ee">/</text>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="15" fill="#0b0b0b">
+    <text x="430" y="178">bin</text>
+    <text x="430" y="204">etc</text>
+    <text x="430" y="230">home</text>
+    <text x="430" y="256">media</text>
+    <text x="430" y="282">tmp</text>
+    <text x="430" y="308">usr</text>
+    <text x="430" y="334">var</text>
+  </g>
+  <g font-size="12.5" fill="#52514e">
+    <text x="500" y="178">programas (en Mint, un atajo a /usr/bin)</text>
+    <text x="500" y="204">configuración del sistema</text>
+    <text x="500" y="282">temporales</text>
+    <text x="500" y="308">programas instalados</text>
+    <text x="500" y="334">datos que cambian, como los registros</text>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="14" font-weight="700" fill="#0b0b0b" text-anchor="middle">
+    <rect x="504" y="213" width="84" height="24" rx="7" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="546" y="230">alumno</text>
+    <rect x="504" y="239" width="84" height="24" rx="7" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="546" y="256">alumno</text>
+    <rect x="604" y="239" width="100" height="24" rx="7" fill="#fbe3ec" stroke="#e87ba4" stroke-width="2"/>
+    <text x="654" y="256">PENDRIVE</text>
+  </g>
+  <text x="600" y="230" font-size="12.5" fill="#52514e">tu carpeta personal ( <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">~</tspan> )</text>
+  <text x="716" y="250" font-size="12.5" fill="#52514e">tu pendrive, como</text>
+  <text x="716" y="266" font-size="12.5" fill="#52514e">una carpeta más</text>
+
+  <text x="24" y="384" font-size="13" fill="#52514e">El mismo pendrive: en Windows es <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">E:\</tspan> y en Linux Mint es la carpeta <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">/media/alumno/PENDRIVE</tspan> (con el nombre que tenga tu pendrive).</text>
+</svg>

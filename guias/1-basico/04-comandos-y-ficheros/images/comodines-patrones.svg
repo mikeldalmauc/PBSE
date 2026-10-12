@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="412" viewBox="0 0 900 412" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Qué ficheros coge cada comodín</title>
+  <desc id="d">Carpeta con seis ficheros: cancion1.mp3, cancion2.mp3, cancion12.mp3, portada.png, notas.txt y el oculto .secreto. El patrón * coge todos menos .secreto. *.mp3 coge las tres canciones. cancion?.mp3 coge cancion1.mp3 y cancion2.mp3, pero no cancion12.mp3. cancion1* coge cancion1.mp3 y cancion12.mp3. [pn]* coge portada.png y notas.txt. Los ocultos sólo entran si el patrón empieza por punto. Antes de borrar, prueba el patrón con echo.</desc>
+  <rect x="0.5" y="0.5" width="899" height="411" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">¿Qué ficheros coge cada comodín?</text>
+  <text x="24" y="62" font-size="14" fill="#52514e">En la carpeta hay estos seis ficheros. Un círculo de color significa que el patrón lo elige.</text>
+
+  <rect x="228" y="78" width="648" height="34" rx="6" fill="#eef0f3"/>
+  <text x="24" y="100" font-size="13" font-weight="700" fill="#52514e">Patrón</text>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="13.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">
+    <text x="282" y="100">cancion1.mp3</text>
+    <text x="390" y="100">cancion2.mp3</text>
+    <text x="498" y="100">cancion12.mp3</text>
+    <text x="606" y="100">portada.png</text>
+    <text x="714" y="100">notas.txt</text>
+    <text x="822" y="100" fill="#52514e">.secreto</text>
+  </g>
+
+  <text x="24" y="137" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="17" font-weight="700" fill="#0b0b0b">*</text>
+  <text x="24" y="154" font-size="12" fill="#52514e">cualquier cosa, sin los ocultos</text>
+  <circle cx="282" cy="139" r="11" fill="#2a78d6"/><path d="M277 139 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="390" cy="139" r="11" fill="#2a78d6"/><path d="M385 139 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="498" cy="139" r="11" fill="#2a78d6"/><path d="M493 139 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="606" cy="139" r="11" fill="#2a78d6"/><path d="M601 139 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="714" cy="139" r="11" fill="#2a78d6"/><path d="M709 139 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="822" cy="139" r="4" fill="#e2e5e9"/>
+  <line x1="24" y1="162" x2="876" y2="162" stroke="#e2e5e9"/>
+
+  <text x="24" y="183" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="17" font-weight="700" fill="#0b0b0b">*.mp3</text>
+  <text x="24" y="200" font-size="12" fill="#52514e">todo lo que acaba en .mp3</text>
+  <circle cx="282" cy="185" r="11" fill="#eb6834"/><path d="M277 185 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="390" cy="185" r="11" fill="#eb6834"/><path d="M385 185 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="498" cy="185" r="11" fill="#eb6834"/><path d="M493 185 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="606" cy="185" r="4" fill="#e2e5e9"/>
+  <circle cx="714" cy="185" r="4" fill="#e2e5e9"/>
+  <circle cx="822" cy="185" r="4" fill="#e2e5e9"/>
+  <line x1="24" y1="208" x2="876" y2="208" stroke="#e2e5e9"/>
+
+  <text x="24" y="229" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="17" font-weight="700" fill="#0b0b0b">cancion?.mp3</text>
+  <text x="24" y="246" font-size="12" fill="#52514e">? = un carácter, ni más ni menos</text>
+  <circle cx="282" cy="231" r="11" fill="#1baf7a"/><path d="M277 231 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="390" cy="231" r="11" fill="#1baf7a"/><path d="M385 231 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="498" cy="231" r="4" fill="#e2e5e9"/>
+  <circle cx="606" cy="231" r="4" fill="#e2e5e9"/>
+  <circle cx="714" cy="231" r="4" fill="#e2e5e9"/>
+  <circle cx="822" cy="231" r="4" fill="#e2e5e9"/>
+  <line x1="24" y1="254" x2="876" y2="254" stroke="#e2e5e9"/>
+
+  <text x="24" y="275" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="17" font-weight="700" fill="#0b0b0b">cancion1*</text>
+  <text x="24" y="292" font-size="12" fill="#52514e">cancion1 y luego lo que sea</text>
+  <circle cx="282" cy="277" r="11" fill="#eda100"/><path d="M277 277 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="390" cy="277" r="4" fill="#e2e5e9"/>
+  <circle cx="498" cy="277" r="11" fill="#eda100"/><path d="M493 277 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="606" cy="277" r="4" fill="#e2e5e9"/>
+  <circle cx="714" cy="277" r="4" fill="#e2e5e9"/>
+  <circle cx="822" cy="277" r="4" fill="#e2e5e9"/>
+  <line x1="24" y1="300" x2="876" y2="300" stroke="#e2e5e9"/>
+
+  <text x="24" y="321" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="17" font-weight="700" fill="#0b0b0b">[pn]*</text>
+  <text x="24" y="338" font-size="12" fill="#52514e">[pn] = una p o una n</text>
+  <circle cx="282" cy="323" r="4" fill="#e2e5e9"/>
+  <circle cx="390" cy="323" r="4" fill="#e2e5e9"/>
+  <circle cx="498" cy="323" r="4" fill="#e2e5e9"/>
+  <circle cx="606" cy="323" r="11" fill="#e87ba4"/><path d="M601 323 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="714" cy="323" r="11" fill="#e87ba4"/><path d="M709 323 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="822" cy="323" r="4" fill="#e2e5e9"/>
+  <line x1="24" y1="346" x2="876" y2="346" stroke="#e2e5e9"/>
+
+  <text x="24" y="372" font-size="13" fill="#52514e">Los ocultos (<tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">.secreto</tspan>) sólo entran si el patrón empieza por punto: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">.s*</tspan> sí lo coge.</text>
+  <text x="24" y="394" font-size="13" fill="#52514e">Antes de borrar, prueba con echo: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">echo *.mp3</tspan> te dice exactamente qué cogería <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">rm *.mp3</tspan>.</text>
+</svg>

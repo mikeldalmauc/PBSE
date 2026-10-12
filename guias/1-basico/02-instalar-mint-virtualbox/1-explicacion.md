@@ -535,7 +535,7 @@ groups          # 'vboxsf' debe aparecer en la lista
 
 > **Si te da «Permiso denegado»** es casi siempre porque no has reiniciado la sesión después de
 > añadirte al grupo. `groups` te lo dice: si no ves `vboxsf`, tu sesión es anterior al cambio.
-> Esta relación entre usuario, grupo y permiso la trabajaremos a fondo en la [guía de permisos](../../2-intermedio/09-permisos/1-explicacion.md).
+> Esta relación entre usuario, grupo y permiso la trabajaremos a fondo en la [guía de permisos](../../2-intermedio/09-permisos/1-guia.md).
 
 ## Problemas frecuentes
 

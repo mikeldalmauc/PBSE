@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="290" viewBox="0 0 900 290" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Las cuatro particiones del disco de Arch</title>
+  <desc id="d">Disco /dev/sda de 20 GB con tabla GPT: sda1 de 512 MB tipo EFI System en FAT32 montada en /boot/efi; sda2 de 10 GB en ext4 montada en /; sda3 de 2 GB de swap; sda4 con el resto, unos 7,5 GB, en ext4 montada en /home.</desc>
+  <rect x="0.5" y="0.5" width="899" height="289" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El disco de Arch: <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace">/dev/sda</tspan>, 20 GB, tabla GPT</text>
+  <text x="24" y="60" font-size="13" fill="#52514e">Las mismas cuatro particiones que en Linux Mint, para que puedas comparar (dibujo no a escala)</text>
+
+  <g stroke-width="2">
+    <rect x="150" y="78" width="90" height="70" fill="#fbe3ec" stroke="#e87ba4"/>
+    <rect x="242" y="78" width="290" height="70" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="534" y="78" width="100" height="70" fill="#fdefcc" stroke="#eda100"/>
+    <rect x="636" y="78" width="224" height="70" fill="#d3f2e6" stroke="#1baf7a"/>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="195" y="106">sda1</text><text x="387" y="106">sda2</text><text x="584" y="106">sda3</text><text x="748" y="106">sda4</text>
+  </g>
+  <g font-size="13" text-anchor="middle" fill="#0b0b0b">
+    <text x="195" y="128">512 MB</text><text x="387" y="128">10 GB</text><text x="584" y="128">2 GB</text><text x="748" y="128">el resto (~7,5 GB)</text>
+  </g>
+  <text x="24" y="118" font-size="12" font-weight="700" letter-spacing="1" fill="#52514e">PARTICIÓN</text>
+
+  <line x1="24" y1="166" x2="876" y2="166" stroke="#e2e5e9"/>
+  <g font-size="12" font-weight="700" letter-spacing="1" fill="#52514e">
+    <text x="24" y="198">TIPO (GPT)</text><text x="24" y="234">FORMATO</text><text x="24" y="270">SE MONTA EN</text>
+  </g>
+  <g font-size="13" text-anchor="middle" fill="#0b0b0b">
+    <text x="195" y="198">EFI System</text><text x="387" y="198">Linux filesystem</text><text x="584" y="198">Linux swap</text><text x="748" y="198">Linux filesystem</text>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="13" text-anchor="middle" fill="#0b0b0b">
+    <text x="195" y="234">FAT32</text><text x="387" y="234">ext4</text><text x="584" y="234">swap</text><text x="748" y="234">ext4</text>
+    <text x="195" y="270" font-weight="700">/boot/efi</text><text x="387" y="270" font-weight="700">/</text><text x="584" y="270" fill="#52514e">(no se monta)</text><text x="748" y="270" font-weight="700">/home</text>
+  </g>
+</svg>

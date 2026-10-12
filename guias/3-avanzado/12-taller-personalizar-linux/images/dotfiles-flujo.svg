@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="290" viewBox="0 0 900 290" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Hacer reproducible tu escritorio</title>
+  <desc id="d">Desde tu máquina configurada copias la configuración a una carpeta dotfiles con config, scripts, la lista de paquetes e instalar.sh, y la guardas con git. En una máquina limpia ejecutas instalar.sh y en menos de diez minutos queda igual que la tuya.</desc>
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="899" height="289" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Nivel 6: tu escritorio, en una carpeta</text>
+
+  <!-- máquina A -->
+  <rect x="24" y="70" width="180" height="120" rx="10" fill="#1e2227"/>
+  <rect x="34" y="80" width="160" height="10" fill="#2a78d6"/>
+  <rect x="44" y="100" width="90" height="56" rx="3" fill="#cde2fb"/>
+  <rect x="140" y="100" width="44" height="56" rx="3" fill="#fde4d8"/>
+  <rect x="44" y="164" width="140" height="16" rx="3" fill="#d3f2e6"/>
+  <text x="114" y="214" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">Tu máquina</text>
+  <text x="114" y="232" font-size="12" text-anchor="middle" fill="#52514e">ya configurada</text>
+
+  <path d="M208 130 H 282" stroke="#52514e" stroke-width="2" fill="none" marker-end="url(#flecha)"/>
+  <text x="245" y="120" font-size="12" font-family="Consolas, 'DejaVu Sans Mono', monospace" text-anchor="middle" fill="#0b0b0b">cp</text>
+
+  <!-- carpeta dotfiles -->
+  <path d="M288 74 h70 l14 14 h182 v150 h-266 z" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <text x="302" y="108" font-size="15" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">~/dotfiles/</text>
+  <g font-size="13" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="312" y="134">config/</text><text x="312" y="154">scripts/</text><text x="312" y="174">paquetes-*.txt</text>
+    <text x="312" y="194" font-weight="700">instalar.sh</text><text x="312" y="214">README.md</text>
+  </g>
+  <g font-size="11.5" fill="#52514e">
+    <text x="440" y="134">ajustes</text><text x="440" y="154">tus scripts</text><text x="440" y="174">qué instalar</text><text x="440" y="194">lo hace todo</text><text x="440" y="214">cómo usarlo</text>
+  </g>
+
+  <path d="M558 156 H 632" stroke="#52514e" stroke-width="2" fill="none" marker-end="url(#flecha)"/>
+  <text x="595" y="146" font-size="12" font-family="Consolas, 'DejaVu Sans Mono', monospace" text-anchor="middle" fill="#0b0b0b">git</text>
+  <text x="595" y="176" font-size="11.5" text-anchor="middle" fill="#52514e">o un pincho</text>
+
+  <!-- máquina limpia -->
+  <rect x="638" y="70" width="110" height="80" rx="8" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+  <text x="693" y="106" font-size="12" text-anchor="middle" fill="#52514e">máquina</text><text x="693" y="122" font-size="12" text-anchor="middle" fill="#52514e">limpia</text>
+  <path d="M752 110 H 776" stroke="#52514e" stroke-width="2" fill="none" marker-end="url(#flecha)"/>
+  <rect x="780" y="70" width="96" height="80" rx="8" fill="#1e2227"/>
+  <rect x="788" y="78" width="80" height="7" fill="#2a78d6"/><rect x="794" y="92" width="46" height="34" rx="2" fill="#cde2fb"/><rect x="844" y="92" width="22" height="34" rx="2" fill="#fde4d8"/><rect x="794" y="132" width="72" height="10" rx="2" fill="#d3f2e6"/>
+  <rect x="638" y="172" width="238" height="34" rx="8" fill="#1e2227"/>
+  <text x="652" y="194" font-size="14" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#ffffff">./instalar.sh</text>
+  <text x="757" y="232" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">¡Igual que la tuya!</text>
+  <text x="757" y="250" font-size="12" text-anchor="middle" fill="#52514e">en menos de 10 minutos</text>
+
+  <text x="24" y="276" font-size="12.5" fill="#52514e">Es lo que hace un técnico que prepara veinte puestos iguales: configura uno, lo captura y automatiza el resto.</text>
+</svg>

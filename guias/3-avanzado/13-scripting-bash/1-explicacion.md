@@ -84,7 +84,7 @@ bash hola.sh      # 1) el intérprete lee el fichero. No hace falta permiso de e
 source hola.sh    # 3) se ejecuta en el shell ACTUAL
 ```
 
-Para la forma 2 hay que dar permiso de ejecución ([guía de permisos](../../2-intermedio/09-permisos/1-explicacion.md)):
+Para la forma 2 hay que dar permiso de ejecución ([guía de permisos](../../2-intermedio/09-permisos/1-guia.md)):
 
 ```bash
 chmod +x hola.sh
@@ -281,7 +281,7 @@ fi
 | `-x ruta` | tengo permiso de **ejecución** |
 | `-s ruta` | existe y no está vacío |
 
-Esto conecta directamente con la [guía de permisos](../../2-intermedio/09-permisos/1-explicacion.md):
+Esto conecta directamente con la [guía de permisos](../../2-intermedio/09-permisos/1-guia.md):
 
 ```bash
 #!/bin/bash

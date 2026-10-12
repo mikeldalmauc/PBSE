@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="330" viewBox="0 0 860 330" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Los permisos en un directorio</title>
+  <desc id="d">Un directorio es como una habitación. r es la ventana: ves los nombres de lo que hay dentro. x es la puerta: puedes entrar y usar lo que hay dentro si sabes su nombre. w es reorganizar: crear, borrar y renombrar dentro, pero sólo si además tienes la puerta, x.</desc>
+  <rect x="0.5" y="0.5" width="859" height="329" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Un directorio es una habitación</text>
+
+  <g stroke-width="2">
+    <rect x="24" y="58" width="260" height="222" rx="12" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="300" y="58" width="260" height="222" rx="12" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="576" y="58" width="260" height="222" rx="12" fill="#d3f2e6" stroke="#1baf7a"/>
+  </g>
+
+  <!-- ventana -->
+  <rect x="114" y="74" width="80" height="70" rx="4" fill="#ffffff" stroke="#2a78d6" stroke-width="3"/>
+  <path d="M154 74 V 144 M114 109 H 194" stroke="#2a78d6" stroke-width="3"/>
+  <!-- puerta -->
+  <rect x="400" y="70" width="60" height="78" rx="4" fill="#ffffff" stroke="#eb6834" stroke-width="3"/>
+  <circle cx="448" cy="112" r="4" fill="#eb6834"/>
+  <!-- reorganizar: cajas con + y - -->
+  <rect x="640" y="94" width="48" height="48" rx="6" fill="#ffffff" stroke="#1baf7a" stroke-width="3"/>
+  <path d="M664 106 V 130 M652 118 H 676" stroke="#1baf7a" stroke-width="3"/>
+  <rect x="704" y="94" width="48" height="48" rx="6" fill="#ffffff" stroke="#1baf7a" stroke-width="3"/>
+  <path d="M716 118 H 740" stroke="#1baf7a" stroke-width="3"/>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="26" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="96">r</text><text x="316" y="96">x</text><text x="592" y="96">w</text>
+  </g>
+  <g font-size="16" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="176">La ventana</text>
+    <text x="316" y="176">La puerta</text>
+    <text x="592" y="176">Reorganizar</text>
+  </g>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="40" y="200">Ves los NOMBRES de lo que</text>
+    <text x="40" y="218">hay dentro (<tspan font-family="Consolas, 'DejaVu Sans Mono', monospace">ls</tspan>)… y nada más.</text>
+    <text x="316" y="200">Puedes ENTRAR (<tspan font-family="Consolas, 'DejaVu Sans Mono', monospace">cd</tspan>) y abrir</text>
+    <text x="316" y="218">un fichero si sabes su nombre.</text>
+    <text x="592" y="200">CREAR, BORRAR y RENOMBRAR</text>
+    <text x="592" y="218">ficheros dentro.</text>
+  </g>
+  <g font-size="12" fill="#52514e">
+    <text x="40" y="250">Sin x: ves los nombres por la</text>
+    <text x="40" y="266">ventana, pero no puedes entrar.</text>
+    <text x="316" y="250">Sin r: entras a oscuras, no ves</text>
+    <text x="316" y="266">la lista, pero si sabes el nombre…</text>
+    <text x="592" y="250">¡Necesita también la x!</text>
+    <text x="592" y="266">Sin puerta no se reorganiza.</text>
+  </g>
+  <text x="24" y="310" font-size="13" fill="#52514e">Para BORRAR un fichero no hace falta permiso sobre el fichero: hace falta w + x en la carpeta que lo contiene.</text>
+</svg>

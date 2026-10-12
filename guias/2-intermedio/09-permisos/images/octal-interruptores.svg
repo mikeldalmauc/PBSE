@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="320" viewBox="0 0 860 320" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">La notación octal como interruptores</title>
+  <desc id="d">Cada permiso es un interruptor con un valor: r vale 4, w vale 2 y x vale 1. Se suman los encendidos de cada grupo. rwx es 4+2+1=7, r-x es 4+0+1=5 y r-- es 4+0+0=4, así que rwxr-xr-- es 754.</desc>
+  <rect x="0.5" y="0.5" width="859" height="319" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Octal: cada permiso es un interruptor que vale 4, 2 o 1</text>
+
+  <!-- paneles -->
+  <rect x="24" y="58" width="268" height="200" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <rect x="304" y="58" width="268" height="200" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <rect x="584" y="58" width="268" height="200" rx="12" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+  <g font-size="15" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="84">propietario (u)</text>
+    <text x="320" y="84">grupo (g)</text>
+    <text x="600" y="84">otros (o)</text>
+  </g>
+
+  <!-- letras -->
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="20" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="74" y="118">r</text><text x="158" y="118">w</text><text x="242" y="118">x</text>
+    <text x="354" y="118">r</text><text x="438" y="118">w</text><text x="522" y="118">x</text>
+    <text x="634" y="118">r</text><text x="718" y="118">w</text><text x="802" y="118">x</text>
+  </g>
+
+  <!-- interruptores: encendido = color + bola a la derecha; apagado = gris + bola a la izquierda -->
+  <g>
+    <rect x="46" y="130" width="56" height="28" rx="14" fill="#2a78d6"/><circle cx="88" cy="144" r="10" fill="#ffffff"/>
+    <rect x="130" y="130" width="56" height="28" rx="14" fill="#2a78d6"/><circle cx="172" cy="144" r="10" fill="#ffffff"/>
+    <rect x="214" y="130" width="56" height="28" rx="14" fill="#2a78d6"/><circle cx="256" cy="144" r="10" fill="#ffffff"/>
+
+    <rect x="326" y="130" width="56" height="28" rx="14" fill="#eb6834"/><circle cx="368" cy="144" r="10" fill="#ffffff"/>
+    <rect x="410" y="130" width="56" height="28" rx="14" fill="#c9ccd1"/><circle cx="424" cy="144" r="10" fill="#ffffff"/>
+    <rect x="494" y="130" width="56" height="28" rx="14" fill="#eb6834"/><circle cx="536" cy="144" r="10" fill="#ffffff"/>
+
+    <rect x="606" y="130" width="56" height="28" rx="14" fill="#1baf7a"/><circle cx="648" cy="144" r="10" fill="#ffffff"/>
+    <rect x="690" y="130" width="56" height="28" rx="14" fill="#c9ccd1"/><circle cx="704" cy="144" r="10" fill="#ffffff"/>
+    <rect x="774" y="130" width="56" height="28" rx="14" fill="#c9ccd1"/><circle cx="788" cy="144" r="10" fill="#ffffff"/>
+  </g>
+
+  <!-- valores -->
+  <g font-size="18" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="74" y="188">4</text><text x="158" y="188">2</text><text x="242" y="188">1</text>
+    <text x="354" y="188">4</text><text x="438" y="188" fill="#8a8f98">0</text><text x="522" y="188">1</text>
+    <text x="634" y="188">4</text><text x="718" y="188" fill="#8a8f98">0</text><text x="802" y="188" fill="#8a8f98">0</text>
+  </g>
+  <g font-size="22" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="158" y="236">4 + 2 + 1 = 7</text>
+    <text x="438" y="236">4 + 0 + 1 = 5</text>
+    <text x="718" y="236">4 + 0 + 0 = 4</text>
+  </g>
+
+  <rect x="230" y="272" width="400" height="36" rx="10" fill="#1e2227"/>
+  <text x="430" y="296" font-size="17" font-weight="700" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#ffffff">rwx r-x r--  →  chmod 754</text>
+</svg>

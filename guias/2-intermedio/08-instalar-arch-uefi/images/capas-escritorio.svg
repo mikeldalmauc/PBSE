@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 860 380" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Las capas de un escritorio Linux</title>
+  <desc id="d">De abajo arriba: el hardware gráfico; el núcleo Linux con sus controladores; el servidor gráfico, Xorg o Wayland; el gestor de inicio de sesión, como LightDM, SDDM o GDM; el entorno de escritorio, como XFCE, KDE Plasma o GNOME; y las aplicaciones.</desc>
+  <rect x="0.5" y="0.5" width="859" height="379" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Un escritorio Linux es una tarta de capas</text>
+  <text x="604" y="64" font-size="12" font-weight="700" letter-spacing="1" fill="#52514e">EJEMPLOS / PAQUETES</text>
+
+  <g stroke-width="2">
+    <rect x="24" y="74" width="560" height="44" rx="8" fill="#d6efd6" stroke="#008300"/>
+    <rect x="24" y="124" width="560" height="44" rx="8" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="24" y="174" width="560" height="44" rx="8" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="24" y="224" width="560" height="44" rx="8" fill="#e4e0f8" stroke="#6250d6"/>
+    <rect x="24" y="274" width="560" height="44" rx="8" fill="#d3f2e6" stroke="#1baf7a"/>
+    <rect x="24" y="324" width="560" height="44" rx="8" fill="#eef0f3" stroke="#8a8f98"/>
+  </g>
+  <g font-size="15" font-weight="700" fill="#0b0b0b">
+    <text x="40" y="101">Aplicaciones</text>
+    <text x="40" y="151">Entorno de escritorio</text>
+    <text x="40" y="201">Gestor de inicio de sesión</text>
+    <text x="40" y="251">Servidor gráfico</text>
+    <text x="40" y="301">Núcleo Linux</text>
+    <text x="40" y="351">Hardware</text>
+  </g>
+  <g font-size="12.5" fill="#52514e">
+    <text x="250" y="101">navegador, terminal, archivos…</text>
+    <text x="250" y="151">panel, menú, ventanas, ajustes</text>
+    <text x="250" y="201">la pantalla de usuario y contraseña</text>
+    <text x="250" y="251">dibuja en pantalla; ratón y teclado</text>
+    <text x="250" y="301">los controladores de vídeo</text>
+    <text x="250" y="351">la tarjeta gráfica (en la MV: VMSVGA)</text>
+  </g>
+  <g font-size="12.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="604" y="101">firefox</text>
+    <text x="604" y="143">xfce4 · plasma-meta</text><text x="604" y="160">gnome · cinnamon · i3-wm</text>
+    <text x="604" y="193">lightdm · sddm · gdm</text><text x="604" y="210" font-family="'Segoe UI', Roboto, sans-serif" fill="#52514e">se activa con systemctl enable</text>
+    <text x="604" y="243">xorg-server (X11)</text><text x="604" y="260" font-family="'Segoe UI', Roboto, sans-serif" fill="#52514e">o Wayland, que trae el escritorio</text>
+    <text x="604" y="293">linux</text><text x="604" y="310">virtualbox-guest-utils</text>
+    <text x="604" y="351" font-family="'Segoe UI', Roboto, sans-serif" fill="#52514e">Configuración de la MV</text>
+  </g>
+</svg>
