@@ -38,7 +38,7 @@ Esto es un extra para quien quiera ir más allá.</p>
 </ul>
 </li>
 </ul>
-<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0"/>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
 <h2 id="antes-de-empezar-qué-es-y-qué-no-es-un-raid-0" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Antes de empezar: qué es y qué no es un RAID 0</h2>
 <p><strong>RAID 0 reparte los datos entre dos discos (<em>striping</em>).</strong> Cada bloque de información se escribe
 alternando entre los dos, así que se leen y se escriben en paralelo.</p>
@@ -67,7 +67,8 @@ alternando entre los dos, así que se leen y se escriben en paralelo.</p>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Se pierde todo</strong>, también lo que estaba en el disco sano</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
 <p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Ojo con la palabra «redundante».</strong> RAID significa <em>Redundant Array of Independent Disks</em>,
 pero <strong>el nivel 0 no tiene ninguna redundancia</strong>. Al contrario: con dos discos en RAID 0 la
@@ -84,7 +85,7 @@ que no puedas volver a crear, y <strong>nunca</strong> sin copias de seguridad a
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
 <p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Contexto en la asignatura.</strong> En el itinerario obligatorio se practica un
 <strong>volumen reflejado (RAID 1) en la máquina de Windows</strong> con simulación de fallo de un disco:
-ahí es donde se trabaja la redundancia de verdad. Esta ampliación practica <strong><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> y el
+ahí es donde se trabaja la redundancia de verdad. Esta ampliación practica <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> y el
 arranque desde un array</strong>, que es lo que la hace interesante técnicamente. En el entregable
 hay que dejar clara esta diferencia.</p>
 </div>
@@ -99,7 +100,7 @@ hay que dejar clara esta diferencia.</p>
 <tbody>
 <tr>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Nombre</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Arch-RAID0</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Arch-RAID0</code></td>
 </tr>
 <tr>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Memoria base</td>
@@ -122,11 +123,12 @@ hay que dejar clara esta diferencia.</p>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">NAT</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <p>Para añadir el segundo disco: máquina apagada → <strong>Configuración → Almacenamiento</strong> →
 controlador SATA → icono de añadir disco duro → <strong>Crear</strong> → 12 GB.</p>
 <p><strong>Esquema que vamos a montar:</strong></p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">  Disco 1 (sda)              Disco 2 (sdb)
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">  Disco 1 (sda)              Disco 2 (sdb)
   ┌──────────────┐           ┌──────────────┐
   │ sda1  512 MB │  EFI      │ sdb1  512 MB │  EFI (copia)
   ├──────────────┤           ├──────────────┤
@@ -144,25 +146,25 @@ controlador SATA → icono de añadir disco duro → <strong>Crear</strong> → 
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
 <p style="margin:.45em 0">❗ <strong style="color:#b45309">La partición EFI no entra en el RAID.</strong> El firmware UEFI lee la partición EFI <strong>antes</strong> de
-que exista ningún sistema operativo, así que no sabe nada de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> ni de arrays. Tiene que
-ser una partición FAT32 normal y corriente. Por eso <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sda1</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sdb1</code> quedan fuera.</p>
+que exista ningún sistema operativo, así que no sabe nada de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> ni de arrays. Tiene que
+ser una partición FAT32 normal y corriente. Por eso <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sda1</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sdb1</code> quedan fuera.</p>
 </div>
 <h2 id="2-arranque-y-comprobaciones" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">2. Arranque y comprobaciones</h2>
 <p>Arranca desde la ISO de Arch y:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">loadkeys es
-setfont ter-132b                              <span style="color: #75715e"># opcional, letra más grande</span>
-cat /sys/firmware/efi/fw_platform_size        <span style="color: #75715e"># debe responder 64</span>
-timedatectl set-ntp <span style="color: #f8f8f2">true</span>
-ping -c <span style="color: #ae81ff">3</span> archlinux.org
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">loadkeys es
+setfont ter-132b                              <span style="color:#8f8a75"># opcional, letra más grande</span>
+<span style="color:#66d9ef">cat</span> /sys/firmware/efi/fw_platform_size        <span style="color:#8f8a75"># debe responder 64</span>
+timedatectl set-ntp <span style="color:#ae81ff">true</span>
+ping -c 3 archlinux.org
 lsblk
 </code></pre>
-<p>Debes ver <strong>dos</strong> discos de 12 GB: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sda</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sdb</code>.</p>
+<p>Debes ver <strong>dos</strong> discos de 12 GB: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sda</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sdb</code>.</p>
 <h2 id="3-particionar-los-dos-discos" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">3. Particionar los dos discos</h2>
-<p>Usamos <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sgdisk</code>, que permite particionar desde la línea de comandos sin menús — útil porque hay
+<p>Usamos <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sgdisk</code>, que permite particionar desde la línea de comandos sin menús — útil porque hay
 que hacer exactamente lo mismo en los dos discos.</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sgdisk -n <span style="color: #ae81ff">1</span>:0:+512M -t <span style="color: #ae81ff">1</span>:ef00 -c <span style="color: #ae81ff">1</span>:<span style="color: #e6db74">"EFI System"</span>  /dev/sda
-sgdisk -n <span style="color: #ae81ff">2</span>:0:+9G   -t <span style="color: #ae81ff">2</span>:fd00 -c <span style="color: #ae81ff">2</span>:<span style="color: #e6db74">"Linux RAID"</span>  /dev/sda
-sgdisk -n <span style="color: #ae81ff">3</span>:0:0     -t <span style="color: #ae81ff">3</span>:fd00 -c <span style="color: #ae81ff">3</span>:<span style="color: #e6db74">"Linux RAID"</span>  /dev/sda
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">sgdisk -n 1:0:+512M -t 1:ef00 -c 1:<span style="color:#e6db74">&quot;EFI System&quot;</span>  /dev/sda
+sgdisk -n 2:0:+9G   -t 2:fd00 -c 2:<span style="color:#e6db74">&quot;Linux RAID&quot;</span>  /dev/sda
+sgdisk -n 3:0:0     -t 3:fd00 -c 3:<span style="color:#e6db74">&quot;Linux RAID&quot;</span>  /dev/sda
 </code></pre>
 <div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
 <thead>
@@ -173,29 +175,30 @@ sgdisk -n <span style="color: #ae81ff">3</span>:0:0     -t <span style="color: #
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-n 2:0:+9G</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-n 2:0:+9G</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Nueva partición nº 2, desde el primer hueco libre, de 9 GB</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-t 2:fd00</code></td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Tipo <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fd00</code> = <em>Linux RAID</em></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-t 2:fd00</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Tipo <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fd00</code> = <em>Linux RAID</em></td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-t 1:ef00</code></td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Tipo <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ef00</code> = <em>EFI System</em></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-t 1:ef00</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Tipo <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ef00</code> = <em>EFI System</em></td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-n 3:0:0</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-n 3:0:0</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Desde el primer hueco hasta el final del disco</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-c n:"..."</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-c n:&quot;...&quot;</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Nombre descriptivo de la partición</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <p><strong>Copiar exactamente la misma tabla al segundo disco:</strong></p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sgdisk /dev/sda -R /dev/sdb -G
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">sgdisk /dev/sda -R /dev/sdb -G
 </code></pre>
 <div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
 <thead>
@@ -206,33 +209,34 @@ sgdisk -n <span style="color: #ae81ff">3</span>:0:0     -t <span style="color: #
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-R /dev/sdb</code></td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Replica la tabla de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sda</code> en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sdb</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-R /dev/sdb</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Replica la tabla de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sda</code> en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sdb</code></td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-G</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-G</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Genera <strong>nuevos GUID</strong>. Imprescindible: dos discos con el mismo identificador confunden al sistema</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <p>Comprueba:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">lsblk
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">lsblk
 sgdisk -p /dev/sda
 sgdisk -p /dev/sdb
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
-<p style="margin:.45em 0">ℹ️ Si te equivocas y quieres empezar de cero: <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sgdisk -Z /dev/sda</code> borra la tabla de particiones.</p>
+<p style="margin:.45em 0">ℹ️ Si te equivocas y quieres empezar de cero: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sgdisk -Z /dev/sda</code> borra la tabla de particiones.</p>
 </div>
 <h2 id="4-crear-los-arrays-con-mdadm" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">4. Crear los arrays con mdadm</h2>
-<p><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> (<em>multiple devices admin</em>) es la herramienta de RAID por software de Linux.</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">pacman -Sy mdadm
+<p><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> (<em>multiple devices admin</em>) es la herramienta de RAID por software de Linux.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">pacman -Sy mdadm
 </code></pre>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mdadm --create --verbose /dev/md0 --level<span style="color: #f92672">=</span><span style="color: #ae81ff">0</span> --raid-devices<span style="color: #f92672">=</span><span style="color: #ae81ff">2</span> /dev/sda2 /dev/sdb2
-mdadm --create --verbose /dev/md1 --level<span style="color: #f92672">=</span><span style="color: #ae81ff">0</span> --raid-devices<span style="color: #f92672">=</span><span style="color: #ae81ff">2</span> /dev/sda3 /dev/sdb3
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">mdadm --create --verbose /dev/md0 --level=0 --raid-devices=2 /dev/sda2 /dev/sdb2
+mdadm --create --verbose /dev/md1 --level=0 --raid-devices=2 /dev/sda3 /dev/sdb3
 </code></pre>
 <p>Forma abreviada, equivalente:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mdadm -Cv /dev/md0 -l0 -n2 /dev/sd<span style="color: #f92672">[</span>a-b<span style="color: #f92672">]</span><span style="color: #ae81ff">2</span>
-mdadm -Cv /dev/md1 -l0 -n2 /dev/sd<span style="color: #f92672">[</span>a-b<span style="color: #f92672">]</span><span style="color: #ae81ff">3</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">mdadm -Cv /dev/md0 -l0 -n2 /dev/sd[a-b]2
+mdadm -Cv /dev/md1 -l0 -n2 /dev/sd[a-b]3
 </code></pre>
 <div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
 <thead>
@@ -243,141 +247,142 @@ mdadm -Cv /dev/md1 -l0 -n2 /dev/sd<span style="color: #f92672">[</span>a-b<span 
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--create /dev/md0</code></td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Crear el dispositivo virtual <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">md0</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--create /dev/md0</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Crear el dispositivo virtual <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">md0</code></td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--level=0</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--level=0</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Nivel RAID 0</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--raid-devices=2</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--raid-devices=2</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Con dos discos</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/sd[a-b]2</code></td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Comodín que se expande a <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/sda2 /dev/sdb2</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/sd[a-b]2</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Comodín que se expande a <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/sda2 /dev/sdb2</code></td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <p>Comprueba:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">lsblk
-cat /proc/mdstat
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">lsblk
+<span style="color:#66d9ef">cat</span> /proc/mdstat
 mdadm --detail /dev/md0
 </code></pre>
-<p><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/proc/mdstat</code> es el estado en vivo de todos los arrays. <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">md0</code> debe aparecer como <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">active raid0</code>
+<p><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/proc/mdstat</code> es el estado en vivo de todos los arrays. <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">md0</code> debe aparecer como <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">active raid0</code>
 con unos 18 GB.</p>
 <h2 id="5-formatear-y-montar" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">5. Formatear y montar</h2>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
 <p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Simplificación respecto a la guía del curso anterior.</strong> Aquella creaba una tabla de
-particiones <strong>dentro</strong> de cada array (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md0p1</code>). No hace falta y complica el <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fstab</code> y el
+particiones <strong>dentro</strong> de cada array (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md0p1</code>). No hace falta y complica el <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fstab</code> y el
 arranque: el array ya es un dispositivo de bloques y se puede formatear directamente. Aquí
-formateamos <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md0</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md1</code> sin particionarlos.</p>
+formateamos <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md0</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md1</code> sin particionarlos.</p>
 </div>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mkfs.ext4 /dev/md0            <span style="color: #75715e"># raíz, sobre el array de 18 GB</span>
-mkswap    /dev/md1            <span style="color: #75715e"># swap, sobre el array de ~5 GB</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">mkfs.ext4 /dev/md0            <span style="color:#8f8a75"># raíz, sobre el array de 18 GB</span>
+mkswap    /dev/md1            <span style="color:#8f8a75"># swap, sobre el array de ~5 GB</span>
 swapon    /dev/md1
-mkfs.fat -F32 /dev/sda1       <span style="color: #75715e"># EFI: partición normal, fuera del RAID</span>
+mkfs.fat -F32 /dev/sda1       <span style="color:#8f8a75"># EFI: partición normal, fuera del RAID</span>
 </code></pre>
 <p>Montaje, <strong>primero la raíz</strong>:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mount /dev/md0 /mnt
-mkdir -p /mnt/boot/efi
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">mount /dev/md0 /mnt
+<span style="color:#66d9ef">mkdir</span> -p /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
 </code></pre>
 <p>Comprobación:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">lsblk -f
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">lsblk -f
 findmnt /mnt
 </code></pre>
 <h2 id="6-sistema-base-fstab-y-mdadmconf" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">6. Sistema base, fstab y mdadm.conf</h2>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">pacstrap -K /mnt base linux linux-firmware <span style="color: #ae81ff">\</span>
-  mdadm networkmanager grub efibootmgr <span style="color: #ae81ff">\</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">pacstrap -K /mnt base linux linux-firmware \
+  mdadm networkmanager grub efibootmgr \
   sudo nano vim base-devel man-db
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
-<p style="margin:.45em 0">ℹ️ <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> tiene que estar instalado <strong>dentro</strong> del sistema nuevo, no sólo en el instalador. Si se
+<p style="margin:.45em 0">ℹ️ <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> tiene que estar instalado <strong>dentro</strong> del sistema nuevo, no sólo en el instalador. Si se
 te olvida, el sistema no podrá ensamblar el array al arrancar.</p>
 </div>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
-cat /mnt/etc/fstab
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+<span style="color:#66d9ef">cat</span> /mnt/etc/fstab
 </code></pre>
 <p><strong>Guardar la configuración del array:</strong></p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mdadm --detail --scan &gt;&gt; /mnt/etc/mdadm.conf
-cat /mnt/etc/mdadm.conf
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">mdadm --detail --scan &gt;&gt; /mnt/etc/mdadm.conf
+<span style="color:#66d9ef">cat</span> /mnt/etc/mdadm.conf
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
-<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Corrección respecto a la guía del curso anterior.</strong> Allí escribía en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/mnt/etc/mdadm-conf</code>,
-con guion. El fichero que Linux lee se llama <strong><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm.conf</code></strong>, con punto. Con el nombre mal, el
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Corrección respecto a la guía del curso anterior.</strong> Allí escribía en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/mnt/etc/mdadm-conf</code>,
+con guion. El fichero que Linux lee se llama <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm.conf</code></strong>, con punto. Con el nombre mal, el
 array puede montarse igualmente por autodetección… o no, y el sistema no arranca sin que se
 entienda por qué. Comprueba el nombre.</p>
 </div>
-<p>El fichero debe contener una línea <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ARRAY</code> por cada array, con su UUID:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">ARRAY /dev/md0 metadata=1.2 name=archiso:0 UUID=xxxxxxxx:xxxxxxxx:xxxxxxxx:xxxxxxxx
+<p>El fichero debe contener una línea <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ARRAY</code> por cada array, con su UUID:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">ARRAY /dev/md0 metadata=1.2 name=archiso:0 UUID=xxxxxxxx:xxxxxxxx:xxxxxxxx:xxxxxxxx
 ARRAY /dev/md1 metadata=1.2 name=archiso:1 UUID=xxxxxxxx:xxxxxxxx:xxxxxxxx:xxxxxxxx
 </code></pre>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">arch-chroot /mnt
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">arch-chroot /mnt
 </code></pre>
 <h2 id="7-configuración-dentro-del-chroot" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">7. Configuración dentro del chroot</h2>
-<p>Igual que en la <a href="08-instalar-arch-uefi-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de instalación normal</a>, resumido:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+<p>Igual que en la <a href="08-instalar-arch-uefi-1-guia.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de instalación normal</a>, resumido:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">ln</span> -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 hwclock --systohc
 
-nano /etc/locale.gen        <span style="color: #75715e"># descomentar es_ES.UTF-8 y en_US.UTF-8</span>
+nano /etc/locale.gen        <span style="color:#8f8a75"># descomentar es_ES.UTF-8 y en_US.UTF-8</span>
 locale-gen
-<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"LANG=es_ES.UTF-8"</span> &gt; /etc/locale.conf
-<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"KEYMAP=es"</span> &gt; /etc/vconsole.conf
+<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;LANG=es_ES.UTF-8&quot;</span> &gt; /etc/locale.conf
+<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;KEYMAP=es&quot;</span> &gt; /etc/vconsole.conf
 
-<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"arch-raid"</span> &gt; /etc/hostname
+<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;arch-raid&quot;</span> &gt; /etc/hostname
 nano /etc/hosts
 </code></pre>
-<p>Contenido de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/hosts</code>:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">127.0.0.1   localhost
+<p>Contenido de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/hosts</code>:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">127.0.0.1   localhost
 ::1         localhost
 127.0.1.1   arch-raid.localdomain   arch-raid
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
-<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Otra corrección.</strong> La guía anterior usaba tres <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">echo ... &gt; /etc/hosts</code> seguidos. Con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&gt;</code>
-cada línea borra la anterior, así que sólo quedaba la última. Edita el fichero, o usa <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&gt;&gt;</code>.</p>
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Otra corrección.</strong> La guía anterior usaba tres <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">echo ... &gt; /etc/hosts</code> seguidos. Con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&gt;</code>
+cada línea borra la anterior, así que sólo quedaba la última. Edita el fichero, o usa <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&gt;&gt;</code>.</p>
 </div>
 <p>Usuarios:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">passwd
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">passwd
 useradd -m -G wheel -s /bin/bash alumno
 passwd alumno
-<span style="color: #f8f8f2">EDITOR</span><span style="color: #f92672">=</span>nano visudo    <span style="color: #75715e"># descomentar %wheel ALL=(ALL:ALL) ALL</span>
+EDITOR=nano visudo    <span style="color:#8f8a75"># descomentar %wheel ALL=(ALL:ALL) ALL</span>
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
-<p style="margin:.45em 0">ℹ️ Usa <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">visudo</code> y no <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nano /etc/sudoers</code>: valida la sintaxis antes de guardar. Un error en ese
-fichero deja el sistema sin <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo</code> para nadie.</p>
+<p style="margin:.45em 0">ℹ️ Usa <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">visudo</code> y no <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nano /etc/sudoers</code>: valida la sintaxis antes de guardar. Un error en ese
+fichero deja el sistema sin <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo</code> para nadie.</p>
 </div>
 <h2 id="8-mkinitcpio-el-paso-que-no-se-puede-saltar" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">8. mkinitcpio: el paso que no se puede saltar</h2>
 <p><strong>Éste es el paso que diferencia esta instalación de la normal, y donde falla todo el mundo.</strong></p>
 <p>El <em>initramfs</em> es un mini-sistema que se carga antes que el sistema real, y es quien tiene que
 ensamblar el array <strong>antes</strong> de poder montar la raíz. Si no lleva el módulo de RAID, no encuentra
-<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md0</code> y el arranque muere con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Cannot open root device</code>.</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">nano /etc/mkinitcpio.conf
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md0</code> y el arranque muere con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Cannot open root device</code>.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">nano /etc/mkinitcpio.conf
 </code></pre>
-<p>Busca la línea <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">HOOKS=</code> y añade <strong><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm_udev</code></strong> justo después de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">block</code>:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block mdadm_udev filesystems fsck)
+<p>Busca la línea <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">HOOKS=</code> y añade <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm_udev</code></strong> justo después de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">block</code>:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block mdadm_udev filesystems fsck)
 </code></pre>
 <p>Y regenera la imagen:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mkinitcpio -P
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">mkinitcpio -P
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #6b3fa0;background:#f5f0fb;border-radius:0 8px 8px 0">
 <p style="margin:.45em 0">🧩 <strong style="color:#6b3fa0">Analogía.</strong> El initramfs es el conserje que abre el edificio antes de que llegue nadie. Si el
-conserje no tiene la llave del RAID, se queda en la puerta y nadie entra. <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm_udev</code> es esa
+conserje no tiene la llave del RAID, se queda en la puerta y nadie entra. <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm_udev</code> es esa
 llave.</p>
 </div>
-<p>Busca en la salida de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mkinitcpio -P</code> que no haya errores y que se mencione el módulo <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code>.</p>
-<p>Opcionalmente, para recibir avisos de fallo del array, revisa la línea <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">MAILADDR</code> de
-<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/mdadm.conf</code>.</p>
+<p>Busca en la salida de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mkinitcpio -P</code> que no haya errores y que se mencione el módulo <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code>.</p>
+<p>Opcionalmente, para recibir avisos de fallo del array, revisa la línea <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">MAILADDR</code> de
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/mdadm.conf</code>.</p>
 <h2 id="9-grub-en-uefi" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">9. GRUB en UEFI</h2>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">grub-install --target<span style="color: #f92672">=</span>x86_64-efi --efi-directory<span style="color: #f92672">=</span>/boot/efi --bootloader-id<span style="color: #f92672">=</span>GRUB
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
-systemctl <span style="color: #f8f8f2">enable</span> NetworkManager
+systemctl <span style="color:#66d9ef">enable</span> NetworkManager
 </code></pre>
 <h3 id="sobre-duplicar-la-partición-efi-en-el-segundo-disco" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Sobre duplicar la partición EFI en el segundo disco</h3>
 <p>La guía anterior copiaba la partición EFI al segundo disco y la registraba en el firmware:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e"># umount /dev/sda1 ; dd if=/dev/sda1 of=/dev/sdb1</span>
-<span style="color: #75715e"># efibootmgr -c -g -d /dev/sdb -p 1 -L "ArchLinux #2" -l "\EFI\GRUB\grubx64.efi"</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#8f8a75"># umount /dev/sda1 ; dd if=/dev/sda1 of=/dev/sdb1</span>
+<span style="color:#8f8a75"># efibootmgr -c -g -d /dev/sdb -p 1 -L &quot;ArchLinux #2&quot; -l &quot;\EFI\GRUB\grubx64.efi&quot;</span>
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
 <p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">En RAID 0 esto no sirve de nada, y conviene entender por qué.</strong> Duplicar el arranque en el
@@ -385,46 +390,46 @@ segundo disco protege del caso «se rompe el disco 1 pero el sistema sigue estan
 disco 2». Eso ocurre en <strong>RAID 1</strong>. En <strong>RAID 0</strong>, si se rompe el disco 1 la mitad de los datos
 del sistema desaparece: podrías arrancar el GRUB del segundo disco, pero no habría sistema al
 que arrancar. Es como tener una segunda llave de una casa que ya no existe.</p>
-<p style="margin:.45em 0">Además el comando original tenía un error: ponía <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-d /dev/sdb1</code>. El parámetro <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-d</code> espera el
-<strong>disco</strong> (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/sdb</code>) y el número de partición se indica aparte con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-p 1</code>.</p>
-<p style="margin:.45em 0"><strong>Por eso este paso se omite aquí.</strong> Si quieres hacerlo, hazlo como ejercicio de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">efibootmgr</code> y
+<p style="margin:.45em 0">Además el comando original tenía un error: ponía <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-d /dev/sdb1</code>. El parámetro <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-d</code> espera el
+<strong>disco</strong> (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/sdb</code>) y el número de partición se indica aparte con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-p 1</code>.</p>
+<p style="margin:.45em 0"><strong>Por eso este paso se omite aquí.</strong> Si quieres hacerlo, hazlo como ejercicio de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">efibootmgr</code> y
 explica en el entregable por qué no aporta tolerancia a fallos en RAID 0. Esa explicación
 puntúa más que el propio comando.</p>
 </div>
 <p>Salir y reiniciar:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #f8f8f2">exit</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">exit</span>
 umount -R /mnt
 swapoff -a
 reboot
 </code></pre>
 <p>Quita la ISO en cuanto se apague.</p>
 <h2 id="10-primer-arranque-y-verificación-del-array" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">10. Primer arranque y verificación del array</h2>
-<p>Entra como <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">alumno</code> y comprueba:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">cat /proc/mdstat
+<p>Entra como <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">alumno</code> y comprueba:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">cat</span> /proc/mdstat
 </code></pre>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">Personalities : [raid0]
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">Personalities : [raid0]
 md0 : active raid0 sda2[0] sdb2[1]
       18855936 blocks super 1.2 512k chunks
 
 md1 : active raid0 sda3[0] sdb3[1]
       4188160 blocks super 1.2 512k chunks
 </code></pre>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">lsblk
-df -h /
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">lsblk
+<span style="color:#66d9ef">df</span> -h /
 sudo mdadm --detail /dev/md0
 free -h
 findmnt /
 </code></pre>
 <p><strong>Medición de rendimiento</strong> (parte del entregable). Compárala con la máquina de Arch normal:</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S hdparm
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">sudo pacman -S hdparm
 
-<span style="color: #75715e"># Escritura secuencial</span>
-dd <span style="color: #66d9ef">if</span><span style="color: #f92672">=</span>/dev/zero <span style="color: #f8f8f2">of</span><span style="color: #f92672">=</span>/tmp/prueba <span style="color: #f8f8f2">bs</span><span style="color: #f92672">=</span>1M <span style="color: #f8f8f2">count</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1024</span> <span style="color: #f8f8f2">conv</span><span style="color: #f92672">=</span>fdatasync <span style="color: #f8f8f2">status</span><span style="color: #f92672">=</span>progress
+<span style="color:#8f8a75"># Escritura secuencial</span>
+<span style="color:#66d9ef">dd</span> <span style="color:#f92672">if</span>=/dev/zero of=/tmp/prueba bs=1M count=1024 conv=fdatasync status=progress
 
-<span style="color: #75715e"># Lectura</span>
+<span style="color:#8f8a75"># Lectura</span>
 sudo hdparm -Tt /dev/md0
 sudo hdparm -Tt /dev/sda
-rm /tmp/prueba
+<span style="color:#66d9ef">rm</span> /tmp/prueba
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
 <p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Aviso de honestidad experimental.</strong> Los dos discos virtuales están en el <strong>mismo disco
@@ -436,14 +441,14 @@ disco físico no acelera nada; el cuello de botella sigue siendo el mismo cabeza
 <h2 id="11-experimento-qué-pasa-si-falla-un-disco" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">11. Experimento: qué pasa si falla un disco</h2>
 <p>Con una <strong>instantánea hecha antes</strong>, para poder volver:</p>
 <ol>
-<li>Apaga la máquina y crea la instantánea <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">raid-ok</code>.</li>
-<li>En <strong>Configuración → Almacenamiento</strong>, quita el segundo disco (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sdb</code>) sin borrarlo.</li>
+<li>Apaga la máquina y crea la instantánea <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">raid-ok</code>.</li>
+<li>En <strong>Configuración → Almacenamiento</strong>, quita el segundo disco (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sdb</code>) sin borrarlo.</li>
 <li>Arranca.</li>
 </ol>
 <p>Anota <strong>exactamente</strong> lo que ocurre: qué mensaje sale, en qué momento del arranque, si llegas a
 alguna consola de emergencia. Compáralo con lo que ocurriría en un RAID 1.</p>
 <ol start="4">
-<li>Vuelve a añadir el disco y comprueba con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cat /proc/mdstat</code> si el array se recupera solo.</li>
+<li>Vuelve a añadir el disco y comprueba con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cat /proc/mdstat</code> si el array se recupera solo.</li>
 <li>Restaura la instantánea si hace falta.</li>
 </ol>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
@@ -462,47 +467,48 @@ la instalación.</p>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Cannot open root device</code> / cae a la consola de emergencia</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Falta <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm_udev</code> en los HOOKS</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Rescate con chroot, editar <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/mkinitcpio.conf</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mkinitcpio -P</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Cannot open root device</code> / cae a la consola de emergencia</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Falta <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm_udev</code> en los HOOKS</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Rescate con chroot, editar <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/mkinitcpio.conf</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mkinitcpio -P</code></td>
 </tr>
 <tr>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El array no aparece al arrancar</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm.conf</code> mal escrito o <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> no instalado en el sistema</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Comprobar el nombre del fichero y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">pacman -S mdadm</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm.conf</code> mal escrito o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm</code> no instalado en el sistema</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Comprobar el nombre del fichero y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">pacman -S mdadm</code></td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">grub-install</code> falla con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">efivarfs</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">grub-install</code> falla con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">efivarfs</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">La MV no tiene EFI activado</td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Apagar y activar EFI</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm: device or resource busy</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm: device or resource busy</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Restos de un array anterior</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm --stop /dev/md0</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm --zero-superblock /dev/sdX2</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm --stop /dev/md0</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm --zero-superblock /dev/sdX2</code></td>
 </tr>
 <tr>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Los dos discos tienen el mismo GUID</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Se copió la tabla sin <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-G</code></td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sgdisk /dev/sda -R /dev/sdb -G</code> otra vez</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Se copió la tabla sin <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-G</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sgdisk /dev/sda -R /dev/sdb -G</code> otra vez</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md127</code> en lugar de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md0</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md127</code> en lugar de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/dev/md0</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El nombre del array no está fijado</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Es normal si falta <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm.conf</code>; añadirlo y regenerar el initramfs</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Es normal si falta <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mdadm.conf</code>; añadirlo y regenerar el initramfs</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <p><strong>Rescate con chroot</strong> (para arreglar los HOOKS desde la ISO):</p>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">loadkeys es
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">loadkeys es
 mdadm --assemble --scan
 lsblk
 mount /dev/md0 /mnt
 mount /dev/sda1 /mnt/boot/efi
 arch-chroot /mnt
-<span style="color: #75715e"># ... arreglar ...</span>
+<span style="color:#8f8a75"># ... arreglar ...</span>
 mkinitcpio -P
-<span style="color: #f8f8f2">exit</span>
+<span style="color:#66d9ef">exit</span>
 umount -R /mnt
 reboot
 </code></pre>

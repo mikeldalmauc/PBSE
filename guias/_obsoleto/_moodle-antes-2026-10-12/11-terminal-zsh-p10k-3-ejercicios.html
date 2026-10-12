@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ejercicios · Personalización del intérprete de comandos y del entorno de trabajo</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="ejercicios--personalización-del-intérprete-de-comandos-y-del-entorno-de-trabajo" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Ejercicios · Personalización del intérprete de comandos y del entorno de trabajo</h1><div><span style="display:inline-block;background:#b45309;color:#fff;border:1px solid #b45309;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Ejercicios</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 3 · Avanzado</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 11</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM4 (parcialmente)</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 10 h</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H2 (CMD/PowerShell), H4 (terminal Linux y Bash)</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Nota.</strong> Esta página acompaña a la <a href="11-terminal-zsh-p10k-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">explicación del tema</a>. Léela antes de ponerte con los ejercicios.</p>
+</div>
+<h2 id="qué-evaluamos-aquí" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Qué evaluamos aquí</h2>
+<p>No se evalúa que el terminal quede bonito. Se evalúa que sepas responder a esto:</p>
+<ol>
+<li><strong>¿Qué fichero se lee y cuándo?</strong> Si pones un alias en el fichero equivocado, funciona hoy y
+deja de funcionar mañana. Hay que saber por qué.</li>
+<li><strong>¿La configuración persiste?</strong> Tras reiniciar la máquina, ¿sigue ahí?</li>
+<li><strong>¿Afecta a otros usuarios?</strong> La configuración de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">alumno</code> no debe cambiarle nada a <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">root</code>
+ni a otro usuario. Eso es lo que se comprobará.</li>
+<li><strong>¿Sabes explicar lo que has puesto?</strong> Un <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.zshrc</code> copiado de internet que no sabes leer
+vale cero. Cada línea del entregable tiene que llevar un comentario tuyo.</li>
+</ol>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ Trabajamos sobre la <strong>máquina virtual de Arch Linux</strong> de la <a href="08-instalar-arch-uefi-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de instalación de Arch</a>. Si la tienes rota,
+vuelve a tu instantánea <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">02-sistema-base</code>. También funciona todo en Linux Mint cambiando
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">pacman -S</code> por <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">apt install</code>.</p>
+</div>
+<h2 id="entregable" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Entregable</h2>
+<p><strong>Tarea Moodle: «Configuración del intérprete de comandos documentada y justificada»</strong>
+Calificación de 0 a 10 · Se aprueba con 5 · Finalización automática por nota de aprobado.</p>
+<p>Entrega un documento (PDF) con:</p>
+<ol>
+<li><strong>Tabla de ficheros de arranque</strong>: qué fichero se lee en cada situación (consola, terminal del
+escritorio, SSH, script) <strong>comprobado por ti</strong> con la prueba de los <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">echo</code> del apartado 1.
+Incluye la salida que obtuviste en cada caso.</li>
+<li><strong>Tu <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.zshrc</code> completo</strong>, con un comentario propio en cada bloque explicando qué hace y por
+qué lo has puesto. Copiar el de la guía sin adaptarlo baja nota; se valora que quites lo que
+no usas y añadas al menos <strong>tres alias y una función propios</strong> que resuelvan algo que hagas
+de verdad.</li>
+<li><strong>Tu perfil de PowerShell</strong> con al menos tres alias, una función y un prompt personalizado.</li>
+<li><strong>Capturas</strong>: prompt de Powerlevel10k funcionando (con rama de Git visible dentro de un
+repositorio), autocompletado con sugerencia gris, coloreado de sintaxis con un comando
+erróneo en rojo, y el prompt de PowerShell.</li>
+<li><strong>Comprobación de persistencia</strong>: capturas antes y después de reiniciar.</li>
+<li><strong>Comprobación de aislamiento</strong>: la salida de <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">su - prueba</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">echo $SHELL</code> y <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">alias</code>
+demostrando que el otro usuario no hereda tu configuración, más una explicación en tus
+palabras de por qué es así.</li>
+<li><strong>Tabla de equivalencias</strong> Zsh ↔ PowerShell rellenada por ti.</li>
+</ol>
+<p><em>Instrumento de evaluación: lista de cotejo de la configuración y de su persistencia.</em></p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">⚠️ Se preguntará en clase por líneas concretas de tu <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.zshrc</code>. Si no sabes explicar una línea,
+quítala. Un fichero corto que entiendes vale más que uno largo que no.</p>
+</div>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Ejercicios</p></div>
+</body>
+</html>

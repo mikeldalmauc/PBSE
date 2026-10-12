@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USB multiarranque con Ventoy: la navaja suiza del técnico</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="usb-multiarranque-con-ventoy-la-navaja-suiza-del-técnico" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">USB multiarranque con Ventoy: la navaja suiza del técnico</h1><div><span style="display:inline-block;background:#6b3fa0;color:#fff;border:1px solid #6b3fa0;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Guía</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 2 · Intermedio</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 07</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM2 (particiones y sistemas de archivos, en un disco real)</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 5 h (2 sesiones en el aula + descargas)</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> Ventoy 1.1.17, H4 (terminal Linux) y PowerShell para las comprobaciones</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #475569;background:#f1f5f9;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧭 <strong style="color:#475569">Antes de empezar.</strong> Es el paso previo a <a href="08-instalar-arch-uefi-1-guia.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">instalar Arch Linux</a>: ahí
+arrancarás desde una ISO, y aquí aprendes qué pasa entre que pulsas el botón de encendido y
+aparece el instalador.</p>
+</div>
+<p>Imagina que llega a tu mesa un portátil que no arranca. Otro va lentísimo. A un tercero hay que
+instalarle Linux. Un técnico no lleva una caja llena de pinchos: lleva <strong>uno solo</strong> que lo
+arranca todo. Al terminar esta guía tendrás el tuyo.</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">🎯 <strong>Qué vas a conseguir</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Un pendrive que arranca una docena de sistemas y herramientas, elegidos desde un menú</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">🧰 <strong>Qué necesitas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Un pendrive de 64 GB, un PC con Windows y permisos de administrador (<a href="#0-qué-necesitas" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 0</a>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">⏱️ <strong>Tiempo</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">5 horas: 2 sesiones en el aula + las descargas</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">📦 <strong>Qué entregas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">La tarea «Mi navaja suiza USB» y una defensa en el aula (<a href="#parte-4--entrega" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 4</a>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Tu misión, paso a paso:</strong></p>
+<ul>
+<li style="list-style:none;margin-left:-1.2em">☐ Entender cómo arranca un equipo desde un pincho y qué hace Ventoy.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Instalar Ventoy y comprobar las dos particiones que crea.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Descargar y <strong>verificar</strong> las ISO de la navaja.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Organizar el pincho con carpetas y un <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy.json</code>.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Arrancar tres ISO en un equipo real, registrando la clave de Secure Boot si hace falta.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Saber qué herramienta sacar en cada situación.</li>
+</ul>
+<h2 id="índice" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Índice</h2>
+<ul style="background:#f6f7f9;border:1px solid #e2e5e9;border-radius:8px;padding:14px 18px 14px 34px;font-size:.93em">
+<li><a href="#usb-multiarranque-con-ventoy-la-navaja-suiza-del-técnico" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">USB multiarranque con Ventoy: la navaja suiza del técnico</a>
+<ul style="padding-left:18px">
+<li><a href="#índice" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Índice</a></li>
+<li><a href="#parte-1--aprende-y-monta-tu-navaja" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 1 · Aprende y monta tu navaja</a>
+<ul style="padding-left:18px">
+<li><a href="#0-qué-necesitas" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">0. Qué necesitas</a></li>
+<li><a href="#1-cómo-funciona-ventoy-por-dentro" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">1. Cómo funciona Ventoy por dentro</a></li>
+<li><a href="#2-descargar-ventoy" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">2. Descargar Ventoy</a></li>
+<li><a href="#3-instalar-ventoy-en-el-pincho" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">3. Instalar Ventoy en el pincho</a></li>
+<li><a href="#4-las-iso-de-la-navaja" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">4. Las ISO de la navaja</a></li>
+<li><a href="#5-organizar-el-pincho" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">5. Organizar el pincho</a></li>
+<li><a href="#6-arrancar-desde-el-pincho" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6. Arrancar desde el pincho</a></li>
+<li><a href="#7-qué-herramienta-saco-en-cada-situación" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">7. Qué herramienta saco en cada situación</a></li>
+<li><a href="#8-mantener-la-navaja-afilada" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">8. Mantener la navaja afilada</a></li>
+<li><a href="#9-lo-que-despista" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">9. Lo que despista</a></li>
+<li><a href="#10-problemas-frecuentes" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">10. Problemas frecuentes</a></li>
+</ul>
+</li>
+<li><a href="#parte-2--chuleta" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 2 · Chuleta</a></li>
+<li><a href="#parte-3--practica" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 3 · Practica</a></li>
+<li><a href="#parte-4--entrega" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 4 · Entrega</a></li>
+</ul>
+</li>
+</ul>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="parte-1--aprende-y-monta-tu-navaja" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Parte 1 · Aprende y monta tu navaja</h2>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #6b3fa0;background:#f5f0fb;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧩 <strong style="color:#6b3fa0">Analogía.</strong> Con las herramientas clásicas (Rufus, balenaEtcher, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">dd</code>), un pincho es como un
+<strong>DVD</strong>: grabas <strong>una</strong> ISO y el pincho <em>se convierte</em> en ella. Para tener cinco sistemas
+necesitas cinco pinchos.</p>
+<p style="margin:.45em 0">Ventoy convierte el pincho en una <strong>estantería con conserje</strong>. Tú copias los ficheros <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.iso</code> en
+la estantería como copiarías fotos, y al encender el equipo el conserje (el cargador de arranque
+de Ventoy) te enseña la lista y arranca el que elijas. ¿Nueva versión de Ubuntu? Borras la ISO
+vieja y copias la nueva. No se reinstala nada.</p>
+</div>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NjAiIGhlaWdodD0iMzIwIiB2aWV3Qm94PSIwIDAgODYwIDMyMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5QaW5jaG8gY2zDoXNpY28gZnJlbnRlIGEgVmVudG95PC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+Q29uIFJ1ZnVzLCBiYWxlbmFFdGNoZXIgbyBkZCBncmFiYXMgdW5hIElTTyB5IGVsIHBpbmNobyBzZSBjb252aWVydGUgZW4gZWxsYTogcGFyYSB0cmVzIHNpc3RlbWFzIG5lY2VzaXRhcyB0cmVzIHBpbmNob3MuIENvbiBWZW50b3kgY29waWFzIG11Y2hhcyBJU08gZW4gZWwgbWlzbW8gcGluY2hvIHkgYWwgYXJyYW5jYXIgZWxpZ2VzIHVuYSBlbiB1biBtZW7Dui48L2Rlc2M+CiAgPGRlZnM+CiAgICA8bWFya2VyIGlkPSJmbGVjaGEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjgiIG1hcmtlckhlaWdodD0iOCIgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPgogICAgICA8cGF0aCBkPSJNMCAwIEwxMCA1IEwwIDEwIHoiIGZpbGw9IiM1MjUxNGUiLz4KICAgIDwvbWFya2VyPgogIDwvZGVmcz4KICA8cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9Ijg1OSIgaGVpZ2h0PSIzMTkiIHJ4PSIxNCIgZmlsbD0iI2ZjZmNmYiIgc3Ryb2tlPSIjZTJlNWU5Ii8+CiAgPHRleHQgeD0iMjQiIHk9IjM4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj5VbiBwaW5jaG8sIHVuIHNpc3RlbWHigKYgbyB1biBwaW5jaG8sIHRvZG9zPC90ZXh0PgoKICA8IS0tIEl6cXVpZXJkYSAtLT4KICA8cmVjdCB4PSIyNCIgeT0iNTgiIHdpZHRoPSIzNzAiIGhlaWdodD0iMjQyIiByeD0iMTIiIGZpbGw9IiNmN2Y4ZmEiIHN0cm9rZT0iI2M5Y2NkMSIvPgogIDx0ZXh0IHg9IjQwIiB5PSI4NCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuNSIgZmlsbD0iIzUyNTE0ZSI+UlVGVVMgwrcgQkFMRU5BRVRDSEVSIMK3IGRkPC90ZXh0PgogIDxnIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwYjBiMGIiPgogICAgPHJlY3QgeD0iNjAiIHk9IjEwMiIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI0MCIgcng9IjgiIGZpbGw9IiNjZGUyZmIiIHN0cm9rZT0iIzJhNzhkNiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iMjEwIiB5PSIxMTIiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcng9IjIiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzJhNzhkNiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMTM1IiB5PSIxMjciPldpbmRvd3MgMTE8L3RleHQ+CiAgICA8cmVjdCB4PSI2MCIgeT0iMTU2IiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI2ZkZTRkOCIgc3Ryb2tlPSIjZWI2ODM0IiBzdHJva2Utd2lkdGg9IjIiLz48cmVjdCB4PSIyMTAiIHk9IjE2NiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiByeD0iMiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjZWI2ODM0IiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIxMzUiIHk9IjE4MSI+VWJ1bnR1PC90ZXh0PgogICAgPHJlY3QgeD0iNjAiIHk9IjIxMCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI0MCIgcng9IjgiIGZpbGw9IiNkM2YyZTYiIHN0cm9rZT0iIzFiYWY3YSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHJlY3QgeD0iMjEwIiB5PSIyMjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcng9IjIiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzFiYWY3YSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMTM1IiB5PSIyMzUiPkhpcmVuJ3M8L3RleHQ+CiAgPC9nPgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iMjUwIiB5PSIxMjIiPmdyYWJhcyB1bmEgSVNPPC90ZXh0PgogICAgPHRleHQgeD0iMjUwIiB5PSIxNDAiPnkgZWwgcGluY2hvPC90ZXh0PgogICAgPHRleHQgeD0iMjUwIiB5PSIxNTgiIGZvbnQtd2VpZ2h0PSI3MDAiPlNFIENPTlZJRVJURTwvdGV4dD4KICAgIDx0ZXh0IHg9IjI1MCIgeT0iMTc2Ij5lbiBlbGxhPC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSI0MCIgeT0iMjg0IiBmb250LXNpemU9IjEzIiBmaWxsPSIjNTI1MTRlIj7Cv1RyZXMgc2lzdGVtYXM/IFRyZXMgcGluY2hvcy4gQ29tbyB1biBEVkQuPC90ZXh0PgoKICA8IS0tIERlcmVjaGEgLS0+CiAgPHJlY3QgeD0iNDEwIiB5PSI1OCIgd2lkdGg9IjQyNiIgaGVpZ2h0PSIyNDIiIHJ4PSIxMiIgZmlsbD0iI2Y3ZjhmYSIgc3Ryb2tlPSIjYzljY2QxIi8+CiAgPHRleHQgeD0iNDI2IiB5PSI4NCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuNSIgZmlsbD0iIzUyNTE0ZSI+VkVOVE9ZPC90ZXh0PgogIDxyZWN0IHg9IjQzMCIgeT0iMTAwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE2MCIgcng9IjEyIiBmaWxsPSIjZTRlMGY4IiBzdHJva2U9IiM2MjUwZDYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjYxMCIgeT0iMTY0IiB3aWR0aD0iMjAiIGhlaWdodD0iMzIiIHJ4PSIzIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiM2MjUwZDYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxnIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJDb25zb2xhcywgJ0RlamFWdSBTYW5zIE1vbm8nLCBtb25vc3BhY2UiIGZpbGw9IiMwYjBiMGIiPgogICAgPHJlY3QgeD0iNDQ0IiB5PSIxMTIiIHdpZHRoPSIxNTIiIGhlaWdodD0iMjIiIHJ4PSI1IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMyYTc4ZDYiLz48dGV4dCB4PSI0NTIiIHk9IjEyNyI+d2luMTEuaXNvPC90ZXh0PgogICAgPHJlY3QgeD0iNDQ0IiB5PSIxNDAiIHdpZHRoPSIxNTIiIGhlaWdodD0iMjIiIHJ4PSI1IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNlYjY4MzQiLz48dGV4dCB4PSI0NTIiIHk9IjE1NSI+dWJ1bnR1LmlzbzwvdGV4dD4KICAgIDxyZWN0IHg9IjQ0NCIgeT0iMTY4IiB3aWR0aD0iMTUyIiBoZWlnaHQ9IjIyIiByeD0iNSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMWJhZjdhIi8+PHRleHQgeD0iNDUyIiB5PSIxODMiPmhpcmVucy5pc288L3RleHQ+CiAgICA8cmVjdCB4PSI0NDQiIHk9IjE5NiIgd2lkdGg9IjE1MiIgaGVpZ2h0PSIyMiIgcng9IjUiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2VkYTEwMCIvPjx0ZXh0IHg9IjQ1MiIgeT0iMjExIj5taW50LmlzbzwvdGV4dD4KICAgIDxyZWN0IHg9IjQ0NCIgeT0iMjI0IiB3aWR0aD0iMTUyIiBoZWlnaHQ9IjIyIiByeD0iNSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjZTg3YmE0Ii8+PHRleHQgeD0iNDUyIiB5PSIyMzkiPm1lbXRlc3QuaXNvIOKApjwvdGV4dD4KICA8L2c+CiAgPHBhdGggZD0iTTYzNiAxODAgSCA2NzAiIHN0cm9rZT0iIzUyNTE0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBtYXJrZXItZW5kPSJ1cmwoI2ZsZWNoYSkiLz4KICA8cmVjdCB4PSI2NzQiIHk9IjEwMCIgd2lkdGg9IjE0NiIgaGVpZ2h0PSIxNjAiIHJ4PSI4IiBmaWxsPSIjMWUyMjI3Ii8+CiAgPHRleHQgeD0iNzQ3IiB5PSIxMjIiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiPlZlbnRveSAxLjEuMTc8L3RleHQ+CiAgPGcgZm9udC1zaXplPSIxMS41IiBmb250LWZhbWlseT0iQ29uc29sYXMsICdEZWphVnUgU2FucyBNb25vJywgbW9ub3NwYWNlIiBmaWxsPSIjYzljY2QxIj4KICAgIDx0ZXh0IHg9IjY4NiIgeT0iMTQ4Ij53aW4xMS5pc288L3RleHQ+CiAgICA8cmVjdCB4PSI2ODAiIHk9IjE1NiIgd2lkdGg9IjEzNCIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNmZmZmZmYiLz4KICAgIDx0ZXh0IHg9IjY4NiIgeT0iMTcwIiBmaWxsPSIjMGIwYjBiIiBmb250LXdlaWdodD0iNzAwIj51YnVudHUuaXNvPC90ZXh0PgogICAgPHRleHQgeD0iNjg2IiB5PSIxOTQiPmhpcmVucy5pc288L3RleHQ+CiAgICA8dGV4dCB4PSI2ODYiIHk9IjIxNiI+bWludC5pc288L3RleHQ+CiAgICA8dGV4dCB4PSI2ODYiIHk9IjIzOCI+bWVtdGVzdC5pc288L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9IjQyNiIgeT0iMjg0IiBmb250LXNpemU9IjEzIiBmaWxsPSIjNTI1MTRlIj5Db3BpYXMgbGFzIElTTyBjb21vIGZvdG9zIHkgZWxpZ2VzIHVuYSBlbiBlbCBtZW7DuiBhbCBlbmNlbmRlci48L3RleHQ+Cjwvc3ZnPgo=" alt="Con Rufus cada pincho es un sistema; con Ventoy un pincho guarda muchas ISO y se elige en un menú" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<p>Por el camino vas a tocar con las manos lo que en la teoría del arranque son sólo palabras:
+<strong>UEFI y BIOS</strong>, <strong>tabla de particiones</strong>, <strong>partición EFI</strong>, <strong>sistemas de archivos</strong> y
+<strong>Secure Boot</strong>.</p>
+<h3 id="0-qué-necesitas" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">0. Qué necesitas</h3>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">💾 <strong>Pendrive</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>64 GB recomendado</strong> (32 GB vale con la lista reducida del <a href="#42-cuánto-ocupa-todo" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 4.2</a>). Mejor USB 3: con USB 2 arrancar Windows tarda una eternidad</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">🪟 <strong>Equipo Windows</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Con permisos de administrador: Ventoy tiene que escribir en el disco a bajo nivel</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">📥 <strong>Descargas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Unos 30 GB de ISO. Si el profesor las ha dejado en la carpeta compartida del aula, cópialas de ahí</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">🖥️ <strong>Un equipo donde probar</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Uno del aula que te indique el profesor, con permiso para abrir su menú de arranque</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Instalar Ventoy borra el pendrive entero.</strong> Copia antes lo que tengas en él. Y comprueba
+<strong>tres veces</strong> qué disco eliges: Ventoy te enseña los discos USB, pero si hay un disco externo
+conectado también aparecerá. <strong>Desconéctalo antes de empezar.</strong></p>
+</div>
+<h3 id="1-cómo-funciona-ventoy-por-dentro" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">1. Cómo funciona Ventoy por dentro</h3>
+<h4 id="11-del-botón-al-instalador" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">1.1 Del botón al instalador</h4>
+<p>Antes de tocar nada, mira el camino completo que recorre el equipo cuando arranca desde tu
+pincho. Cada caja es un apartado de esta guía:</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iMjcwIiB2aWV3Qm94PSIwIDAgOTAwIDI3MCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5EZWwgYm90w7NuIGRlIGVuY2VuZGlkbyBhbCBpbnN0YWxhZG9yPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+U2VpcyBwYXNvczogcHVsc2FzIGVuY2VuZGVyOyBhcnJhbmNhIGVsIGZpcm13YXJlIFVFRkk7IGVuIGVsIG1lbsO6IGRlIGFycmFucXVlIGVsaWdlcyBlbCBwaW5jaG87IFNlY3VyZSBCb290IGNvbXBydWViYSBsYSBmaXJtYTsgYXJyYW5jYSBlbCBjYXJnYWRvciBkZSBWZW50b3kgZGVzZGUgbGEgcGFydGljacOzbiBWVE9ZRUZJOyBlbiBlbCBtZW7DuiBkZSBWZW50b3kgZWxpZ2VzIHVuYSBJU08geSBhcnJhbmNhIGVsIHNpc3RlbWEgcXVlIGNvbnRpZW5lLjwvZGVzYz4KICA8ZGVmcz4KICAgIDxtYXJrZXIgaWQ9ImZsZWNoYSIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI5IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+CiAgICAgIDxwYXRoIGQ9Ik0wIDAgTDEwIDUgTDAgMTAgeiIgZmlsbD0iIzUyNTE0ZSIvPgogICAgPC9tYXJrZXI+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODk5IiBoZWlnaHQ9IjI2OSIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPlF1w6kgcGFzYSBlbnRyZSBxdWUgcHVsc2FzIGVsIGJvdMOzbiB5IGFwYXJlY2UgZWwgaW5zdGFsYWRvcjwvdGV4dD4KCiAgPGcgc3Ryb2tlLXdpZHRoPSIyIj4KICAgIDxyZWN0IHg9IjI2IiB5PSI2MiIgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjQiIHJ4PSIxMiIgZmlsbD0iI2VlZjBmMyIgc3Ryb2tlPSIjOGE4Zjk4Ii8+CiAgICA8cmVjdCB4PSIxNzAiIHk9IjYyIiB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyNCIgcng9IjEyIiBmaWxsPSIjY2RlMmZiIiBzdHJva2U9IiMyYTc4ZDYiLz4KICAgIDxyZWN0IHg9IjMxNCIgeT0iNjIiIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI0IiByeD0iMTIiIGZpbGw9IiNmZGU0ZDgiIHN0cm9rZT0iI2ViNjgzNCIvPgogICAgPHJlY3QgeD0iNDU4IiB5PSI2MiIgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjQiIHJ4PSIxMiIgZmlsbD0iI2U0ZTBmOCIgc3Ryb2tlPSIjNjI1MGQ2Ii8+CiAgICA8cmVjdCB4PSI2MDIiIHk9IjYyIiB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyNCIgcng9IjEyIiBmaWxsPSIjZmRlZmNjIiBzdHJva2U9IiNlZGExMDAiLz4KICAgIDxyZWN0IHg9Ijc0NiIgeT0iNjIiIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI0IiByeD0iMTIiIGZpbGw9IiNkNmVmZDYiIHN0cm9rZT0iIzAwODMwMCIvPgogIDwvZz4KICA8ZyBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjNTI1MTRlIj4KICAgIDx0ZXh0IHg9IjM4IiB5PSI5MiI+MTwvdGV4dD48dGV4dCB4PSIxODIiIHk9IjkyIj4yPC90ZXh0Pjx0ZXh0IHg9IjMyNiIgeT0iOTIiPjM8L3RleHQ+CiAgICA8dGV4dCB4PSI0NzAiIHk9IjkyIj40PC90ZXh0Pjx0ZXh0IHg9IjYxNCIgeT0iOTIiPjU8L3RleHQ+PHRleHQgeD0iNzU4IiB5PSI5MiI+NjwvdGV4dD4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSIzOCIgeT0iMTE4Ij5FbmNlbmRlcjwvdGV4dD4KICAgIDx0ZXh0IHg9IjE4MiIgeT0iMTE4Ij5GaXJtd2FyZTwvdGV4dD48dGV4dCB4PSIxODIiIHk9IjEzNiI+VUVGSTwvdGV4dD4KICAgIDx0ZXh0IHg9IjMyNiIgeT0iMTE4Ij5NZW7DuiBkZTwvdGV4dD48dGV4dCB4PSIzMjYiIHk9IjEzNiI+YXJyYW5xdWU8L3RleHQ+CiAgICA8dGV4dCB4PSI0NzAiIHk9IjExOCI+Q2FyZ2Fkb3I8L3RleHQ+PHRleHQgeD0iNDcwIiB5PSIxMzYiPmRlIFZlbnRveTwvdGV4dD4KICAgIDx0ZXh0IHg9IjYxNCIgeT0iMTE4Ij5NZW7DuiBkZTwvdGV4dD48dGV4dCB4PSI2MTQiIHk9IjEzNiI+VmVudG95PC90ZXh0PgogICAgPHRleHQgeD0iNzU4IiB5PSIxMTgiPkFycmFuY2E8L3RleHQ+PHRleHQgeD0iNzU4IiB5PSIxMzYiPmxhIElTTzwvdGV4dD4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxMiIgZmlsbD0iIzUyNTE0ZSI+CiAgICA8dGV4dCB4PSIzOCIgeT0iMTYwIj5wdWxzYXMgZWwgYm90w7NuPC90ZXh0PgogICAgPHRleHQgeD0iMTgyIiB5PSIxNjAiPmxhIMKrQklPU8K7IGRlIGhveTo8L3RleHQ+PHRleHQgeD0iMTgyIiB5PSIxNzYiPnJldmlzYSBlbCBoYXJkd2FyZTwvdGV4dD4KICAgIDx0ZXh0IHg9IjMyNiIgeT0iMTYwIj5GMTIsIEY5LCBGMTHigKY8L3RleHQ+PHRleHQgeD0iMzI2IiB5PSIxNzYiPmVsaWdlcyDCq1VFRkk6IHBpbmNob8K7PC90ZXh0PgogICAgPHRleHQgeD0iNDcwIiB5PSIxNjAiPmRlc2RlIGxhIHBhcnRpY2nDs248L3RleHQ+PHRleHQgeD0iNDcwIiB5PSIxNzYiPlZUT1lFRkk8L3RleHQ+CiAgICA8dGV4dCB4PSI2MTQiIHk9IjE2MCI+ZWxpZ2VzIGxhIElTTzwvdGV4dD48dGV4dCB4PSI2MTQiIHk9IjE3NiI+Y29uIGxhcyBmbGVjaGFzPC90ZXh0PgogICAgPHRleHQgeD0iNzU4IiB5PSIxNjAiPmluc3RhbGFkb3IgbzwvdGV4dD48dGV4dCB4PSI3NTgiIHk9IjE3NiI+aGVycmFtaWVudGE8L3RleHQ+CiAgPC9nPgogIDxnIHN0cm9rZT0iIzUyNTE0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIj4KICAgIDxwYXRoIGQ9Ik0xNTQgMTI0IEggMTY4IiBtYXJrZXItZW5kPSJ1cmwoI2ZsZWNoYSkiLz48cGF0aCBkPSJNMjk4IDEyNCBIIDMxMiIgbWFya2VyLWVuZD0idXJsKCNmbGVjaGEpIi8+CiAgICA8cGF0aCBkPSJNNDQyIDEyNCBIIDQ1NiIgbWFya2VyLWVuZD0idXJsKCNmbGVjaGEpIi8+PHBhdGggZD0iTTU4NiAxMjQgSCA2MDAiIG1hcmtlci1lbmQ9InVybCgjZmxlY2hhKSIvPgogICAgPHBhdGggZD0iTTczMCAxMjQgSCA3NDQiIG1hcmtlci1lbmQ9InVybCgjZmxlY2hhKSIvPgogIDwvZz4KCiAgPCEtLSBjb250cm9sIGRlIFNlY3VyZSBCb290IGVudHJlIDMgeSA0IC0tPgogIDxwYXRoIGQ9Ik00NTAgMTkyIFYgMjA2IiBzdHJva2U9IiNkMDNiM2IiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik00NTAgMjEwIGwtMTQgNSB2MTIgYzAgMTAgNyAxNyAxNCAyMCBjNyAtMyAxNCAtMTAgMTQgLTIwIHYtMTIgeiIgZmlsbD0iI2ZiZGNkYyIgc3Ryb2tlPSIjZDAzYjNiIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSI0MjYiIHk9IjIyNiIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzBiMGIwYiI+Q29udHJvbCBkZSBTZWN1cmUgQm9vdDwvdGV4dD4KICA8dGV4dCB4PSI0MjYiIHk9IjI0NCIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzUyNTE0ZSI+wr9Fc3TDoSBmaXJtYWRvIGVsIGNhcmdhZG9yPyBMYSAxLsKqIHZleiByZWdpc3RyYXMgbGEgY2xhdmUgZGUgVmVudG95IChNT0spPC90ZXh0Pgo8L3N2Zz4K" alt="Seis pasos desde que pulsas encender hasta que arranca la ISO, con el control de Secure Boot" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<h4 id="12-las-dos-particiones-del-pincho" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">1.2 Las dos particiones del pincho</h4>
+<p>Cuando instalas Ventoy, el pincho queda así:</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NjAiIGhlaWdodD0iMjkwIiB2aWV3Qm94PSIwIDAgODYwIDI5MCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5MYXMgZG9zIHBhcnRpY2lvbmVzIGRlbCBwaW5jaG8gVmVudG95PC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+RWwgcGluY2hvIHRpZW5lIHVuYSB0YWJsYSBkZSBwYXJ0aWNpb25lcyBNQlIgYWwgcHJpbmNpcGlvLCB1bmEgcGFydGljacOzbiBncmFuZGUgbGxhbWFkYSBWZW50b3kgZW4gZXhGQVQgZG9uZGUgc2UgY29waWFuIGxhcyBJU08sIHkgdW5hIHBhcnRpY2nDs24gcGVxdWXDsWEgZGUgMzIgTUIgbGxhbWFkYSBWVE9ZRUZJIGVuIEZBVCBjb24gZWwgY2FyZ2Fkb3IgZGUgYXJyYW5xdWUuPC9kZXNjPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODU5IiBoZWlnaHQ9IjI4OSIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPkPDs21vIHF1ZWRhIGVsIHBpbmNobyBwb3IgZGVudHJvPC90ZXh0PgogIDx0ZXh0IHg9IjI0IiB5PSI2MCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzUyNTE0ZSI+UGVuZHJpdmUgZGUgNjQgR0IgZGVzcHXDqXMgZGUgaW5zdGFsYXIgVmVudG95IChkaWJ1am8gbm8gYSBlc2NhbGE6IDMyIE1CIGVzIGRpbWludXRvIGFsIGxhZG8gZGVsIHJlc3RvKTwvdGV4dD4KCiAgPCEtLSBiYXJyYSBkZWwgcGluY2hvIC0tPgogIDxyZWN0IHg9IjQwIiB5PSI5NiIgd2lkdGg9IjE4IiBoZWlnaHQ9Ijc2IiBmaWxsPSIjOGE4Zjk4Ii8+CiAgPHJlY3QgeD0iNjAiIHk9Ijk2IiB3aWR0aD0iNjQwIiBoZWlnaHQ9Ijc2IiBmaWxsPSIjY2RlMmZiIiBzdHJva2U9IiMyYTc4ZDYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjcwMiIgeT0iOTYiIHdpZHRoPSIxMTgiIGhlaWdodD0iNzYiIGZpbGw9IiNmYmUzZWMiIHN0cm9rZT0iI2U4N2JhNCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHJlY3QgeD0iODIwIiB5PSIxMTYiIHdpZHRoPSIxOCIgaGVpZ2h0PSIzNiIgcng9IjMiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzhhOGY5OCIgc3Ryb2tlLXdpZHRoPSIyIi8+CgogIDx0ZXh0IHg9Ijc2IiB5PSIxMjIiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPlBhcnRpY2nDs24gMSDCtyDCq1ZlbnRvecK7PC90ZXh0PgogIDx0ZXh0IHg9Ijc2IiB5PSIxNDIiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM1MjUxNGUiPmV4RkFUIMK3IGNhc2kgdG9kbyBlbCBwaW5jaG88L3RleHQ+CiAgPGcgZm9udC1zaXplPSIxMS41IiBmb250LWZhbWlseT0iQ29uc29sYXMsICdEZWphVnUgU2FucyBNb25vJywgbW9ub3NwYWNlIiBmaWxsPSIjMGIwYjBiIj4KICAgIDxyZWN0IHg9IjMzMCIgeT0iMTEwIiB3aWR0aD0iMTA0IiBoZWlnaHQ9IjIyIiByeD0iNSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMmE3OGQ2Ii8+PHRleHQgeD0iMzM4IiB5PSIxMjUiPndpbjExLmlzbzwvdGV4dD4KICAgIDxyZWN0IHg9IjQ0MiIgeT0iMTEwIiB3aWR0aD0iMTA0IiBoZWlnaHQ9IjIyIiByeD0iNSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMmE3OGQ2Ii8+PHRleHQgeD0iNDUwIiB5PSIxMjUiPm1pbnQuaXNvPC90ZXh0PgogICAgPHJlY3QgeD0iNTU0IiB5PSIxMTAiIHdpZHRoPSIxMzIiIGhlaWdodD0iMjIiIHJ4PSI1IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMyYTc4ZDYiLz48dGV4dCB4PSI1NjIiIHk9IjEyNSI+TEVFTUUudHh0PC90ZXh0PgogICAgPHJlY3QgeD0iMzMwIiB5PSIxNDAiIHdpZHRoPSIxMDQiIGhlaWdodD0iMjIiIHJ4PSI1IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMyYTc4ZDYiLz48dGV4dCB4PSIzMzgiIHk9IjE1NSI+aGlyZW5zLmlzbzwvdGV4dD4KICAgIDxyZWN0IHg9IjQ0MiIgeT0iMTQwIiB3aWR0aD0iMTA0IiBoZWlnaHQ9IjIyIiByeD0iNSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMmE3OGQ2Ii8+PHRleHQgeD0iNDUwIiB5PSIxNTUiPmRyaXZlcnMvPC90ZXh0PgogICAgPHJlY3QgeD0iNTU0IiB5PSIxNDAiIHdpZHRoPSIxMzIiIGhlaWdodD0iMjIiIHJ4PSI1IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMyYTc4ZDYiLz48dGV4dCB4PSI1NjIiIHk9IjE1NSI+dmVudG95Lmpzb248L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9Ijc2MSIgeT0iMTI4IiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMGIwYjBiIj5QYXJ0aWNpw7NuIDI8L3RleHQ+CiAgPHRleHQgeD0iNzYxIiB5PSIxNDYiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwYjBiMGIiPsKrVlRPWUVGScK7PC90ZXh0PgogIDx0ZXh0IHg9Ijc2MSIgeT0iMTYzIiBmb250LXNpemU9IjEyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTI1MTRlIj5GQVQgwrcgMzIgTUI8L3RleHQ+CgogIDwhLS0gZXhwbGljYWNpb25lcyAtLT4KICA8ZyBzdHJva2U9IiM4YThmOTgiIHN0cm9rZS13aWR0aD0iMS41Ij4KICAgIDxsaW5lIHgxPSI0OSIgeTE9IjE3MiIgeDI9IjQ5IiB5Mj0iMTk2Ii8+CiAgICA8bGluZSB4MT0iMzgwIiB5MT0iMTcyIiB4Mj0iMzgwIiB5Mj0iMTk2Ii8+CiAgICA8bGluZSB4MT0iNzYxIiB5MT0iMTcyIiB4Mj0iNzYxIiB5Mj0iMTk2Ii8+CiAgPC9nPgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iNDAiIHk9IjIxNCIgZm9udC13ZWlnaHQ9IjcwMCI+TUJSPC90ZXh0PgogICAgPHRleHQgeD0iNDAiIHk9IjIzMiIgZmlsbD0iIzUyNTE0ZSI+bGEgdGFibGEgZGU8L3RleHQ+CiAgICA8dGV4dCB4PSI0MCIgeT0iMjUwIiBmaWxsPSIjNTI1MTRlIj5wYXJ0aWNpb25lczwvdGV4dD4KCiAgICA8dGV4dCB4PSIzODAiIHk9IjIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VW4gYWxtYWPDqW4gbm9ybWFsPC90ZXh0PgogICAgPHRleHQgeD0iMzgwIiB5PSIyMzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1MjUxNGUiPldpbmRvd3MgbGEgdmUgY29tbyB1bmEgdW5pZGFkIFVTQiBtw6FzIChFOikuPC90ZXh0PgogICAgPHRleHQgeD0iMzgwIiB5PSIyNTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1MjUxNGUiPkFxdcOtIGNvcGlhcyBJU08sIGRvY3VtZW50b3MsIGRyaXZlcnMsIHByb2dyYW1hc+KApjwvdGV4dD4KCiAgICA8dGV4dCB4PSI4MzAiIHk9IjIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9ImVuZCI+RWwgY2FyZ2Fkb3IgZGUgVmVudG95PC90ZXh0PgogICAgPHRleHQgeD0iODMwIiB5PSIyMzIiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM1MjUxNGUiPkhhY2UgZGUgcGFydGljacOzbiBFRkkuPC90ZXh0PgogICAgPHRleHQgeD0iODMwIiB5PSIyNTAiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM1MjUxNGUiPldpbmRvd3Mgbm8gbGUgZGEgbGV0cmEuPC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSIyNCIgeT0iMjc4IiBmb250LXNpemU9IjEyIiBmaWxsPSIjNTI1MTRlIj5BbCBlbGVnaXIgdW5hIElTTywgVmVudG95IG5vIGxhIGRlc2NvbXByaW1lIG5pIGxhIGNvcGlhOiBsYSBhYnJlIHRhbCBjdWFsIHkgbGUgaGFjZSBjcmVlciBhbCBzaXN0ZW1hIHF1ZSBlc3TDoSBsZXllbmRvIHVuIERWRC48L3RleHQ+Cjwvc3ZnPgo=" alt="El pincho tiene una tabla MBR, una partición grande exFAT llamada Ventoy y una pequeña de 32 MB llamada VTOYEFI" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<ul>
+<li>La <strong>partición 2 (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOYEFI</code>)</strong> es la que busca el firmware al arrancar. En un equipo UEFI hace
+de <strong>partición EFI</strong> (la misma idea que la partición de 512 MB de tu MV de Mint); en un equipo
+antiguo con BIOS, el arranque empieza en el <strong>MBR</strong> del pincho y salta a ella.</li>
+<li>La <strong>partición 1 (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ventoy</code>)</strong> es un almacén normal. Windows la ve como una unidad USB cualquiera
+y puedes guardar en ella también documentos, drivers o instaladores de programas.</li>
+</ul>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0">Cuando eliges una ISO en el menú, Ventoy <strong>no la descomprime ni la copia</strong>: la abre
+directamente y le hace creer al sistema que arranca que está leyendo un DVD. Por eso basta con
+copiar el fichero.</p>
+</div>
+<h4 id="13-por-qué-exfat-y-no-fat32" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">1.3 Por qué exFAT y no FAT32</h4>
+<p><strong>FAT32 no admite ficheros de 4 GB o más.</strong> Y mira cuánto ocupan algunas ISO:</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NjAiIGhlaWdodD0iMzMwIiB2aWV3Qm94PSIwIDAgODYwIDMzMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5UYW1hw7FvIGRlIGFsZ3VuYXMgSVNPIGZyZW50ZSBhbCBsw61taXRlIGRlIEZBVDMyPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+V2luZG93cyAxMSBvY3VwYSB1bm9zIDcgR0IsIFVidW50dSA2IEdCLCBLYWxpIDQsNSBHQiwgSGlyZW4ncyAzLDEgR0IsIExpbnV4IE1pbnQgMiw4IEdCIHkgQXJjaCAxLDUgR0IuIEZBVDMyIG5vIGFkbWl0ZSBmaWNoZXJvcyBkZSA0IEdCIG8gbcOhcywgYXPDrSBxdWUgbGFzIHRyZXMgcHJpbWVyYXMgbm8gY2FicsOtYW47IGV4RkFUIG5vIHRpZW5lIGVzZSBsw61taXRlLjwvZGVzYz4KICA8cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9Ijg1OSIgaGVpZ2h0PSIzMjkiIHJ4PSIxNCIgZmlsbD0iI2ZjZmNmYiIgc3Ryb2tlPSIjZTJlNWU5Ii8+CiAgPHRleHQgeD0iMjQiIHk9IjM4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj7Cv1BvciBxdcOpIGV4RkFUPyBBbGd1bmFzIElTTyBwYXNhbiBkZSA0IEdCPC90ZXh0PgogIDx0ZXh0IHg9IjI0IiB5PSI2MCIgZm9udC1zaXplPSIxMyIgZmlsbD0iIzUyNTE0ZSI+VGFtYcOxbyBhcHJveGltYWRvIGRlIGNhZGEgSVNPLCBlbiBHQjwvdGV4dD4KCiAgPCEtLSByZWppbGxhOiB4ID0gMjAwICsgR0IqNzUgLS0+CiAgPGcgc3Ryb2tlPSIjZTJlNWU5IiBzdHJva2Utd2lkdGg9IjEiPgogICAgPGxpbmUgeDE9IjI3NSIgeTE9Ijc2IiB4Mj0iMjc1IiB5Mj0iMjkyIi8+PGxpbmUgeDE9IjM1MCIgeTE9Ijc2IiB4Mj0iMzUwIiB5Mj0iMjkyIi8+PGxpbmUgeDE9IjQyNSIgeTE9Ijc2IiB4Mj0iNDI1IiB5Mj0iMjkyIi8+CiAgICA8bGluZSB4MT0iNTc1IiB5MT0iNzYiIHgyPSI1NzUiIHkyPSIyOTIiLz48bGluZSB4MT0iNjUwIiB5MT0iNzYiIHgyPSI2NTAiIHkyPSIyOTIiLz48bGluZSB4MT0iNzI1IiB5MT0iNzYiIHgyPSI3MjUiIHkyPSIyOTIiLz4KICAgIDxsaW5lIHgxPSI4MDAiIHkxPSI3NiIgeDI9IjgwMCIgeTI9IjI5MiIvPgogIDwvZz4KICA8bGluZSB4MT0iMjAwIiB5MT0iNzYiIHgyPSIyMDAiIHkyPSIyOTIiIHN0cm9rZT0iIzhhOGY5OCIgc3Ryb2tlLXdpZHRoPSIxIi8+CgogIDxnIGZpbGw9IiMyYTc4ZDYiPgogICAgPHBhdGggZD0iTTIwMCA5MCBINzIxIFE3MjUgOTAgNzI1IDk0IFYxMDggUTcyNSAxMTIgNzIxIDExMiBIMjAwIFoiLz4KICAgIDxwYXRoIGQ9Ik0yMDAgMTI0IEg2NDYgUTY1MCAxMjQgNjUwIDEyOCBWMTQyIFE2NTAgMTQ2IDY0NiAxNDYgSDIwMCBaIi8+CiAgICA8cGF0aCBkPSJNMjAwIDE1OCBINTMzLjUgUTUzNy41IDE1OCA1MzcuNSAxNjIgVjE3NiBRNTM3LjUgMTgwIDUzMy41IDE4MCBIMjAwIFoiLz4KICAgIDxwYXRoIGQ9Ik0yMDAgMTkyIEg0MjguNSBRNDMyLjUgMTkyIDQzMi41IDE5NiBWMjEwIFE0MzIuNSAyMTQgNDI4LjUgMjE0IEgyMDAgWiIvPgogICAgPHBhdGggZD0iTTIwMCAyMjYgSDQwNiBRNDEwIDIyNiA0MTAgMjMwIFYyNDQgUTQxMCAyNDggNDA2IDI0OCBIMjAwIFoiLz4KICAgIDxwYXRoIGQ9Ik0yMDAgMjYwIEgzMDguNSBRMzEyLjUgMjYwIDMxMi41IDI2NCBWMjc4IFEzMTIuNSAyODIgMzA4LjUgMjgyIEgyMDAgWiIvPgogIDwvZz4KICA8ZyBmb250LXNpemU9IjE0IiBmaWxsPSIjMGIwYjBiIiB0ZXh0LWFuY2hvcj0iZW5kIj4KICAgIDx0ZXh0IHg9IjE5MCIgeT0iMTA2Ij5XaW5kb3dzIDExPC90ZXh0PgogICAgPHRleHQgeD0iMTkwIiB5PSIxNDAiPlVidW50dSAyNi4wNDwvdGV4dD4KICAgIDx0ZXh0IHg9IjE5MCIgeT0iMTc0Ij5LYWxpIExpbnV4PC90ZXh0PgogICAgPHRleHQgeD0iMTkwIiB5PSIyMDgiPkhpcmVuJ3MgQm9vdENEIFBFPC90ZXh0PgogICAgPHRleHQgeD0iMTkwIiB5PSIyNDIiPkxpbnV4IE1pbnQgMjIuMzwvdGV4dD4KICAgIDx0ZXh0IHg9IjE5MCIgeT0iMjc2Ij5BcmNoIExpbnV4PC90ZXh0PgogIDwvZz4KICA8ZyBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj4KICAgIDx0ZXh0IHg9IjczMyIgeT0iMTA2Ij43PC90ZXh0PgogICAgPHRleHQgeD0iNjU4IiB5PSIxNDAiPjY8L3RleHQ+CiAgICA8dGV4dCB4PSI1NDUiIHk9IjE3NCI+NCw1PC90ZXh0PgogICAgPHRleHQgeD0iNDQwIiB5PSIyMDgiPjMsMTwvdGV4dD4KICAgIDx0ZXh0IHg9IjQxOCIgeT0iMjQyIj4yLDg8L3RleHQ+CiAgICA8dGV4dCB4PSIzMjAiIHk9IjI3NiI+MSw1PC90ZXh0PgogIDwvZz4KICA8IS0tIG1hcmNhIGRlIMKrbm8gY2FiZcK7IC0tPgogIDxnIGZpbGw9IiNkMDNiM2IiPgogICAgPGNpcmNsZSBjeD0iNzU4IiBjeT0iMTAxIiByPSI4Ii8+PGNpcmNsZSBjeD0iNjg4IiBjeT0iMTM1IiByPSI4Ii8+PGNpcmNsZSBjeD0iNTg0IiBjeT0iMTY5IiByPSI4Ii8+CiAgPC9nPgogIDxnIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiPgogICAgPHBhdGggZD0iTTc1NCA5NyBsOCA4IE03NjIgOTcgbC04IDgiLz48cGF0aCBkPSJNNjg0IDEzMSBsOCA4IE02OTIgMTMxIGwtOCA4Ii8+PHBhdGggZD0iTTU4MCAxNjUgbDggOCBNNTg4IDE2NSBsLTggOCIvPgogIDwvZz4KCiAgPCEtLSBsw61taXRlIEZBVDMyIC0tPgogIDxsaW5lIHgxPSI1MDAiIHkxPSI3MiIgeDI9IjUwMCIgeTI9IjI5MiIgc3Ryb2tlPSIjZDAzYjNiIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSI1MDgiIHk9Ijg0IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj5sw61taXRlIGRlIEZBVDMyOiA0IEdCIHBvciBmaWNoZXJvPC90ZXh0PgoKICA8ZyBmb250LXNpemU9IjEyIiBmaWxsPSIjNTI1MTRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4KICAgIDx0ZXh0IHg9IjIwMCIgeT0iMzA4Ij4wPC90ZXh0Pjx0ZXh0IHg9IjI3NSIgeT0iMzA4Ij4xPC90ZXh0Pjx0ZXh0IHg9IjM1MCIgeT0iMzA4Ij4yPC90ZXh0Pjx0ZXh0IHg9IjQyNSIgeT0iMzA4Ij4zPC90ZXh0PgogICAgPHRleHQgeD0iNTAwIiB5PSIzMDgiPjQ8L3RleHQ+PHRleHQgeD0iNTc1IiB5PSIzMDgiPjU8L3RleHQ+PHRleHQgeD0iNjUwIiB5PSIzMDgiPjY8L3RleHQ+PHRleHQgeD0iNzI1IiB5PSIzMDgiPjc8L3RleHQ+PHRleHQgeD0iODAwIiB5PSIzMDgiPjggR0I8L3RleHQ+CiAgPC9nPgogIDxjaXJjbGUgY3g9IjMwIiBjeT0iMzE4IiByPSI2IiBmaWxsPSIjZDAzYjNiIi8+CiAgPHBhdGggZD0iTTI3IDMxNSBsNiA2IE0zMyAzMTUgbC02IDYiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDx0ZXh0IHg9IjQyIiB5PSIzMjIiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM1MjUxNGUiPj0gbm8gc2UgcG9kcsOtYSBjb3BpYXIgYSB1biBwaW5jaG8gRkFUMzI8L3RleHQ+Cjwvc3ZnPgo=" alt="Gráfico de barras: Windows 11, Ubuntu y Kali superan el límite de 4 GB de FAT32" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<p>En FAT32 ni siquiera se podrían copiar. <strong>exFAT</strong> no tiene ese límite y lo leen Windows, macOS y
+Linux.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Para comparar.</strong> Herramientas como Rufus en modo FAT32 tienen que <strong>partir</strong> el fichero
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">install.wim</code> de Windows para que quepa. Con Ventoy ese problema no existe: la ISO viaja
+entera.</p>
+</div>
+<h4 id="14-secure-boot-en-dos-minutos" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">1.4 Secure Boot en dos minutos</h4>
+<p><strong>Secure Boot</strong> es una función de UEFI que sólo deja arrancar programas <strong>firmados</strong> con una
+clave en la que el firmware confía. Los fabricantes traen de serie las claves de <strong>Microsoft</strong>, y
+Microsoft firma también un pequeño programa llamado <strong>shim</strong> que usan casi todas las
+distribuciones Linux para arrancar con Secure Boot activo.</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NjAiIGhlaWdodD0iMzQ0IiB2aWV3Qm94PSIwIDAgODYwIDM0NCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5TZWN1cmUgQm9vdCwgZWwgcG9ydGVybyBjb24gbGlzdGE8L3RpdGxlPgogIDxkZXNjIGlkPSJkIj5TZWN1cmUgQm9vdCBzw7NsbyBkZWphIHBhc2FyIHByb2dyYW1hcyBmaXJtYWRvcyBjb24gdW5hIGNsYXZlIGRlIHN1IGxpc3RhLiBXaW5kb3dzLCBmaXJtYWRvIHBvciBNaWNyb3NvZnQsIHBhc2EuIExpbnV4IGNvbiBzaGltLCBhdmFsYWRvIHBvciBNaWNyb3NvZnQsIHBhc2EuIFZlbnRveSBubyBlc3TDoSBlbiBsYSBsaXN0YSBkZSBmw6FicmljYTogbGEgcHJpbWVyYSB2ZXogc2FsZSBTZWN1cml0eSBWaW9sYXRpb24geSBoYXkgcXVlIHJlZ2lzdHJhciBzdSBjbGF2ZSBNT0s7IGRlc2RlIGVudG9uY2VzIHBhc2Egc2llbXByZSBlbiBlc2UgZXF1aXBvLjwvZGVzYz4KICA8ZGVmcz4KICAgIDxtYXJrZXIgaWQ9ImZsZWNoYSIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI5IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iOCIgbWFya2VySGVpZ2h0PSI4IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+CiAgICAgIDxwYXRoIGQ9Ik0wIDAgTDEwIDUgTDAgMTAgeiIgZmlsbD0iIzUyNTE0ZSIvPgogICAgPC9tYXJrZXI+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODU5IiBoZWlnaHQ9IjM0MyIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPlNlY3VyZSBCb290OiBlbCBwb3J0ZXJvIGRlIGxhIGRpc2NvdGVjYSBjb24gbGlzdGE8L3RleHQ+CgogIDwhLS0gY2FuZGlkYXRvcyAtLT4KICA8ZyBzdHJva2Utd2lkdGg9IjIiPgogICAgPHJlY3QgeD0iMjQiIHk9IjcyIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjU2IiByeD0iMTAiIGZpbGw9IiNjZGUyZmIiIHN0cm9rZT0iIzJhNzhkNiIvPgogICAgPHJlY3QgeD0iMjQiIHk9IjE1MiIgd2lkdGg9IjE3NiIgaGVpZ2h0PSI1NiIgcng9IjEwIiBmaWxsPSIjZmRlNGQ4IiBzdHJva2U9IiNlYjY4MzQiLz4KICAgIDxyZWN0IHg9IjI0IiB5PSIyMzIiIHdpZHRoPSIxNzYiIGhlaWdodD0iNTYiIHJ4PSIxMCIgZmlsbD0iI2U0ZTBmOCIgc3Ryb2tlPSIjNjI1MGQ2Ii8+CiAgPC9nPgogIDxnIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iNDAiIHk9Ijk2Ij5XaW5kb3dzPC90ZXh0PgogICAgPHRleHQgeD0iNDAiIHk9IjE3NiI+TGludXggY29uIHNoaW08L3RleHQ+CiAgICA8dGV4dCB4PSI0MCIgeT0iMjU2Ij5WZW50b3k8L3RleHQ+CiAgPC9nPgogIDxnIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM1MjUxNGUiPgogICAgPHRleHQgeD0iNDAiIHk9IjExNiI+ZmlybWFkbyBwb3IgTWljcm9zb2Z0PC90ZXh0PgogICAgPHRleHQgeD0iNDAiIHk9IjE5NiI+c2hpbSBhdmFsYWRvIHBvciBNaWNyb3NvZnQ8L3RleHQ+CiAgICA8dGV4dCB4PSI0MCIgeT0iMjc2Ij5maXJtYWRvIGNvbiBzdSBwcm9waWEgY2xhdmU8L3RleHQ+CiAgPC9nPgoKICA8ZyBzdHJva2U9IiM1MjUxNGUiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSI+CiAgICA8cGF0aCBkPSJNMjAyIDEwMCBDIDI1MCAxMDAsIDI2MCAxNDAsIDI5NiAxNjAiIG1hcmtlci1lbmQ9InVybCgjZmxlY2hhKSIvPgogICAgPHBhdGggZD0iTTIwMiAxODAgSCAyOTYiIG1hcmtlci1lbmQ9InVybCgjZmxlY2hhKSIvPgogICAgPHBhdGggZD0iTTIwMiAyNjAgQyAyNTAgMjYwLCAyNjAgMjIwLCAyOTYgMjAwIiBtYXJrZXItZW5kPSJ1cmwoI2ZsZWNoYSkiLz4KICA8L2c+CgogIDwhLS0gcG9ydGVybyAtLT4KICA8cmVjdCB4PSIzMDAiIHk9IjY0IiB3aWR0aD0iMjQwIiBoZWlnaHQ9IjIzMiIgcng9IjE0IiBmaWxsPSIjMWUyMjI3Ii8+CiAgPHBhdGggZD0iTTQyMCA4MiBsLTIyIDggdjIwIGMwIDE2IDExIDI3IDIyIDMyIGMxMSAtNSAyMiAtMTYgMjIgLTMyIHYtMjAgeiIgZmlsbD0iIzNhM2Y0NyIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSI0MjAiIHk9IjEyMCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiI+4pyTPC90ZXh0PgogIDx0ZXh0IHg9IjQyMCIgeT0iMTY4IiBmb250LXNpemU9IjE1IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIj5TRUNVUkUgQk9PVDwvdGV4dD4KICA8dGV4dCB4PSI0MjAiIHk9IjE4OCIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2M5Y2NkMSI+c8OzbG8gcGFzYSBxdWllbiBlc3TDoSBlbiBsYSBsaXN0YTwvdGV4dD4KICA8cmVjdCB4PSIzMjAiIHk9IjIwMCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSI4NCIgcng9IjgiIGZpbGw9IiNmZmZmZmYiLz4KICA8ZyBmb250LXNpemU9IjEyIiBmaWxsPSIjMGIwYjBiIj4KICAgIDx0ZXh0IHg9IjMzMiIgeT0iMjIwIiBmb250LXdlaWdodD0iNzAwIj5MYSBsaXN0YTwvdGV4dD4KICAgIDx0ZXh0IHg9IjMzMiIgeT0iMjM4Ij7inJMgTWljcm9zb2Z0IChkZSBmw6FicmljYSk8L3RleHQ+CiAgICA8dGV4dCB4PSIzMzIiIHk9IjI1NiI+4pyTIHF1aWVuIE1pY3Jvc29mdCBhdmFsYTwvdGV4dD4KICAgIDx0ZXh0IHg9IjMzMiIgeT0iMjc0Ij4rIGNsYXZlcyBNT0sgZGVsIGR1ZcOxbzwvdGV4dD4KICA8L2c+CgogIDxnIHN0cm9rZT0iIzUyNTE0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIj4KICAgIDxwYXRoIGQ9Ik01NDIgMTQwIEMgNTgwIDEyMCwgNTkwIDEwMCwgNjIwIDEwMCIgbWFya2VyLWVuZD0idXJsKCNmbGVjaGEpIi8+CiAgICA8cGF0aCBkPSJNNTQyIDE4MCBIIDYxOCIgbWFya2VyLWVuZD0idXJsKCNmbGVjaGEpIi8+CiAgICA8cGF0aCBkPSJNNTQyIDIyMCBDIDU4MCAyNDAsIDU5MCAyNjAsIDYyMCAyNjAiIG1hcmtlci1lbmQ9InVybCgjZmxlY2hhKSIvPgogIDwvZz4KCiAgPCEtLSByZXN1bHRhZG9zIC0tPgogIDxnIHN0cm9rZS13aWR0aD0iMiI+CiAgICA8cmVjdCB4PSI2MjQiIHk9IjcyIiB3aWR0aD0iMjEyIiBoZWlnaHQ9IjU2IiByeD0iMTAiIGZpbGw9IiNkNmVmZDYiIHN0cm9rZT0iIzAwODMwMCIvPgogICAgPHJlY3QgeD0iNjI0IiB5PSIxNTIiIHdpZHRoPSIyMTIiIGhlaWdodD0iNTYiIHJ4PSIxMCIgZmlsbD0iI2Q2ZWZkNiIgc3Ryb2tlPSIjMDA4MzAwIi8+CiAgICA8cmVjdCB4PSI2MjQiIHk9IjIzMiIgd2lkdGg9IjIxMiIgaGVpZ2h0PSI3NiIgcng9IjEwIiBmaWxsPSIjZmRlZmNjIiBzdHJva2U9IiNlZGExMDAiLz4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI2NDAiIHk9IjEwNSI+4pyTIEFycmFuY2E8L3RleHQ+CiAgICA8dGV4dCB4PSI2NDAiIHk9IjE4NSI+4pyTIEFycmFuY2E8L3RleHQ+CiAgICA8dGV4dCB4PSI2NDAiIHk9IjI1NiI+4pyVIDEuwqogdmV6OiBlcnJvciAweDFBPC90ZXh0PgogIDwvZz4KICA8ZyBmb250LXNpemU9IjEyIiBmaWxsPSIjNTI1MTRlIj4KICAgIDx0ZXh0IHg9IjY0MCIgeT0iMjc2Ij5yZWdpc3RyYXMgc3UgY2xhdmUgTU9LICg2LjIpPC90ZXh0PgogICAgPHRleHQgeD0iNjQwIiB5PSIyOTQiPnkgZGVzZGUgZW50b25jZXMg4pyTIGFycmFuY2E8L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9IjI0IiB5PSIzMzAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM1MjUxNGUiPk1PSyA9IE1hY2hpbmUgT3duZXIgS2V5OiBsYSBjbGF2ZSBxdWUgYcOxYWRlIGVsIGR1ZcOxbyBkZSBsYSBtw6FxdWluYS4gU2UgcmVnaXN0cmEgdW5hIHZleiBwb3IgZXF1aXBvLjwvdGV4dD4KPC9zdmc+Cg==" alt="Secure Boot como portero: Windows y Linux con shim pasan; Ventoy necesita registrar su clave MOK la primera vez" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #6b3fa0;background:#f5f0fb;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧩 <strong style="color:#6b3fa0">Analogía.</strong> Secure Boot es el <strong>portero de una discoteca con lista</strong>. La lista de fábrica sólo
+tiene a Microsoft y a quien Microsoft avala. Ventoy no está en la lista, así que la primera vez
+tienes que <strong>apuntarlo tú</strong>: eso es la pantalla azul de <em>MOK</em> del
+<a href="#62-primer-arranque-con-secure-boot-registrar-la-clave" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 6.2</a>. MOK significa <em>Machine
+Owner Key</em>: la clave que añade el dueño de la máquina.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b45309">❗ Importante</p><p style="margin:.45em 0"><strong>Lo que tienes que saber en 2026.</strong> Los certificados de Microsoft de 2011 que firmaban esos
+shim caducaron en junio de 2026 y se están sustituyendo por los de 2023. Por eso <strong>Ventoy 1.1.14
+cambió su clave</strong>. En la práctica:</p>
+<ul>
+<li>Usa <strong>Ventoy 1.1.14 o posterior</strong> (en esta guía, la 1.1.17).</li>
+<li>Un pincho con un Ventoy antiguo hay que <strong>actualizarlo</strong>, y el equipo te pedirá registrar la
+clave nueva <strong>aunque ya tuviera la vieja</strong>.</li>
+</ul>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>La otra cara.</strong> Una vez registrada su clave, Ventoy por defecto <strong>se salta</strong> Secure Boot para
+las ISO que arranca: por eso arrancan también las que no están firmadas (Arch, Memtest86+…). Es
+cómodo, pero es un agujero: en un equipo con la clave de Ventoy registrada, cualquiera con un
+pincho Ventoy arranca lo que quiera. Lo comentaremos en clase.</p>
+</div>
+<p><strong>🧠 ¿Lo has pillado?</strong></p>
+<ol>
+<li>¿En qué partición del pincho copias las ISO? ¿Y cuál busca el firmware al arrancar?</li>
+<li>Tienes un pincho FAT32 con 40 GB libres. ¿Por qué no puedes copiar la ISO de Windows 11?</li>
+</ol>
+<details>
+<summary style="cursor:pointer;font-weight:600;color:#7a3e1d">Ver respuestas</summary>
+<ol>
+<li>Las ISO van en la partición grande, <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ventoy</code></strong> (exFAT). El firmware busca la pequeña,
+<strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOYEFI</code></strong>, que hace de partición EFI.</li>
+<li>Porque el problema no es el espacio libre sino el <strong>tamaño de cada fichero</strong>: FAT32 no admite
+ficheros de 4 GB o más, y la ISO de Windows 11 pasa de 7 GB.</li>
+</ol>
+</details>
+<h3 id="2-descargar-ventoy" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">2. Descargar Ventoy</h3>
+<ol>
+<li>Entra en la web oficial, https://www.ventoy.net/en/download.html, o en la página de versiones
+de GitHub, https://github.com/ventoy/Ventoy/releases.</li>
+<li>Descarga <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy-1.1.17-windows.zip</code></strong> (o la versión más reciente que aparezca).</li>
+<li><strong>Descomprime la carpeta entera</strong> (clic derecho → <em>Extraer todo</em>). No lo ejecutes desde dentro
+del zip: el programa necesita los ficheros que lo acompañan.</li>
+</ol>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Buena costumbre profesional.</strong> Comprueba la huella SHA-256 del zip con la que publica la
+página de descarga, igual que hiciste con la ISO de Mint:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-FileHash</span> .\ventoy<span style="color:#ae81ff">-1</span>.<span style="color:#ae81ff">1.17</span><span style="color:#ae81ff">-windows</span>.zip <span style="color:#ae81ff">-Algorithm</span> SHA256
+</code></pre>
+<p style="margin:.45em 0">Algunos antivirus marcan Ventoy como sospechoso porque escribe en el disco a bajo nivel, que es
+justo lo que hace el malware. Por eso importa descargarlo <strong>sólo</strong> de la web oficial o de su
+GitHub y verificar la huella.</p>
+</div>
+<h3 id="3-instalar-ventoy-en-el-pincho" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">3. Instalar Ventoy en el pincho</h3>
+<p>Abre <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ventoy2Disk.exe</code></strong> y acepta el aviso de administrador. Si sale en inglés: menú
+<strong>Language → Español</strong>.</p>
+<h4 id="31-conoce-la-ventana" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">3.1 Conoce la ventana</h4>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NjAiIGhlaWdodD0iMzgwIiB2aWV3Qm94PSIwIDAgODYwIDM4MCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5MYSB2ZW50YW5hIGRlIFZlbnRveTJEaXNrPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+RXNxdWVtYSBkZSBsYSB2ZW50YW5hIGRlIFZlbnRveTJEaXNrIGNvbiBjaW5jbyB6b25hcyBudW1lcmFkYXM6IDEsIGVsIG1lbsO6IE9wY2nDs24gY29uIFNlY3VyZSBCb290IHkgZXN0aWxvIGRlIHBhcnRpY2nDs247IDIsIGxhIGxpc3RhIGRlIGRpc3Bvc2l0aXZvcywgZG9uZGUgc2UgZWxpZ2UgZWwgcGluY2hvIHBvciBzdSBjYXBhY2lkYWQ7IDMsIGxhcyB2ZXJzaW9uZXMgZGUgVmVudG95IGVuIGVsIHBhcXVldGUgeSBlbiBlbCBkaXNwb3NpdGl2bzsgNCwgZWwgYm90w7NuIEluc3RhbGFyLCBxdWUgYm9ycmEgdG9kbzsgNSwgZWwgYm90w7NuIEFjdHVhbGl6YXIsIHF1ZSBjb25zZXJ2YSBsYXMgSVNPLjwvZGVzYz4KICA8cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9Ijg1OSIgaGVpZ2h0PSIzNzkiIHJ4PSIxNCIgZmlsbD0iI2ZjZmNmYiIgc3Ryb2tlPSIjZTJlNWU5Ii8+CiAgPHRleHQgeD0iMjQiIHk9IjM4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj5MYSB2ZW50YW5hIGRlIFZlbnRveTJEaXNrPC90ZXh0PgoKICA8IS0tIHZlbnRhbmEgLS0+CiAgPHJlY3QgeD0iMjQiIHk9IjU4IiB3aWR0aD0iNDQwIiBoZWlnaHQ9IjI5NiIgcng9IjgiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzhhOGY5OCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8cGF0aCBkPSJNMjQgNjYgYTggOCAwIDAgMSA4IC04IGg0MjQgYTggOCAwIDAgMSA4IDggdjIyIGgtNDQwIHoiIGZpbGw9IiNlZWYwZjMiLz4KICA8dGV4dCB4PSI0MCIgeT0iNzkiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPlZlbnRveTJEaXNrPC90ZXh0PgogIDxnIHN0cm9rZT0iIzUyNTE0ZSIgc3Ryb2tlLXdpZHRoPSIxLjUiPjxsaW5lIHgxPSIzOTgiIHkxPSI3NCIgeDI9IjQwOCIgeTI9Ijc0Ii8+PHJlY3QgeD0iNDIwIiB5PSI2OCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTQ0MiA2OCBsMTAgMTAgTTQ1MiA2OCBsLTEwIDEwIi8+PC9nPgogIDxsaW5lIHgxPSIyNCIgeTE9Ijg4IiB4Mj0iNDY0IiB5Mj0iODgiIHN0cm9rZT0iI2M5Y2NkMSIvPgogIDx0ZXh0IHg9IjQwIiB5PSIxMDYiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPk9wY2nDs248L3RleHQ+CiAgPHRleHQgeD0iMTAwIiB5PSIxMDYiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPklkaW9tYTwvdGV4dD4KICA8bGluZSB4MT0iMjQiIHkxPSIxMTQiIHgyPSI0NjQiIHkyPSIxMTQiIHN0cm9rZT0iI2UyZTVlOSIvPgoKICA8dGV4dCB4PSI0MCIgeT0iMTM2IiBmb250LXNpemU9IjEzIiBmaWxsPSIjNTI1MTRlIj5EaXNwb3NpdGl2bzwvdGV4dD4KICA8cmVjdCB4PSI0MCIgeT0iMTQ0IiB3aWR0aD0iMzMwIiBoZWlnaHQ9IjMwIiByeD0iNCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjOGE4Zjk4Ii8+CiAgPHRleHQgeD0iNTAiIHk9IjE2NCIgZm9udC1zaXplPSIxMyIgZmlsbD0iIzBiMGIwYiI+RTogWzU3LjcgR0JdIFNhbkRpc2sgVWx0cmE8L3RleHQ+CiAgPHBhdGggZD0iTTM1MiAxNTYgbDYgNiBsNiAtNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTI1MTRlIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxyZWN0IHg9IjM4MCIgeT0iMTQ0IiB3aWR0aD0iMzQiIGhlaWdodD0iMzAiIHJ4PSI0IiBmaWxsPSIjZWVmMGYzIiBzdHJva2U9IiM4YThmOTgiLz4KICA8cGF0aCBkPSJNNDAzIDE1MiBhNyA3IDAgMSAwIDIgOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTI1MTRlIiBzdHJva2Utd2lkdGg9IjEuOCIvPgogIDxwYXRoIGQ9Ik0zOTkgMTUwIGw1IDEgbC0xIDUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzUyNTE0ZSIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KCiAgPHJlY3QgeD0iNDAiIHk9IjE5MCIgd2lkdGg9IjE5MCIgaGVpZ2h0PSI2NiIgcng9IjYiIGZpbGw9IiNmN2Y4ZmEiIHN0cm9rZT0iI2M5Y2NkMSIvPgogIDx0ZXh0IHg9IjEzNSIgeT0iMjEwIiBmb250LXNpemU9IjEyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTI1MTRlIj5WZW50b3kgZW4gcGFxdWV0ZTwvdGV4dD4KICA8dGV4dCB4PSIxMjgiIHk9IjI0MiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzAwODMwMCI+MS4xLjE3PC90ZXh0PgogIDxwYXRoIGQ9Ik0xOTYgMjI2IGwtOSAzIHY4IGMwIDYgNCAxMCA5IDEyIGM1IC0yIDkgLTYgOSAtMTIgdi04IHoiIGZpbGw9IiNkNmVmZDYiIHN0cm9rZT0iIzAwODMwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8cmVjdCB4PSIyNDQiIHk9IjE5MCIgd2lkdGg9IjE5MCIgaGVpZ2h0PSI2NiIgcng9IjYiIGZpbGw9IiNmN2Y4ZmEiIHN0cm9rZT0iI2M5Y2NkMSIvPgogIDx0ZXh0IHg9IjMzOSIgeT0iMjEwIiBmb250LXNpemU9IjEyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTI1MTRlIj5WZW50b3kgZW4gZGlzcG9zaXRpdm88L3RleHQ+CiAgPHRleHQgeD0iMzM5IiB5PSIyNDIiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM4YThmOTgiPuKAlDwvdGV4dD4KCiAgPHJlY3QgeD0iNDAiIHk9IjI2OCIgd2lkdGg9IjM5NCIgaGVpZ2h0PSIyNCIgcng9IjQiIGZpbGw9IiNlZWYwZjMiLz4KICA8dGV4dCB4PSI1MCIgeT0iMjg1IiBmb250LXNpemU9IjEyIiBmaWxsPSIjMGIwYjBiIj5Fc3RhZG86IExJU1RPPC90ZXh0PgoKICA8cmVjdCB4PSIxMTAiIHk9IjMwNiIgd2lkdGg9IjExMCIgaGVpZ2h0PSIzNCIgcng9IjYiIGZpbGw9IiNlZWYwZjMiIHN0cm9rZT0iIzhhOGY5OCIvPgogIDx0ZXh0IHg9IjE2NSIgeT0iMzI4IiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMGIwYjBiIj5JbnN0YWxhcjwvdGV4dD4KICA8cmVjdCB4PSIyNTAiIHk9IjMwNiIgd2lkdGg9IjExMCIgaGVpZ2h0PSIzNCIgcng9IjYiIGZpbGw9IiNlZWYwZjMiIHN0cm9rZT0iIzhhOGY5OCIvPgogIDx0ZXh0IHg9IjMwNSIgeT0iMzI4IiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMGIwYjBiIj5BY3R1YWxpemFyPC90ZXh0PgoKICA8IS0tIG7Dum1lcm9zIHNvYnJlIGxhIHZlbnRhbmEgLS0+CiAgPGcgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiI+CiAgICA8Y2lyY2xlIGN4PSIxNjAiIGN5PSIxMDEiIHI9IjExIiBmaWxsPSIjMmE3OGQ2Ii8+PHRleHQgeD0iMTYwIiB5PSIxMDYiPjE8L3RleHQ+CiAgICA8Y2lyY2xlIGN4PSI0NDAiIGN5PSIxNTkiIHI9IjExIiBmaWxsPSIjZWI2ODM0Ii8+PHRleHQgeD0iNDQwIiB5PSIxNjQiPjI8L3RleHQ+CiAgICA8Y2lyY2xlIGN4PSI0NDgiIGN5PSIyMjMiIHI9IjExIiBmaWxsPSIjMWJhZjdhIi8+PHRleHQgeD0iNDQ4IiB5PSIyMjgiIGZpbGw9IiMwYjBiMGIiPjM8L3RleHQ+CiAgICA8Y2lyY2xlIGN4PSI5NCIgY3k9IjMyMyIgcj0iMTEiIGZpbGw9IiNkMDNiM2IiLz48dGV4dCB4PSI5NCIgeT0iMzI4Ij40PC90ZXh0PgogICAgPGNpcmNsZSBjeD0iMzc2IiBjeT0iMzIzIiByPSIxMSIgZmlsbD0iIzAwODMwMCIvPjx0ZXh0IHg9IjM3NiIgeT0iMzI4Ij41PC90ZXh0PgogIDwvZz4KCiAgPCEtLSBleHBsaWNhY2lvbmVzIC0tPgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPgogICAgPGNpcmNsZSBjeD0iNDk4IiBjeT0iNzIiIHI9IjExIiBmaWxsPSIjMmE3OGQ2Ii8+PHRleHQgeD0iNDk4IiB5PSI3NyIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiI+MTwvdGV4dD4KICAgIDx0ZXh0IHg9IjUxOCIgeT0iNzciIGZvbnQtd2VpZ2h0PSI3MDAiPk9wY2nDs248L3RleHQ+CiAgICA8dGV4dCB4PSI1MTgiIHk9Ijk2IiBmaWxsPSIjNTI1MTRlIj5NYXJjYSDCq1NvcG9ydGUgU2VjdXJlIEJvb3TCuyB5IGRlamE8L3RleHQ+CiAgICA8dGV4dCB4PSI1MTgiIHk9IjExMyIgZmlsbD0iIzUyNTE0ZSI+ZWwgZXN0aWxvIGRlIHBhcnRpY2nDs24gZW4gTUJSLjwvdGV4dD4KCiAgICA8Y2lyY2xlIGN4PSI0OTgiIGN5PSIxMzgiIHI9IjExIiBmaWxsPSIjZWI2ODM0Ii8+PHRleHQgeD0iNDk4IiB5PSIxNDMiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiPjI8L3RleHQ+CiAgICA8dGV4dCB4PSI1MTgiIHk9IjE0MyIgZm9udC13ZWlnaHQ9IjcwMCI+RGlzcG9zaXRpdm88L3RleHQ+CiAgICA8dGV4dCB4PSI1MTgiIHk9IjE2MiIgZmlsbD0iIzUyNTE0ZSI+RWxpZ2UgdHUgcGluY2hvIGZpasOhbmRvdGUgZW4gbGE8L3RleHQ+CiAgICA8dGV4dCB4PSI1MTgiIHk9IjE3OSIgZmlsbD0iIzUyNTE0ZSI+Q0FQQUNJREFELiBTaSBkdWRhcywgcGFyYS48L3RleHQ+CgogICAgPGNpcmNsZSBjeD0iNDk4IiBjeT0iMjA0IiByPSIxMSIgZmlsbD0iIzFiYWY3YSIvPjx0ZXh0IHg9IjQ5OCIgeT0iMjA5IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4zPC90ZXh0PgogICAgPHRleHQgeD0iNTE4IiB5PSIyMDkiIGZvbnQtd2VpZ2h0PSI3MDAiPlZlcnNpb25lczwvdGV4dD4KICAgIDx0ZXh0IHg9IjUxOCIgeT0iMjI4IiBmaWxsPSIjNTI1MTRlIj5MYSBxdWUgdmFzIGEgaW5zdGFsYXIgeSBsYSBxdWUgeWEgdGllbmU8L3RleHQ+CiAgICA8dGV4dCB4PSI1MTgiIHk9IjI0NSIgZmlsbD0iIzUyNTE0ZSI+ZWwgcGluY2hvICh2YWPDrW8gPSBzaW4gVmVudG95KS4gRWw8L3RleHQ+CiAgICA8dGV4dCB4PSI1MTgiIHk9IjI2MiIgZmlsbD0iIzUyNTE0ZSI+ZXNjdWRvIGluZGljYSBTZWN1cmUgQm9vdCBhY3RpdmFkby48L3RleHQ+CgogICAgPGNpcmNsZSBjeD0iNDk4IiBjeT0iMjg3IiByPSIxMSIgZmlsbD0iI2QwM2IzYiIvPjx0ZXh0IHg9IjQ5OCIgeT0iMjkyIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIj40PC90ZXh0PgogICAgPHRleHQgeD0iNTE4IiB5PSIyOTIiIGZvbnQtd2VpZ2h0PSI3MDAiPkluc3RhbGFyID0gZm9ybWF0ZWFyOiDCoWJvcnJhIHRvZG8hPC90ZXh0PgoKICAgIDxjaXJjbGUgY3g9IjQ5OCIgY3k9IjMyMCIgcj0iMTEiIGZpbGw9IiMwMDgzMDAiLz48dGV4dCB4PSI0OTgiIHk9IjMyNSIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiI+NTwvdGV4dD4KICAgIDx0ZXh0IHg9IjUxOCIgeT0iMzI1IiBmb250LXdlaWdodD0iNzAwIj5BY3R1YWxpemFyID0gc8OzbG8gY2FtYmlhIFZUT1lFRkkuPC90ZXh0PgogICAgPHRleHQgeD0iNTE4IiB5PSIzNDIiIGZpbGw9IiM1MjUxNGUiPlR1cyBJU08gc2UgcXVlZGFuIGRvbmRlIGVzdGFiYW4uPC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSIyNCIgeT0iMzcyIiBmb250LXNpemU9IjExLjUiIGZpbGw9IiM1MjUxNGUiPkVzcXVlbWEgc2ltcGxpZmljYWRvOiBsb3MgdGV4dG9zIHB1ZWRlbiB2YXJpYXIgdW4gcG9jbyBzZWfDum4gbGEgdmVyc2nDs24geSBlbCBpZGlvbWEuPC90ZXh0Pgo8L3N2Zz4K" alt="Esquema de la ventana de Ventoy2Disk con las cinco zonas que tienes que mirar" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<h4 id="32-opciones-antes-de-instalar" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">3.2 Opciones antes de instalar</h4>
+<p>Antes de pulsar nada, revisa el menú <strong>Opción</strong> (zona 1):</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Opción</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué elegir</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Soporte Secure Boot</strong> (<em>Secure Boot Support</em>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">✅ <strong>Marcada</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sin ella, en los equipos con Secure Boot activo tendrías que entrar en la BIOS a desactivarlo</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Estilo de partición</strong> (<em>Partition Style</em>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>MBR</strong> (el predeterminado)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Un pincho MBR arranca en UEFI y en BIOS; algunos equipos viejos no arrancan pinchos GPT</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Configuración de partición</strong> (<em>Partition Configuration</em>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sin espacio reservado</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sirve para dejar hueco al final del pincho para otra partición. No lo necesitas</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b45309">❗ Importante</p><p style="margin:.45em 0"><strong>«¿MBR? ¡Pero si en el curso todo es GPT!»</strong> No hay contradicción: la tabla de particiones es
+una propiedad <strong>de cada disco</strong>, no del ordenador. Tu portátil puede tener el disco interno en
+GPT y arrancar sin problema desde un pincho MBR. Es una buena pregunta de examen.</p>
+</div>
+<h4 id="33-instalar" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">3.3 Instalar</h4>
+<ol>
+<li>En <strong>Dispositivo</strong> (zona 2), elige tu pendrive. Fíjate en la <strong>capacidad</strong>: es la forma de
+distinguirlo de otros discos.</li>
+<li>Pulsa <strong>Instalar</strong> (zona 4). Ventoy avisa <strong>dos veces</strong> de que borrará todo. Lee la letra y el
+tamaño antes de aceptar la segunda.</li>
+<li>Al terminar, la columna <strong>Ventoy en dispositivo</strong> (zona 3) muestra la versión, y aparece un
+escudo si el soporte de Secure Boot está activo.</li>
+</ol>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Instalar ≠ Actualizar.</strong> <strong>Instalar</strong> formatea el pincho y borra las ISO. <strong>Actualizar</strong> sólo
+cambia la partición <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOYEFI</code> y <strong>no toca</strong> tus ficheros. Cuando salga una versión nueva de
+Ventoy, el botón que quieres es <strong>Actualizar</strong>.</p>
+</div>
+<h4 id="34-comprobar-lo-que-ha-hecho" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">3.4 Comprobar lo que ha hecho</h4>
+<p>No te fíes: <strong>mira</strong>. En Windows, clic derecho en Inicio → <strong>Administración de discos</strong>, o en
+PowerShell como administrador:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-Disk</span> | <span style="color:#66d9ef">Where-Object</span> BusType <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#x27;USB&#x27;</span>
+<span style="color:#66d9ef">Get-Partition</span> <span style="color:#ae81ff">-DiskNumber</span> N          <span style="color:#8f8a75"># N = el número de disco del pincho</span>
+<span style="color:#66d9ef">Get-Volume</span> | <span style="color:#66d9ef">Where-Object</span> FileSystemLabel <span style="color:#f92672">-in</span> <span style="color:#e6db74">&#x27;Ventoy&#x27;</span>,<span style="color:#e6db74">&#x27;VTOYEFI&#x27;</span>
+</code></pre>
+<p>Tienes que ver <strong>dos particiones</strong>: una grande exFAT llamada <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ventoy</code> y una de 32 MB llamada
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOYEFI</code>. El Explorador de Windows sólo te enseña la primera; la segunda no tiene letra, igual
+que la partición EFI de tu disco interno.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0">Si conectas el pincho a tu MV de Mint (menú <strong>Dispositivos → USB</strong> de VirtualBox), también lo
+puedes ver con la herramienta que ya conoces:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">lsblk -f /dev/sdb      <span style="color:#8f8a75"># o la letra que tenga el pincho</span>
+</code></pre>
+</div>
+<h3 id="4-las-iso-de-la-navaja" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">4. Las ISO de la navaja</h3>
+<h4 id="41-la-lista" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">4.1 La lista</h4>
+<p>Estas son las «hojas» de tu navaja, agrupadas por lo que resuelven:</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iMzUwIiB2aWV3Qm94PSIwIDAgOTAwIDM1MCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5MYXMgaG9qYXMgZGUgbGEgbmF2YWphIHN1aXphPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+TGFzIElTTyBkZWwgcGluY2hvIGVuIGN1YXRybyBncnVwb3MuIEluc3RhbGFyOiBXaW5kb3dzIDExLCBVYnVudHUsIExpbnV4IE1pbnQgeSBBcmNoIExpbnV4LiBSZXNjYXRhcjogSGlyZW4ncyBCb290Q0QgUEUgeSBTeXN0ZW1SZXNjdWUuIERpc2NvczogQ2xvbmV6aWxsYSwgUmVzY3VlemlsbGEsIEdQYXJ0ZWQgTGl2ZSwgTWVtdGVzdDg2KyB5IFNocmVkT1MuIFNlZ3VyaWRhZCB5IHJlZDogS2FsaSBMaW51eCB5IG5ldGJvb3QueHl6LjwvZGVzYz4KICA8cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9Ijg5OSIgaGVpZ2h0PSIzNDkiIHJ4PSIxNCIgZmlsbD0iI2ZjZmNmYiIgc3Ryb2tlPSIjZTJlNWU5Ii8+CiAgPHRleHQgeD0iMjQiIHk9IjM4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj5MYXMgaG9qYXMgZGUgdHUgbmF2YWphIHN1aXphPC90ZXh0PgoKICA8IS0tIHBpbmNobyAtLT4KICA8cmVjdCB4PSIzODAiIHk9IjU2IiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQ0IiByeD0iMTAiIGZpbGw9IiMxZTIyMjciLz4KICA8cmVjdCB4PSI1MDAiIHk9IjY2IiB3aWR0aD0iMjIiIGhlaWdodD0iMjQiIHJ4PSIzIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMxZTIyMjciIHN0cm9rZS13aWR0aD0iMiIvPgogIDx0ZXh0IHg9IjQ0MCIgeT0iODQiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiPlZlbnRveTwvdGV4dD4KICA8ZyBzdHJva2U9IiMxZTIyMjciIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSI+CiAgICA8cGF0aCBkPSJNNDQwIDEwMCBWIDExNiIvPgogICAgPHBhdGggZD0iTTEyNiAxMTYgSCA3NzQiLz4KICAgIDxwYXRoIGQ9Ik0xMjYgMTE2IFYgMTMwIi8+PHBhdGggZD0iTTM0MiAxMTYgViAxMzAiLz48cGF0aCBkPSJNNTU4IDExNiBWIDEzMCIvPjxwYXRoIGQ9Ik03NzQgMTE2IFYgMTMwIi8+CiAgPC9nPgoKICA8ZyBzdHJva2Utd2lkdGg9IjIiPgogICAgPHJlY3QgeD0iMjQiIHk9IjEzMCIgd2lkdGg9IjIwNCIgaGVpZ2h0PSIxOTYiIHJ4PSIxMiIgZmlsbD0iI2NkZTJmYiIgc3Ryb2tlPSIjMmE3OGQ2Ii8+CiAgICA8cmVjdCB4PSIyNDAiIHk9IjEzMCIgd2lkdGg9IjIwNCIgaGVpZ2h0PSIxOTYiIHJ4PSIxMiIgZmlsbD0iI2ZkZTRkOCIgc3Ryb2tlPSIjZWI2ODM0Ii8+CiAgICA8cmVjdCB4PSI0NTYiIHk9IjEzMCIgd2lkdGg9IjIwNCIgaGVpZ2h0PSIxOTYiIHJ4PSIxMiIgZmlsbD0iI2QzZjJlNiIgc3Ryb2tlPSIjMWJhZjdhIi8+CiAgICA8cmVjdCB4PSI2NzIiIHk9IjEzMCIgd2lkdGg9IjIwNCIgaGVpZ2h0PSIxOTYiIHJ4PSIxMiIgZmlsbD0iI2U0ZTBmOCIgc3Ryb2tlPSIjNjI1MGQ2Ii8+CiAgPC9nPgogIDxnIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iNDAiIHk9IjE1OCI+SW5zdGFsYXI8L3RleHQ+CiAgICA8dGV4dCB4PSIyNTYiIHk9IjE1OCI+UmVzY2F0YXI8L3RleHQ+CiAgICA8dGV4dCB4PSI0NzIiIHk9IjE1OCI+RGlzY29zIHkgaGFyZHdhcmU8L3RleHQ+CiAgICA8dGV4dCB4PSI2ODgiIHk9IjE1OCI+U2VndXJpZGFkIHkgcmVkPC90ZXh0PgogIDwvZz4KICA8ZyBmb250LXNpemU9IjEyIiBmaWxsPSIjNTI1MTRlIj4KICAgIDx0ZXh0IHg9IjQwIiB5PSIxNzYiPnBvbmVyIHVuIHNpc3RlbWEgbnVldm88L3RleHQ+CiAgICA8dGV4dCB4PSIyNTYiIHk9IjE3NiI+c2FsdmFyIHVuIGVxdWlwbyBxdWUgbm8gYXJyYW5jYTwvdGV4dD4KICAgIDx0ZXh0IHg9IjQ3MiIgeT0iMTc2Ij5jbG9uYXIsIHBhcnRpY2lvbmFyLCBwcm9iYXIsIGJvcnJhcjwvdGV4dD4KICAgIDx0ZXh0IHg9IjY4OCIgeT0iMTc2Ij5hdWRpdGFyIHkgYXJyYW5jYXIgcG9yIHJlZDwvdGV4dD4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxNCIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI0MCIgeT0iMjA2Ij7igKIgV2luZG93cyAxMTwvdGV4dD4KICAgIDx0ZXh0IHg9IjQwIiB5PSIyMzAiPuKAoiBVYnVudHU8L3RleHQ+CiAgICA8dGV4dCB4PSI0MCIgeT0iMjU0Ij7igKIgTGludXggTWludDwvdGV4dD4KICAgIDx0ZXh0IHg9IjQwIiB5PSIyNzgiPuKAoiBBcmNoIExpbnV4PC90ZXh0PgoKICAgIDx0ZXh0IHg9IjI1NiIgeT0iMjA2Ij7igKIgSGlyZW4ncyBCb290Q0QgUEU8L3RleHQ+CiAgICA8dGV4dCB4PSIyNTYiIHk9IjIzMCI+4oCiIFN5c3RlbVJlc2N1ZTwvdGV4dD4KCiAgICA8dGV4dCB4PSI0NzIiIHk9IjIwNiI+4oCiIENsb25lemlsbGE8L3RleHQ+CiAgICA8dGV4dCB4PSI0NzIiIHk9IjIzMCI+4oCiIFJlc2N1ZXppbGxhPC90ZXh0PgogICAgPHRleHQgeD0iNDcyIiB5PSIyNTQiPuKAoiBHUGFydGVkIExpdmU8L3RleHQ+CiAgICA8dGV4dCB4PSI0NzIiIHk9IjI3OCI+4oCiIE1lbXRlc3Q4Nis8L3RleHQ+CiAgICA8dGV4dCB4PSI0NzIiIHk9IjMwMiI+4oCiIFNocmVkT1M8L3RleHQ+CgogICAgPHRleHQgeD0iNjg4IiB5PSIyMDYiPuKAoiBLYWxpIExpbnV4IChMaXZlKTwvdGV4dD4KICAgIDx0ZXh0IHg9IjY4OCIgeT0iMjMwIj7igKIgbmV0Ym9vdC54eXo8L3RleHQ+CiAgPC9nPgo8L3N2Zz4K" alt="Las ISO agrupadas en cuatro hojas: instalar, rescatar, discos y hardware, seguridad y red" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<p>Versiones vigentes en septiembre de 2026.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Descarga siempre desde la web oficial.</strong> Una ISO de una web de descargas cualquiera puede
+venir modificada, y es un sistema que vas a arrancar <strong>con todos los permisos sobre el equipo</strong>.</p>
+</div>
+<p><strong>🔵 Instalar sistemas</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">ISO</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Fichero (versión actual)</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tamaño</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Web oficial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Windows 11</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Instalar o reinstalar Windows</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">ISO multiedición x64, versión 25H2</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">~7 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">https://www.microsoft.com/es-es/software-download/windows11 → <em>Descargar imagen de disco (ISO)</em></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Ubuntu</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Instalar Ubuntu o probar si el hardware funciona con Linux</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ubuntu-26.04.1-desktop-amd64.iso</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">6,0 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">https://ubuntu.com/download/desktop</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Linux Mint</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">La distribución del curso; ideal para revivir equipos viejos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">linuxmint-22.3-xfce-64bit.iso</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">2,8 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">https://linuxmint.com/download.php</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Arch Linux</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">La <a href="08-instalar-arch-uefi-1-guia.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">instalación de Arch</a></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">archlinux-2026.09.01-x86_64.iso</code> (sale una nueva cada mes)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">1,5 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">https://archlinux.org/download/</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>🟠 Rescatar y reparar</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">ISO</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Fichero (versión actual)</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tamaño</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Web oficial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Hiren's BootCD PE</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Un Windows 11 que arranca desde el pincho con decenas de utilidades: explorador, antivirus, recuperación de ficheros, diagnóstico de discos, edición del registro</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">HBCD_PE_x64.iso</code> (v1.0.8)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">~3,1 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">https://www.hirensbootcd.org/download/</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>SystemRescue</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El equivalente en Linux: reparar GRUB, montar discos, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">chroot</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fsck</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">testdisk</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">systemrescue-13.02-amd64.iso</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">~1,3 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">https://www.system-rescue.org/Download/</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>🟢 Clonar, particionar, diagnosticar, borrar</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">ISO</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Fichero (versión actual)</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tamaño</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Web oficial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Clonezilla</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Clonar un disco entero o guardar una imagen del sistema. En modo texto, muy fiable</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">clonezilla-live-3.3.3-37-amd64.iso</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">~0,5 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">https://clonezilla.org/downloads.php</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Rescuezilla</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Lo mismo que Clonezilla pero con ventanas; compatible con sus imágenes</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rescuezilla-2.6.2-64bit.resolute.iso</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">~1,3 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">https://rescuezilla.com/download</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>GParted Live</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Crear, mover y redimensionar particiones de forma gráfica</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">gparted-live-1.8.1-6-amd64.iso</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">~0,6 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">https://gparted.org/download.php</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Memtest86+</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Probar la memoria RAM durante horas</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mt86plus_8.10_x86_64.iso</code> (viene en un <strong>.zip</strong>: descomprímelo)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">&lt; 50 MB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">https://www.memtest.org/</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>ShredOS</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Borrar un disco de forma segura con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nwipe</code> antes de vender o reciclar el equipo</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">la <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.iso</code> de x86-64 más reciente</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">&lt; 200 MB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">https://github.com/PartialVolume/shredos.x86_64/releases</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>🟣 Seguridad y red</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">ISO</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Fichero (versión actual)</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tamaño</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Web oficial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Kali Linux</strong> (<em>Live</em>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Auditoría de seguridad. La usarás en el ciclo; aquí, para conocerla</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">la ISO <strong>Live</strong> más reciente (2026.x)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">~4,5 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">https://www.kali.org/get-kali/ → <em>Live Boot</em></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>netboot.xyz</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Una ISO diminuta que descarga por red el instalador de decenas de sistemas</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">netboot.xyz.iso</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">&lt; 5 MB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">https://netboot.xyz/downloads/</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Kali y las herramientas de contraseñas no son juguetes.</strong> Kali trae herramientas de ataque y
+Hiren's trae utilidades para quitar la contraseña de una cuenta local de Windows. Úsalas <strong>sólo
+en equipos tuyos o en los que te hayan autorizado por escrito</strong>. Entrar en un sistema ajeno sin
+permiso es delito en España (artículo 197 bis del Código Penal), aunque «sólo estuvieras
+mirando». En el aula: sólo en tus máquinas virtuales.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><strong>¿Y Windows 10?</strong> Perdió el soporte gratuito en octubre de 2025. Si te lo piden para un equipo
+concreto, añádelo, pero no forma parte de la navaja estándar.</p>
+</div>
+<h4 id="42-cuánto-ocupa-todo" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">4.2 Cuánto ocupa todo</h4>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Conjunto</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tamaño aproximado</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Pincho</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Todo lo del apartado 4.1</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">~29 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>64 GB</strong> (un pincho «de 32 GB» tiene unos 29,8 GB útiles: no cabe con margen)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Lista reducida: Windows 11, Mint, Hiren's, SystemRescue, Clonezilla, GParted, Memtest86+</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">~15 GB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">32 GB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>¿Por qué un pincho de 32 GB no tiene 32 GB?</strong> Porque el fabricante y Windows cuentan distinto:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Quién</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Cómo cuenta</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">1 «giga» son…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">El fabricante</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>GB decimales</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">1 000 000 000 bytes</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Windows</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>GiB binarios</strong> (aunque ponga «GB»)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">1 073 741 824 bytes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>32 000 000 000 ÷ 1 073 741 824 ≈ <strong>29,8</strong>. No te han timado: es la misma cantidad de bytes contada
+con otra unidad. Es lo mismo que pasaba con tu disco de 25 GB, que salía como 26 843 MB en el
+instalador de Mint, pero al revés.</p>
+<h4 id="43-verificar-cada-descarga" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">4.3 Verificar cada descarga</h4>
+<p>Cada web oficial publica la huella SHA-256 de sus ISO (un fichero <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">SHA256SUMS</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sha256sum.txt</code> o
+la propia cifra junto al botón de descarga). Compruébala <strong>antes</strong> de copiar la ISO al pincho:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-FileHash</span> .\archlinux<span style="color:#ae81ff">-2026</span>.<span style="color:#ae81ff">09.01</span><span style="color:#ae81ff">-x86_64</span>.iso <span style="color:#ae81ff">-Algorithm</span> SHA256
+</code></pre>
+<p>Para verificar todas las ISO de una carpeta de una vez y copiar el resultado al entregable:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-ChildItem</span> *.iso | <span style="color:#66d9ef">Get-FileHash</span> <span style="color:#ae81ff">-Algorithm</span> SHA256 | <span style="color:#66d9ef">Format-Table</span> Hash, Path <span style="color:#ae81ff">-AutoSize</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b45309">❗ Importante</p><p style="margin:.45em 0"><strong>Por qué importa aquí más que nunca.</strong> Un programa normal se ejecuta dentro de Windows, con sus
+permisos y su antivirus vigilando. Una ISO de arranque se ejecuta <strong>antes</strong> que Windows, con
+acceso total a todos los discos. Es la puerta de atrás perfecta, y la huella es la única manera
+de saber que el fichero es el que publicó el autor.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #6b3fa0;background:#f5f0fb;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧩 <strong style="color:#6b3fa0">Analogía.</strong> La huella SHA-256 es como el <strong>precinto</strong> de un bote de comida: si el número que
+calculas no coincide con el de la web, alguien ha abierto el bote (o la descarga se ha roto).
+Basta con que cambie un solo bit para que la huella sea completamente distinta.</p>
+</div>
+<h3 id="5-organizar-el-pincho" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">5. Organizar el pincho</h3>
+<h4 id="51-carpetas" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">5.1 Carpetas</h4>
+<p>Ventoy busca ISO <strong>en todo el pincho</strong>, también dentro de carpetas. Aprovéchalo para que el menú
+tenga orden:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-text" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">Ventoy (E:)
+├── ISO/
+│   ├── 1-instalar/
+│   │   ├── Win11_25H2_Spanish_x64.iso
+│   │   ├── ubuntu-26.04.1-desktop-amd64.iso
+│   │   ├── linuxmint-22.3-xfce-64bit.iso
+│   │   └── archlinux-2026.09.01-x86_64.iso
+│   ├── 2-rescate/
+│   │   ├── HBCD_PE_x64.iso
+│   │   └── systemrescue-13.02-amd64.iso
+│   ├── 3-discos/
+│   │   ├── clonezilla-live-3.3.3-37-amd64.iso
+│   │   ├── rescuezilla-2.6.2-64bit.resolute.iso
+│   │   ├── gparted-live-1.8.1-6-amd64.iso
+│   │   ├── mt86plus_8.10_x86_64.iso
+│   │   └── shredos-...-x86-64.iso
+│   └── 4-seguridad-y-red/
+│       ├── kali-linux-2026.x-live-amd64.iso
+│       └── netboot.xyz.iso
+├── ventoy/
+│   └── ventoy.json          ← configuración (apartado 5.2)
+└── LEEME.txt                ← qué hay, qué versión y cuándo lo actualizaste
+</code></pre>
+<p>Normas:</p>
+<ul>
+<li>Nombres de carpeta <strong>sin espacios ni tildes</strong> (como en la guía de Markdown).</li>
+<li>Las ISO con su <strong>nombre original</strong>, que ya dice la versión.</li>
+</ul>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Espera a que termine la copia y usa «Expulsar»</strong> antes de sacar el pincho. Con ficheros de
+varios GB, sacarlo a lo bruto deja ISO a medias que luego «no arrancan sin motivo».</p>
+</div>
+<h4 id="52-el-fichero-ventoyjson" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">5.2 El fichero ventoy.json</h4>
+<p>Ventoy funciona sin configurar nada. Pero con un fichero <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/ventoy/ventoy.json</code> puedes cambiar su
+comportamiento con <strong>plugins</strong>. Hay dos formas de escribirlo:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Forma</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Cómo</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Ojo con</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">✍️ <strong>A mano</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">En VS Code</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Es JSON puro: cuidado con las comas y <strong>sin comentarios</strong> (JSON no los admite)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">🖱️ <strong>Con VentoyPlugson.exe</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Viene en la misma carpeta que Ventoy2Disk. Abre un formulario en el navegador y escribe el fichero por ti</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Guarda una copia <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy_backup.json</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Un ejemplo razonable para empezar:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-json" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#e6e9ee">{</span>
+    <span style="color:#a6e22e">&quot;control&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6e9ee">[</span>
+        <span style="color:#e6e9ee">{</span> <span style="color:#a6e22e">&quot;VTOY_DEFAULT_MENU_MODE&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;1&quot;</span> <span style="color:#e6e9ee">}</span>
+    <span style="color:#e6e9ee">]</span><span style="color:#e6e9ee">,</span>
+    <span style="color:#a6e22e">&quot;menu_alias&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6e9ee">[</span>
+        <span style="color:#e6e9ee">{</span> <span style="color:#a6e22e">&quot;image&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;/ISO/1-instalar/linuxmint-22.3-xfce-64bit.iso&quot;</span><span style="color:#e6e9ee">,</span>
+          <span style="color:#a6e22e">&quot;alias&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;Linux Mint 22.3 Xfce (la del curso)&quot;</span> <span style="color:#e6e9ee">}</span><span style="color:#e6e9ee">,</span>
+        <span style="color:#e6e9ee">{</span> <span style="color:#a6e22e">&quot;image&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;/ISO/2-rescate/HBCD_PE_x64.iso&quot;</span><span style="color:#e6e9ee">,</span>
+          <span style="color:#a6e22e">&quot;alias&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;Hiren&#x27;s BootCD PE (rescate Windows)&quot;</span> <span style="color:#e6e9ee">}</span><span style="color:#e6e9ee">,</span>
+        <span style="color:#e6e9ee">{</span> <span style="color:#a6e22e">&quot;image&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;/ISO/3-discos/mt86plus_8.10_x86_64.iso&quot;</span><span style="color:#e6e9ee">,</span>
+          <span style="color:#a6e22e">&quot;alias&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;Memtest86+ (probar la RAM)&quot;</span> <span style="color:#e6e9ee">}</span>
+    <span style="color:#e6e9ee">]</span>
+<span style="color:#e6e9ee">}</span>
+</code></pre>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Clave</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOY_DEFAULT_MENU_MODE</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">1</code> abre el menú en <strong>vista de árbol</strong>, con las carpetas del apartado anterior. <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">0</code> es la lista plana. También se cambia al vuelo con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F3</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">menu_alias</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Sustituye el nombre del fichero por un texto descriptivo en el menú. La ruta empieza en la raíz del pincho, <strong>con barras <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/</code></strong> aunque estés en Windows</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>¿Te da error el JSON?</strong> Ábrelo en VS Code: las comas que faltan o sobran salen subrayadas en
+rojo. Un error típico es dejar una coma después del <strong>último</strong> elemento de una lista.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><strong>Lo que Ventoy ya hace por ti con Windows 11.</strong> Por defecto tiene activada la opción
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOY_WIN11_BYPASS_CHECK</code>, que salta las comprobaciones de TPM, Secure Boot, RAM y procesador
+del instalador de Windows 11. Útil en el aula con equipos antiguos; recuerda que un Windows 11
+instalado así en hardware no compatible <strong>no tiene garantizadas las actualizaciones</strong>.</p>
+</div>
+<h4 id="53-persistencia-un-linux-que-recuerda-ampliación" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">5.3 Persistencia: un Linux que recuerda (ampliación)</h4>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #0e7490;background:#ecfeff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🚀 <strong style="color:#0e7490">Ampliación.</strong> Un Linux <em>live</em> arrancado desde el pincho lo olvida todo al apagar. Con
+<strong>persistencia</strong>, los cambios (programas instalados, ficheros, ajustes) se guardan en un fichero
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.dat</code> dentro del pincho. Es como darle al sistema <em>live</em> una <strong>mochila</strong>.</p>
+</div>
+<ol>
+<li>
+<p>Crea el fichero de persistencia <strong>desde tu MV de Mint</strong>, con el paquete de Linux de Ventoy
+(<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy-1.1.17-linux.tar.gz</code>), y déjalo en la carpeta compartida con Windows:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">tar xf ventoy-1.1.17-linux.tar.gz
+<span style="color:#66d9ef">cd</span> ventoy-1.1.17
+sudo ./CreatePersistentImg.sh -s 4096 -l casper-rw -o mint-persistencia.dat
+</code></pre>
+<p><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-s</code> es el tamaño en MB y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-l</code> la etiqueta, que <strong>depende de la distribución</strong>: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">casper-rw</code>
+para Ubuntu y Mint, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">persistence</code> para Kali, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">vtoycow</code> para Arch.</p>
+</li>
+<li>
+<p>Copia <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">mint-persistencia.dat</code> al pincho, en una carpeta <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/persistence/</code>.</p>
+</li>
+<li>
+<p>Añade al <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy.json</code>, al mismo nivel que <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">menu_alias</code>:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-json" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#a6e22e">&quot;persistence&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6e9ee">[</span>
+    <span style="color:#e6e9ee">{</span> <span style="color:#a6e22e">&quot;image&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;/ISO/1-instalar/linuxmint-22.3-xfce-64bit.iso&quot;</span><span style="color:#e6e9ee">,</span>
+      <span style="color:#a6e22e">&quot;backend&quot;</span><span style="color:#e6e9ee">:</span> <span style="color:#e6db74">&quot;/persistence/mint-persistencia.dat&quot;</span> <span style="color:#e6e9ee">}</span>
+<span style="color:#e6e9ee">]</span>
+</code></pre>
+</li>
+</ol>
+<p>Al arrancar Mint, Ventoy preguntará si quieres usar la persistencia o arrancar limpio.</p>
+<h3 id="6-arrancar-desde-el-pincho" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6. Arrancar desde el pincho</h3>
+<h4 id="61-el-menú-de-arranque-del-equipo" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">6.1 El menú de arranque del equipo</h4>
+<p>No hace falta cambiar el orden de arranque en la BIOS. Casi todos los equipos tienen un <strong>menú de
+arranque de un solo uso</strong> al que se entra pulsando una tecla nada más encender:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Fabricante</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tecla habitual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Dell, Lenovo, Acer, Gigabyte, Toshiba</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F12</code> (en Acer hay que activarlo antes en la BIOS)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">HP</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F9</code> (o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code> y luego <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F9</code>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">ASUS</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F8</code> en sobremesa, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code> en portátil</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">MSI, ASRock</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F11</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Pulsa la tecla repetidamente</strong> desde que enciendes, como quien llama a un ascensor con prisa.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Si Windows arranca igualmente</strong>, no lo has apagado de verdad: el apagado normal de Windows
+10/11 es en realidad una hibernación y se salta el firmware. Apágalo con <strong>Mayús + Apagar</strong> o,
+desde Windows, <em>Configuración → Sistema → Recuperación → Inicio avanzado → Usar un
+dispositivo</em>.</p>
+</div>
+<p>En el menú puede aparecer el pincho <strong>dos veces</strong>: una con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">UEFI:</code> delante y otra sin ella. Elige
+<strong>la de UEFI</strong>, que es el modo en que trabajamos todo el curso.</p>
+<h4 id="62-primer-arranque-con-secure-boot-registrar-la-clave" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">6.2 Primer arranque con Secure Boot: registrar la clave</h4>
+<p>Si el equipo tiene Secure Boot activo, la <strong>primera vez</strong> no aparece Ventoy sino una pantalla azul
+en inglés, sin ratón. Es el portero preguntando por el nuevo de la lista. Se maneja con las
+<strong>flechas</strong> y <strong>Enter</strong>:</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNDIwIiB2aWV3Qm94PSIwIDAgOTAwIDQyMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5SZWdpc3RyYXIgbGEgY2xhdmUgZGUgVmVudG95IGVuIE1va01hbmFnZXI8L3RpdGxlPgogIDxkZXNjIGlkPSJkIj5TZWlzIHBhbnRhbGxhcyBhenVsZXMgZW4gb3JkZW46IDEsIGF2aXNvIFZlcmlmaWNhdGlvbiBmYWlsZWQgMHgxQSwgcHVsc2EgT0s7IDIsIHB1bHNhIHVuYSB0ZWNsYSBhbnRlcyBkZSBxdWUgYWNhYmUgbGEgY3VlbnRhIGF0csOhczsgMywgZWxpZ2UgRW5yb2xsIGtleSBmcm9tIGRpc2s7IDQsIGVudHJhIGVuIFZUT1lFRkkgeSBlbGlnZSBFTlJPTExfVEhJU19LRVlfSU5fTU9LTUFOQUdFUi5jZXI7IDUsIENvbnRpbnVlIHkgbHVlZ28gWWVzOyA2LCBSZWJvb3QuPC9kZXNjPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODk5IiBoZWlnaHQ9IjQxOSIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPkxhIHBhbnRhbGxhIGF6dWwgZGUgTU9LLCBwYXNvIGEgcGFzbyAoc8OzbG8gbGEgcHJpbWVyYSB2ZXopPC90ZXh0PgoKICA8ZyBmaWxsPSIjMWQzYWE2Ij4KICAgIDxyZWN0IHg9IjM0IiB5PSI1OCIgd2lkdGg9IjI2OCIgaGVpZ2h0PSIxMjQiIHJ4PSI2Ii8+CiAgICA8cmVjdCB4PSIzMTYiIHk9IjU4IiB3aWR0aD0iMjY4IiBoZWlnaHQ9IjEyNCIgcng9IjYiLz4KICAgIDxyZWN0IHg9IjU5OCIgeT0iNTgiIHdpZHRoPSIyNjgiIGhlaWdodD0iMTI0IiByeD0iNiIvPgogICAgPHJlY3QgeD0iMzQiIHk9IjI0NCIgd2lkdGg9IjI2OCIgaGVpZ2h0PSIxMjQiIHJ4PSI2Ii8+CiAgICA8cmVjdCB4PSIzMTYiIHk9IjI0NCIgd2lkdGg9IjI2OCIgaGVpZ2h0PSIxMjQiIHJ4PSI2Ii8+CiAgICA8cmVjdCB4PSI1OTgiIHk9IjI0NCIgd2lkdGg9IjI2OCIgaGVpZ2h0PSIxMjQiIHJ4PSI2Ii8+CiAgPC9nPgoKICA8ZyBmb250LWZhbWlseT0iQ29uc29sYXMsICdEZWphVnUgU2FucyBNb25vJywgbW9ub3NwYWNlIiBmb250LXNpemU9IjEyIiBmaWxsPSIjZTZlOWVlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4KICAgIDwhLS0gMSAtLT4KICAgIDx0ZXh0IHg9IjE2OCIgeT0iOTYiPlZlcmlmaWNhdGlvbiBmYWlsZWQ6PC90ZXh0PgogICAgPHRleHQgeD0iMTY4IiB5PSIxMTQiPigweDFBKSBTZWN1cml0eSBWaW9sYXRpb248L3RleHQ+CiAgICA8cmVjdCB4PSIxMzgiIHk9IjEzNCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZTZlOWVlIi8+CiAgICA8dGV4dCB4PSIxNjgiIHk9IjE1MCIgZmlsbD0iIzBiMGIwYiIgZm9udC13ZWlnaHQ9IjcwMCI+T0s8L3RleHQ+CiAgICA8IS0tIDIgLS0+CiAgICA8dGV4dCB4PSI0NTAiIHk9IjkwIj5TaGltIFVFRkkga2V5IG1hbmFnZW1lbnQ8L3RleHQ+CiAgICA8dGV4dCB4PSI0NTAiIHk9IjExOCI+UHJlc3MgYW55IGtleSB0byBwZXJmb3JtPC90ZXh0PgogICAgPHRleHQgeD0iNDUwIiB5PSIxMzQiPk1PSyBtYW5hZ2VtZW50PC90ZXh0PgogICAgPHRleHQgeD0iNDUwIiB5PSIxNjQiIGZpbGw9IiNmZGQzNmEiPkJvb3RpbmcgaW4gMTAgc2Vjb25kczwvdGV4dD4KICAgIDwhLS0gMyAtLT4KICAgIDx0ZXh0IHg9IjczMiIgeT0iODQiPlBlcmZvcm0gTU9LIG1hbmFnZW1lbnQ8L3RleHQ+CiAgICA8dGV4dCB4PSI3MzIiIHk9IjExNCI+Q29udGludWUgYm9vdDwvdGV4dD4KICAgIDxyZWN0IHg9IjYzNiIgeT0iMTIyIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwIiBmaWxsPSIjZTZlOWVlIi8+CiAgICA8dGV4dCB4PSI3MzIiIHk9IjEzNyIgZmlsbD0iIzBiMGIwYiIgZm9udC13ZWlnaHQ9IjcwMCI+RW5yb2xsIGtleSBmcm9tIGRpc2s8L3RleHQ+CiAgICA8dGV4dCB4PSI3MzIiIHk9IjE2MCI+RW5yb2xsIGhhc2ggZnJvbSBkaXNrPC90ZXh0PgogICAgPCEtLSA0IC0tPgogICAgPHRleHQgeD0iMTY4IiB5PSIyNzAiPlNlbGVjdCBLZXk8L3RleHQ+CiAgICA8dGV4dCB4PSIxNjgiIHk9IjI5OCI+VlRPWUVGSS88L3RleHQ+CiAgICA8cmVjdCB4PSI0NCIgeT0iMzEwIiB3aWR0aD0iMjQ4IiBoZWlnaHQ9IjIwIiBmaWxsPSIjZTZlOWVlIi8+CiAgICA8dGV4dCB4PSIxNjgiIHk9IjMyNSIgZmlsbD0iIzBiMGIwYiIgZm9udC13ZWlnaHQ9IjcwMCIgZm9udC1zaXplPSIxMSI+RU5ST0xMX1RISVNfS0VZX0lOX01PS01BTkFHRVIuY2VyPC90ZXh0PgogICAgPCEtLSA1IC0tPgogICAgPHRleHQgeD0iNDUwIiB5PSIyNzAiPltFbnJvbGwgTU9LXTwvdGV4dD4KICAgIDx0ZXh0IHg9IjQ1MCIgeT0iMjkyIj5WaWV3IGtleSAwPC90ZXh0PgogICAgPHJlY3QgeD0iNDAwIiB5PSIzMDAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMjAiIGZpbGw9IiNlNmU5ZWUiLz4KICAgIDx0ZXh0IHg9IjQ1MCIgeT0iMzE1IiBmaWxsPSIjMGIwYjBiIiBmb250LXdlaWdodD0iNzAwIj5Db250aW51ZTwvdGV4dD4KICAgIDx0ZXh0IHg9IjQ1MCIgeT0iMzQyIj5FbnJvbGwgdGhlIGtleShzKT8gIE5vICA8L3RleHQ+CiAgICA8cmVjdCB4PSI1MjQiIHk9IjMyOSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjE4IiBmaWxsPSIjZTZlOWVlIi8+CiAgICA8dGV4dCB4PSI1NDQiIHk9IjM0MyIgZmlsbD0iIzBiMGIwYiIgZm9udC13ZWlnaHQ9IjcwMCI+WWVzPC90ZXh0PgogICAgPCEtLSA2IC0tPgogICAgPHRleHQgeD0iNzMyIiB5PSIyNzAiPlBlcmZvcm0gTU9LIG1hbmFnZW1lbnQ8L3RleHQ+CiAgICA8cmVjdCB4PSI2NzIiIHk9IjI5MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iI2U2ZTllZSIvPgogICAgPHRleHQgeD0iNzMyIiB5PSIzMDUiIGZpbGw9IiMwYjBiMGIiIGZvbnQtd2VpZ2h0PSI3MDAiPlJlYm9vdDwvdGV4dD4KICAgIDx0ZXh0IHg9IjczMiIgeT0iMzM0Ij5FbnJvbGwga2V5IGZyb20gZGlzazwvdGV4dD4KICAgIDx0ZXh0IHg9IjczMiIgeT0iMzUyIj5FbnJvbGwgaGFzaCBmcm9tIGRpc2s8L3RleHQ+CiAgPC9nPgoKICA8ZyBmb250LXNpemU9IjE1IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj4KICAgIDx0ZXh0IHg9IjM0IiB5PSIyMDQiPjEgwrcgRXMgbG8gZXNwZXJhZG88L3RleHQ+CiAgICA8dGV4dCB4PSIzMTYiIHk9IjIwNCI+MiDCtyDCoVLDoXBpZG8hPC90ZXh0PgogICAgPHRleHQgeD0iNTk4IiB5PSIyMDQiPjMgwrcgUmVnaXN0cmFyIGRlc2RlIGVsIGRpc2NvPC90ZXh0PgogICAgPHRleHQgeD0iMzQiIHk9IjM5MCI+NCDCtyBFbGlnZSBlbCBjZXJ0aWZpY2FkbzwvdGV4dD4KICAgIDx0ZXh0IHg9IjMxNiIgeT0iMzkwIj41IMK3IENvbmZpcm1hPC90ZXh0PgogICAgPHRleHQgeD0iNTk4IiB5PSIzOTAiPjYgwrcgUmVpbmljaWE8L3RleHQ+CiAgPC9nPgogIDxnIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzUyNTE0ZSI+CiAgICA8dGV4dCB4PSIzNCIgeT0iMjIyIj5QdWxzYSBFbnRlciBzb2JyZSBPSy48L3RleHQ+CiAgICA8dGV4dCB4PSIzMTYiIHk9IjIyMiI+UHVsc2EgdW5hIHRlY2xhIGFudGVzIGRlIHF1ZSBhY2FiZSBlbCB0aWVtcG8uPC90ZXh0PgogICAgPHRleHQgeD0iNTk4IiB5PSIyMjIiPkJhamEgY29uIGxhcyBmbGVjaGFzIHkgcHVsc2EgRW50ZXIuPC90ZXh0PgogICAgPHRleHQgeD0iMzQiIHk9IjQwOCI+RW50cmEgZW4gVlRPWUVGSSB5IGVsaWdlIGVsIGZpY2hlcm8gLmNlci48L3RleHQ+CiAgICA8dGV4dCB4PSIzMTYiIHk9IjQwOCI+Q29udGludWUgeSwgY3VhbmRvIHByZWd1bnRlLCBZZXMuPC90ZXh0PgogICAgPHRleHQgeD0iNTk4IiB5PSI0MDgiPlZ1ZWx2ZSBhIGVsZWdpciBlbCBwaW5jaG86IGFob3JhIHPDrSwgVmVudG95LjwvdGV4dD4KICA8L2c+Cjwvc3ZnPgo=" alt="Las seis pantallas de MokManager para registrar la clave de Ventoy, en orden" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<ol>
+<li>Sale un aviso <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Verification failed: (0x1A) Security Violation</code></strong>. Es lo esperado. Pulsa
+<strong>OK</strong>.</li>
+<li>Pulsa una tecla para entrar en <strong>Perform MOK management</strong>. <strong>Hazlo rápido</strong>: hay una cuenta
+atrás de unos segundos y, si se acaba, el equipo sigue arrancando sin registrar nada.</li>
+<li>Elige <strong>Enroll key from disk</strong>.</li>
+<li>Selecciona el volumen <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOYEFI</code></strong> y dentro el fichero <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ENROLL_THIS_KEY_IN_MOKMANAGER.cer</code></strong>.</li>
+<li><strong>Continue</strong> → <strong>Yes</strong>.</li>
+<li><strong>Reboot</strong>. Vuelve a abrir el menú de arranque y elige otra vez el pincho. Ahora sí sale Ventoy.</li>
+</ol>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0">Esto se hace <strong>una vez por equipo</strong>. Si en lugar de la pantalla azul aparece un error y el
+equipo no deja registrar claves, la salida es desactivar Secure Boot en la BIOS para la práctica
+(y volver a activarlo al terminar).</p>
+</div>
+<h4 id="63-el-menú-de-ventoy" style="font-size:1em;margin:1.5em 0 .5em;color:#7a3e1d">6.3 El menú de Ventoy</h4>
+<p>Verás la lista de ISO (o el árbol de carpetas). Se maneja con el teclado:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tecla</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Enter</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Abre el submenú de la ISO; elige <strong>Boot in normal mode</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F3</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Cambia entre vista de lista y de árbol</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F5</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Herramientas: comprobar la ISO, ajustes temporales (por ejemplo, desactivar el salto de comprobaciones de Windows 11 para un arranque)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F6</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Menú personalizado, si lo has creado</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Volver atrás</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En el submenú de cada ISO hay otros modos para cuando el normal falla:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Modo</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Atajo</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>GRUB2</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Algunas distribuciones Linux que no arrancan en modo normal</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>WIMBOOT</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">W</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Imágenes de Windows</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>MEMDISK</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">D</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Carga la ISO entera en RAM; para imágenes pequeñas como Memtest86+ en equipos BIOS</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>🎯 Prueba mínima de la práctica</strong>: arranca tres ISO y llega hasta su pantalla principal, <strong>sin
+instalar nada</strong>:</p>
+<ol>
+<li><strong>Linux Mint</strong> hasta el escritorio <em>live</em>.</li>
+<li><strong>Hiren's BootCD PE</strong> hasta su escritorio.</li>
+<li><strong>El instalador de Windows 11</strong> hasta la pantalla de idioma. Ahí, <strong>apaga</strong>.</li>
+</ol>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>En un equipo real no pulses «Instalar»</strong> en ningún instalador ni «Start» en ShredOS o
+Clonezilla: borrarías el disco del equipo del aula. Las instalaciones de verdad se hacen en
+máquinas virtuales.</p>
+</div>
+<h3 id="7-qué-herramienta-saco-en-cada-situación" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">7. Qué herramienta saco en cada situación</h3>
+<p>Tener las ISO no te hace técnico: lo que te hace técnico es saber <strong>qué hoja de la navaja abrir</strong>.</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Situación</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Herramienta</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué harías</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Windows no arranca y hay que salvar las fotos del usuario</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Hiren's</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Arrancar, abrir el explorador, copiar la carpeta del usuario a un disco externo</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El portátil va lentísimo y quieres pasar el sistema a un SSD nuevo</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Clonezilla</strong> o <strong>Rescuezilla</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Clonar disco a disco (<em>device-device</em>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Pantallazos azules al azar, sin patrón</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Memtest86+</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Dejarlo varias pasadas; un solo error ya significa RAM defectuosa</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Quieres instalar Linux junto a Windows y no hay espacio libre</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>GParted Live</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Reducir la partición de Windows (desfragmentada y sin hibernar antes)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Tras instalar Windows, desaparece el GRUB de Arch</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>SystemRescue</strong> o <strong>Arch</strong> <em>live</em></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Montar las particiones, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">arch-chroot</code> y reinstalar GRUB</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Vas a donar un equipo con disco mecánico</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>ShredOS</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nwipe</code> con una pasada; con discos SSD, mejor el borrado seguro del fabricante (un SSD reparte las escrituras y sobrescribir no garantiza nada)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Ordenador de 2012 que ya no mueve Windows</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Linux Mint</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Probar en <em>live</em>; si va fino, instalar</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Quieres saber si la wifi de un portátil funciona en Linux antes de instalar</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Ubuntu</strong> <em>live</em></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Arrancar y probar sin tocar el disco</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Hay que hacer una copia completa del sistema antes de tocar nada</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Clonezilla</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Guardar una imagen del disco en un disco externo (<em>device-image</em>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Regla del técnico:</strong> antes de cualquier operación que pueda borrar algo (particionar, reparar,
+reinstalar), <strong>primero una copia</strong> con Clonezilla o Hiren's. Cinco minutos de copia te ahorran
+un disgusto enorme.</p>
+</div>
+<h3 id="8-mantener-la-navaja-afilada" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">8. Mantener la navaja afilada</h3>
+<ul>
+<li>🔁 <strong>Actualizar una ISO</strong>: borras la vieja, copias la nueva y cambias el alias en
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy.json</code> si lo tenía. Nada más.</li>
+<li>⬆️ <strong>Actualizar Ventoy</strong>: descargas la versión nueva, abres Ventoy2Disk y pulsas
+<strong>Actualizar</strong> (no Instalar). Las ISO se quedan donde estaban.</li>
+<li>📝 <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">LEEME.txt</code> en la raíz del pincho</strong>, con qué hay, qué versión y cuándo lo revisaste. Un
+técnico que abre tu pincho dentro de un año tiene que saber de un vistazo si el Windows es el de
+2026 o el de 2031.</li>
+<li>📅 <strong>Revisión trimestral</strong>: Arch publica una ISO al mes y Kali una por trimestre. Un instalador
+viejo funciona, pero luego descarga cientos de actualizaciones.</li>
+</ul>
+<h3 id="9-lo-que-despista" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">9. Lo que despista</h3>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Lo que pasa</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Lo que significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">«Windows me dice que formatee el pincho»</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Es la partición <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOYEFI</code>, que Windows no entiende del todo. <strong>Cancela</strong>. Si la formateas, Ventoy deja de arrancar (se arregla con <em>Actualizar</em>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">«He copiado una ISO de 7 GB y no ha dado error»</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Correcto: es exFAT. Si alguna vez da error de «archivo demasiado grande», alguien ha reformateado la partición a FAT32</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">«He copiado Memtest86+ y no sale en el menú»</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Viene dentro de un <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.zip</code>. Ventoy no ve los zip: descomprímelo y copia la <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.iso</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">«Pendrive MBR, pero el curso dice UEFI + GPT»</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El pincho y el disco del equipo son discos distintos, cada uno con su tabla. Ver <a href="#32-opciones-antes-de-instalar" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 3.2</a></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">«¿Dónde está el botón de grabar?»</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">No hay: las ISO no se «graban», se <strong>copian</strong>, como cualquier fichero</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">«Ventoy me ha borrado el disco del equipo»</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">No: Ventoy sólo <strong>arranca</strong> el instalador. Lo que pasa después (particionar, formatear) es cosa de cada sistema, y ahí es donde se borran discos</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="10-problemas-frecuentes" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">10. Problemas frecuentes</h3>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Síntoma</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Causa habitual</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">El pincho no aparece en el menú de arranque del equipo</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Arranque desde USB desactivado en la BIOS, o puerto USB 3 que el firmware no ve</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Probar otro puerto (mejor uno trasero en sobremesa); activar <em>USB Boot</em> en la BIOS</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Pantalla azul <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Verification failed (0x1A)</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Secure Boot activo y clave de Ventoy sin registrar</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Registrar la clave (<a href="#62-primer-arranque-con-secure-boot-registrar-la-clave" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 6.2</a>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Después de actualizar Ventoy vuelve a pedir la clave</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Desde la 1.1.14 la clave es distinta</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Normal: registrar la nueva una vez</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Sale un error en lugar de la pantalla de MOK</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El firmware no acepta la gestión de claves</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Desactivar Secure Boot en la BIOS para la práctica</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Una ISO concreta se queda en negro o da error al arrancar</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Descarga corrupta, o modo de arranque no compatible</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Comprobar SHA-256; si está bien, probar el modo <strong>GRUB2</strong> (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code>) o <strong>MEMDISK</strong> (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">D</code>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Una ISO no aparece en el menú</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Está comprimida (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.zip</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.7z</code>) o tiene una extensión rara</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Descomprimirla; Ventoy lista <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.iso</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.wim</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.img</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.vhd(x)</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.efi</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Windows arranca sin enseñar el menú de arranque</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Inicio rápido de Windows (hibernación)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Apagar con <strong>Mayús + Apagar</strong> o usar <em>Inicio avanzado</em></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Ventoy2Disk no ve el pincho</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Es un disco que Windows identifica como fijo, o falta permiso de administrador</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Ejecutar como administrador; <em>Opción → Mostrar todos los dispositivos</em> <strong>con muchísimo cuidado</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">El pincho «de 64 GB» se llena con 20 GB o las ISO salen corruptas al copiar</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Pendrive falsificado que miente sobre su capacidad</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Comprobarlo con H2testw (Windows) o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">f3</code> (Linux) y tirarlo</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Mint <em>live</em> arranca pero la persistencia no guarda nada</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Etiqueta del <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.dat</code> incorrecta</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Recrearlo con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-l casper-rw</code> (Kali: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">persistence</code>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="parte-2--chuleta" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Parte 2 · Chuleta</h2>
+<p><strong>La práctica en 8 pasos</strong></p>
+<ol>
+<li>Descargar <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy-1.1.17-windows.zip</code>, verificar SHA-256 y descomprimir.</li>
+<li>Desconectar otros discos externos.</li>
+<li><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ventoy2Disk.exe</code> → <strong>Opción</strong>: Secure Boot ✅, estilo <strong>MBR</strong>.</li>
+<li>Elegir el pincho <strong>por su capacidad</strong> → <strong>Instalar</strong> (acepta dos avisos).</li>
+<li>Comprobar las dos particiones (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ventoy</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOYEFI</code>) en Administración de discos.</li>
+<li>Descargar las ISO <strong>de la web oficial</strong>, verificar SHA-256 y copiarlas en carpetas.</li>
+<li>Escribir <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy/ventoy.json</code> y el <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">LEEME.txt</code>.</li>
+<li>Arrancar en un equipo real con la tecla del menú de arranque → registrar MOK si lo pide.</li>
+</ol>
+<p><strong>Teclas</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Dónde</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tecla</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Al encender</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F12</code> / <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F9</code> / <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F11</code> / <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F8</code> / <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Menú de arranque (según fabricante)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Menú de Ventoy</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Enter</code> → <em>Boot in normal mode</em></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Arrancar la ISO</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Menú de Ventoy</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F3</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Lista ↔ árbol</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Menú de Ventoy</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F5</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Herramientas</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Submenú de la ISO</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> / <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">W</code> / <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">D</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Modo GRUB2 / WIMBOOT / MEMDISK</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">MokManager</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">flechas + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Enter</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Navegar (no hay ratón)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Comprobaciones en PowerShell (como administrador)</strong></p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-Disk</span> | <span style="color:#66d9ef">Where-Object</span> BusType <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#x27;USB&#x27;</span>                             <span style="color:#8f8a75"># ver el pincho</span>
+<span style="color:#66d9ef">Get-Partition</span> <span style="color:#ae81ff">-DiskNumber</span> N                                           <span style="color:#8f8a75"># sus particiones</span>
+<span style="color:#66d9ef">Get-ChildItem</span> *.iso | <span style="color:#66d9ef">Get-FileHash</span> <span style="color:#ae81ff">-Algorithm</span> SHA256 | <span style="color:#66d9ef">Format-Table</span> Hash, Path <span style="color:#ae81ff">-AutoSize</span>
+</code></pre>
+<p><strong>Las tres ideas clave</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Idea</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">En una frase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">exFAT</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Porque FAT32 no admite ficheros de 4 GB o más</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">MBR en el pincho</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">La tabla de particiones es de cada disco, no del ordenador</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">MOK</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">La clave del dueño de la máquina: apunta a Ventoy en la lista de Secure Boot</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="parte-3--practica" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Parte 3 · Practica</h2>
+<p>Antes de la práctica real, comprueba que lo tienes claro. <strong>No cuentan para nota</strong>: son para ti.</p>
+<p><strong>Calentamiento</strong></p>
+<ol>
+<li>Te dan un pincho de 64 GB. ¿Cuántos GB verá Windows, aproximadamente? Haz la cuenta.</li>
+<li>Sale Ventoy 1.1.18 y quieres ponerla en tu pincho sin perder las ISO. ¿Qué botón pulsas?</li>
+<li>Arrancas un HP y aparece Windows en lugar del menú de arranque. ¿Qué dos cosas pudieron fallar?</li>
+<li>Has calculado la SHA-256 de una ISO y no coincide con la de la web. ¿Qué haces?</li>
+</ol>
+<details>
+<summary style="cursor:pointer;font-weight:600;color:#7a3e1d">Ver respuestas</summary>
+<ol>
+<li>64 000 000 000 ÷ 1 073 741 824 ≈ <strong>59,6 GB</strong>.</li>
+<li><strong>Actualizar</strong>. Instalar formatearía el pincho y borraría las ISO.</li>
+<li>No pulsaste la tecla correcta a tiempo (en HP es <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F9</code>, o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code> y luego <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">F9</code>), o Windows estaba
+<strong>hibernado</strong> en lugar de apagado: hay que apagar con <strong>Mayús + Apagar</strong>.</li>
+<li><strong>No la uses.</strong> Bórrala y vuelve a descargarla de la web oficial. Si vuelve a no coincidir, no
+la arranques nunca.</li>
+</ol>
+</details>
+<p><strong>Situaciones de práctica</strong> (como las que te pondrá el profesor en la entrega): para cada una,
+¿qué herramienta sacas y qué pasos das?</p>
+<ol>
+<li>Un compañero ha borrado sin querer la partición de Linux de su portátil y ahora el equipo
+arranca directamente en una pantalla negra con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">grub rescue&gt;</code>.</li>
+<li>Una empresa te pide revisar 10 ordenadores que se van a reciclar: no puede quedar ni un dato.
+Tienen discos mecánicos.</li>
+<li>Un cliente dice que su ordenador «se reinicia solo cuando juega», y ya ha cambiado la fuente de
+alimentación.</li>
+</ol>
+<details>
+<summary style="cursor:pointer;font-weight:600;color:#7a3e1d">Ver respuestas</summary>
+<ol>
+<li><strong>SystemRescue</strong> (o la ISO de Arch <em>live</em>): arrancar, montar las particiones que queden,
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">chroot</code> y reinstalar GRUB. Si la partición está borrada del todo, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">testdisk</code> (incluido en
+SystemRescue) puede intentar recuperarla. <strong>Antes de tocar nada</strong>, imagen del disco con
+Clonezilla.</li>
+<li><strong>ShredOS</strong> con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nwipe</code>, una pasada por disco, y apuntar el número de serie de cada disco
+borrado como justificante.</li>
+<li><strong>Memtest86+</strong> varias pasadas para descartar la RAM. Si la RAM está bien, seguiría por la
+temperatura (con Hiren's se pueden ver los sensores).</li>
+</ol>
+</details>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="parte-4--entrega" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Parte 4 · Entrega</h2>
+<p><strong>Tarea Moodle: «Mi navaja suiza USB»</strong>
+Calificación de 0 a 10 · Se aprueba con 5.</p>
+<p>Entrega un <strong>PDF exportado desde Markdown</strong> (como en la
+<a href="01-markdown-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de Markdown</a>) con:</p>
+<ol>
+<li><strong>Ficha del pincho</strong>: marca, capacidad anunciada y capacidad real que ve Windows, versión de
+Ventoy, estilo de partición y si tiene Secure Boot activado. Explica la diferencia entre las
+dos capacidades.</li>
+<li><strong>Captura de Administración de discos</strong> (o la salida de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Get-Partition</code> en texto) donde se vean
+las dos particiones, y un párrafo que explique para qué sirve cada una.</li>
+<li><strong>Tabla de ISO</strong>: nombre, versión, tamaño, web oficial y <strong>resultado de la comprobación
+SHA-256</strong> (la salida de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Get-FileHash</code> en texto, no en captura).</li>
+<li>Tu <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy.json</code></strong> con al menos <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOY_DEFAULT_MENU_MODE</code> y tres <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">menu_alias</code>.</li>
+<li><strong>Prueba de arranque</strong> en un equipo real: foto con el móvil del menú de Ventoy y de las tres
+pantallas del <a href="#63-el-menú-de-ventoy" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 6.3</a>. Indica el modelo del equipo, la tecla del
+menú de arranque y si tuviste que registrar la clave MOK.</li>
+<li><strong>Cuatro preguntas</strong>, con tus palabras:
+<ol>
+<li>¿Por qué Ventoy formatea en exFAT y no en FAT32?</li>
+<li>¿Por qué un pincho con tabla MBR puede arrancar en un equipo UEFI con disco GPT?</li>
+<li>¿Qué es la clave MOK y por qué la pide Ventoy la primera vez?</li>
+<li>Ventoy se salta Secure Boot una vez registrada su clave. ¿Qué riesgo supone eso en los
+equipos de una empresa?</li>
+</ol>
+</li>
+<li><strong>Tres situaciones</strong> que te dará el profesor en Moodle, del estilo de las del
+<a href="#7-qué-herramienta-saco-en-cada-situación" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 7</a>: qué herramienta sacas y qué pasos
+darías.</li>
+<li><strong>Incidencias</strong>: qué se torció y cómo lo resolviste.</li>
+</ol>
+<p><strong>Rúbrica</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Criterio</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Puntos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Ficha del pincho y explicación de las particiones (1 y 2)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">1,5</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Tabla de ISO completa y verificada con SHA-256 (3)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">2</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy.json</code> válido y funcionando (4)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">1</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Prueba de arranque documentada (5)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">2</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Respuestas a las cuatro preguntas (6)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">2</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Situaciones resueltas con criterio (7)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">1</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Incidencias y calidad del documento (8, formato, capturas con pie)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">0,5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b45309">❗ Importante</p><p style="margin:.45em 0"><strong>Defensa en el aula</strong> (sin nota aparte, pero sin ella no se califica la tarea): el profesor te
+pide una herramienta de la lista y tienes que llegar a su pantalla principal en un equipo del
+aula en menos de <strong>tres minutos</strong>, desde el equipo apagado. Practica antes: ¿sabes la tecla del
+menú de arranque de los equipos del aula?</p>
+</div>
+<p><strong>Antes de entregar, comprueba:</strong></p>
+<ul>
+<li style="list-style:none;margin-left:-1.2em">☐ La ficha explica por qué la capacidad real es menor que la anunciada.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Se ven las <strong>dos</strong> particiones y explicas cada una.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Las huellas SHA-256 están <strong>en texto</strong>, no en captura.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Tu <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ventoy.json</code> funciona (lo has probado arrancando).</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Hay foto del menú de Ventoy y de las tres pantallas.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Las cuatro preguntas están respondidas con tus palabras.</li>
+</ul>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Guía</p></div>
+</body>
+</html>

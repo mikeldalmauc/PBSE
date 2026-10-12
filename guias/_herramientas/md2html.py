@@ -22,7 +22,7 @@ except ImportError:
     highlight = None
 
 FUENTE = "'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif"
-MONO = "'Cascadia Code',Consolas,'SF Mono',Menlo,monospace"
+MONO = "Consolas,'Cascadia Mono','SF Mono',Menlo,monospace"
 TINTA, SUAVE, LINEA, PAPEL, ACENTO = '#1c1e21', '#5b6168', '#e2e5e9', '#f6f7f9', '#7a3e1d'
 
 # tipo: (color del borde y del título, fondo, icono, título por defecto)
@@ -186,7 +186,7 @@ def convertir(ruta_md, avisos):
         lang = ''
         if code and code.get('class'):
             lang = code['class'][0].replace('language-', '')
-        estilo(pre, f'background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:{MONO};font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word')
+        estilo(pre, f'background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:{MONO};font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word')
         if highlight and code and lang and lang not in ('text', 'txt', 'plain', 'markdown', 'md'):
             try:
                 lx = get_lexer_by_name({'sh': 'bash', 'shell': 'bash', 'zsh': 'bash', 'ps1': 'powershell', 'cmd': 'batch'}.get(lang, lang))
@@ -197,10 +197,10 @@ def convertir(ruta_md, avisos):
                     sp['style'] = re.sub(r'background-color:\s*#[0-9a-fA-F]+;?', '', sp.get('style', ''))
             except Exception:
                 pass
-        if code: estilo(code, f'font-family:{MONO};background:none;color:inherit')
+        if code: estilo(code, f'font-family:{MONO};font-variant-ligatures:none;background:none;color:inherit')
     for code in soup.find_all('code'):
         if code.parent.name != 'pre':
-            estilo(code, f'font-family:{MONO};font-size:.88em;background:#f3f4f6;border:1px solid {LINEA};border-radius:4px;padding:.1em .35em')
+            estilo(code, f'font-family:{MONO};font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid {LINEA};border-radius:4px;padding:.1em .35em')
 
     # tablas
     for tb in soup.find_all('table'):

@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1-guia.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="usb-multiarranque-con-ventoy-la-navaja-suiza-del-técnico">USB multiarranque con Ventoy: la navaja suiza del técnico</h1>
+<blockquote>
+<p><strong>Antes de empezar.</strong> Es el paso previo a <a href="../08-instalar-arch-uefi/1-guia.md">instalar Arch Linux</a>: ahí
+arrancarás desde una ISO, y aquí aprendes qué pasa entre que pulsas el botón de encendido y
+aparece el instalador.</p>
+</blockquote>
+<p>Imagina que llega a tu mesa un portátil que no arranca. Otro va lentísimo. A un tercero hay que
+instalarle Linux. Un técnico no lleva una caja llena de pinchos: lleva <strong>uno solo</strong> que lo
+arranca todo. Al terminar esta guía tendrás el tuyo.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🎯 <strong>Qué vas a conseguir</strong></td>
+<td>Un pendrive que arranca una docena de sistemas y herramientas, elegidos desde un menú</td>
+</tr>
+<tr>
+<td>🧰 <strong>Qué necesitas</strong></td>
+<td>Un pendrive de 64 GB, un PC con Windows y permisos de administrador (<a href="#0-qu%C3%A9-necesitas">apartado 0</a>)</td>
+</tr>
+<tr>
+<td>⏱️ <strong>Tiempo</strong></td>
+<td>5 horas: 2 sesiones en el aula + las descargas</td>
+</tr>
+<tr>
+<td>📦 <strong>Qué entregas</strong></td>
+<td>La tarea «Mi navaja suiza USB» y una defensa en el aula (<a href="#parte-4--entrega">Parte 4</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tu misión, paso a paso:</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">Entender cómo arranca un equipo desde un pincho y qué hace Ventoy.</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">Instalar Ventoy y comprobar las dos particiones que crea.</label></li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">Descargar y <strong>verificar</strong> las ISO de la navaja.</label></li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3">Organizar el pincho con carpetas y un <code>ventoy.json</code>.</label></li>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4">Arrancar tres ISO en un equipo real, registrando la clave de Secure Boot si hace falta.</label></li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5">Saber qué herramienta sacar en cada situación.</label></li>
+</ul>
+<h2 id="índice">Índice</h2>
+<ul>
+<li><a href="#usb-multiarranque-con-ventoy-la-navaja-suiza-del-t%C3%A9cnico">USB multiarranque con Ventoy: la navaja suiza del técnico</a>
+<ul>
+<li><a href="#%C3%ADndice">Índice</a></li>
+<li><a href="#parte-1--aprende-y-monta-tu-navaja">Parte 1 · Aprende y monta tu navaja</a>
+<ul>
+<li><a href="#0-qu%C3%A9-necesitas">0. Qué necesitas</a></li>
+<li><a href="#1-c%C3%B3mo-funciona-ventoy-por-dentro">1. Cómo funciona Ventoy por dentro</a></li>
+<li><a href="#2-descargar-ventoy">2. Descargar Ventoy</a></li>
+<li><a href="#3-instalar-ventoy-en-el-pincho">3. Instalar Ventoy en el pincho</a></li>
+<li><a href="#4-las-iso-de-la-navaja">4. Las ISO de la navaja</a></li>
+<li><a href="#5-organizar-el-pincho">5. Organizar el pincho</a></li>
+<li><a href="#6-arrancar-desde-el-pincho">6. Arrancar desde el pincho</a></li>
+<li><a href="#7-qu%C3%A9-herramienta-saco-en-cada-situaci%C3%B3n">7. Qué herramienta saco en cada situación</a></li>
+<li><a href="#8-mantener-la-navaja-afilada">8. Mantener la navaja afilada</a></li>
+<li><a href="#9-lo-que-despista">9. Lo que despista</a></li>
+<li><a href="#10-problemas-frecuentes">10. Problemas frecuentes</a></li>
+</ul>
+</li>
+<li><a href="#parte-2--chuleta">Parte 2 · Chuleta</a></li>
+<li><a href="#parte-3--practica">Parte 3 · Practica</a></li>
+<li><a href="#parte-4--entrega">Parte 4 · Entrega</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="parte-1--aprende-y-monta-tu-navaja">Parte 1 · Aprende y monta tu navaja</h2>
+<blockquote>
+<p><strong>Analogía.</strong> Con las herramientas clásicas (Rufus, balenaEtcher, <code>dd</code>), un pincho es como un
+<strong>DVD</strong>: grabas <strong>una</strong> ISO y el pincho <em>se convierte</em> en ella. Para tener cinco sistemas
+necesitas cinco pinchos.</p>
+<p>Ventoy convierte el pincho en una <strong>estantería con conserje</strong>. Tú copias los ficheros <code>.iso</code> en
+la estantería como copiarías fotos, y al encender el equipo el conserje (el cargador de arranque
+de Ventoy) te enseña la lista y arranca el que elijas. ¿Nueva versión de Ubuntu? Borras la ISO
+vieja y copias la nueva. No se reinstala nada.</p>
+</blockquote>
+<p><img src="images/dvd-vs-ventoy.svg" alt="Con Rufus cada pincho es un sistema; con Ventoy un pincho guarda muchas ISO y se elige en un menú"></p>
+<p>Por el camino vas a tocar con las manos lo que en la teoría del arranque son sólo palabras:
+<strong>UEFI y BIOS</strong>, <strong>tabla de particiones</strong>, <strong>partición EFI</strong>, <strong>sistemas de archivos</strong> y
+<strong>Secure Boot</strong>.</p>
+<h3 id="0-qué-necesitas">0. Qué necesitas</h3>
+<table>
+<thead>
+<tr>
+<th>Qué</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>💾 <strong>Pendrive</strong></td>
+<td><strong>64 GB recomendado</strong> (32 GB vale con la lista reducida del <a href="#42-cu%C3%A1nto-ocupa-todo">apartado 4.2</a>). Mejor USB 3: con USB 2 arrancar Windows tarda una eternidad</td>
+</tr>
+<tr>
+<td>🪟 <strong>Equipo Windows</strong></td>
+<td>Con permisos de administrador: Ventoy tiene que escribir en el disco a bajo nivel</td>
+</tr>
+<tr>
+<td>📥 <strong>Descargas</strong></td>
+<td>Unos 30 GB de ISO. Si el profesor las ha dejado en la carpeta compartida del aula, cópialas de ahí</td>
+</tr>
+<tr>
+<td>🖥️ <strong>Un equipo donde probar</strong></td>
+<td>Uno del aula que te indique el profesor, con permiso para abrir su menú de arranque</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!WARNING]
+<strong>Instalar Ventoy borra el pendrive entero.</strong> Copia antes lo que tengas en él. Y comprueba
+<strong>tres veces</strong> qué disco eliges: Ventoy te enseña los discos USB, pero si hay un disco externo
+conectado también aparecerá. <strong>Desconéctalo antes de empezar.</strong></p>
+</blockquote>
+<h3 id="1-cómo-funciona-ventoy-por-dentro">1. Cómo funciona Ventoy por dentro</h3>
+<h4 id="11-del-botón-al-instalador">1.1 Del botón al instalador</h4>
+<p>Antes de tocar nada, mira el camino completo que recorre el equipo cuando arranca desde tu
+pincho. Cada caja es un apartado de esta guía:</p>
+<p><img src="images/camino-arranque.svg" alt="Seis pasos desde que pulsas encender hasta que arranca la ISO, con el control de Secure Boot"></p>
+<h4 id="12-las-dos-particiones-del-pincho">1.2 Las dos particiones del pincho</h4>
+<p>Cuando instalas Ventoy, el pincho queda así:</p>
+<p><img src="images/particiones-ventoy.svg" alt="El pincho tiene una tabla MBR, una partición grande exFAT llamada Ventoy y una pequeña de 32 MB llamada VTOYEFI"></p>
+<ul>
+<li>La <strong>partición 2 (<code>VTOYEFI</code>)</strong> es la que busca el firmware al arrancar. En un equipo UEFI hace
+de <strong>partición EFI</strong> (la misma idea que la partición de 512 MB de tu MV de Mint); en un equipo
+antiguo con BIOS, el arranque empieza en el <strong>MBR</strong> del pincho y salta a ella.</li>
+<li>La <strong>partición 1 (<code>Ventoy</code>)</strong> es un almacén normal. Windows la ve como una unidad USB cualquiera
+y puedes guardar en ella también documentos, drivers o instaladores de programas.</li>
+</ul>
+<blockquote>
+<p>[!NOTE]
+Cuando eliges una ISO en el menú, Ventoy <strong>no la descomprime ni la copia</strong>: la abre
+directamente y le hace creer al sistema que arranca que está leyendo un DVD. Por eso basta con
+copiar el fichero.</p>
+</blockquote>
+<h4 id="13-por-qué-exfat-y-no-fat32">1.3 Por qué exFAT y no FAT32</h4>
+<p><strong>FAT32 no admite ficheros de 4 GB o más.</strong> Y mira cuánto ocupan algunas ISO:</p>
+<p><img src="images/fat32-vs-exfat.svg" alt="Gráfico de barras: Windows 11, Ubuntu y Kali superan el límite de 4 GB de FAT32"></p>
+<p>En FAT32 ni siquiera se podrían copiar. <strong>exFAT</strong> no tiene ese límite y lo leen Windows, macOS y
+Linux.</p>
+<blockquote>
+<p>[!TIP]
+<strong>Para comparar.</strong> Herramientas como Rufus en modo FAT32 tienen que <strong>partir</strong> el fichero
+<code>install.wim</code> de Windows para que quepa. Con Ventoy ese problema no existe: la ISO viaja
+entera.</p>
+</blockquote>
+<h4 id="14-secure-boot-en-dos-minutos">1.4 Secure Boot en dos minutos</h4>
+<p><strong>Secure Boot</strong> es una función de UEFI que sólo deja arrancar programas <strong>firmados</strong> con una
+clave en la que el firmware confía. Los fabricantes traen de serie las claves de <strong>Microsoft</strong>, y
+Microsoft firma también un pequeño programa llamado <strong>shim</strong> que usan casi todas las
+distribuciones Linux para arrancar con Secure Boot activo.</p>
+<p><img src="images/secure-boot-portero.svg" alt="Secure Boot como portero: Windows y Linux con shim pasan; Ventoy necesita registrar su clave MOK la primera vez"></p>
+<blockquote>
+<p><strong>Analogía.</strong> Secure Boot es el <strong>portero de una discoteca con lista</strong>. La lista de fábrica sólo
+tiene a Microsoft y a quien Microsoft avala. Ventoy no está en la lista, así que la primera vez
+tienes que <strong>apuntarlo tú</strong>: eso es la pantalla azul de <em>MOK</em> del
+<a href="#62-primer-arranque-con-secure-boot-registrar-la-clave">apartado 6.2</a>. MOK significa <em>Machine
+Owner Key</em>: la clave que añade el dueño de la máquina.</p>
+</blockquote>
+<blockquote>
+<p>[!IMPORTANT]
+<strong>Lo que tienes que saber en 2026.</strong> Los certificados de Microsoft de 2011 que firmaban esos
+shim caducaron en junio de 2026 y se están sustituyendo por los de 2023. Por eso <strong>Ventoy 1.1.14
+cambió su clave</strong>. En la práctica:</p>
+<ul>
+<li>Usa <strong>Ventoy 1.1.14 o posterior</strong> (en esta guía, la 1.1.17).</li>
+<li>Un pincho con un Ventoy antiguo hay que <strong>actualizarlo</strong>, y el equipo te pedirá registrar la
+clave nueva <strong>aunque ya tuviera la vieja</strong>.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>[!CAUTION]
+<strong>La otra cara.</strong> Una vez registrada su clave, Ventoy por defecto <strong>se salta</strong> Secure Boot para
+las ISO que arranca: por eso arrancan también las que no están firmadas (Arch, Memtest86+…). Es
+cómodo, pero es un agujero: en un equipo con la clave de Ventoy registrada, cualquiera con un
+pincho Ventoy arranca lo que quiera. Lo comentaremos en clase.</p>
+</blockquote>
+<p><strong>🧠 ¿Lo has pillado?</strong></p>
+<ol>
+<li>¿En qué partición del pincho copias las ISO? ¿Y cuál busca el firmware al arrancar?</li>
+<li>Tienes un pincho FAT32 con 40 GB libres. ¿Por qué no puedes copiar la ISO de Windows 11?</li>
+</ol>
+<details>
+<summary>Ver respuestas</summary>
+<ol>
+<li>Las ISO van en la partición grande, <strong><code>Ventoy</code></strong> (exFAT). El firmware busca la pequeña,
+<strong><code>VTOYEFI</code></strong>, que hace de partición EFI.</li>
+<li>Porque el problema no es el espacio libre sino el <strong>tamaño de cada fichero</strong>: FAT32 no admite
+ficheros de 4 GB o más, y la ISO de Windows 11 pasa de 7 GB.</li>
+</ol>
+</details>
+<h3 id="2-descargar-ventoy">2. Descargar Ventoy</h3>
+<ol>
+<li>Entra en la web oficial, https://www.ventoy.net/en/download.html, o en la página de versiones
+de GitHub, https://github.com/ventoy/Ventoy/releases.</li>
+<li>Descarga <strong><code>ventoy-1.1.17-windows.zip</code></strong> (o la versión más reciente que aparezca).</li>
+<li><strong>Descomprime la carpeta entera</strong> (clic derecho → <em>Extraer todo</em>). No lo ejecutes desde dentro
+del zip: el programa necesita los ficheros que lo acompañan.</li>
+</ol>
+<blockquote>
+<p>[!TIP]
+<strong>Buena costumbre profesional.</strong> Comprueba la huella SHA-256 del zip con la que publica la
+página de descarga, igual que hiciste con la ISO de Mint:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">Get-FileHash</span> .\ventoy<span class="hljs-literal">-1</span>.<span class="hljs-number">1.17</span><span class="hljs-literal">-windows</span>.zip <span class="hljs-literal">-Algorithm</span> SHA256
+</div></code></pre>
+<p>Algunos antivirus marcan Ventoy como sospechoso porque escribe en el disco a bajo nivel, que es
+justo lo que hace el malware. Por eso importa descargarlo <strong>sólo</strong> de la web oficial o de su
+GitHub y verificar la huella.</p>
+</blockquote>
+<h3 id="3-instalar-ventoy-en-el-pincho">3. Instalar Ventoy en el pincho</h3>
+<p>Abre <strong><code>Ventoy2Disk.exe</code></strong> y acepta el aviso de administrador. Si sale en inglés: menú
+<strong>Language → Español</strong>.</p>
+<h4 id="31-conoce-la-ventana">3.1 Conoce la ventana</h4>
+<p><img src="images/ventoy2disk-ventana.svg" alt="Esquema de la ventana de Ventoy2Disk con las cinco zonas que tienes que mirar"></p>
+<h4 id="32-opciones-antes-de-instalar">3.2 Opciones antes de instalar</h4>
+<p>Antes de pulsar nada, revisa el menú <strong>Opción</strong> (zona 1):</p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Qué elegir</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Soporte Secure Boot</strong> (<em>Secure Boot Support</em>)</td>
+<td>✅ <strong>Marcada</strong></td>
+<td>Sin ella, en los equipos con Secure Boot activo tendrías que entrar en la BIOS a desactivarlo</td>
+</tr>
+<tr>
+<td><strong>Estilo de partición</strong> (<em>Partition Style</em>)</td>
+<td><strong>MBR</strong> (el predeterminado)</td>
+<td>Un pincho MBR arranca en UEFI y en BIOS; algunos equipos viejos no arrancan pinchos GPT</td>
+</tr>
+<tr>
+<td><strong>Configuración de partición</strong> (<em>Partition Configuration</em>)</td>
+<td>Sin espacio reservado</td>
+<td>Sirve para dejar hueco al final del pincho para otra partición. No lo necesitas</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT]
+<strong>«¿MBR? ¡Pero si en el curso todo es GPT!»</strong> No hay contradicción: la tabla de particiones es
+una propiedad <strong>de cada disco</strong>, no del ordenador. Tu portátil puede tener el disco interno en
+GPT y arrancar sin problema desde un pincho MBR. Es una buena pregunta de examen.</p>
+</blockquote>
+<h4 id="33-instalar">3.3 Instalar</h4>
+<ol>
+<li>En <strong>Dispositivo</strong> (zona 2), elige tu pendrive. Fíjate en la <strong>capacidad</strong>: es la forma de
+distinguirlo de otros discos.</li>
+<li>Pulsa <strong>Instalar</strong> (zona 4). Ventoy avisa <strong>dos veces</strong> de que borrará todo. Lee la letra y el
+tamaño antes de aceptar la segunda.</li>
+<li>Al terminar, la columna <strong>Ventoy en dispositivo</strong> (zona 3) muestra la versión, y aparece un
+escudo si el soporte de Secure Boot está activo.</li>
+</ol>
+<blockquote>
+<p>[!WARNING]
+<strong>Instalar ≠ Actualizar.</strong> <strong>Instalar</strong> formatea el pincho y borra las ISO. <strong>Actualizar</strong> sólo
+cambia la partición <code>VTOYEFI</code> y <strong>no toca</strong> tus ficheros. Cuando salga una versión nueva de
+Ventoy, el botón que quieres es <strong>Actualizar</strong>.</p>
+</blockquote>
+<h4 id="34-comprobar-lo-que-ha-hecho">3.4 Comprobar lo que ha hecho</h4>
+<p>No te fíes: <strong>mira</strong>. En Windows, clic derecho en Inicio → <strong>Administración de discos</strong>, o en
+PowerShell como administrador:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">Get-Disk</span> | <span class="hljs-built_in">Where-Object</span> BusType <span class="hljs-operator">-eq</span> <span class="hljs-string">&#x27;USB&#x27;</span>
+<span class="hljs-built_in">Get-Partition</span> <span class="hljs-literal">-DiskNumber</span> N          <span class="hljs-comment"># N = el número de disco del pincho</span>
+<span class="hljs-built_in">Get-Volume</span> | <span class="hljs-built_in">Where-Object</span> FileSystemLabel <span class="hljs-operator">-in</span> <span class="hljs-string">&#x27;Ventoy&#x27;</span>,<span class="hljs-string">&#x27;VTOYEFI&#x27;</span>
+</div></code></pre>
+<p>Tienes que ver <strong>dos particiones</strong>: una grande exFAT llamada <code>Ventoy</code> y una de 32 MB llamada
+<code>VTOYEFI</code>. El Explorador de Windows sólo te enseña la primera; la segunda no tiene letra, igual
+que la partición EFI de tu disco interno.</p>
+<blockquote>
+<p>[!TIP]
+Si conectas el pincho a tu MV de Mint (menú <strong>Dispositivos → USB</strong> de VirtualBox), también lo
+puedes ver con la herramienta que ya conoces:</p>
+<pre class="hljs"><code><div>lsblk -f /dev/sdb      <span class="hljs-comment"># o la letra que tenga el pincho</span>
+</div></code></pre>
+</blockquote>
+<h3 id="4-las-iso-de-la-navaja">4. Las ISO de la navaja</h3>
+<h4 id="41-la-lista">4.1 La lista</h4>
+<p>Estas son las «hojas» de tu navaja, agrupadas por lo que resuelven:</p>
+<p><img src="images/navaja-suiza.svg" alt="Las ISO agrupadas en cuatro hojas: instalar, rescatar, discos y hardware, seguridad y red"></p>
+<p>Versiones vigentes en septiembre de 2026.</p>
+<blockquote>
+<p>[!WARNING]
+<strong>Descarga siempre desde la web oficial.</strong> Una ISO de una web de descargas cualquiera puede
+venir modificada, y es un sistema que vas a arrancar <strong>con todos los permisos sobre el equipo</strong>.</p>
+</blockquote>
+<p><strong>🔵 Instalar sistemas</strong></p>
+<table>
+<thead>
+<tr>
+<th>ISO</th>
+<th>Para qué</th>
+<th>Fichero (versión actual)</th>
+<th>Tamaño</th>
+<th>Web oficial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows 11</strong></td>
+<td>Instalar o reinstalar Windows</td>
+<td>ISO multiedición x64, versión 25H2</td>
+<td>~7 GB</td>
+<td>https://www.microsoft.com/es-es/software-download/windows11 → <em>Descargar imagen de disco (ISO)</em></td>
+</tr>
+<tr>
+<td><strong>Ubuntu</strong></td>
+<td>Instalar Ubuntu o probar si el hardware funciona con Linux</td>
+<td><code>ubuntu-26.04.1-desktop-amd64.iso</code></td>
+<td>6,0 GB</td>
+<td>https://ubuntu.com/download/desktop</td>
+</tr>
+<tr>
+<td><strong>Linux Mint</strong></td>
+<td>La distribución del curso; ideal para revivir equipos viejos</td>
+<td><code>linuxmint-22.3-xfce-64bit.iso</code></td>
+<td>2,8 GB</td>
+<td>https://linuxmint.com/download.php</td>
+</tr>
+<tr>
+<td><strong>Arch Linux</strong></td>
+<td>La <a href="../08-instalar-arch-uefi/1-guia.md">instalación de Arch</a></td>
+<td><code>archlinux-2026.09.01-x86_64.iso</code> (sale una nueva cada mes)</td>
+<td>1,5 GB</td>
+<td>https://archlinux.org/download/</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🟠 Rescatar y reparar</strong></p>
+<table>
+<thead>
+<tr>
+<th>ISO</th>
+<th>Para qué</th>
+<th>Fichero (versión actual)</th>
+<th>Tamaño</th>
+<th>Web oficial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hiren's BootCD PE</strong></td>
+<td>Un Windows 11 que arranca desde el pincho con decenas de utilidades: explorador, antivirus, recuperación de ficheros, diagnóstico de discos, edición del registro</td>
+<td><code>HBCD_PE_x64.iso</code> (v1.0.8)</td>
+<td>~3,1 GB</td>
+<td>https://www.hirensbootcd.org/download/</td>
+</tr>
+<tr>
+<td><strong>SystemRescue</strong></td>
+<td>El equivalente en Linux: reparar GRUB, montar discos, <code>chroot</code>, <code>fsck</code>, <code>testdisk</code></td>
+<td><code>systemrescue-13.02-amd64.iso</code></td>
+<td>~1,3 GB</td>
+<td>https://www.system-rescue.org/Download/</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🟢 Clonar, particionar, diagnosticar, borrar</strong></p>
+<table>
+<thead>
+<tr>
+<th>ISO</th>
+<th>Para qué</th>
+<th>Fichero (versión actual)</th>
+<th>Tamaño</th>
+<th>Web oficial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Clonezilla</strong></td>
+<td>Clonar un disco entero o guardar una imagen del sistema. En modo texto, muy fiable</td>
+<td><code>clonezilla-live-3.3.3-37-amd64.iso</code></td>
+<td>~0,5 GB</td>
+<td>https://clonezilla.org/downloads.php</td>
+</tr>
+<tr>
+<td><strong>Rescuezilla</strong></td>
+<td>Lo mismo que Clonezilla pero con ventanas; compatible con sus imágenes</td>
+<td><code>rescuezilla-2.6.2-64bit.resolute.iso</code></td>
+<td>~1,3 GB</td>
+<td>https://rescuezilla.com/download</td>
+</tr>
+<tr>
+<td><strong>GParted Live</strong></td>
+<td>Crear, mover y redimensionar particiones de forma gráfica</td>
+<td><code>gparted-live-1.8.1-6-amd64.iso</code></td>
+<td>~0,6 GB</td>
+<td>https://gparted.org/download.php</td>
+</tr>
+<tr>
+<td><strong>Memtest86+</strong></td>
+<td>Probar la memoria RAM durante horas</td>
+<td><code>mt86plus_8.10_x86_64.iso</code> (viene en un <strong>.zip</strong>: descomprímelo)</td>
+<td>&lt; 50 MB</td>
+<td>https://www.memtest.org/</td>
+</tr>
+<tr>
+<td><strong>ShredOS</strong></td>
+<td>Borrar un disco de forma segura con <code>nwipe</code> antes de vender o reciclar el equipo</td>
+<td>la <code>.iso</code> de x86-64 más reciente</td>
+<td>&lt; 200 MB</td>
+<td>https://github.com/PartialVolume/shredos.x86_64/releases</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🟣 Seguridad y red</strong></p>
+<table>
+<thead>
+<tr>
+<th>ISO</th>
+<th>Para qué</th>
+<th>Fichero (versión actual)</th>
+<th>Tamaño</th>
+<th>Web oficial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kali Linux</strong> (<em>Live</em>)</td>
+<td>Auditoría de seguridad. La usarás en el ciclo; aquí, para conocerla</td>
+<td>la ISO <strong>Live</strong> más reciente (2026.x)</td>
+<td>~4,5 GB</td>
+<td>https://www.kali.org/get-kali/ → <em>Live Boot</em></td>
+</tr>
+<tr>
+<td><strong>netboot.xyz</strong></td>
+<td>Una ISO diminuta que descarga por red el instalador de decenas de sistemas</td>
+<td><code>netboot.xyz.iso</code></td>
+<td>&lt; 5 MB</td>
+<td>https://netboot.xyz/downloads/</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!CAUTION]
+<strong>Kali y las herramientas de contraseñas no son juguetes.</strong> Kali trae herramientas de ataque y
+Hiren's trae utilidades para quitar la contraseña de una cuenta local de Windows. Úsalas <strong>sólo
+en equipos tuyos o en los que te hayan autorizado por escrito</strong>. Entrar en un sistema ajeno sin
+permiso es delito en España (artículo 197 bis del Código Penal), aunque «sólo estuvieras
+mirando». En el aula: sólo en tus máquinas virtuales.</p>
+</blockquote>
+<blockquote>
+<p>[!NOTE]
+<strong>¿Y Windows 10?</strong> Perdió el soporte gratuito en octubre de 2025. Si te lo piden para un equipo
+concreto, añádelo, pero no forma parte de la navaja estándar.</p>
+</blockquote>
+<h4 id="42-cuánto-ocupa-todo">4.2 Cuánto ocupa todo</h4>
+<table>
+<thead>
+<tr>
+<th>Conjunto</th>
+<th>Tamaño aproximado</th>
+<th>Pincho</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Todo lo del apartado 4.1</td>
+<td>~29 GB</td>
+<td><strong>64 GB</strong> (un pincho «de 32 GB» tiene unos 29,8 GB útiles: no cabe con margen)</td>
+</tr>
+<tr>
+<td>Lista reducida: Windows 11, Mint, Hiren's, SystemRescue, Clonezilla, GParted, Memtest86+</td>
+<td>~15 GB</td>
+<td>32 GB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>¿Por qué un pincho de 32 GB no tiene 32 GB?</strong> Porque el fabricante y Windows cuentan distinto:</p>
+<table>
+<thead>
+<tr>
+<th>Quién</th>
+<th>Cómo cuenta</th>
+<th>1 «giga» son…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El fabricante</td>
+<td><strong>GB decimales</strong></td>
+<td>1 000 000 000 bytes</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><strong>GiB binarios</strong> (aunque ponga «GB»)</td>
+<td>1 073 741 824 bytes</td>
+</tr>
+</tbody>
+</table>
+<p>32 000 000 000 ÷ 1 073 741 824 ≈ <strong>29,8</strong>. No te han timado: es la misma cantidad de bytes contada
+con otra unidad. Es lo mismo que pasaba con tu disco de 25 GB, que salía como 26 843 MB en el
+instalador de Mint, pero al revés.</p>
+<h4 id="43-verificar-cada-descarga">4.3 Verificar cada descarga</h4>
+<p>Cada web oficial publica la huella SHA-256 de sus ISO (un fichero <code>SHA256SUMS</code>, <code>sha256sum.txt</code> o
+la propia cifra junto al botón de descarga). Compruébala <strong>antes</strong> de copiar la ISO al pincho:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">Get-FileHash</span> .\archlinux<span class="hljs-literal">-2026</span>.<span class="hljs-number">09.01</span><span class="hljs-literal">-x86_64</span>.iso <span class="hljs-literal">-Algorithm</span> SHA256
+</div></code></pre>
+<p>Para verificar todas las ISO de una carpeta de una vez y copiar el resultado al entregable:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">Get-ChildItem</span> *.iso | <span class="hljs-built_in">Get-FileHash</span> <span class="hljs-literal">-Algorithm</span> SHA256 | <span class="hljs-built_in">Format-Table</span> Hash, Path <span class="hljs-literal">-AutoSize</span>
+</div></code></pre>
+<blockquote>
+<p>[!IMPORTANT]
+<strong>Por qué importa aquí más que nunca.</strong> Un programa normal se ejecuta dentro de Windows, con sus
+permisos y su antivirus vigilando. Una ISO de arranque se ejecuta <strong>antes</strong> que Windows, con
+acceso total a todos los discos. Es la puerta de atrás perfecta, y la huella es la única manera
+de saber que el fichero es el que publicó el autor.</p>
+</blockquote>
+<blockquote>
+<p><strong>Analogía.</strong> La huella SHA-256 es como el <strong>precinto</strong> de un bote de comida: si el número que
+calculas no coincide con el de la web, alguien ha abierto el bote (o la descarga se ha roto).
+Basta con que cambie un solo bit para que la huella sea completamente distinta.</p>
+</blockquote>
+<h3 id="5-organizar-el-pincho">5. Organizar el pincho</h3>
+<h4 id="51-carpetas">5.1 Carpetas</h4>
+<p>Ventoy busca ISO <strong>en todo el pincho</strong>, también dentro de carpetas. Aprovéchalo para que el menú
+tenga orden:</p>
+<pre class="hljs"><code><div>Ventoy (E:)
+├── ISO/
+│   ├── 1-instalar/
+│   │   ├── Win11_25H2_Spanish_x64.iso
+│   │   ├── ubuntu-26.04.1-desktop-amd64.iso
+│   │   ├── linuxmint-22.3-xfce-64bit.iso
+│   │   └── archlinux-2026.09.01-x86_64.iso
+│   ├── 2-rescate/
+│   │   ├── HBCD_PE_x64.iso
+│   │   └── systemrescue-13.02-amd64.iso
+│   ├── 3-discos/
+│   │   ├── clonezilla-live-3.3.3-37-amd64.iso
+│   │   ├── rescuezilla-2.6.2-64bit.resolute.iso
+│   │   ├── gparted-live-1.8.1-6-amd64.iso
+│   │   ├── mt86plus_8.10_x86_64.iso
+│   │   └── shredos-...-x86-64.iso
+│   └── 4-seguridad-y-red/
+│       ├── kali-linux-2026.x-live-amd64.iso
+│       └── netboot.xyz.iso
+├── ventoy/
+│   └── ventoy.json          ← configuración (apartado 5.2)
+└── LEEME.txt                ← qué hay, qué versión y cuándo lo actualizaste
+</div></code></pre>
+<p>Normas:</p>
+<ul>
+<li>Nombres de carpeta <strong>sin espacios ni tildes</strong> (como en la guía de Markdown).</li>
+<li>Las ISO con su <strong>nombre original</strong>, que ya dice la versión.</li>
+</ul>
+<blockquote>
+<p>[!WARNING]
+<strong>Espera a que termine la copia y usa «Expulsar»</strong> antes de sacar el pincho. Con ficheros de
+varios GB, sacarlo a lo bruto deja ISO a medias que luego «no arrancan sin motivo».</p>
+</blockquote>
+<h4 id="52-el-fichero-ventoyjson">5.2 El fichero ventoy.json</h4>
+<p>Ventoy funciona sin configurar nada. Pero con un fichero <code>/ventoy/ventoy.json</code> puedes cambiar su
+comportamiento con <strong>plugins</strong>. Hay dos formas de escribirlo:</p>
+<table>
+<thead>
+<tr>
+<th>Forma</th>
+<th>Cómo</th>
+<th>Ojo con</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✍️ <strong>A mano</strong></td>
+<td>En VS Code</td>
+<td>Es JSON puro: cuidado con las comas y <strong>sin comentarios</strong> (JSON no los admite)</td>
+</tr>
+<tr>
+<td>🖱️ <strong>Con VentoyPlugson.exe</strong></td>
+<td>Viene en la misma carpeta que Ventoy2Disk. Abre un formulario en el navegador y escribe el fichero por ti</td>
+<td>Guarda una copia <code>ventoy_backup.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>Un ejemplo razonable para empezar:</p>
+<pre class="hljs"><code><div><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;control&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;VTOY_DEFAULT_MENU_MODE&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span> <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;menu_alias&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/ISO/1-instalar/linuxmint-22.3-xfce-64bit.iso&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;alias&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Linux Mint 22.3 Xfce (la del curso)&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/ISO/2-rescate/HBCD_PE_x64.iso&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;alias&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Hiren&#x27;s BootCD PE (rescate Windows)&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/ISO/3-discos/mt86plus_8.10_x86_64.iso&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;alias&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Memtest86+ (probar la RAM)&quot;</span> <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Clave</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VTOY_DEFAULT_MENU_MODE</code></td>
+<td><code>1</code> abre el menú en <strong>vista de árbol</strong>, con las carpetas del apartado anterior. <code>0</code> es la lista plana. También se cambia al vuelo con <code>F3</code></td>
+</tr>
+<tr>
+<td><code>menu_alias</code></td>
+<td>Sustituye el nombre del fichero por un texto descriptivo en el menú. La ruta empieza en la raíz del pincho, <strong>con barras <code>/</code></strong> aunque estés en Windows</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!TIP]
+<strong>¿Te da error el JSON?</strong> Ábrelo en VS Code: las comas que faltan o sobran salen subrayadas en
+rojo. Un error típico es dejar una coma después del <strong>último</strong> elemento de una lista.</p>
+</blockquote>
+<blockquote>
+<p>[!NOTE]
+<strong>Lo que Ventoy ya hace por ti con Windows 11.</strong> Por defecto tiene activada la opción
+<code>VTOY_WIN11_BYPASS_CHECK</code>, que salta las comprobaciones de TPM, Secure Boot, RAM y procesador
+del instalador de Windows 11. Útil en el aula con equipos antiguos; recuerda que un Windows 11
+instalado así en hardware no compatible <strong>no tiene garantizadas las actualizaciones</strong>.</p>
+</blockquote>
+<h4 id="53-persistencia-un-linux-que-recuerda-ampliación">5.3 Persistencia: un Linux que recuerda (ampliación)</h4>
+<blockquote>
+<p><strong>Ampliación.</strong> Un Linux <em>live</em> arrancado desde el pincho lo olvida todo al apagar. Con
+<strong>persistencia</strong>, los cambios (programas instalados, ficheros, ajustes) se guardan en un fichero
+<code>.dat</code> dentro del pincho. Es como darle al sistema <em>live</em> una <strong>mochila</strong>.</p>
+</blockquote>
+<ol>
+<li>
+<p>Crea el fichero de persistencia <strong>desde tu MV de Mint</strong>, con el paquete de Linux de Ventoy
+(<code>ventoy-1.1.17-linux.tar.gz</code>), y déjalo en la carpeta compartida con Windows:</p>
+<pre class="hljs"><code><div>tar xf ventoy-1.1.17-linux.tar.gz
+<span class="hljs-built_in">cd</span> ventoy-1.1.17
+<span class="hljs-built_in">sudo</span> ./CreatePersistentImg.sh -s 4096 -l casper-rw -o mint-persistencia.dat
+</div></code></pre>
+<p><code>-s</code> es el tamaño en MB y <code>-l</code> la etiqueta, que <strong>depende de la distribución</strong>: <code>casper-rw</code>
+para Ubuntu y Mint, <code>persistence</code> para Kali, <code>vtoycow</code> para Arch.</p>
+</li>
+<li>
+<p>Copia <code>mint-persistencia.dat</code> al pincho, en una carpeta <code>/persistence/</code>.</p>
+</li>
+<li>
+<p>Añade al <code>ventoy.json</code>, al mismo nivel que <code>menu_alias</code>:</p>
+<pre class="hljs"><code><div><span class="hljs-attr">&quot;persistence&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/ISO/1-instalar/linuxmint-22.3-xfce-64bit.iso&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;backend&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/persistence/mint-persistencia.dat&quot;</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span>
+</div></code></pre>
+</li>
+</ol>
+<p>Al arrancar Mint, Ventoy preguntará si quieres usar la persistencia o arrancar limpio.</p>
+<h3 id="6-arrancar-desde-el-pincho">6. Arrancar desde el pincho</h3>
+<h4 id="61-el-menú-de-arranque-del-equipo">6.1 El menú de arranque del equipo</h4>
+<p>No hace falta cambiar el orden de arranque en la BIOS. Casi todos los equipos tienen un <strong>menú de
+arranque de un solo uso</strong> al que se entra pulsando una tecla nada más encender:</p>
+<table>
+<thead>
+<tr>
+<th>Fabricante</th>
+<th>Tecla habitual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dell, Lenovo, Acer, Gigabyte, Toshiba</td>
+<td><code>F12</code> (en Acer hay que activarlo antes en la BIOS)</td>
+</tr>
+<tr>
+<td>HP</td>
+<td><code>F9</code> (o <code>Esc</code> y luego <code>F9</code>)</td>
+</tr>
+<tr>
+<td>ASUS</td>
+<td><code>F8</code> en sobremesa, <code>Esc</code> en portátil</td>
+</tr>
+<tr>
+<td>MSI, ASRock</td>
+<td><code>F11</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!TIP]
+<strong>Pulsa la tecla repetidamente</strong> desde que enciendes, como quien llama a un ascensor con prisa.</p>
+</blockquote>
+<blockquote>
+<p>[!WARNING]
+<strong>Si Windows arranca igualmente</strong>, no lo has apagado de verdad: el apagado normal de Windows
+10/11 es en realidad una hibernación y se salta el firmware. Apágalo con <strong>Mayús + Apagar</strong> o,
+desde Windows, <em>Configuración → Sistema → Recuperación → Inicio avanzado → Usar un
+dispositivo</em>.</p>
+</blockquote>
+<p>En el menú puede aparecer el pincho <strong>dos veces</strong>: una con <code>UEFI:</code> delante y otra sin ella. Elige
+<strong>la de UEFI</strong>, que es el modo en que trabajamos todo el curso.</p>
+<h4 id="62-primer-arranque-con-secure-boot-registrar-la-clave">6.2 Primer arranque con Secure Boot: registrar la clave</h4>
+<p>Si el equipo tiene Secure Boot activo, la <strong>primera vez</strong> no aparece Ventoy sino una pantalla azul
+en inglés, sin ratón. Es el portero preguntando por el nuevo de la lista. Se maneja con las
+<strong>flechas</strong> y <strong>Enter</strong>:</p>
+<p><img src="images/pasos-mok.svg" alt="Las seis pantallas de MokManager para registrar la clave de Ventoy, en orden"></p>
+<ol>
+<li>Sale un aviso <strong><code>Verification failed: (0x1A) Security Violation</code></strong>. Es lo esperado. Pulsa
+<strong>OK</strong>.</li>
+<li>Pulsa una tecla para entrar en <strong>Perform MOK management</strong>. <strong>Hazlo rápido</strong>: hay una cuenta
+atrás de unos segundos y, si se acaba, el equipo sigue arrancando sin registrar nada.</li>
+<li>Elige <strong>Enroll key from disk</strong>.</li>
+<li>Selecciona el volumen <strong><code>VTOYEFI</code></strong> y dentro el fichero <strong><code>ENROLL_THIS_KEY_IN_MOKMANAGER.cer</code></strong>.</li>
+<li><strong>Continue</strong> → <strong>Yes</strong>.</li>
+<li><strong>Reboot</strong>. Vuelve a abrir el menú de arranque y elige otra vez el pincho. Ahora sí sale Ventoy.</li>
+</ol>
+<blockquote>
+<p>[!NOTE]
+Esto se hace <strong>una vez por equipo</strong>. Si en lugar de la pantalla azul aparece un error y el
+equipo no deja registrar claves, la salida es desactivar Secure Boot en la BIOS para la práctica
+(y volver a activarlo al terminar).</p>
+</blockquote>
+<h4 id="63-el-menú-de-ventoy">6.3 El menú de Ventoy</h4>
+<p>Verás la lista de ISO (o el árbol de carpetas). Se maneja con el teclado:</p>
+<table>
+<thead>
+<tr>
+<th>Tecla</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Enter</code></td>
+<td>Abre el submenú de la ISO; elige <strong>Boot in normal mode</strong></td>
+</tr>
+<tr>
+<td><code>F3</code></td>
+<td>Cambia entre vista de lista y de árbol</td>
+</tr>
+<tr>
+<td><code>F5</code></td>
+<td>Herramientas: comprobar la ISO, ajustes temporales (por ejemplo, desactivar el salto de comprobaciones de Windows 11 para un arranque)</td>
+</tr>
+<tr>
+<td><code>F6</code></td>
+<td>Menú personalizado, si lo has creado</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Volver atrás</td>
+</tr>
+</tbody>
+</table>
+<p>En el submenú de cada ISO hay otros modos para cuando el normal falla:</p>
+<table>
+<thead>
+<tr>
+<th>Modo</th>
+<th>Atajo</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GRUB2</strong></td>
+<td><code>Ctrl</code> + <code>R</code></td>
+<td>Algunas distribuciones Linux que no arrancan en modo normal</td>
+</tr>
+<tr>
+<td><strong>WIMBOOT</strong></td>
+<td><code>Ctrl</code> + <code>W</code></td>
+<td>Imágenes de Windows</td>
+</tr>
+<tr>
+<td><strong>MEMDISK</strong></td>
+<td><code>Ctrl</code> + <code>D</code></td>
+<td>Carga la ISO entera en RAM; para imágenes pequeñas como Memtest86+ en equipos BIOS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🎯 Prueba mínima de la práctica</strong>: arranca tres ISO y llega hasta su pantalla principal, <strong>sin
+instalar nada</strong>:</p>
+<ol>
+<li><strong>Linux Mint</strong> hasta el escritorio <em>live</em>.</li>
+<li><strong>Hiren's BootCD PE</strong> hasta su escritorio.</li>
+<li><strong>El instalador de Windows 11</strong> hasta la pantalla de idioma. Ahí, <strong>apaga</strong>.</li>
+</ol>
+<blockquote>
+<p>[!CAUTION]
+<strong>En un equipo real no pulses «Instalar»</strong> en ningún instalador ni «Start» en ShredOS o
+Clonezilla: borrarías el disco del equipo del aula. Las instalaciones de verdad se hacen en
+máquinas virtuales.</p>
+</blockquote>
+<h3 id="7-qué-herramienta-saco-en-cada-situación">7. Qué herramienta saco en cada situación</h3>
+<p>Tener las ISO no te hace técnico: lo que te hace técnico es saber <strong>qué hoja de la navaja abrir</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Situación</th>
+<th>Herramienta</th>
+<th>Qué harías</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows no arranca y hay que salvar las fotos del usuario</td>
+<td><strong>Hiren's</strong></td>
+<td>Arrancar, abrir el explorador, copiar la carpeta del usuario a un disco externo</td>
+</tr>
+<tr>
+<td>El portátil va lentísimo y quieres pasar el sistema a un SSD nuevo</td>
+<td><strong>Clonezilla</strong> o <strong>Rescuezilla</strong></td>
+<td>Clonar disco a disco (<em>device-device</em>)</td>
+</tr>
+<tr>
+<td>Pantallazos azules al azar, sin patrón</td>
+<td><strong>Memtest86+</strong></td>
+<td>Dejarlo varias pasadas; un solo error ya significa RAM defectuosa</td>
+</tr>
+<tr>
+<td>Quieres instalar Linux junto a Windows y no hay espacio libre</td>
+<td><strong>GParted Live</strong></td>
+<td>Reducir la partición de Windows (desfragmentada y sin hibernar antes)</td>
+</tr>
+<tr>
+<td>Tras instalar Windows, desaparece el GRUB de Arch</td>
+<td><strong>SystemRescue</strong> o <strong>Arch</strong> <em>live</em></td>
+<td>Montar las particiones, <code>arch-chroot</code> y reinstalar GRUB</td>
+</tr>
+<tr>
+<td>Vas a donar un equipo con disco mecánico</td>
+<td><strong>ShredOS</strong></td>
+<td><code>nwipe</code> con una pasada; con discos SSD, mejor el borrado seguro del fabricante (un SSD reparte las escrituras y sobrescribir no garantiza nada)</td>
+</tr>
+<tr>
+<td>Ordenador de 2012 que ya no mueve Windows</td>
+<td><strong>Linux Mint</strong></td>
+<td>Probar en <em>live</em>; si va fino, instalar</td>
+</tr>
+<tr>
+<td>Quieres saber si la wifi de un portátil funciona en Linux antes de instalar</td>
+<td><strong>Ubuntu</strong> <em>live</em></td>
+<td>Arrancar y probar sin tocar el disco</td>
+</tr>
+<tr>
+<td>Hay que hacer una copia completa del sistema antes de tocar nada</td>
+<td><strong>Clonezilla</strong></td>
+<td>Guardar una imagen del disco en un disco externo (<em>device-image</em>)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!TIP]
+<strong>Regla del técnico:</strong> antes de cualquier operación que pueda borrar algo (particionar, reparar,
+reinstalar), <strong>primero una copia</strong> con Clonezilla o Hiren's. Cinco minutos de copia te ahorran
+un disgusto enorme.</p>
+</blockquote>
+<h3 id="8-mantener-la-navaja-afilada">8. Mantener la navaja afilada</h3>
+<ul>
+<li>🔁 <strong>Actualizar una ISO</strong>: borras la vieja, copias la nueva y cambias el alias en
+<code>ventoy.json</code> si lo tenía. Nada más.</li>
+<li>⬆️ <strong>Actualizar Ventoy</strong>: descargas la versión nueva, abres Ventoy2Disk y pulsas
+<strong>Actualizar</strong> (no Instalar). Las ISO se quedan donde estaban.</li>
+<li>📝 <strong><code>LEEME.txt</code> en la raíz del pincho</strong>, con qué hay, qué versión y cuándo lo revisaste. Un
+técnico que abre tu pincho dentro de un año tiene que saber de un vistazo si el Windows es el de
+2026 o el de 2031.</li>
+<li>📅 <strong>Revisión trimestral</strong>: Arch publica una ISO al mes y Kali una por trimestre. Un instalador
+viejo funciona, pero luego descarga cientos de actualizaciones.</li>
+</ul>
+<h3 id="9-lo-que-despista">9. Lo que despista</h3>
+<table>
+<thead>
+<tr>
+<th>Lo que pasa</th>
+<th>Lo que significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«Windows me dice que formatee el pincho»</td>
+<td>Es la partición <code>VTOYEFI</code>, que Windows no entiende del todo. <strong>Cancela</strong>. Si la formateas, Ventoy deja de arrancar (se arregla con <em>Actualizar</em>)</td>
+</tr>
+<tr>
+<td>«He copiado una ISO de 7 GB y no ha dado error»</td>
+<td>Correcto: es exFAT. Si alguna vez da error de «archivo demasiado grande», alguien ha reformateado la partición a FAT32</td>
+</tr>
+<tr>
+<td>«He copiado Memtest86+ y no sale en el menú»</td>
+<td>Viene dentro de un <code>.zip</code>. Ventoy no ve los zip: descomprímelo y copia la <code>.iso</code></td>
+</tr>
+<tr>
+<td>«Pendrive MBR, pero el curso dice UEFI + GPT»</td>
+<td>El pincho y el disco del equipo son discos distintos, cada uno con su tabla. Ver <a href="#32-opciones-antes-de-instalar">apartado 3.2</a></td>
+</tr>
+<tr>
+<td>«¿Dónde está el botón de grabar?»</td>
+<td>No hay: las ISO no se «graban», se <strong>copian</strong>, como cualquier fichero</td>
+</tr>
+<tr>
+<td>«Ventoy me ha borrado el disco del equipo»</td>
+<td>No: Ventoy sólo <strong>arranca</strong> el instalador. Lo que pasa después (particionar, formatear) es cosa de cada sistema, y ahí es donde se borran discos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-problemas-frecuentes">10. Problemas frecuentes</h3>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa habitual</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El pincho no aparece en el menú de arranque del equipo</td>
+<td>Arranque desde USB desactivado en la BIOS, o puerto USB 3 que el firmware no ve</td>
+<td>Probar otro puerto (mejor uno trasero en sobremesa); activar <em>USB Boot</em> en la BIOS</td>
+</tr>
+<tr>
+<td>Pantalla azul <code>Verification failed (0x1A)</code></td>
+<td>Secure Boot activo y clave de Ventoy sin registrar</td>
+<td>Registrar la clave (<a href="#62-primer-arranque-con-secure-boot-registrar-la-clave">apartado 6.2</a>)</td>
+</tr>
+<tr>
+<td>Después de actualizar Ventoy vuelve a pedir la clave</td>
+<td>Desde la 1.1.14 la clave es distinta</td>
+<td>Normal: registrar la nueva una vez</td>
+</tr>
+<tr>
+<td>Sale un error en lugar de la pantalla de MOK</td>
+<td>El firmware no acepta la gestión de claves</td>
+<td>Desactivar Secure Boot en la BIOS para la práctica</td>
+</tr>
+<tr>
+<td>Una ISO concreta se queda en negro o da error al arrancar</td>
+<td>Descarga corrupta, o modo de arranque no compatible</td>
+<td>Comprobar SHA-256; si está bien, probar el modo <strong>GRUB2</strong> (<code>Ctrl</code> + <code>R</code>) o <strong>MEMDISK</strong> (<code>Ctrl</code> + <code>D</code>)</td>
+</tr>
+<tr>
+<td>Una ISO no aparece en el menú</td>
+<td>Está comprimida (<code>.zip</code>, <code>.7z</code>) o tiene una extensión rara</td>
+<td>Descomprimirla; Ventoy lista <code>.iso</code>, <code>.wim</code>, <code>.img</code>, <code>.vhd(x)</code> y <code>.efi</code></td>
+</tr>
+<tr>
+<td>Windows arranca sin enseñar el menú de arranque</td>
+<td>Inicio rápido de Windows (hibernación)</td>
+<td>Apagar con <strong>Mayús + Apagar</strong> o usar <em>Inicio avanzado</em></td>
+</tr>
+<tr>
+<td>Ventoy2Disk no ve el pincho</td>
+<td>Es un disco que Windows identifica como fijo, o falta permiso de administrador</td>
+<td>Ejecutar como administrador; <em>Opción → Mostrar todos los dispositivos</em> <strong>con muchísimo cuidado</strong></td>
+</tr>
+<tr>
+<td>El pincho «de 64 GB» se llena con 20 GB o las ISO salen corruptas al copiar</td>
+<td>Pendrive falsificado que miente sobre su capacidad</td>
+<td>Comprobarlo con H2testw (Windows) o <code>f3</code> (Linux) y tirarlo</td>
+</tr>
+<tr>
+<td>Mint <em>live</em> arranca pero la persistencia no guarda nada</td>
+<td>Etiqueta del <code>.dat</code> incorrecta</td>
+<td>Recrearlo con <code>-l casper-rw</code> (Kali: <code>persistence</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="parte-2--chuleta">Parte 2 · Chuleta</h2>
+<p><strong>La práctica en 8 pasos</strong></p>
+<ol>
+<li>Descargar <code>ventoy-1.1.17-windows.zip</code>, verificar SHA-256 y descomprimir.</li>
+<li>Desconectar otros discos externos.</li>
+<li><code>Ventoy2Disk.exe</code> → <strong>Opción</strong>: Secure Boot ✅, estilo <strong>MBR</strong>.</li>
+<li>Elegir el pincho <strong>por su capacidad</strong> → <strong>Instalar</strong> (acepta dos avisos).</li>
+<li>Comprobar las dos particiones (<code>Ventoy</code> y <code>VTOYEFI</code>) en Administración de discos.</li>
+<li>Descargar las ISO <strong>de la web oficial</strong>, verificar SHA-256 y copiarlas en carpetas.</li>
+<li>Escribir <code>ventoy/ventoy.json</code> y el <code>LEEME.txt</code>.</li>
+<li>Arrancar en un equipo real con la tecla del menú de arranque → registrar MOK si lo pide.</li>
+</ol>
+<p><strong>Teclas</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dónde</th>
+<th>Tecla</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Al encender</td>
+<td><code>F12</code> / <code>F9</code> / <code>F11</code> / <code>F8</code> / <code>Esc</code></td>
+<td>Menú de arranque (según fabricante)</td>
+</tr>
+<tr>
+<td>Menú de Ventoy</td>
+<td><code>Enter</code> → <em>Boot in normal mode</em></td>
+<td>Arrancar la ISO</td>
+</tr>
+<tr>
+<td>Menú de Ventoy</td>
+<td><code>F3</code></td>
+<td>Lista ↔ árbol</td>
+</tr>
+<tr>
+<td>Menú de Ventoy</td>
+<td><code>F5</code></td>
+<td>Herramientas</td>
+</tr>
+<tr>
+<td>Submenú de la ISO</td>
+<td><code>Ctrl</code> + <code>R</code> / <code>W</code> / <code>D</code></td>
+<td>Modo GRUB2 / WIMBOOT / MEMDISK</td>
+</tr>
+<tr>
+<td>MokManager</td>
+<td>flechas + <code>Enter</code></td>
+<td>Navegar (no hay ratón)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comprobaciones en PowerShell (como administrador)</strong></p>
+<pre class="hljs"><code><div><span class="hljs-built_in">Get-Disk</span> | <span class="hljs-built_in">Where-Object</span> BusType <span class="hljs-operator">-eq</span> <span class="hljs-string">&#x27;USB&#x27;</span>                             <span class="hljs-comment"># ver el pincho</span>
+<span class="hljs-built_in">Get-Partition</span> <span class="hljs-literal">-DiskNumber</span> N                                           <span class="hljs-comment"># sus particiones</span>
+<span class="hljs-built_in">Get-ChildItem</span> *.iso | <span class="hljs-built_in">Get-FileHash</span> <span class="hljs-literal">-Algorithm</span> SHA256 | <span class="hljs-built_in">Format-Table</span> Hash, Path <span class="hljs-literal">-AutoSize</span>
+</div></code></pre>
+<p><strong>Las tres ideas clave</strong></p>
+<table>
+<thead>
+<tr>
+<th>Idea</th>
+<th>En una frase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exFAT</td>
+<td>Porque FAT32 no admite ficheros de 4 GB o más</td>
+</tr>
+<tr>
+<td>MBR en el pincho</td>
+<td>La tabla de particiones es de cada disco, no del ordenador</td>
+</tr>
+<tr>
+<td>MOK</td>
+<td>La clave del dueño de la máquina: apunta a Ventoy en la lista de Secure Boot</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="parte-3--practica">Parte 3 · Practica</h2>
+<p>Antes de la práctica real, comprueba que lo tienes claro. <strong>No cuentan para nota</strong>: son para ti.</p>
+<p><strong>Calentamiento</strong></p>
+<ol>
+<li>Te dan un pincho de 64 GB. ¿Cuántos GB verá Windows, aproximadamente? Haz la cuenta.</li>
+<li>Sale Ventoy 1.1.18 y quieres ponerla en tu pincho sin perder las ISO. ¿Qué botón pulsas?</li>
+<li>Arrancas un HP y aparece Windows en lugar del menú de arranque. ¿Qué dos cosas pudieron fallar?</li>
+<li>Has calculado la SHA-256 de una ISO y no coincide con la de la web. ¿Qué haces?</li>
+</ol>
+<details>
+<summary>Ver respuestas</summary>
+<ol>
+<li>64 000 000 000 ÷ 1 073 741 824 ≈ <strong>59,6 GB</strong>.</li>
+<li><strong>Actualizar</strong>. Instalar formatearía el pincho y borraría las ISO.</li>
+<li>No pulsaste la tecla correcta a tiempo (en HP es <code>F9</code>, o <code>Esc</code> y luego <code>F9</code>), o Windows estaba
+<strong>hibernado</strong> en lugar de apagado: hay que apagar con <strong>Mayús + Apagar</strong>.</li>
+<li><strong>No la uses.</strong> Bórrala y vuelve a descargarla de la web oficial. Si vuelve a no coincidir, no
+la arranques nunca.</li>
+</ol>
+</details>
+<p><strong>Situaciones de práctica</strong> (como las que te pondrá el profesor en la entrega): para cada una,
+¿qué herramienta sacas y qué pasos das?</p>
+<ol>
+<li>Un compañero ha borrado sin querer la partición de Linux de su portátil y ahora el equipo
+arranca directamente en una pantalla negra con <code>grub rescue&gt;</code>.</li>
+<li>Una empresa te pide revisar 10 ordenadores que se van a reciclar: no puede quedar ni un dato.
+Tienen discos mecánicos.</li>
+<li>Un cliente dice que su ordenador «se reinicia solo cuando juega», y ya ha cambiado la fuente de
+alimentación.</li>
+</ol>
+<details>
+<summary>Ver respuestas</summary>
+<ol>
+<li><strong>SystemRescue</strong> (o la ISO de Arch <em>live</em>): arrancar, montar las particiones que queden,
+<code>chroot</code> y reinstalar GRUB. Si la partición está borrada del todo, <code>testdisk</code> (incluido en
+SystemRescue) puede intentar recuperarla. <strong>Antes de tocar nada</strong>, imagen del disco con
+Clonezilla.</li>
+<li><strong>ShredOS</strong> con <code>nwipe</code>, una pasada por disco, y apuntar el número de serie de cada disco
+borrado como justificante.</li>
+<li><strong>Memtest86+</strong> varias pasadas para descartar la RAM. Si la RAM está bien, seguiría por la
+temperatura (con Hiren's se pueden ver los sensores).</li>
+</ol>
+</details>
+<hr>
+<h2 id="parte-4--entrega">Parte 4 · Entrega</h2>
+<p><strong>Tarea Moodle: «Mi navaja suiza USB»</strong>
+Calificación de 0 a 10 · Se aprueba con 5.</p>
+<p>Entrega un <strong>PDF exportado desde Markdown</strong> (como en la
+<a href="../../1-basico/01-markdown/1-explicacion.md">guía de Markdown</a>) con:</p>
+<ol>
+<li><strong>Ficha del pincho</strong>: marca, capacidad anunciada y capacidad real que ve Windows, versión de
+Ventoy, estilo de partición y si tiene Secure Boot activado. Explica la diferencia entre las
+dos capacidades.</li>
+<li><strong>Captura de Administración de discos</strong> (o la salida de <code>Get-Partition</code> en texto) donde se vean
+las dos particiones, y un párrafo que explique para qué sirve cada una.</li>
+<li><strong>Tabla de ISO</strong>: nombre, versión, tamaño, web oficial y <strong>resultado de la comprobación
+SHA-256</strong> (la salida de <code>Get-FileHash</code> en texto, no en captura).</li>
+<li>Tu <strong><code>ventoy.json</code></strong> con al menos <code>VTOY_DEFAULT_MENU_MODE</code> y tres <code>menu_alias</code>.</li>
+<li><strong>Prueba de arranque</strong> en un equipo real: foto con el móvil del menú de Ventoy y de las tres
+pantallas del <a href="#63-el-men%C3%BA-de-ventoy">apartado 6.3</a>. Indica el modelo del equipo, la tecla del
+menú de arranque y si tuviste que registrar la clave MOK.</li>
+<li><strong>Cuatro preguntas</strong>, con tus palabras:
+<ol>
+<li>¿Por qué Ventoy formatea en exFAT y no en FAT32?</li>
+<li>¿Por qué un pincho con tabla MBR puede arrancar en un equipo UEFI con disco GPT?</li>
+<li>¿Qué es la clave MOK y por qué la pide Ventoy la primera vez?</li>
+<li>Ventoy se salta Secure Boot una vez registrada su clave. ¿Qué riesgo supone eso en los
+equipos de una empresa?</li>
+</ol>
+</li>
+<li><strong>Tres situaciones</strong> que te dará el profesor en Moodle, del estilo de las del
+<a href="#7-qu%C3%A9-herramienta-saco-en-cada-situaci%C3%B3n">apartado 7</a>: qué herramienta sacas y qué pasos
+darías.</li>
+<li><strong>Incidencias</strong>: qué se torció y cómo lo resolviste.</li>
+</ol>
+<p><strong>Rúbrica</strong></p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Puntos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ficha del pincho y explicación de las particiones (1 y 2)</td>
+<td>1,5</td>
+</tr>
+<tr>
+<td>Tabla de ISO completa y verificada con SHA-256 (3)</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>ventoy.json</code> válido y funcionando (4)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Prueba de arranque documentada (5)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Respuestas a las cuatro preguntas (6)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Situaciones resueltas con criterio (7)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Incidencias y calidad del documento (8, formato, capturas con pie)</td>
+<td>0,5</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT]
+<strong>Defensa en el aula</strong> (sin nota aparte, pero sin ella no se califica la tarea): el profesor te
+pide una herramienta de la lista y tienes que llegar a su pantalla principal en un equipo del
+aula en menos de <strong>tres minutos</strong>, desde el equipo apagado. Practica antes: ¿sabes la tecla del
+menú de arranque de los equipos del aula?</p>
+</blockquote>
+<p><strong>Antes de entregar, comprueba:</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6">La ficha explica por qué la capacidad real es menor que la anunciada.</label></li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7">Se ven las <strong>dos</strong> particiones y explicas cada una.</label></li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8">Las huellas SHA-256 están <strong>en texto</strong>, no en captura.</label></li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">Tu <code>ventoy.json</code> funciona (lo has probado arrancando).</label></li>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10">Hay foto del menú de Ventoy y de las tres pantallas.</label></li>
+<li><input type="checkbox" id="checkbox11"><label for="checkbox11">Las cuatro preguntas están respondidas con tus palabras.</label></li>
+</ul>
+
+</body>
+</html>

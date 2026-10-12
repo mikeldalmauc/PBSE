@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Windows por dentro: diferencias con Linux y herramientas del técnico</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="windows-por-dentro-diferencias-con-linux-y-herramientas-del-técnico" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Windows por dentro: diferencias con Linux y herramientas del técnico</h1><div><span style="display:inline-block;background:#6b3fa0;color:#fff;border:1px solid #6b3fa0;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Guía</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 1 · Básico</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 06</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 3 h</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H2 (CMD/PowerShell) y herramientas gráficas de Windows</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #475569;background:#f1f5f9;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧭 <strong style="color:#475569">Antes de empezar.</strong> Conviene haber hecho la <a href="03-procesos-1-guia.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de procesos</a> y la
+<a href="05-explorar-el-sistema-4-tarea-directorios-linux.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">tarea del mapa de directorios</a>: aquí vas
+a comparar todo aquello con Windows. Trabaja en tu <strong>máquina virtual de Windows</strong> si la tienes;
+en el equipo del aula puedes mirar casi todo, pero crear usuarios o tocar servicios pide ser
+administrador.</p>
+</div>
+<p>Llevas años usando Windows… como usuario. Ahora toca mirarlo <strong>como técnico</strong>: dónde guarda cada
+cosa, qué ventanas abres cuando algo falla y cómo se hacen en Windows las mismas tareas que ya
+sabes hacer en Linux. Es una guía resumida: lo justo para moverte con soltura.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #6b3fa0;background:#f5f0fb;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧩 <strong style="color:#6b3fa0">Analogía.</strong> Windows y Linux son dos coches de marcas distintas. Los dos tienen volante, pedales
+y motor, pero los mandos están en otro sitio y se llaman de otra forma. Un buen mecánico no se
+aprende un coche: aprende <strong>qué piezas tiene cualquier coche</strong> y luego busca dónde las ha puesto
+cada marca.</p>
+</div>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">🎯 <strong>Qué vas a aprender</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Las diferencias clave con Linux y las ventanas que usa un técnico para gestionar Windows</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">🧰 <strong>Qué necesitas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Windows 10 u 11 (mejor en una MV) y, para algunas tareas, una cuenta de administrador</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">⏱️ <strong>Tiempo</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">3 horas</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">📦 <strong>Qué entregas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">La ficha «Radiografía de mi Windows» (<a href="#parte-4--entrega" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 4</a>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Tu misión, paso a paso:</strong></p>
+<ul>
+<li style="list-style:none;margin-left:-1.2em">☐ Saber dónde guarda Windows lo que en Linux está en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/home</code> o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/usr</code>.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Abrir cualquier herramienta de administración en dos segundos (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code>).</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Leer el Administrador de tareas, el de dispositivos y la Administración de discos.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Gestionar usuarios y grupos, con ventanas y con PowerShell.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Revisar servicios, eventos y características de Windows.</li>
+</ul>
+<h2 id="índice" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Índice</h2>
+<ul style="background:#f6f7f9;border:1px solid #e2e5e9;border-radius:8px;padding:14px 18px 14px 34px;font-size:.93em">
+<li><a href="#windows-por-dentro-diferencias-con-linux-y-herramientas-del-técnico" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Windows por dentro: diferencias con Linux y herramientas del técnico</a>
+<ul style="padding-left:18px">
+<li><a href="#índice" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Índice</a></li>
+<li><a href="#parte-1--aprende" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 1 · Aprende</a>
+<ul style="padding-left:18px">
+<li><a href="#1-windows-y-linux-lo-mismo-con-otro-nombre" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">1. Windows y Linux: lo mismo con otro nombre</a></li>
+<li><a href="#2-configuración-y-panel-de-control" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">2. Configuración y Panel de control</a></li>
+<li><a href="#3-administrador-de-tareas" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">3. Administrador de tareas</a></li>
+<li><a href="#4-administrador-de-dispositivos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">4. Administrador de dispositivos</a></li>
+<li><a href="#5-administración-de-discos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">5. Administración de discos</a></li>
+<li><a href="#6-usuarios-y-grupos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6. Usuarios y grupos</a></li>
+<li><a href="#7-servicios" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">7. Servicios</a></li>
+<li><a href="#8-visor-de-eventos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">8. Visor de eventos</a></li>
+<li><a href="#9-características-y-programas" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">9. Características y programas</a></li>
+<li><a href="#10-administración-de-equipos-y-otras-herramientas" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">10. Administración de equipos y otras herramientas</a></li>
+</ul>
+</li>
+<li><a href="#parte-2--chuleta" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 2 · Chuleta</a></li>
+<li><a href="#parte-3--practica" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 3 · Practica</a></li>
+<li><a href="#parte-4--entrega" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Parte 4 · Entrega</a></li>
+</ul>
+</li>
+</ul>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="parte-1--aprende" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Parte 1 · Aprende</h2>
+<h3 id="1-windows-y-linux-lo-mismo-con-otro-nombre" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">1. Windows y Linux: lo mismo con otro nombre</h3>
+<p>Lo primero que choca es <strong>dónde</strong> está cada cosa. En Linux todo cuelga de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/</code>; en Windows cada
+disco tiene su letra.</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNDEyIiB2aWV3Qm94PSIwIDAgOTAwIDQxMiIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5Ew7NuZGUgZXN0w6EgY2FkYSBjb3NhIGVuIFdpbmRvd3MgeSBlbiBMaW51eDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImQiPkVsIHNpc3RlbWE6IEM6XFdpbmRvd3MgZW4gV2luZG93czsgL3VzciB5IC9ib290IGVuIExpbnV4LiBMb3MgcHJvZ3JhbWFzOiBDOlxQcm9ncmFtIEZpbGVzOyAvdXNyL2JpbiB5IC9vcHQuIExhIGNvbmZpZ3VyYWNpw7NuIGRlIHRvZG8gZWwgZXF1aXBvOiBlbCBSZWdpc3RybyBIS0xNIHkgQzpcUHJvZ3JhbURhdGE7IC9ldGMuIExhcyBjYXJwZXRhcyBkZSBsb3MgdXN1YXJpb3M6IEM6XFVzZXJzXGFsdW1ubzsgL2hvbWUvYWx1bW5vLiBMYSBjb25maWd1cmFjacOzbiBkZSBjYWRhIHVzdWFyaW86IEFwcERhdGEgeSBlbCBSZWdpc3RybyBIS0NVOyB+Ly5jb25maWcuIE90cm9zIGRpc2NvczogdW5hIGxldHJhIGNhZGEgdW5vLCBEOiBvIEU6OyBjYXJwZXRhcyBkZW50cm8gZGVsIMOhcmJvbCBjb21vIC9tZWRpYS9hbHVtbm8uPC9kZXNjPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODk5IiBoZWlnaHQ9IjQxMSIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPkxhcyBtaXNtYXMgY29zYXMsIGVuIG90cm8gc2l0aW88L3RleHQ+CgogIDxnIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPgogICAgPHJlY3QgeD0iMjUwIiB5PSI1NiIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMCIgcng9IjgiIGZpbGw9IiNjZGUyZmIiLz48dGV4dCB4PSI0MDAiIHk9Ijc3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5XaW5kb3dzPC90ZXh0PgogICAgPHJlY3QgeD0iNTc2IiB5PSI1NiIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMCIgcng9IjgiIGZpbGw9IiNmZGU0ZDgiLz48dGV4dCB4PSI3MjYiIHk9Ijc3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5MaW51eDwvdGV4dD4KICA8L2c+CgogIDwhLS0gbWFyY2Fkb3JlcyBkZSBmaWxhIC0tPgogIDxnPgogICAgPHJlY3QgeD0iMjQiIHk9Ijk4IiB3aWR0aD0iNiIgaGVpZ2h0PSI0MCIgcng9IjMiIGZpbGw9IiMyYTc4ZDYiLz4KICAgIDxyZWN0IHg9IjI0IiB5PSIxNDYiIHdpZHRoPSI2IiBoZWlnaHQ9IjQwIiByeD0iMyIgZmlsbD0iI2ViNjgzNCIvPgogICAgPHJlY3QgeD0iMjQiIHk9IjE5NCIgd2lkdGg9IjYiIGhlaWdodD0iNDAiIHJ4PSIzIiBmaWxsPSIjMWJhZjdhIi8+CiAgICA8cmVjdCB4PSIyNCIgeT0iMjQyIiB3aWR0aD0iNiIgaGVpZ2h0PSI0MCIgcng9IjMiIGZpbGw9IiNlZGExMDAiLz4KICAgIDxyZWN0IHg9IjI0IiB5PSIyOTAiIHdpZHRoPSI2IiBoZWlnaHQ9IjQwIiByeD0iMyIgZmlsbD0iI2U4N2JhNCIvPgogICAgPHJlY3QgeD0iMjQiIHk9IjMzOCIgd2lkdGg9IjYiIGhlaWdodD0iNDAiIHJ4PSIzIiBmaWxsPSIjNjI1MGQ2Ii8+CiAgPC9nPgogIDxnIGZvbnQtc2l6ZT0iMTMuNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI0MCIgeT0iMTIzIj5FbCBzaXN0ZW1hPC90ZXh0PgogICAgPHRleHQgeD0iNDAiIHk9IjE3MSI+TG9zIHByb2dyYW1hczwvdGV4dD4KICAgIDx0ZXh0IHg9IjQwIiB5PSIyMTIiPkNvbmZpZ3VyYWNpw7NuIGRlPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSIyMjgiPnRvZG8gZWwgZXF1aXBvPC90ZXh0PgogICAgPHRleHQgeD0iNDAiIHk9IjI2NyI+Q2FycGV0YXMgcGVyc29uYWxlczwvdGV4dD4KICAgIDx0ZXh0IHg9IjQwIiB5PSIzMDgiPkNvbmZpZ3VyYWNpw7NuIGRlPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSIzMjQiPmNhZGEgdXN1YXJpbzwvdGV4dD4KICAgIDx0ZXh0IHg9IjQwIiB5PSIzNjMiPk90cm9zIGRpc2NvcyB5IHBpbmNob3M8L3RleHQ+CiAgPC9nPgoKICA8ZyBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNjOWNjZDEiPgogICAgPHJlY3QgeD0iMjUwIiB5PSI5OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI0MCIgcng9IjgiLz48cmVjdCB4PSI1NzYiIHk9Ijk4IiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwIiByeD0iOCIvPgogICAgPHJlY3QgeD0iMjUwIiB5PSIxNDYiIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAiIHJ4PSI4Ii8+PHJlY3QgeD0iNTc2IiB5PSIxNDYiIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAiIHJ4PSI4Ii8+CiAgICA8cmVjdCB4PSIyNTAiIHk9IjE5NCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI0MCIgcng9IjgiLz48cmVjdCB4PSI1NzYiIHk9IjE5NCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI0MCIgcng9IjgiLz4KICAgIDxyZWN0IHg9IjI1MCIgeT0iMjQyIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwIiByeD0iOCIvPjxyZWN0IHg9IjU3NiIgeT0iMjQyIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwIiByeD0iOCIvPgogICAgPHJlY3QgeD0iMjUwIiB5PSIyOTAiIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAiIHJ4PSI4Ii8+PHJlY3QgeD0iNTc2IiB5PSIyOTAiIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAiIHJ4PSI4Ii8+CiAgICA8cmVjdCB4PSIyNTAiIHk9IjMzOCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI0MCIgcng9IjgiLz48cmVjdCB4PSI1NzYiIHk9IjMzOCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI0MCIgcng9IjgiLz4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9IkNvbnNvbGFzLCAnRGVqYVZ1IFNhbnMgTW9ubycsIG1vbm9zcGFjZSIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSIyNjQiIHk9IjEyMyI+QzpcV2luZG93czwvdGV4dD4gICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjU5MCIgeT0iMTIzIj4vdXNyICAgL2Jvb3Q8L3RleHQ+CiAgICA8dGV4dCB4PSIyNjQiIHk9IjE3MSI+QzpcUHJvZ3JhbSBGaWxlczwvdGV4dD4gICAgICAgICAgIDx0ZXh0IHg9IjU5MCIgeT0iMTcxIj4vdXNyL2JpbiAgIC9vcHQ8L3RleHQ+CiAgICA8dGV4dCB4PSIyNjQiIHk9IjIxOSI+UmVnaXN0cm8gKEhLTE0pLCBQcm9ncmFtRGF0YTwvdGV4dD4gPHRleHQgeD0iNTkwIiB5PSIyMTkiPi9ldGM8L3RleHQ+CiAgICA8dGV4dCB4PSIyNjQiIHk9IjI2NyI+QzpcVXNlcnNcYWx1bW5vPC90ZXh0PiAgICAgICAgICAgIDx0ZXh0IHg9IjU5MCIgeT0iMjY3Ij4vaG9tZS9hbHVtbm88L3RleHQ+CiAgICA8dGV4dCB4PSIyNjQiIHk9IjMxNSI+QXBwRGF0YSwgUmVnaXN0cm8gKEhLQ1UpPC90ZXh0PiAgICA8dGV4dCB4PSI1OTAiIHk9IjMxNSI+fi8uY29uZmlnICAgfi8ubG9jYWw8L3RleHQ+CiAgICA8dGV4dCB4PSIyNjQiIHk9IjM2MyI+RDogIEU6ICAodW5hIGxldHJhIGNhZGEgdW5vKTwvdGV4dD4gPHRleHQgeD0iNTkwIiB5PSIzNjMiPi9tZWRpYS9hbHVtbm8v4oCmPC90ZXh0PgogIDwvZz4KICA8ZyBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOGE4Zjk4Ij4KICAgIDx0ZXh0IHg9IjU2MyIgeT0iMTI0Ij7iiYg8L3RleHQ+PHRleHQgeD0iNTYzIiB5PSIxNzIiPuKJiDwvdGV4dD48dGV4dCB4PSI1NjMiIHk9IjIyMCI+4omIPC90ZXh0PgogICAgPHRleHQgeD0iNTYzIiB5PSIyNjgiPuKJiDwvdGV4dD48dGV4dCB4PSI1NjMiIHk9IjMxNiI+4omIPC90ZXh0Pjx0ZXh0IHg9IjU2MyIgeT0iMzY0Ij7iiYg8L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9IjI0IiB5PSI0MDIiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM1MjUxNGUiPldpbmRvd3M6IHVuYSBsZXRyYSBwb3IgZGlzY28geSDCq1zCuyBjb21vIHNlcGFyYWRvci4gTGludXg6IHVuIMO6bmljbyDDoXJib2wgZGVzZGUgwqsvwrsgeSDCqy/CuyBjb21vIHNlcGFyYWRvci48L3RleHQ+Cjwvc3ZnPgo=" alt="Tabla visual: el sistema, los programas, la configuración, las carpetas personales y los discos, en Windows y en Linux" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<p>Y estas son las diferencias que más vas a notar:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">🪟 Windows</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">🐧 Linux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Núcleo</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Windows NT</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Linux</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Licencia</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">De pago, código cerrado</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Libre y gratuito</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Discos</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Una letra por disco: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">C:</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">D:</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Un único árbol desde <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Separador de rutas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">\</code> (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">C:\Users\alumno</code>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/</code> (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/home/alumno</code>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Mayúsculas en los nombres</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Dan igual: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Hola.txt</code> = <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">hola.txt</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Importan: son dos ficheros distintos</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Ficheros ocultos</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Tienen el atributo «oculto»</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Empiezan por punto (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.bashrc</code>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>¿Qué se puede ejecutar?</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Lo decide la extensión: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.exe</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.msi</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.bat</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.ps1</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Lo decide el permiso <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">x</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Configuración</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El <strong>Registro</strong> (una base de datos) y la app Configuración</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Ficheros de texto en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.config</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Instalar programas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Instaladores <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.exe</code>/<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.msi</code>, Microsoft Store, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">winget</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Gestor de paquetes: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">apt</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">pacman</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Administrador</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Grupo <strong>Administradores</strong> + aviso <strong>UAC</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>root</strong> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Terminal</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">PowerShell y CMD (dentro de Terminal de Windows)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">bash, zsh</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Servicios</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Ventana <strong>Servicios</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">systemctl</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Registro de eventos</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Visor de eventos</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">journalctl</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/var/log</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Tareas programadas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Programador de tareas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cron</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Permisos</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">NTFS: listas de quién puede qué</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rwx</code> (y ACL)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Actualizar</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Windows Update</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">apt upgrade</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">pacman -Syu</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b45309">❗ Importante</p><p style="margin:.45em 0"><strong>El Registro</strong> es la gran diferencia. En Linux la configuración son miles de ficheros de texto
+que abres con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nano</code>; en Windows casi todo está en una única base de datos que se ve con el
+<strong>Editor del Registro</strong> (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">regedit</code>). Tiene dos ramas principales: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">HKEY_LOCAL_MACHINE</code> (todo el
+equipo, como <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code>) y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">HKEY_CURRENT_USER</code> (tu usuario, como <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.config</code>).</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>No toques el Registro «a ver qué pasa».</strong> No hay papelera ni «deshacer»: un valor mal cambiado
+puede impedir que Windows arranque. Si un tutorial te pide editarlo, antes haz <strong>Archivo →
+Exportar</strong> de la rama que vas a tocar.</p>
+</div>
+<p><strong>🧠 ¿Lo has pillado?</strong></p>
+<ol>
+<li>¿Dónde guardaría Windows lo que en Linux está en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/home/alumno</code>?</li>
+<li>En Linux, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">informe.TXT</code> e <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">informe.txt</code> son dos ficheros. ¿Y en Windows?</li>
+</ol>
+<details>
+<summary style="cursor:pointer;font-weight:600;color:#7a3e1d">Ver respuestas</summary>
+<ol>
+<li>En <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">C:\Users\alumno</code>.</li>
+<li>En Windows son <strong>el mismo</strong> fichero: no distingue mayúsculas de minúsculas en los nombres.</li>
+</ol>
+</details>
+<h3 id="2-configuración-y-panel-de-control" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">2. Configuración y Panel de control</h3>
+<p>Windows tiene <strong>dos</strong> sitios para configurarlo todo, de épocas distintas:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">⚙️ Configuración</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">🧰 Panel de control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Cómo se abre</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">I</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> → <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">control</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Época</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Moderna (Windows 10 y 11)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Clásica (desde Windows 95)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Para qué</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Casi todo lo del día a día</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Lo que todavía no se ha pasado a Configuración</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los apartados de <strong>Configuración</strong> en Windows 11: Sistema, Bluetooth y dispositivos, Red e
+Internet, Personalización, Aplicaciones, Cuentas, Hora e idioma, Juegos, Accesibilidad, Privacidad
+y seguridad, y Windows Update.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>El atajo del técnico: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code></strong> (o clic derecho en Inicio). Es un menú con las herramientas
+de administración más usadas. Lo verás durante toda la guía:</p>
+</div>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NjAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgODYwIDUwMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5FbCBtZW7DuiBXaW4gKyBYPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+RXNxdWVtYSBkZWwgbWVuw7ogcXVlIGFwYXJlY2UgY29uIFdpbiArIFggbyBjb24gY2xpYyBkZXJlY2hvIGVuIEluaWNpby4gQ29udGllbmUsIGVudHJlIG90cm9zLCBWaXNvciBkZSBldmVudG9zLCBBZG1pbmlzdHJhZG9yIGRlIGRpc3Bvc2l0aXZvcywgQWRtaW5pc3RyYWNpw7NuIGRlIGRpc2NvcywgQWRtaW5pc3RyYWNpw7NuIGRlIGVxdWlwb3MsIFRlcm1pbmFsIChBZG1pbmlzdHJhZG9yKSwgQWRtaW5pc3RyYWRvciBkZSB0YXJlYXMsIENvbmZpZ3VyYWNpw7NuIHkgRWplY3V0YXIsIHF1ZSBzZSBleHBsaWNhbiBlbiBlc3RhIGd1w61hLjwvZGVzYz4KICA8cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9Ijg1OSIgaGVpZ2h0PSI0OTkiIHJ4PSIxNCIgZmlsbD0iI2ZjZmNmYiIgc3Ryb2tlPSIjZTJlNWU5Ii8+CiAgPHRleHQgeD0iMjQiIHk9IjM4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj5XaW4gKyBYOiBlbCBtZW7DuiBkZWwgdMOpY25pY288L3RleHQ+CgogIDwhLS0gbWVuw7ogLS0+CiAgPHJlY3QgeD0iNDAiIHk9IjU4IiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQyOCIgcng9IjgiIGZpbGw9IiNmM2YzZjMiIHN0cm9rZT0iI2M5Y2NkMSIvPgogIDxnIGZvbnQtc2l6ZT0iMTMuNSIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI2MCIgeT0iODQiPkFwbGljYWNpb25lcyBpbnN0YWxhZGFzPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjEwNiI+T3BjaW9uZXMgZGUgZW5lcmfDrWE8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMTI4IiBmb250LXdlaWdodD0iNzAwIj5WaXNvciBkZSBldmVudG9zPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjE1MCI+U2lzdGVtYTwvdGV4dD4KICAgIDx0ZXh0IHg9IjYwIiB5PSIxNzIiIGZvbnQtd2VpZ2h0PSI3MDAiPkFkbWluaXN0cmFkb3IgZGUgZGlzcG9zaXRpdm9zPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjE5NCI+Q29uZXhpb25lcyBkZSByZWQ8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMjE2IiBmb250LXdlaWdodD0iNzAwIj5BZG1pbmlzdHJhY2nDs24gZGUgZGlzY29zPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjIzOCIgZm9udC13ZWlnaHQ9IjcwMCI+QWRtaW5pc3RyYWNpw7NuIGRlIGVxdWlwb3M8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMjYwIj5UZXJtaW5hbDwvdGV4dD4KICAgIDx0ZXh0IHg9IjYwIiB5PSIyODIiIGZvbnQtd2VpZ2h0PSI3MDAiPlRlcm1pbmFsIChBZG1pbmlzdHJhZG9yKTwvdGV4dD4KICAgIDx0ZXh0IHg9IjYwIiB5PSIzMTQiIGZvbnQtd2VpZ2h0PSI3MDAiPkFkbWluaXN0cmFkb3IgZGUgdGFyZWFzPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjMzNiIgZm9udC13ZWlnaHQ9IjcwMCI+Q29uZmlndXJhY2nDs248L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMzU4Ij5FeHBsb3JhZG9yIGRlIGFyY2hpdm9zPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjM4MCI+QnVzY2FyPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjQwMiIgZm9udC13ZWlnaHQ9IjcwMCI+RWplY3V0YXI8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iNDM0Ij5BcGFnYXIgbyBjZXJyYXIgc2VzacOzbjwvdGV4dD4KICAgIDx0ZXh0IHg9IjYwIiB5PSI0NTYiPkVzY3JpdG9yaW88L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9IjMyMCIgeT0iNDM0IiBmb250LXNpemU9IjEzIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNTI1MTRlIj7igLo8L3RleHQ+CiAgPGcgc3Ryb2tlPSIjYzljY2QxIj48bGluZSB4MT0iNTAiIHkxPSIyOTQiIHgyPSIzMzAiIHkyPSIyOTQiLz48bGluZSB4MT0iNTAiIHkxPSI0MTQiIHgyPSIzMzAiIHkyPSI0MTQiLz48L2c+CgogIDwhLS0gbWFyY2FzIC0tPgogIDxnPgogICAgPGNpcmNsZSBjeD0iMzE2IiBjeT0iMTI0IiByPSI5IiBmaWxsPSIjMmE3OGQ2Ii8+PGNpcmNsZSBjeD0iMzE2IiBjeT0iMTY4IiByPSI5IiBmaWxsPSIjZWI2ODM0Ii8+CiAgICA8Y2lyY2xlIGN4PSIzMTYiIGN5PSIyMTIiIHI9IjkiIGZpbGw9IiMxYmFmN2EiLz48Y2lyY2xlIGN4PSIzMTYiIGN5PSIyMzQiIHI9IjkiIGZpbGw9IiNlZGExMDAiLz4KICAgIDxjaXJjbGUgY3g9IjMxNiIgY3k9IjI3OCIgcj0iOSIgZmlsbD0iI2U4N2JhNCIvPjxjaXJjbGUgY3g9IjMxNiIgY3k9IjMxMCIgcj0iOSIgZmlsbD0iIzAwODMwMCIvPgogICAgPGNpcmNsZSBjeD0iMzE2IiBjeT0iMzMyIiByPSI5IiBmaWxsPSIjNjI1MGQ2Ii8+PGNpcmNsZSBjeD0iMzE2IiBjeT0iMzk4IiByPSI5IiBmaWxsPSIjOGE4Zjk4Ii8+CiAgPC9nPgoKICA8IS0tIGV4cGxpY2FjacOzbiAtLT4KICA8dGV4dCB4PSIzODAiIHk9Ijg0IiBmb250LXNpemU9IjE0IiBmaWxsPSIjMGIwYjBiIj7DgWJyZWxvIGNvbiA8dHNwYW4gZm9udC13ZWlnaHQ9IjcwMCI+V2luICsgWDwvdHNwYW4+IG8gY29uIDx0c3BhbiBmb250LXdlaWdodD0iNzAwIj5jbGljIGRlcmVjaG8gZW4gSW5pY2lvPC90c3Bhbj4uPC90ZXh0PgogIDx0ZXh0IHg9IjM4MCIgeT0iMTA2IiBmb250LXNpemU9IjE0IiBmaWxsPSIjMGIwYjBiIj5MYXMgb3BjaW9uZXMgZW4gbmVncml0YSBsYXMgdmVyw6FzIGVuIGVzdGEgZ3XDrWE6PC90ZXh0PgogIDxnIGZvbnQtc2l6ZT0iMTMuNSIgZmlsbD0iIzBiMGIwYiI+CiAgICA8Y2lyY2xlIGN4PSIzOTAiIGN5PSIxMzkiIHI9IjciIGZpbGw9IiMyYTc4ZDYiLz48dGV4dCB4PSI0MDYiIHk9IjE0NCI+Vmlzb3IgZGUgZXZlbnRvcyDCtyBhcGFydGFkbyA4PC90ZXh0PgogICAgPGNpcmNsZSBjeD0iMzkwIiBjeT0iMTY5IiByPSI3IiBmaWxsPSIjZWI2ODM0Ii8+PHRleHQgeD0iNDA2IiB5PSIxNzQiPkFkbWluaXN0cmFkb3IgZGUgZGlzcG9zaXRpdm9zIMK3IGFwYXJ0YWRvIDQ8L3RleHQ+CiAgICA8Y2lyY2xlIGN4PSIzOTAiIGN5PSIxOTkiIHI9IjciIGZpbGw9IiMxYmFmN2EiLz48dGV4dCB4PSI0MDYiIHk9IjIwNCI+QWRtaW5pc3RyYWNpw7NuIGRlIGRpc2NvcyDCtyBhcGFydGFkbyA1PC90ZXh0PgogICAgPGNpcmNsZSBjeD0iMzkwIiBjeT0iMjI5IiByPSI3IiBmaWxsPSIjZWRhMTAwIi8+PHRleHQgeD0iNDA2IiB5PSIyMzQiPkFkbWluaXN0cmFjacOzbiBkZSBlcXVpcG9zIMK3IGFwYXJ0YWRvIDEwPC90ZXh0PgogICAgPGNpcmNsZSBjeD0iMzkwIiBjeT0iMjU5IiByPSI3IiBmaWxsPSIjZTg3YmE0Ii8+PHRleHQgeD0iNDA2IiB5PSIyNjQiPlRlcm1pbmFsIChBZG1pbmlzdHJhZG9yKSDCtyBQb3dlclNoZWxsIGNvbiBwZXJtaXNvczwvdGV4dD4KICAgIDxjaXJjbGUgY3g9IjM5MCIgY3k9IjI4OSIgcj0iNyIgZmlsbD0iIzAwODMwMCIvPjx0ZXh0IHg9IjQwNiIgeT0iMjk0Ij5BZG1pbmlzdHJhZG9yIGRlIHRhcmVhcyDCtyBhcGFydGFkbyAzPC90ZXh0PgogICAgPGNpcmNsZSBjeD0iMzkwIiBjeT0iMzE5IiByPSI3IiBmaWxsPSIjNjI1MGQ2Ii8+PHRleHQgeD0iNDA2IiB5PSIzMjQiPkNvbmZpZ3VyYWNpw7NuIMK3IGFwYXJ0YWRvIDI8L3RleHQ+CiAgICA8Y2lyY2xlIGN4PSIzOTAiIGN5PSIzNDkiIHI9IjciIGZpbGw9IiM4YThmOTgiLz48dGV4dCB4PSI0MDYiIHk9IjM1NCI+RWplY3V0YXIgKFdpbiArIFIpIMK3IGxhIGNodWxldGEgZGUgbGEgUGFydGUgMjwvdGV4dD4KICA8L2c+CiAgPHJlY3QgeD0iMzgwIiB5PSIzODQiIHdpZHRoPSI0NTYiIGhlaWdodD0iNzIiIHJ4PSIxMCIgZmlsbD0iI2ZkZWZjYyIgc3Ryb2tlPSIjZWRhMTAwIi8+CiAgPHRleHQgeD0iMzk2IiB5PSI0MTAiIGZvbnQtc2l6ZT0iMTMuNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+VHJ1Y288L3RleHQ+CiAgPHRleHQgeD0iMzk2IiB5PSI0MzAiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPkNvbiBlbCBtZW7DuiBhYmllcnRvLCBwdWxzYSBsYSBsZXRyYSBzdWJyYXlhZGEgZGUgY2FkYSBvcGNpw7NuPC90ZXh0PgogIDx0ZXh0IHg9IjM5NiIgeT0iNDQ2IiBmb250LXNpemU9IjEzIiBmaWxsPSIjMGIwYjBiIj55IHNlIGFicmUgc2luIHVzYXIgZWwgcmF0w7NuLjwvdGV4dD4KPC9zdmc+Cg==" alt="Esquema del menú Win + X con las opciones que se explican en esta guía marcadas" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>El otro atajo: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> (Ejecutar).</strong> Escribes el nombre corto de una herramienta y se
+abre: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">taskmgr</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">devmgmt.msc</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">services.msc</code>… Tienes la lista completa en la
+<a href="#parte-2--chuleta" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">chuleta</a>. Escribir el nombre en el buscador del menú Inicio también vale.</p>
+</div>
+<h3 id="3-administrador-de-tareas" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">3. Administrador de tareas</h3>
+<p><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Mayús</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code>. Ya lo usaste en la <a href="03-procesos-1-guia.html#9-procesos-en-windows" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">guía de procesos</a>;
+aquí lo miramos entero.</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgOTAwIDQwMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5FbCBBZG1pbmlzdHJhZG9yIGRlIHRhcmVhcyBkZSBXaW5kb3dzIDExPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+RXNxdWVtYSBkZWwgQWRtaW5pc3RyYWRvciBkZSB0YXJlYXM6IGEgbGEgaXpxdWllcmRhIGxhcyBwZXN0YcOxYXMgUHJvY2Vzb3MsIFJlbmRpbWllbnRvLCBIaXN0b3JpYWwgZGUgYXBsaWNhY2lvbmVzLCBBcGxpY2FjaW9uZXMgZGUgYXJyYW5xdWUsIFVzdWFyaW9zLCBEZXRhbGxlcyB5IFNlcnZpY2lvczsgYXJyaWJhIHVuIGJ1c2NhZG9yIHBvciBub21icmUgbyBQSUQgeSBlbCBib3TDs24gRmluYWxpemFyIHRhcmVhOyBlbiBlbCBjZW50cm8gbGEgbGlzdGEgZGUgcHJvY2Vzb3MgY29uIGNvbHVtbmFzIGRlIENQVSwgbWVtb3JpYSwgZGlzY28geSByZWQsIGNvbG9yZWFkYXMgY29uIG3DoXMgaW50ZW5zaWRhZCBjdWFudG8gbcOhcyBjb25zdW1lbi48L2Rlc2M+CiAgPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI4OTkiIGhlaWdodD0iMzk5IiByeD0iMTQiIGZpbGw9IiNmY2ZjZmIiIHN0cm9rZT0iI2UyZTVlOSIvPgogIDx0ZXh0IHg9IjI0IiB5PSIzOCIgZm9udC1zaXplPSIyMSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+RWwgQWRtaW5pc3RyYWRvciBkZSB0YXJlYXMgKEN0cmwgKyBNYXnDunMgKyBFc2MpPC90ZXh0PgoKICA8cmVjdCB4PSIyNCIgeT0iNTYiIHdpZHRoPSI2MjAiIGhlaWdodD0iMzI2IiByeD0iOCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjOGE4Zjk4Ii8+CiAgPHBhdGggZD0iTTI0IDY0IGE4IDggMCAwIDEgOCAtOCBoNjA0IGE4IDggMCAwIDEgOCA4IHYyNCBoLTYyMCB6IiBmaWxsPSIjZWVmMGYzIi8+CiAgPHRleHQgeD0iNDAiIHk9Ijc3IiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiMwYjBiMGIiPkFkbWluaXN0cmFkb3IgZGUgdGFyZWFzPC90ZXh0PgogIDxyZWN0IHg9IjIzNiIgeT0iNjIiIHdpZHRoPSIyMzAiIGhlaWdodD0iMjAiIHJ4PSIxMCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjYzljY2QxIi8+CiAgPHRleHQgeD0iMjQ4IiB5PSI3NiIgZm9udC1zaXplPSIxMSIgZmlsbD0iIzhhOGY5OCI+RXNjcmliZSB1biBub21icmUsIGVkaXRvciBvIFBJROKApjwvdGV4dD4KCiAgPCEtLSBtZW7DuiBsYXRlcmFsIC0tPgogIDxyZWN0IHg9IjI0IiB5PSI4OCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIyOTQiIGZpbGw9IiNmN2Y4ZmEiLz4KICA8ZyBmb250LXNpemU9IjEyLjUiIGZpbGw9IiMwYjBiMGIiPgogICAgPHJlY3QgeD0iMzAiIHk9Ijk2IiB3aWR0aD0iMTU4IiBoZWlnaHQ9IjI2IiByeD0iNSIgZmlsbD0iI2NkZTJmYiIvPgogICAgPHRleHQgeD0iNDIiIHk9IjExNCIgZm9udC13ZWlnaHQ9IjcwMCI+UHJvY2Vzb3M8L3RleHQ+CiAgICA8dGV4dCB4PSI0MiIgeT0iMTQ0Ij5SZW5kaW1pZW50bzwvdGV4dD4KICAgIDx0ZXh0IHg9IjQyIiB5PSIxNzIiPkhpc3RvcmlhbCBkZSBhcGxpY2FjaW9uZXM8L3RleHQ+CiAgICA8dGV4dCB4PSI0MiIgeT0iMjAwIj5BcGxpY2FjaW9uZXMgZGUgYXJyYW5xdWU8L3RleHQ+CiAgICA8dGV4dCB4PSI0MiIgeT0iMjI4Ij5Vc3VhcmlvczwvdGV4dD4KICAgIDx0ZXh0IHg9IjQyIiB5PSIyNTYiPkRldGFsbGVzPC90ZXh0PgogICAgPHRleHQgeD0iNDIiIHk9IjI4NCI+U2VydmljaW9zPC90ZXh0PgogICAgPHRleHQgeD0iNDIiIHk9IjM2NiIgZmlsbD0iIzUyNTE0ZSI+Q29uZmlndXJhY2nDs248L3RleHQ+CiAgPC9nPgoKICA8IS0tIGJhcnJhIGRlIGFjY2lvbmVzIC0tPgogIDx0ZXh0IHg9IjIwOCIgeT0iMTEyIiBmb250LXNpemU9IjE1IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj5Qcm9jZXNvczwvdGV4dD4KICA8cmVjdCB4PSI1MTQiIHk9Ijk4IiB3aWR0aD0iMTE2IiBoZWlnaHQ9IjIyIiByeD0iNSIgZmlsbD0iI2VlZjBmMyIgc3Ryb2tlPSIjYzljY2QxIi8+CiAgPHRleHQgeD0iNTcyIiB5PSIxMTMiIGZvbnQtc2l6ZT0iMTEuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzBiMGIwYiI+RmluYWxpemFyIHRhcmVhPC90ZXh0PgoKICA8IS0tIHRhYmxhIC0tPgogIDxnIGZvbnQtc2l6ZT0iMTEuNSIgZmlsbD0iIzUyNTE0ZSI+CiAgICA8dGV4dCB4PSIyMDgiIHk9IjE0NiI+Tm9tYnJlPC90ZXh0Pjx0ZXh0IHg9IjQxMCIgeT0iMTQ2Ij5DUFU8L3RleHQ+PHRleHQgeD0iNDYwIiB5PSIxNDYiPk1lbW9yaWE8L3RleHQ+PHRleHQgeD0iNTMyIiB5PSIxNDYiPkRpc2NvPC90ZXh0Pjx0ZXh0IHg9IjU5MCIgeT0iMTQ2Ij5SZWQ8L3RleHQ+CiAgPC9nPgogIDxnIGZvbnQtc2l6ZT0iMTEuNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI0MTAiIHk9IjEzMiI+MjMgJTwvdGV4dD48dGV4dCB4PSI0NjAiIHk9IjEzMiI+NjEgJTwvdGV4dD48dGV4dCB4PSI1MzIiIHk9IjEzMiI+MiAlPC90ZXh0Pjx0ZXh0IHg9IjU5MCIgeT0iMTMyIj4wICU8L3RleHQ+CiAgPC9nPgogIDxsaW5lIHgxPSIyMDAiIHkxPSIxNTIiIHgyPSI2NDAiIHkyPSIxNTIiIHN0cm9rZT0iI2UyZTVlOSIvPgogIDx0ZXh0IHg9IjIwOCIgeT0iMTcyIiBmb250LXNpemU9IjExLjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPkFwbGljYWNpb25lcyAoMyk8L3RleHQ+CiAgPCEtLSBjZWxkYXMgZGUgY2Fsb3IgLS0+CiAgPGc+CiAgICA8cmVjdCB4PSI0MDQiIHk9IjE4MCIgd2lkdGg9IjUwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZmRlZmNjIi8+PHJlY3QgeD0iNDU2IiB5PSIxODAiIHdpZHRoPSI3MCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2ZiZDM4ZCIvPgogICAgPHJlY3QgeD0iNDA0IiB5PSIyMDQiIHdpZHRoPSI1MCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2ZmZjhlNiIvPjxyZWN0IHg9IjQ1NiIgeT0iMjA0IiB3aWR0aD0iNzAiIGhlaWdodD0iMjIiIGZpbGw9IiNmZGVmY2MiLz4KICAgIDxyZWN0IHg9IjQwNCIgeT0iMjI4IiB3aWR0aD0iNTAiIGhlaWdodD0iMjIiIGZpbGw9IiNmZmY4ZTYiLz48cmVjdCB4PSI0NTYiIHk9IjIyOCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZmZmOGU2Ii8+CiAgICA8cmVjdCB4PSI0MDQiIHk9IjI3NiIgd2lkdGg9IjUwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZmJkMzhkIi8+PHJlY3QgeD0iNDU2IiB5PSIyNzYiIHdpZHRoPSI3MCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2ZkZWZjYyIvPgogICAgPHJlY3QgeD0iNDA0IiB5PSIzMDAiIHdpZHRoPSI1MCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2ZmZjhlNiIvPjxyZWN0IHg9IjQ1NiIgeT0iMzAwIiB3aWR0aD0iNzAiIGhlaWdodD0iMjIiIGZpbGw9IiNmZmY4ZTYiLz4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxMiIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSIyMTQiIHk9IjE5NiI+RmlyZWZveDwvdGV4dD48dGV4dCB4PSI0MTAiIHk9IjE5NiI+NiwxICU8L3RleHQ+PHRleHQgeD0iNDYwIiB5PSIxOTYiPjgxMiBNQjwvdGV4dD48dGV4dCB4PSI1MzIiIHk9IjE5NiI+MCwxIE1CL3M8L3RleHQ+PHRleHQgeD0iNTkwIiB5PSIxOTYiPjAgTWJwczwvdGV4dD4KICAgIDx0ZXh0IHg9IjIxNCIgeT0iMjIwIj5FeHBsb3JhZG9yIGRlIFdpbmRvd3M8L3RleHQ+PHRleHQgeD0iNDEwIiB5PSIyMjAiPjAsNCAlPC90ZXh0Pjx0ZXh0IHg9IjQ2MCIgeT0iMjIwIj45NiBNQjwvdGV4dD48dGV4dCB4PSI1MzIiIHk9IjIyMCI+MCBNQi9zPC90ZXh0Pjx0ZXh0IHg9IjU5MCIgeT0iMjIwIj4wIE1icHM8L3RleHQ+CiAgICA8dGV4dCB4PSIyMTQiIHk9IjI0NCI+VGVybWluYWw8L3RleHQ+PHRleHQgeD0iNDEwIiB5PSIyNDQiPjAsMiAlPC90ZXh0Pjx0ZXh0IHg9IjQ2MCIgeT0iMjQ0Ij41OCBNQjwvdGV4dD48dGV4dCB4PSI1MzIiIHk9IjI0NCI+MCBNQi9zPC90ZXh0Pjx0ZXh0IHg9IjU5MCIgeT0iMjQ0Ij4wIE1icHM8L3RleHQ+CiAgICA8dGV4dCB4PSIyMDgiIHk9IjI2OCIgZm9udC13ZWlnaHQ9IjcwMCI+UHJvY2Vzb3MgZW4gc2VndW5kbyBwbGFubyAoOTQpPC90ZXh0PgogICAgPHRleHQgeD0iMjE0IiB5PSIyOTIiPkFudGltYWx3YXJlIFNlcnZpY2UgRXhlY3V0YWJsZTwvdGV4dD48dGV4dCB4PSI0MTAiIHk9IjI5MiI+OSw4ICU8L3RleHQ+PHRleHQgeD0iNDYwIiB5PSIyOTIiPjIxMCBNQjwvdGV4dD48dGV4dCB4PSI1MzIiIHk9IjI5MiI+MSwyIE1CL3M8L3RleHQ+PHRleHQgeD0iNTkwIiB5PSIyOTIiPjAgTWJwczwvdGV4dD4KICAgIDx0ZXh0IHg9IjIxNCIgeT0iMzE2Ij5Db2xhIGRlIGltcHJlc2nDs248L3RleHQ+PHRleHQgeD0iNDEwIiB5PSIzMTYiPjAgJTwvdGV4dD48dGV4dCB4PSI0NjAiIHk9IjMxNiI+NiBNQjwvdGV4dD48dGV4dCB4PSI1MzIiIHk9IjMxNiI+MCBNQi9zPC90ZXh0Pjx0ZXh0IHg9IjU5MCIgeT0iMzE2Ij4wIE1icHM8L3RleHQ+CiAgPC9nPgoKICA8IS0tIG7Dum1lcm9zIC0tPgogIDxnIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiPgogICAgPGNpcmNsZSBjeD0iMTg2IiBjeT0iMTAwIiByPSIxMCIgZmlsbD0iIzJhNzhkNiIvPjx0ZXh0IHg9IjE4NiIgeT0iMTA0Ij4xPC90ZXh0PgogICAgPGNpcmNsZSBjeD0iNDc2IiBjeT0iNzIiIHI9IjEwIiBmaWxsPSIjZWI2ODM0Ii8+PHRleHQgeD0iNDc2IiB5PSI3NiI+MjwvdGV4dD4KICAgIDxjaXJjbGUgY3g9IjYzMiIgY3k9Ijk2IiByPSIxMCIgZmlsbD0iI2QwM2IzYiIvPjx0ZXh0IHg9IjYzMiIgeT0iMTAwIj4zPC90ZXh0PgogICAgPGNpcmNsZSBjeD0iNDMwIiBjeT0iMzQyIiByPSIxMCIgZmlsbD0iI2VkYTEwMCIvPjx0ZXh0IHg9IjQzMCIgeT0iMzQ2IiBmaWxsPSIjMGIwYjBiIj40PC90ZXh0PgogIDwvZz4KCiAgPCEtLSBsZXllbmRhIC0tPgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPgogICAgPGNpcmNsZSBjeD0iNjcyIiBjeT0iODAiIHI9IjEwIiBmaWxsPSIjMmE3OGQ2Ii8+PHRleHQgeD0iNjcyIiB5PSI4NCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiI+MTwvdGV4dD4KICAgIDx0ZXh0IHg9IjY5MCIgeT0iODUiIGZvbnQtd2VpZ2h0PSI3MDAiPlBlc3Rhw7FhczwvdGV4dD4KICAgIDx0ZXh0IHg9IjY5MCIgeT0iMTAzIiBmaWxsPSIjNTI1MTRlIj5EZXRhbGxlcyA9IGNvbiBQSUQ8L3RleHQ+CiAgICA8dGV4dCB4PSI2OTAiIHk9IjExOSIgZmlsbD0iIzUyNTE0ZSI+QXBsaWMuIGRlIGFycmFucXVlID0gcXXDqTwvdGV4dD4KICAgIDx0ZXh0IHg9IjY5MCIgeT0iMTM1IiBmaWxsPSIjNTI1MTRlIj5zZSBhYnJlIGFsIGVuY2VuZGVyPC90ZXh0PgoKICAgIDxjaXJjbGUgY3g9IjY3MiIgY3k9IjE2NiIgcj0iMTAiIGZpbGw9IiNlYjY4MzQiLz48dGV4dCB4PSI2NzIiIHk9IjE3MCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiI+MjwvdGV4dD4KICAgIDx0ZXh0IHg9IjY5MCIgeT0iMTcxIiBmb250LXdlaWdodD0iNzAwIj5CdXNjYWRvcjwvdGV4dD4KICAgIDx0ZXh0IHg9IjY5MCIgeT0iMTg5IiBmaWxsPSIjNTI1MTRlIj5wb3Igbm9tYnJlIG8gcG9yIFBJRDwvdGV4dD4KCiAgICA8Y2lyY2xlIGN4PSI2NzIiIGN5PSIyMjAiIHI9IjEwIiBmaWxsPSIjZDAzYjNiIi8+PHRleHQgeD0iNjcyIiB5PSIyMjQiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiPjM8L3RleHQ+CiAgICA8dGV4dCB4PSI2OTAiIHk9IjIyNSIgZm9udC13ZWlnaHQ9IjcwMCI+RmluYWxpemFyIHRhcmVhPC90ZXh0PgogICAgPHRleHQgeD0iNjkwIiB5PSIyNDMiIGZpbGw9IiM1MjUxNGUiPmVsIMKra2lsbMK7IGRlIFdpbmRvd3M8L3RleHQ+CgogICAgPGNpcmNsZSBjeD0iNjcyIiBjeT0iMjc0IiByPSIxMCIgZmlsbD0iI2VkYTEwMCIvPjx0ZXh0IHg9IjY3MiIgeT0iMjc4IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMGIwYjBiIj40PC90ZXh0PgogICAgPHRleHQgeD0iNjkwIiB5PSIyNzkiIGZvbnQtd2VpZ2h0PSI3MDAiPk1hcGEgZGUgY2Fsb3I8L3RleHQ+CiAgICA8dGV4dCB4PSI2OTAiIHk9IjI5NyIgZmlsbD0iIzUyNTE0ZSI+bcOhcyBjb2xvciA9IG3DoXMgY29uc3Vtby48L3RleHQ+CiAgICA8dGV4dCB4PSI2OTAiIHk9IjMxMyIgZmlsbD0iIzUyNTE0ZSI+Q2xpYyBlbiB1bmEgY29sdW1uYTwvdGV4dD4KICAgIDx0ZXh0IHg9IjY5MCIgeT0iMzI5IiBmaWxsPSIjNTI1MTRlIj5wYXJhIG9yZGVuYXIuPC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSI2NjQiIHk9IjM3MiIgZm9udC1zaXplPSIxMS41IiBmaWxsPSIjNTI1MTRlIj5Fc3F1ZW1hIHNpbXBsaWZpY2FkbyBkZSBXaW5kb3dzIDExLjwvdGV4dD4KPC9zdmc+Cg==" alt="Esquema del Administrador de tareas con las pestañas, el buscador, el botón Finalizar tarea y el mapa de calor de consumo" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Pestaña</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué la usa un técnico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Procesos</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Ver qué consume CPU, memoria, disco o red y cerrar lo que se ha colgado</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Rendimiento</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Núcleos, RAM, tipo de disco, GPU y <strong>tiempo activo</strong> (desde cuándo está encendido)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Historial de aplicaciones</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Qué apps han consumido más recursos últimamente</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Aplicaciones de arranque</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Qué se abre al encender y cuánto lo retrasa (<strong>impacto de inicio</strong>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Usuarios</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Quién tiene la sesión iniciada y qué consume cada uno</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Detalles</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">La vista técnica, con el <strong>PID</strong> de cada proceso</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Servicios</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Los servicios, con un enlace a la ventana completa (<a href="#7-servicios" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 7</a>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>«El ordenador tarda mucho en arrancar»</strong> → pestaña <strong>Aplicaciones de arranque</strong>, ordena por
+«Impacto de inicio» y deshabilita lo que no haga falta. Es el arreglo más rápido que existe.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><strong>En Linux:</strong> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">top</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">htop</code> o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">btop</code> para los procesos, y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">systemctl list-unit-files</code> para lo que
+arranca con el sistema. Para ver aún más detalle en Windows, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> → <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">resmon</code> (Monitor de
+recursos).</p>
+</div>
+<h3 id="4-administrador-de-dispositivos" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">4. Administrador de dispositivos</h3>
+<p><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code> → <strong>Administrador de dispositivos</strong> (o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">devmgmt.msc</code>). Es la lista de todo el hardware
+que Windows ha encontrado y del <strong>controlador</strong> (<em>driver</em>) que usa cada pieza.</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNDIwIiB2aWV3Qm94PSIwIDAgOTAwIDQyMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5FbCBBZG1pbmlzdHJhZG9yIGRlIGRpc3Bvc2l0aXZvczwvdGl0bGU+CiAgPGRlc2MgaWQ9ImQiPkVzcXVlbWEgZGVsIEFkbWluaXN0cmFkb3IgZGUgZGlzcG9zaXRpdm9zIGRlIHVuYSBtw6FxdWluYSB2aXJ0dWFsOiB1biDDoXJib2wgZGUgY2F0ZWdvcsOtYXMgY29uIHVuIGRpc3Bvc2l0aXZvIGVuIE90cm9zIGRpc3Bvc2l0aXZvcyBtYXJjYWRvIGNvbiB1biB0cmnDoW5ndWxvIGFtYXJpbGxvLCBxdWUgaW5kaWNhIHF1ZSBmYWx0YSBlbCBjb250cm9sYWRvciwgeSB1bmEgdW5pZGFkIGRlIENEIGNvbiB1bmEgZmxlY2hhIGhhY2lhIGFiYWpvLCBxdWUgaW5kaWNhIHF1ZSBlc3TDoSBkZXNoYWJpbGl0YWRhLiBDb24gY2xpYyBkZXJlY2hvIGFwYXJlY2VuIEFjdHVhbGl6YXIgY29udHJvbGFkb3IsIERlc2hhYmlsaXRhciBkaXNwb3NpdGl2bywgRGVzaW5zdGFsYXIgZWwgZGlzcG9zaXRpdm8sIEJ1c2NhciBjYW1iaW9zIGRlIGhhcmR3YXJlIHkgUHJvcGllZGFkZXMuPC9kZXNjPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODk5IiBoZWlnaHQ9IjQxOSIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPkVsIEFkbWluaXN0cmFkb3IgZGUgZGlzcG9zaXRpdm9zIChkZXZtZ210Lm1zYyk8L3RleHQ+CgogIDxyZWN0IHg9IjI0IiB5PSI1NiIgd2lkdGg9IjQ0MCIgaGVpZ2h0PSIzNDgiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiM4YThmOTgiLz4KICA8cGF0aCBkPSJNMjQgNjQgYTggOCAwIDAgMSA4IC04IGg0MjQgYTggOCAwIDAgMSA4IDggdjIyIGgtNDQwIHoiIGZpbGw9IiNlZWYwZjMiLz4KICA8dGV4dCB4PSI0MCIgeT0iNzYiIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzBiMGIwYiI+QWRtaW5pc3RyYWRvciBkZSBkaXNwb3NpdGl2b3M8L3RleHQ+CgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iNDAiIHk9IjEwOCI+4pa+IFdJTi1TTVI8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMTMyIj7ilrggQWRhcHRhZG9yZXMgZGUgcGFudGFsbGE8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMTU2Ij7ilr4gQWRhcHRhZG9yZXMgZGUgcmVkPC90ZXh0PgogICAgPHRleHQgeD0iMTAwIiB5PSIxODAiPkludGVsKFIpIFBSTy8xMDAwIE1UIERlc2t0b3AgQWRhcHRlcjwvdGV4dD4KICAgIDx0ZXh0IHg9IjYwIiB5PSIyMDQiPuKWuCBDb250cm9sYWRvcmFzIGRlIGFsbWFjZW5hbWllbnRvPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjIyOCI+4pa4IERpc3Bvc2l0aXZvcyBkZSBpbnRlcmZheiBodW1hbmEgKEhJRCk8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMjUyIj7ilr4gT3Ryb3MgZGlzcG9zaXRpdm9zPC90ZXh0PgogICAgPHRleHQgeD0iMTAwIiB5PSIyNzYiIGZvbnQtd2VpZ2h0PSI3MDAiPkRpc3Bvc2l0aXZvIGRlbCBzaXN0ZW1hIGJhc2U8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMzAwIj7ilrggUHJvY2VzYWRvcmVzPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjMyNCI+4pa+IFVuaWRhZGVzIGRlIERWRCBvIENELVJPTTwvdGV4dD4KICAgIDx0ZXh0IHg9IjEwMCIgeT0iMzQ4IiBmb250LXdlaWdodD0iNzAwIj5WQk9YIENELVJPTSBBVEEgRGV2aWNlPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjM3MiI+4pa+IFVuaWRhZGVzIGRlIGRpc2NvPC90ZXh0PgogICAgPHRleHQgeD0iMTAwIiB5PSIzOTYiPlZCT1ggSEFSRERJU0sgQVRBIERldmljZTwvdGV4dD4KICA8L2c+CiAgPCEtLSBpY29ub3MgZGUgYXZpc28gLS0+CiAgPHBhdGggZD0iTTg0IDI2NCBsOCAxNCBoLTE2IHoiIGZpbGw9IiNmYWIyMTkiIHN0cm9rZT0iIzdhNTIwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHRleHQgeD0iODQiIHk9IjI3NiIgZm9udC1zaXplPSI5IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMGIwYjBiIj4hPC90ZXh0PgogIDxjaXJjbGUgY3g9Ijg0IiBjeT0iMzQ0IiByPSI3IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMwYjBiMGIiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPHBhdGggZD0iTTg0IDM0MCB2NiBNODEgMzQzIGwzIDQgbDMgLTQiIHN0cm9rZT0iIzBiMGIwYiIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgoKICA8IS0tIGxleWVuZGEgLS0+CiAgPHRleHQgeD0iNDg4IiB5PSI3NiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+TG9zIGljb25vcyBxdWUgdGllbmVzIHF1ZSByZWNvbm9jZXI8L3RleHQ+CiAgPHBhdGggZD0iTTQ5OCA5NCBsOSAxNiBoLTE4IHoiIGZpbGw9IiNmYWIyMTkiIHN0cm9rZT0iIzdhNTIwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHRleHQgeD0iNDk4IiB5PSIxMDgiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwYjBiMGIiPiE8L3RleHQ+CiAgPHRleHQgeD0iNTIwIiB5PSIxMDciIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPjx0c3BhbiBmb250LXdlaWdodD0iNzAwIj5UcmnDoW5ndWxvIGFtYXJpbGxvOjwvdHNwYW4+IGZhbHRhIGVsIGNvbnRyb2xhZG9yIG8gZmFsbGE8L3RleHQ+CiAgPGNpcmNsZSBjeD0iNDk4IiBjeT0iMTMyIiByPSI4IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMwYjBiMGIiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPHBhdGggZD0iTTQ5OCAxMjcgdjcgTTQ5NSAxMzEgbDMgNCBsMyAtNCIgc3Ryb2tlPSIjMGIwYjBiIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHRleHQgeD0iNTIwIiB5PSIxMzciIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPjx0c3BhbiBmb250LXdlaWdodD0iNzAwIj5GbGVjaGEgYWJham86PC90c3Bhbj4gZGlzcG9zaXRpdm8gZGVzaGFiaWxpdGFkbzwvdGV4dD4KICA8cmVjdCB4PSI0OTAiIHk9IjE1MiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iMyIgZmlsbD0iI2VlZjBmMyIgc3Ryb2tlPSIjOGE4Zjk4Ii8+CiAgPHRleHQgeD0iNDk4IiB5PSIxNjUiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwYjBiMGIiPj88L3RleHQ+CiAgPHRleHQgeD0iNTIwIiB5PSIxNjUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPjx0c3BhbiBmb250LXdlaWdodD0iNzAwIj7Cq090cm9zIGRpc3Bvc2l0aXZvc8K7OjwvdHNwYW4+IFdpbmRvd3Mgbm8gc2FiZSBxdcOpIGVzPC90ZXh0PgoKICA8dGV4dCB4PSI0ODgiIHk9IjIwNiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+Q2xpYyBkZXJlY2hvIHNvYnJlIHVuIGRpc3Bvc2l0aXZvPC90ZXh0PgogIDxyZWN0IHg9IjQ4OCIgeT0iMjE4IiB3aWR0aD0iMjUwIiBoZWlnaHQ9IjE1MCIgcng9IjYiIGZpbGw9IiNmM2YzZjMiIHN0cm9rZT0iI2M5Y2NkMSIvPgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iNTA0IiB5PSIyNDIiPkFjdHVhbGl6YXIgY29udHJvbGFkb3I8L3RleHQ+CiAgICA8dGV4dCB4PSI1MDQiIHk9IjI2NiI+RGVzaGFiaWxpdGFyIGRpc3Bvc2l0aXZvPC90ZXh0PgogICAgPHRleHQgeD0iNTA0IiB5PSIyOTAiPkRlc2luc3RhbGFyIGVsIGRpc3Bvc2l0aXZvPC90ZXh0PgogICAgPHRleHQgeD0iNTA0IiB5PSIzMjAiPkJ1c2NhciBjYW1iaW9zIGRlIGhhcmR3YXJlPC90ZXh0PgogICAgPHRleHQgeD0iNTA0IiB5PSIzNTAiIGZvbnQtd2VpZ2h0PSI3MDAiPlByb3BpZWRhZGVzPC90ZXh0PgogIDwvZz4KICA8ZyBzdHJva2U9IiNjOWNjZDEiPjxsaW5lIHgxPSI0OTYiIHkxPSIzMDIiIHgyPSI3MzAiIHkyPSIzMDIiLz48bGluZSB4MT0iNDk2IiB5MT0iMzMyIiB4Mj0iNzMwIiB5Mj0iMzMyIi8+PC9nPgogIDx0ZXh0IHg9IjQ4OCIgeT0iMzkyIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNTI1MTRlIj5Qcm9waWVkYWRlcyDihpIgQ29udHJvbGFkb3I6IHZlcnNpw7NuLCDCq1JldmVydGlyIGFsIGNvbnRyb2xhZG9yIGFudGVyaW9ywrsuPC90ZXh0PgogIDx0ZXh0IHg9IjQ4OCIgeT0iNDA4IiBmb250LXNpemU9IjEyIiBmaWxsPSIjNTI1MTRlIj5Qcm9waWVkYWRlcyDihpIgRGV0YWxsZXMg4oaSIElkLiBkZSBoYXJkd2FyZTogcGFyYSBidXNjYXIgZWwgY29udHJvbGFkb3IuPC90ZXh0Pgo8L3N2Zz4K" alt="Esquema del Administrador de dispositivos con un triángulo amarillo, una flecha de deshabilitado y el menú de clic derecho" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Icono</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué significa</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué haces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">⚠️ Triángulo amarillo</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Falta el controlador o da error</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Clic derecho → <strong>Actualizar controlador</strong>, o descargarlo del fabricante</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">⬇️ Flecha hacia abajo</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El dispositivo está deshabilitado</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Clic derecho → <strong>Habilitar dispositivo</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">❓ En «Otros dispositivos»</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Windows no sabe qué es</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Buscar su <strong>Id. de hardware</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Encontrar el controlador de un dispositivo desconocido:</strong> clic derecho → <strong>Propiedades</strong> →
+pestaña <strong>Detalles</strong> → <strong>Id. de hardware</strong>. Verás algo como <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">PCI\VEN_8086&amp;DEV_100E</code>: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VEN</code> es el
+fabricante (8086 = Intel) y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">DEV</code> el modelo. Buscando ese código das con el controlador exacto.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Si tras actualizar un controlador algo va peor</strong>, en <strong>Propiedades → Controlador</strong> tienes
+<strong>Revertir al controlador anterior</strong>. Por eso no se borra nunca un controlador «por si acaso».</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><strong>En Linux</strong> los controladores vienen dentro del núcleo. Para ver el hardware: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lspci</code> (tarjetas
+internas), <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lsusb</code> (USB) y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lsmod</code> (módulos del núcleo cargados).</p>
+</div>
+<h3 id="5-administración-de-discos" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">5. Administración de discos</h3>
+<p><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code> → <strong>Administración de discos</strong> (o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">diskmgmt.msc</code>). Discos, particiones, sistemas de
+archivos y letras.</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iMzQwIiB2aWV3Qm94PSIwIDAgOTAwIDM0MCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5BZG1pbmlzdHJhY2nDs24gZGUgZGlzY29zPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+RXNxdWVtYSBkZSBBZG1pbmlzdHJhY2nDs24gZGUgZGlzY29zLiBEaXNjbyAwLCBkZSA2MCBHQiB5IHRhYmxhIEdQVCwgY29uIHVuYSBwYXJ0aWNpw7NuIGRlIHNpc3RlbWEgRUZJIGRlIDEwMCBNQiwgbGEgcGFydGljacOzbiByZXNlcnZhZGEgZGUgTWljcm9zb2Z0IGRlIDE2IE1CIHF1ZSBlc3RhIHZlbnRhbmEgbm8gZW5zZcOxYSwgZWwgdm9sdW1lbiBXaW5kb3dzIEM6IGVuIE5URlMgeSB1bmEgcGFydGljacOzbiBkZSByZWN1cGVyYWNpw7NuLiBEaXNjbyAxLCB1biBwaW5jaG8gVmVudG95IGNvbiBsYSBwYXJ0aWNpw7NuIFZlbnRveSBFOiBlbiBleEZBVCB5IGxhIHBhcnRpY2nDs24gVlRPWUVGSSBkZSAzMiBNQi48L2Rlc2M+CiAgPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI4OTkiIGhlaWdodD0iMzM5IiByeD0iMTQiIGZpbGw9IiNmY2ZjZmIiIHN0cm9rZT0iI2UyZTVlOSIvPgogIDx0ZXh0IHg9IjI0IiB5PSIzOCIgZm9udC1zaXplPSIyMSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+QWRtaW5pc3RyYWNpw7NuIGRlIGRpc2NvcyAoZGlza21nbXQubXNjKTwvdGV4dD4KCiAgPCEtLSBEaXNjbyAwIC0tPgogIDxyZWN0IHg9IjI0IiB5PSI2MiIgd2lkdGg9IjE0MCIgaGVpZ2h0PSI4NCIgcng9IjQiIGZpbGw9IiNlZWYwZjMiIHN0cm9rZT0iIzhhOGY5OCIvPgogIDxnIGZvbnQtc2l6ZT0iMTIuNSIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSIzNCIgeT0iODIiIGZvbnQtd2VpZ2h0PSI3MDAiPkRpc2NvIDA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjEwMCI+QsOhc2ljbzwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTE2Ij42MCwwMCBHQjwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTMyIj5FbiBsw61uZWE8L3RleHQ+CiAgPC9nPgogIDxnPgogICAgPHJlY3QgeD0iMTY2IiB5PSI2MiIgd2lkdGg9IjEwNCIgaGVpZ2h0PSI4NCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjOGE4Zjk4Ii8+PHJlY3QgeD0iMTY2IiB5PSI2MiIgd2lkdGg9IjEwNCIgaGVpZ2h0PSI4IiBmaWxsPSIjMWQzYWE2Ii8+CiAgICA8cmVjdCB4PSIyNzIiIHk9IjYyIiB3aWR0aD0iNjAiIGhlaWdodD0iODQiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzhhOGY5OCIgc3Ryb2tlLWRhc2hhcnJheT0iNSA0Ii8+CiAgICA8cmVjdCB4PSIzMzQiIHk9IjYyIiB3aWR0aD0iNDIwIiBoZWlnaHQ9Ijg0IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiM4YThmOTgiLz48cmVjdCB4PSIzMzQiIHk9IjYyIiB3aWR0aD0iNDIwIiBoZWlnaHQ9IjgiIGZpbGw9IiMxZDNhYTYiLz4KICAgIDxyZWN0IHg9Ijc1NiIgeT0iNjIiIHdpZHRoPSIxMjAiIGhlaWdodD0iODQiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzhhOGY5OCIvPjxyZWN0IHg9Ijc1NiIgeT0iNjIiIHdpZHRoPSIxMjAiIGhlaWdodD0iOCIgZmlsbD0iIzFkM2FhNiIvPgogIDwvZz4KICA8ZyBmb250LXNpemU9IjEyIiBmaWxsPSIjMGIwYjBiIj4KICAgIDx0ZXh0IHg9IjE3NCIgeT0iOTAiIGZvbnQtd2VpZ2h0PSI3MDAiPjEwMCBNQjwvdGV4dD48dGV4dCB4PSIxNzQiIHk9IjEwNiI+Q29ycmVjdG8gKHBhcnRpY2nDs248L3RleHQ+PHRleHQgeD0iMTc0IiB5PSIxMjIiPmRlIHNpc3RlbWEgRUZJKTwvdGV4dD4KICAgIDx0ZXh0IHg9IjI4MCIgeT0iOTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM1MjUxNGUiPk1TUjwvdGV4dD48dGV4dCB4PSIyODAiIHk9IjEwNiIgZmlsbD0iIzUyNTE0ZSI+MTYgTUI8L3RleHQ+PHRleHQgeD0iMjgwIiB5PSIxMjIiIGZpbGw9IiM1MjUxNGUiPihubyBzYWxlKTwvdGV4dD4KICAgIDx0ZXh0IHg9IjM0NCIgeT0iOTAiIGZvbnQtd2VpZ2h0PSI3MDAiPldpbmRvd3MgKEM6KTwvdGV4dD48dGV4dCB4PSIzNDQiIHk9IjEwNiI+NTksMTUgR0IgTlRGUzwvdGV4dD48dGV4dCB4PSIzNDQiIHk9IjEyMiI+Q29ycmVjdG8gKGFycmFucXVlLCBhcmNoaXZvIGRlIHBhZ2luYWNpw7Nu4oCmKTwvdGV4dD4KICAgIDx0ZXh0IHg9Ijc2NCIgeT0iOTAiIGZvbnQtd2VpZ2h0PSI3MDAiPjc1MCBNQjwvdGV4dD48dGV4dCB4PSI3NjQiIHk9IjEwNiI+Q29ycmVjdG8gKHBhcnRpY2nDs248L3RleHQ+PHRleHQgeD0iNzY0IiB5PSIxMjIiPmRlIHJlY3VwZXJhY2nDs24pPC90ZXh0PgogIDwvZz4KCiAgPCEtLSBEaXNjbyAxIC0tPgogIDxyZWN0IHg9IjI0IiB5PSIxNjAiIHdpZHRoPSIxNDAiIGhlaWdodD0iODQiIHJ4PSI0IiBmaWxsPSIjZWVmMGYzIiBzdHJva2U9IiM4YThmOTgiLz4KICA8ZyBmb250LXNpemU9IjEyLjUiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iMzQiIHk9IjE4MCIgZm9udC13ZWlnaHQ9IjcwMCI+RGlzY28gMTwvdGV4dD48dGV4dCB4PSIzNCIgeT0iMTk4Ij5FeHRyYcOtYmxlPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyMTQiPjU3LDcwIEdCPC90ZXh0Pjx0ZXh0IHg9IjM0IiB5PSIyMzAiPkVuIGzDrW5lYTwvdGV4dD4KICA8L2c+CiAgPGc+CiAgICA8cmVjdCB4PSIxNjYiIHk9IjE2MCIgd2lkdGg9IjU5MCIgaGVpZ2h0PSI4NCIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjOGE4Zjk4Ii8+PHJlY3QgeD0iMTY2IiB5PSIxNjAiIHdpZHRoPSI1OTAiIGhlaWdodD0iOCIgZmlsbD0iIzFkM2FhNiIvPgogICAgPHJlY3QgeD0iNzU4IiB5PSIxNjAiIHdpZHRoPSIxMTgiIGhlaWdodD0iODQiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzhhOGY5OCIvPjxyZWN0IHg9Ijc1OCIgeT0iMTYwIiB3aWR0aD0iMTE4IiBoZWlnaHQ9IjgiIGZpbGw9IiMxZDNhYTYiLz4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxMiIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSIxNzYiIHk9IjE4OCIgZm9udC13ZWlnaHQ9IjcwMCI+VmVudG95IChFOik8L3RleHQ+PHRleHQgeD0iMTc2IiB5PSIyMDQiPjU3LDY2IEdCIGV4RkFUPC90ZXh0Pjx0ZXh0IHg9IjE3NiIgeT0iMjIwIj5Db3JyZWN0byAocGFydGljacOzbiBwcmltYXJpYSk8L3RleHQ+CiAgICA8dGV4dCB4PSI3NjYiIHk9IjE4OCIgZm9udC13ZWlnaHQ9IjcwMCI+VlRPWUVGSTwvdGV4dD48dGV4dCB4PSI3NjYiIHk9IjIwNCI+MzIgTUIgRkFUPC90ZXh0Pjx0ZXh0IHg9Ijc2NiIgeT0iMjIwIj5Db3JyZWN0bzwvdGV4dD4KICA8L2c+CgogIDwhLS0gbm90YXMgLS0+CiAgPGcgZm9udC1zaXplPSIxMyIgZmlsbD0iIzBiMGIwYiI+CiAgICA8Y2lyY2xlIGN4PSIzNCIgY3k9IjI3NiIgcj0iOCIgZmlsbD0iIzJhNzhkNiIvPjx0ZXh0IHg9IjUwIiB5PSIyODEiPjx0c3BhbiBmb250LXdlaWdodD0iNzAwIj7Cv0dQVCBvIE1CUj88L3RzcGFuPiBDbGljIGRlcmVjaG8gZW4gwqtEaXNjbyAwwrsg4oaSIFByb3BpZWRhZGVzIOKGkiBWb2zDum1lbmVzIOKGkiBFc3RpbG8gZGUgcGFydGljacOzbi48L3RleHQ+CiAgICA8Y2lyY2xlIGN4PSIzNCIgY3k9IjMwMiIgcj0iOCIgZmlsbD0iIzFiYWY3YSIvPjx0ZXh0IHg9IjUwIiB5PSIzMDciPjx0c3BhbiBmb250LXdlaWdodD0iNzAwIj5DbGljIGRlcmVjaG8gZW4gdW4gdm9sdW1lbjo8L3RzcGFuPiByZWR1Y2lyLCBleHRlbmRlciwgZm9ybWF0ZWFyLCBjYW1iaWFyIGxhIGxldHJh4oCmPC90ZXh0PgogICAgPGNpcmNsZSBjeD0iMzQiIGN5PSIzMjgiIHI9IjgiIGZpbGw9IiNkMDNiM2IiLz48dGV4dCB4PSI1MCIgeT0iMzMzIj48dHNwYW4gZm9udC13ZWlnaHQ9IjcwMCI+Q3VpZGFkbzo8L3RzcGFuPiBzb24gdHVzIGRpc2NvcyBkZSB2ZXJkYWQuIEFxdcOtIHNlIG1pcmE7IGxvcyBjYW1iaW9zLCBlbiB1bmEgbcOhcXVpbmEgdmlydHVhbC48L3RleHQ+CiAgPC9nPgo8L3N2Zz4K" alt="Esquema de Administración de discos: Disco 0 con particiones EFI, MSR oculta, C: y recuperación; Disco 1 con un pincho Ventoy" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<p>Así instala Windows 11 su disco en un equipo UEFI, en <strong>GPT</strong>:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Partición</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tamaño</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">¿La ves aquí?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Partición de sistema EFI</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">100 MB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">El arranque (como la de 512 MB de Mint y Arch)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sí, sin letra</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Reservada de Microsoft (MSR)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">16 MB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Uso interno de Windows</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>No</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Windows (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">C:</code>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">El resto</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">El sistema y tus datos, en NTFS</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sí</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Recuperación</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">~750 MB</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Las herramientas para reparar Windows</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Sí, sin letra</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>¿El disco es GPT o MBR?</strong> Clic derecho sobre «Disco 0» (el recuadro gris de la izquierda) →
+<strong>Propiedades</strong> → pestaña <strong>Volúmenes</strong> → <strong>Estilo de partición</strong>. O en PowerShell:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-Disk</span>          <span style="color:#8f8a75"># columna Partition Style: GPT o MBR</span>
+</code></pre>
+</div>
+<p>Con clic derecho sobre un volumen puedes <strong>reducirlo</strong>, <strong>extenderlo</strong>, <strong>formatearlo</strong> o
+<strong>cambiarle la letra</strong>. Es lo que se usa para hacer hueco a un Linux junto a Windows.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Son tus discos de verdad.</strong> Aquí se mira; los cambios, en una máquina virtual. Y recuerda lo
+del <a href="07-usb-multiarranque-ventoy-1-guia.html#9-lo-que-despista" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">pincho Ventoy</a>:
+si Windows te ofrece «formatear» la partición <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">VTOYEFI</code>, <strong>cancela</strong>.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><strong>En Linux:</strong> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lsblk -f</code> para verlo todo, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fdisk -l</code> para ver la tabla, y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cfdisk</code> o GParted para
+cambiarla.</p>
+</div>
+<h3 id="6-usuarios-y-grupos" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6. Usuarios y grupos</h3>
+<p>En Windows, igual que en Linux, cada persona tiene su cuenta, y los permisos se dan a <strong>grupos</strong>.</p>
+<p><strong>Tipos de cuenta:</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué es</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Cuenta local</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sólo existe en este equipo (como las de Linux)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Cuenta Microsoft</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Se inicia con un correo y sincroniza ajustes y OneDrive</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Administrador</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Pertenece al grupo <strong>Administradores</strong>: puede instalar y cambiar el sistema</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Estándar</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Pertenece sólo a <strong>Usuarios</strong>: usa el equipo, pero no lo administra</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Grupos locales que tienes que conocer:</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Grupo</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Quién está</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">En Linux sería…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Administradores</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Quien puede administrar el equipo</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">El grupo <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo</code> (Mint) o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">wheel</code> (Arch)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Usuarios</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Todas las cuentas normales</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El grupo <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">users</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Invitados</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">La cuenta de invitado (deshabilitada por defecto)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">—</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Usuarios de escritorio remoto</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Quien puede conectarse a distancia</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Dónde se gestionan</strong> (de más sencillo a más completo):</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Herramienta</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Cómo se abre</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Configuración → <strong>Cuentas</strong> → <strong>Otros usuarios</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">I</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Lo normal para crear cuentas y cambiar su tipo</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Cuentas de usuario</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> → <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">netplwiz</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Ver todas las cuentas y cambiar a qué grupo pertenecen</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Usuarios y grupos locales</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> → <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lusrmgr.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">La vista completa. <strong>No existe en Windows Home</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Crear una cuenta local sin correo</strong> desde Configuración: <strong>Agregar cuenta</strong> → «No tengo los
+datos de inicio de sesión de esta persona» → «Agregar un usuario sin cuenta Microsoft».</p>
+</div>
+<p><strong>Por PowerShell</strong> (abre <strong>Terminal (Administrador)</strong> con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code>):</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-LocalUser</span>                                      <span style="color:#8f8a75"># usuarios del equipo</span>
+<span style="color:#66d9ef">Get-LocalGroup</span>                                     <span style="color:#8f8a75"># grupos</span>
+<span style="color:#66d9ef">Get-LocalGroupMember</span> <span style="color:#ae81ff">-Group</span> <span style="color:#e6db74">&quot;Administradores&quot;</span>      <span style="color:#8f8a75"># quién es administrador</span>
+
+<span style="color:#fd971f">$clave</span> = <span style="color:#66d9ef">Read-Host</span> <span style="color:#ae81ff">-AsSecureString</span> <span style="color:#e6db74">&quot;Contraseña&quot;</span>    <span style="color:#8f8a75"># te la pide sin mostrarla</span>
+<span style="color:#66d9ef">New-LocalUser</span> <span style="color:#ae81ff">-Name</span> <span style="color:#e6db74">&quot;prueba&quot;</span> <span style="color:#ae81ff">-Password</span> <span style="color:#fd971f">$clave</span> <span style="color:#ae81ff">-FullName</span> <span style="color:#e6db74">&quot;Usuario de prueba&quot;</span>
+<span style="color:#66d9ef">Add-LocalGroupMember</span> <span style="color:#ae81ff">-Group</span> <span style="color:#e6db74">&quot;Usuarios&quot;</span> <span style="color:#ae81ff">-Member</span> <span style="color:#e6db74">&quot;prueba&quot;</span>
+<span style="color:#66d9ef">Remove-LocalUser</span> <span style="color:#ae81ff">-Name</span> <span style="color:#e6db74">&quot;prueba&quot;</span>                    <span style="color:#8f8a75"># borrarlo al terminar</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><strong>Los nombres de los grupos dependen del idioma</strong>: en un Windows en español es
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&quot;Administradores&quot;</code>; en uno en inglés, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&quot;Administrators&quot;</code>. Compruébalo con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Get-LocalGroup</code>.
+También existe la forma clásica de CMD: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">net user</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">net localgroup Administradores</code>.</p>
+</div>
+<p><strong>El aviso de UAC.</strong> Aunque tu cuenta sea de administrador, Windows te hace trabajar como usuario
+normal y te pregunta cada vez que algo necesita permisos de verdad. Es el <strong>Control de cuentas de
+usuario</strong> (UAC), el primo de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo</code>:</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NjAiIGhlaWdodD0iMzMwIiB2aWV3Qm94PSIwIDAgODYwIDMzMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5VQUMgZW4gV2luZG93cyB5IHN1ZG8gZW4gTGludXg8L3RpdGxlPgogIDxkZXNjIGlkPSJkIj5BIGxhIGl6cXVpZXJkYSwgbGEgdmVudGFuYSBkZWwgQ29udHJvbCBkZSBjdWVudGFzIGRlIHVzdWFyaW8gZGUgV2luZG93cyBwcmVndW50YW5kbyBzaSBwZXJtaXRlcyBxdWUgdW5hIGFwbGljYWNpw7NuIGhhZ2EgY2FtYmlvcywgY29uIGxvcyBib3RvbmVzIFPDrSB5IE5vLiBBIGxhIGRlcmVjaGEsIHVuIHRlcm1pbmFsIGRlIExpbnV4IGRvbmRlIHN1ZG8gcGlkZSBsYSBjb250cmFzZcOxYSBkZWwgdXN1YXJpby4gRW4gbG9zIGRvcyBzaXN0ZW1hcyB0cmFiYWphcyBjb21vIHVzdWFyaW8gbm9ybWFsIHkgcGlkZXMgcGVybWlzb3MgZGUgYWRtaW5pc3RyYWRvciBzw7NsbyBwYXJhIHVuYSB0YXJlYS48L2Rlc2M+CiAgPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI4NTkiIGhlaWdodD0iMzI5IiByeD0iMTQiIGZpbGw9IiNmY2ZjZmIiIHN0cm9rZT0iI2UyZTVlOSIvPgogIDx0ZXh0IHg9IjI0IiB5PSIzOCIgZm9udC1zaXplPSIyMSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+UGVkaXIgcGVybWlzbyBkZSBhZG1pbmlzdHJhZG9yOiBVQUMgeSBzdWRvPC90ZXh0PgoKICA8IS0tIFVBQyAtLT4KICA8dGV4dCB4PSIyNCIgeT0iNzAiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPldpbmRvd3MgwrcgQ29udHJvbCBkZSBjdWVudGFzIGRlIHVzdWFyaW88L3RleHQ+CiAgPHJlY3QgeD0iMjQiIHk9IjgwIiB3aWR0aD0iMzkwIiBoZWlnaHQ9IjE4MCIgcng9IjgiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzhhOGY5OCIvPgogIDxyZWN0IHg9IjI0IiB5PSI4MCIgd2lkdGg9IjM5MCIgaGVpZ2h0PSIzNCIgcng9IjgiIGZpbGw9IiMxZDNhYTYiLz48cmVjdCB4PSIyNCIgeT0iMTAwIiB3aWR0aD0iMzkwIiBoZWlnaHQ9IjE0IiBmaWxsPSIjMWQzYWE2Ii8+CiAgPHRleHQgeD0iNDAiIHk9IjEwMiIgZm9udC1zaXplPSIxMi41IiBmaWxsPSIjZmZmZmZmIj5Db250cm9sIGRlIGN1ZW50YXMgZGUgdXN1YXJpbzwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iMTM4IiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj7Cv1F1aWVyZXMgcGVybWl0aXIgcXVlIGVzdGEgYXBsaWNhY2nDs248L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjE1NiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+aGFnYSBjYW1iaW9zIGVuIGVsIGRpc3Bvc2l0aXZvPzwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iMTgyIiBmb250LXNpemU9IjEyLjUiIGZpbGw9IiMwYjBiMGIiPkVkaXRvciBkZWwgUmVnaXN0cm88L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjIwMCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzUyNTE0ZSI+RWRpdG9yIGNvbXByb2JhZG86IE1pY3Jvc29mdCBXaW5kb3dzPC90ZXh0PgogIDxyZWN0IHg9IjEzNCIgeT0iMjE4IiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjMwIiByeD0iNSIgZmlsbD0iIzJhNzhkNiIvPjx0ZXh0IHg9IjE5OSIgeT0iMjM4IiBmb250LXNpemU9IjEzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIj5Tw608L3RleHQ+CiAgPHJlY3QgeD0iMjcyIiB5PSIyMTgiIHdpZHRoPSIxMzAiIGhlaWdodD0iMzAiIHJ4PSI1IiBmaWxsPSIjZWVmMGYzIiBzdHJva2U9IiNjOWNjZDEiLz48dGV4dCB4PSIzMzciIHk9IjIzOCIgZm9udC1zaXplPSIxMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzBiMGIwYiI+Tm88L3RleHQ+CgogIDwhLS0gc3VkbyAtLT4KICA8dGV4dCB4PSI0NDYiIHk9IjcwIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj5MaW51eCDCtyBzdWRvPC90ZXh0PgogIDxyZWN0IHg9IjQ0NiIgeT0iODAiIHdpZHRoPSIzOTAiIGhlaWdodD0iMTgwIiByeD0iOCIgZmlsbD0iIzFlMjIyNyIvPgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJDb25zb2xhcywgJ0RlamFWdSBTYW5zIE1vbm8nLCBtb25vc3BhY2UiIGZpbGw9IiNlNmU5ZWUiPgogICAgPHRleHQgeD0iNDYyIiB5PSIxMTIiPjx0c3BhbiBmaWxsPSIjN2ZlMGI2Ij5hbHVtbm9AbWludC1zbXI8L3RzcGFuPjp+JCBzdWRvIGFwdCB1cGRhdGU8L3RleHQ+CiAgICA8dGV4dCB4PSI0NjIiIHk9IjEzNiI+W3N1ZG9dIGNvbnRyYXNlw7FhIHBhcmEgYWx1bW5vOiDilow8L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9IjQ2MiIgeT0iMTkwIiBmb250LXNpemU9IjEyIiBmaWxsPSIjYzljY2QxIj5QaWRlIFRVIGNvbnRyYXNlw7FhLCB5IHPDs2xvIGZ1bmNpb25hIHNpIGVzdMOhczwvdGV4dD4KICA8dGV4dCB4PSI0NjIiIHk9IjIwOCIgZm9udC1zaXplPSIxMiIgZmlsbD0iI2M5Y2NkMSI+ZW4gZWwgZ3J1cG8gZGUgYWRtaW5pc3RyYWRvcmVzIChzdWRvIG8gd2hlZWwpLjwvdGV4dD4KCiAgPGcgZm9udC1zaXplPSIxMyIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSIyNCIgeT0iMjkwIj48dHNwYW4gZm9udC13ZWlnaHQ9IjcwMCI+TGEgaWRlYSBlcyBsYSBtaXNtYTo8L3RzcGFuPiB0cmFiYWphcyBjb21vIHVzdWFyaW8gbm9ybWFsIHkgcGlkZXMgcGVybWlzb3MgZGUgYWRtaW5pc3RyYWRvciBzw7NsbyBwYXJhIHVuYSB0YXJlYS48L3RleHQ+CiAgICA8dGV4dCB4PSIyNCIgeT0iMzEyIiBmaWxsPSIjNTI1MTRlIj5TaSBlcmVzIGFkbWluaXN0cmFkb3IsIFVBQyBzw7NsbyB0ZSBwaWRlIMKrU8Otwrs7IHNpIGVyZXMgdXN1YXJpbyBlc3TDoW5kYXIsIHRlIHBpZGUgbGEgY29udHJhc2XDsWEgZGUgdW4gYWRtaW5pc3RyYWRvci48L3RleHQ+CiAgPC9nPgo8L3N2Zz4K" alt="Comparación entre la ventana de UAC de Windows, que pregunta Sí o No, y sudo en Linux, que pide tu contraseña" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>No desactives UAC.</strong> Es lo que impide que un programa que has descargado cambie el sistema sin
+que te enteres. Si molesta mucho, es señal de que estás trabajando todo el día como
+administrador cuando no hace falta.</p>
+</div>
+<p><strong>🧠 ¿Lo has pillado?</strong> En el ordenador de casa todos usáis la misma cuenta, que es de
+administrador. ¿Qué cambiarías?</p>
+<details>
+<summary style="cursor:pointer;font-weight:600;color:#7a3e1d">Ver respuesta</summary>
+<p>Una <strong>cuenta estándar para cada persona</strong> y una sola de administrador, con contraseña, que sólo se
+usa para instalar o configurar. Así un error o un virus en la sesión de alguien no puede tocar el
+sistema, y cada uno tiene sus archivos separados.</p>
+</details>
+<h3 id="7-servicios" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">7. Servicios</h3>
+<p>Un <strong>servicio</strong> es un programa que funciona en segundo plano, sin ventana: la cola de impresión,
+Windows Update, el antivirus… Se abre con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> → <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">services.msc</code>.</p>
+<p>Lo importante de cada servicio son dos columnas: <strong>Estado</strong> (en ejecución o no) y <strong>Tipo de
+inicio</strong>:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tipo de inicio</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué significa</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">En Linux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Automático</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Arranca al encender el equipo</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">systemctl enable</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Automático (inicio retrasado)</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Arranca un poco después, para no frenar el arranque</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">—</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Manual</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Sólo arranca cuando algo lo necesita</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">servicio sin <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">enable</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Deshabilitado</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">No puede arrancar</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">systemctl mask</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Doble clic sobre un servicio → <strong>Iniciar</strong>, <strong>Detener</strong> y cambiar el <strong>Tipo de inicio</strong>.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-Service</span>                                   <span style="color:#8f8a75"># todos los servicios</span>
+<span style="color:#66d9ef">Get-Service</span> wuauserv                          <span style="color:#8f8a75"># Windows Update</span>
+<span style="color:#66d9ef">Get-Service</span> | <span style="color:#66d9ef">Where-Object</span> Status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#x27;Running&#x27;</span>
+<span style="color:#66d9ef">Restart-Service</span> Spooler                       <span style="color:#8f8a75"># reiniciar la cola de impresión (administrador)</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>«No imprime nada y la cola está atascada»</strong> → reiniciar el servicio <strong>Cola de impresión</strong>
+(<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Spooler</code>). Es una de las incidencias más típicas del soporte técnico.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>No deshabilites servicios porque lo diga un vídeo de «optimizar Windows».</strong> Muchos son
+necesarios y el fallo aparece semanas después, cuando ya no te acuerdas de qué tocaste.</p>
+</div>
+<h3 id="8-visor-de-eventos" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">8. Visor de eventos</h3>
+<p><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code> → <strong>Visor de eventos</strong> (o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">eventvwr.msc</code>). Es el diario de Windows: cada aviso, error o
+inicio de sesión queda apuntado.</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Registro</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué apunta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Registros de Windows → Sistema</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Controladores, servicios, apagados inesperados</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Registros de Windows → Aplicación</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Errores de los programas</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Registros de Windows → Seguridad</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Inicios de sesión, correctos y fallidos</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cada evento tiene un <strong>nivel</strong>: <strong>Crítico</strong>, <strong>Error</strong>, <strong>Advertencia</strong> o <strong>Información</strong>. Para no
+ahogarte, usa <strong>Filtrar registro actual</strong> (panel de la derecha) y marca sólo Crítico y Error.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-WinEvent</span> <span style="color:#ae81ff">-LogName</span> System <span style="color:#ae81ff">-MaxEvents</span> <span style="color:#ae81ff">10</span>    <span style="color:#8f8a75"># los 10 últimos eventos del sistema</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>«Se apaga solo»</strong> → filtra el registro <strong>Sistema</strong> por nivel <strong>Crítico</strong>. Un evento <em>Kernel-Power</em>
+con el ID <strong>41</strong> significa que el equipo se apagó sin cerrarse bien: fallo de corriente, de
+fuente o de temperatura.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><strong>En Linux:</strong> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">journalctl -p err -b</code> (errores del arranque actual) y los ficheros de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/var/log</code>.</p>
+</div>
+<h3 id="9-características-y-programas" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">9. Características y programas</h3>
+<p><strong>Características de Windows.</strong> Windows trae piezas opcionales que se activan o desactivan:
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> → <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">optionalfeatures</code> («Activar o desactivar las características de Windows»).</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Característica</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Subsistema de Windows para Linux</strong> (WSL)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Ejecutar un Linux de verdad dentro de Windows</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Hyper-V</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">El virtualizador de Microsoft (sólo en Pro y superiores)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Espacio aislado de Windows</strong> (<em>Sandbox</em>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Un Windows desechable para probar programas sospechosos</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>.NET Framework 3.5</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Lo piden algunos programas antiguos</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>SMB 1.0/CIFS</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Compartir archivos con equipos muy antiguos. <strong>Inseguro: déjalo desactivado</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Linux dentro de Windows en un comando.</strong> En una Terminal (Administrador): <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">wsl --install</code>.
+Tras reiniciar tendrás un Ubuntu con su <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">bash</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">apt</code> y todo lo que has aprendido.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Si activas Hyper-V o WSL, VirtualBox puede ir más lento</strong>, porque pasa a funcionar por encima
+de Hyper-V. Tenlo en cuenta en el equipo donde haces las prácticas con máquinas virtuales.</p>
+</div>
+<p><strong>Programas instalados.</strong> Configuración → <strong>Aplicaciones</strong> → <strong>Aplicaciones instaladas</strong> (o el
+clásico <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">appwiz.cpl</code>). Y desde la terminal, con <strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">winget</code></strong>, el «gestor de paquetes» de Windows:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">winget search firefox                 <span style="color:#8f8a75"># buscar</span>
+winget install Mozilla.Firefox        <span style="color:#8f8a75"># instalar</span>
+winget list                           <span style="color:#8f8a75"># qué hay instalado</span>
+winget upgrade <span style="color:#ae81ff">--all</span>                  <span style="color:#8f8a75"># actualizar todo</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">winget</code> es el <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">apt</code> de Windows: la misma idea de instalar desde la terminal con un nombre, sin
+buscar instaladores por internet.</p>
+</div>
+<h3 id="10-administración-de-equipos-y-otras-herramientas" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">10. Administración de equipos y otras herramientas</h3>
+<p><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code> → <strong>Administración de equipos</strong> (o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">compmgmt.msc</code>) reúne en una sola ventana casi todo
+lo que has visto:</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNDIwIiB2aWV3Qm94PSIwIDAgOTAwIDQyMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5BZG1pbmlzdHJhY2nDs24gZGUgZXF1aXBvcyB5IHN1cyBlcXVpdmFsZW50ZXMgZW4gTGludXg8L3RpdGxlPgogIDxkZXNjIGlkPSJkIj7DgXJib2wgZGUgQWRtaW5pc3RyYWNpw7NuIGRlIGVxdWlwb3M6IEhlcnJhbWllbnRhcyBkZWwgc2lzdGVtYSBjb24gUHJvZ3JhbWFkb3IgZGUgdGFyZWFzLCBlcXVpdmFsZW50ZSBhIGNyb247IFZpc29yIGRlIGV2ZW50b3MsIGVxdWl2YWxlbnRlIGEgam91cm5hbGN0bDsgQ2FycGV0YXMgY29tcGFydGlkYXM7IFVzdWFyaW9zIHkgZ3J1cG9zIGxvY2FsZXMsIGVxdWl2YWxlbnRlIGEgdXNlcmFkZCB5IC9ldGMvcGFzc3dkOyBSZW5kaW1pZW50bywgZXF1aXZhbGVudGUgYSBidG9wOyBBZG1pbmlzdHJhZG9yIGRlIGRpc3Bvc2l0aXZvcywgZXF1aXZhbGVudGUgYSBsc3BjaSB5IGxzdXNiLiBBbG1hY2VuYW1pZW50byBjb24gQWRtaW5pc3RyYWNpw7NuIGRlIGRpc2NvcywgZXF1aXZhbGVudGUgYSBsc2JsayB5IGZkaXNrLiBTZXJ2aWNpb3MgeSBBcGxpY2FjaW9uZXMgY29uIFNlcnZpY2lvcywgZXF1aXZhbGVudGUgYSBzeXN0ZW1jdGwuPC9kZXNjPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODk5IiBoZWlnaHQ9IjQxOSIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPkFkbWluaXN0cmFjacOzbiBkZSBlcXVpcG9zOiB0b2RvIGVuIHVuYSB2ZW50YW5hPC90ZXh0PgogIDx0ZXh0IHg9IjI0IiB5PSI2MCIgZm9udC1zaXplPSIxMyIgZmlsbD0iIzUyNTE0ZSI+Y29tcG1nbXQubXNjIMK3IHkgbG8gcXVlIHVzYXLDrWFzIGVuIExpbnV4IHBhcmEgbG8gbWlzbW88L3RleHQ+CgogIDxyZWN0IHg9IjI0IiB5PSI3NCIgd2lkdGg9IjQ3MCIgaGVpZ2h0PSIzMzAiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiM4YThmOTgiLz4KICA8ZyBmb250LXNpemU9IjEzLjUiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iNDAiIHk9IjEwMCIgZm9udC13ZWlnaHQ9IjcwMCI+QWRtaW5pc3RyYWNpw7NuIGRlIGVxdWlwb3MgKGxvY2FsKTwvdGV4dD4KICAgIDx0ZXh0IHg9IjU2IiB5PSIxMjgiIGZvbnQtd2VpZ2h0PSI3MDAiPuKWviBIZXJyYW1pZW50YXMgZGVsIHNpc3RlbWE8L3RleHQ+CiAgICA8dGV4dCB4PSI4NCIgeT0iMTU0Ij5Qcm9ncmFtYWRvciBkZSB0YXJlYXM8L3RleHQ+CiAgICA8dGV4dCB4PSI4NCIgeT0iMTgwIj5WaXNvciBkZSBldmVudG9zPC90ZXh0PgogICAgPHRleHQgeD0iODQiIHk9IjIwNiI+Q2FycGV0YXMgY29tcGFydGlkYXM8L3RleHQ+CiAgICA8dGV4dCB4PSI4NCIgeT0iMjMyIj5Vc3VhcmlvcyB5IGdydXBvcyBsb2NhbGVzPC90ZXh0PgogICAgPHRleHQgeD0iODQiIHk9IjI1OCI+UmVuZGltaWVudG88L3RleHQ+CiAgICA8dGV4dCB4PSI4NCIgeT0iMjg0Ij5BZG1pbmlzdHJhZG9yIGRlIGRpc3Bvc2l0aXZvczwvdGV4dD4KICAgIDx0ZXh0IHg9IjU2IiB5PSIzMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPuKWviBBbG1hY2VuYW1pZW50bzwvdGV4dD4KICAgIDx0ZXh0IHg9Ijg0IiB5PSIzMzgiPkFkbWluaXN0cmFjacOzbiBkZSBkaXNjb3M8L3RleHQ+CiAgICA8dGV4dCB4PSI1NiIgeT0iMzY2IiBmb250LXdlaWdodD0iNzAwIj7ilr4gU2VydmljaW9zIHkgQXBsaWNhY2lvbmVzPC90ZXh0PgogICAgPHRleHQgeD0iODQiIHk9IjM5MiI+U2VydmljaW9zPC90ZXh0PgogIDwvZz4KICA8ZyBmaWxsPSIjMmE3OGQ2Ij4KICAgIDxyZWN0IHg9IjY2IiB5PSIxNDQiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgcng9IjIiLz48cmVjdCB4PSI2NiIgeT0iMTcwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSIjZWI2ODM0Ii8+CiAgICA8cmVjdCB4PSI2NiIgeT0iMTk2IiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSIjOGE4Zjk4Ii8+PHJlY3QgeD0iNjYiIHk9IjIyMiIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiByeD0iMiIgZmlsbD0iIzFiYWY3YSIvPgogICAgPHJlY3QgeD0iNjYiIHk9IjI0OCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiByeD0iMiIgZmlsbD0iI2VkYTEwMCIvPjxyZWN0IHg9IjY2IiB5PSIyNzQiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgcng9IjIiIGZpbGw9IiNlODdiYTQiLz4KICAgIDxyZWN0IHg9IjY2IiB5PSIzMjgiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgcng9IjIiIGZpbGw9IiM2MjUwZDYiLz48cmVjdCB4PSI2NiIgeT0iMzgyIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSIjMDA4MzAwIi8+CiAgPC9nPgoKICA8ZyBzdHJva2U9IiNjOWNjZDEiIHN0cm9rZS1kYXNoYXJyYXk9IjMgNCI+CiAgICA8bGluZSB4MT0iMjgwIiB5MT0iMTUwIiB4Mj0iNTIwIiB5Mj0iMTUwIi8+PGxpbmUgeDE9IjIzMCIgeTE9IjE3NiIgeDI9IjUyMCIgeTI9IjE3NiIvPgogICAgPGxpbmUgeDE9IjI1MCIgeTE9IjIwMiIgeDI9IjUyMCIgeTI9IjIwMiIvPjxsaW5lIHgxPSIyNjgiIHkxPSIyMjgiIHgyPSI1MjAiIHkyPSIyMjgiLz4KICAgIDxsaW5lIHgxPSIxODAiIHkxPSIyNTQiIHgyPSI1MjAiIHkyPSIyNTQiLz48bGluZSB4MT0iMjk4IiB5MT0iMjgwIiB4Mj0iNTIwIiB5Mj0iMjgwIi8+CiAgICA8bGluZSB4MT0iMjYyIiB5MT0iMzM0IiB4Mj0iNTIwIiB5Mj0iMzM0Ii8+PGxpbmUgeDE9IjE1MiIgeTE9IjM4OCIgeDI9IjUyMCIgeTI9IjM4OCIvPgogIDwvZz4KICA8dGV4dCB4PSI1MzAiIHk9IjEwMCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEiIGZpbGw9IiM1MjUxNGUiPkVOIExJTlVYPC90ZXh0PgogIDxnIGZvbnQtc2l6ZT0iMTMuNSIgZm9udC1mYW1pbHk9IkNvbnNvbGFzLCAnRGVqYVZ1IFNhbnMgTW9ubycsIG1vbm9zcGFjZSIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI1MzAiIHk9IjE1NCI+Y3JvbiDCtyBzeXN0ZW1kIHRpbWVyczwvdGV4dD4KICAgIDx0ZXh0IHg9IjUzMCIgeT0iMTgwIj5qb3VybmFsY3RsIMK3IC92YXIvbG9nPC90ZXh0PgogICAgPHRleHQgeD0iNTMwIiB5PSIyMDYiIGZvbnQtZmFtaWx5PSInU2Vnb2UgVUknLCBSb2JvdG8sIHNhbnMtc2VyaWYiIGZpbGw9IiM1MjUxNGUiPlNhbWJhIChvdHJvIG3Ds2R1bG8pPC90ZXh0PgogICAgPHRleHQgeD0iNTMwIiB5PSIyMzIiPnVzZXJhZGQgwrcgL2V0Yy9wYXNzd2Q8L3RleHQ+CiAgICA8dGV4dCB4PSI1MzAiIHk9IjI1OCI+dG9wIMK3IGJ0b3A8L3RleHQ+CiAgICA8dGV4dCB4PSI1MzAiIHk9IjI4NCI+bHNwY2kgwrcgbHN1c2I8L3RleHQ+CiAgICA8dGV4dCB4PSI1MzAiIHk9IjMzOCI+bHNibGsgwrcgZmRpc2s8L3RleHQ+CiAgICA8dGV4dCB4PSI1MzAiIHk9IjM5MiI+c3lzdGVtY3RsPC90ZXh0PgogIDwvZz4KPC9zdmc+Cg==" alt="Árbol de Administración de equipos con cada herramienta y su equivalente en Linux" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<p>Y estas otras herramientas se abren con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code>:</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Escribe</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Abre</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">msinfo32</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Información del sistema</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Todo sobre el equipo. Fíjate en <strong>Modo de BIOS</strong> (UEFI) y <strong>Estado de arranque seguro</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sysdm.cpl</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Propiedades del sistema</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Nombre del equipo, variables de entorno y <strong>puntos de restauración</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">msconfig</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Configuración del sistema</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Arrancar en <strong>modo seguro</strong> (pestaña Arranque)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">taskschd.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Programador de tareas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Tareas a una hora fija: el <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cron</code> de Windows</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ncpa.cpl</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Conexiones de red</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Ver y configurar los adaptadores de red</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">wf.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Firewall de Windows Defender</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Reglas de entrada y salida</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">regedit</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Editor del Registro</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Con muchísimo cuidado (<a href="#1-windows-y-linux-lo-mismo-con-otro-nombre" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 1</a>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">gpedit.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><strong>Editor de directivas de grupo local</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Normas del equipo. <strong>No existe en Windows Home</strong></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">winver</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><strong>Acerca de Windows</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Versión y edición exactas</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Herramientas de Windows</strong> (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code> → <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">control admintools</code>) es una carpeta con accesos
+directos a todas estas ventanas. Es la «caja de herramientas» oficial.</p>
+</div>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="parte-2--chuleta" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Parte 2 · Chuleta</h2>
+<p><strong>Win + R: escribe y abre</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Escribe</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Abre</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">En Linux usarías…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">taskmgr</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Administrador de tareas</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">top</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">htop</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">btop</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">resmon</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Monitor de recursos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">btop</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">devmgmt.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Administrador de dispositivos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lspci</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lsusb</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">diskmgmt.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Administración de discos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lsblk</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fdisk -l</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">compmgmt.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Administración de equipos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">—</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lusrmgr.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Usuarios y grupos locales</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/passwd</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">useradd</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">netplwiz</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Cuentas de usuario</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">—</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">services.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Servicios</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">systemctl</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">eventvwr.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Visor de eventos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">journalctl</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">taskschd.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Programador de tareas</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cron</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">optionalfeatures</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Características de Windows</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">—</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">appwiz.cpl</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Programas y características</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">apt list --installed</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">pacman -Q</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">msinfo32</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Información del sistema</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">fastfetch</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">msconfig</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Configuración del sistema</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">—</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sysdm.cpl</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Propiedades del sistema</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">hostnamectl</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ncpa.cpl</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Conexiones de red</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ip a</code>, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nmcli</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">regedit</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Editor del Registro</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">los ficheros de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">control</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Panel de control</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">—</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">winver</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Versión de Windows</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cat /etc/os-release</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">wt</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Terminal de Windows</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">el terminal</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Atajos de teclado</strong></p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Atajo</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">X</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Menú del técnico</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">R</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Ejecutar</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">I</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Configuración</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">E</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Explorador de archivos</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Mayús</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Administrador de tareas</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">L</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Bloquear el equipo</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">D</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Mostrar el escritorio</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Tab</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Vista de tareas y escritorios virtuales</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Mayús</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">S</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Captura de una zona de la pantalla</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">V</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Historial del portapapeles</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Win</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Emojis y símbolos</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>PowerShell de supervivencia</strong></p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-powershell" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">Get-ComputerInfo</span> | <span style="color:#66d9ef">Select-Object</span> OsName, OsVersion, CsName   <span style="color:#8f8a75"># qué Windows es</span>
+<span style="color:#66d9ef">Get-Disk</span>                                                     <span style="color:#8f8a75"># discos y si son GPT</span>
+<span style="color:#66d9ef">Get-LocalUser</span> ; <span style="color:#66d9ef">Get-LocalGroupMember</span> <span style="color:#ae81ff">-Group</span> <span style="color:#e6db74">&quot;Administradores&quot;</span>
+<span style="color:#66d9ef">Get-Service</span> wuauserv
+<span style="color:#66d9ef">Get-WinEvent</span> <span style="color:#ae81ff">-LogName</span> System <span style="color:#ae81ff">-MaxEvents</span> <span style="color:#ae81ff">10</span>
+winget upgrade <span style="color:#ae81ff">--all</span>
+</code></pre>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="parte-3--practica" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Parte 3 · Practica</h2>
+<h3 id="radiografía-de-tu-windows" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Radiografía de tu Windows</h3>
+<p>Responde a cada pregunta con la herramienta indicada y apunta <strong>cómo lo has averiguado</strong>. La última
+columna es para que pienses qué comando usarías en Linux para lo mismo.</p>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">#</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Pregunta</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Herramienta</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Tu respuesta</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">En Linux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">1</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">¿Qué edición y versión de Windows tienes?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">winver</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">2</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">¿Arranca en UEFI? ¿Está activado el arranque seguro?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">msinfo32</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">3</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">¿Cuántos núcleos y cuánta RAM tiene? ¿Cuánto tiempo lleva encendido?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Administrador de tareas → Rendimiento</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">4</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">¿Qué programa de arranque tiene más impacto?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Administrador de tareas → Aplicaciones de arranque</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">5</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">¿Qué adaptador de red tiene y qué versión de controlador usa?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Administrador de dispositivos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">6</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">¿Hay algún dispositivo con triángulo amarillo? ¿Cuál es su Id. de hardware?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Administrador de dispositivos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">7</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">¿El disco 0 es GPT o MBR? ¿Cuántas particiones tiene y de qué tamaño?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Administración de discos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">8</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">¿Quién pertenece al grupo Administradores?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">lusrmgr.msc</code> o PowerShell</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">9</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">¿En qué estado está el servicio Windows Update y qué tipo de inicio tiene?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">services.msc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">10</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">¿Cuál fue el último <strong>error</strong> del registro Sistema y de qué origen?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Visor de eventos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">11</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">¿Está activado el Subsistema de Windows para Linux?</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">optionalfeatures</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Si no encuentras algo</strong>, vuelve al apartado de esa herramienta: cada respuesta está a uno o dos
+clics de donde se explica. La pregunta 7 tiene truco: la partición MSR no sale en esa ventana,
+pero <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Get-Partition -DiskNumber 0</code> sí te la enseña.</p>
+</div>
+<h3 id="crear-un-usuario-de-dos-formas" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">Crear un usuario de dos formas</h3>
+<p><strong>Sólo en tu máquina virtual de Windows</strong> (necesitas ser administrador):</p>
+<ol>
+<li>Crea con <strong>Configuración → Cuentas → Otros usuarios</strong> una cuenta local estándar llamada
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">alumno2</code>. Inicia sesión con ella y comprueba que no puede abrir <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">services.msc</code> sin pedir la
+contraseña de un administrador.</li>
+<li>Crea con <strong>PowerShell</strong> una cuenta <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">prueba</code> y añádela al grupo <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Usuarios</code> (comandos del
+<a href="#6-usuarios-y-grupos" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">apartado 6</a>). Compruébalo con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Get-LocalGroupMember -Group &quot;Usuarios&quot;</code>.</li>
+<li>Borra las dos cuentas al terminar.</li>
+</ol>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #0e7490;background:#ecfeff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🚀 <strong style="color:#0e7490">Reto.</strong> Haz lo mismo en tu Linux Mint con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo adduser alumno2</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo deluser alumno2</code>.
+¿Qué fichero de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc</code> cambia cuando creas un usuario? <em>(pista: la
+<a href="05-explorar-el-sistema-3-ejercicios.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">ficha de exploración</a>)</em></p>
+</div>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="parte-4--entrega" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Parte 4 · Entrega</h2>
+<p><strong>Tarea Moodle: «Radiografía de mi Windows»</strong>
+Calificación <strong>Apto / No apto</strong>.</p>
+<p>Entrega un PDF exportado desde Markdown con:</p>
+<ol>
+<li>La <strong>tabla de la radiografía</strong> completa, las 11 filas con las cinco columnas rellenas.</li>
+<li>Una <strong>captura</strong> de cada herramienta que has usado, con un pie que diga qué se ve.</li>
+<li>Los <strong>comandos de PowerShell</strong> con los que creaste y borraste el usuario <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">prueba</code>, y la salida
+de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Get-LocalGroupMember -Group &quot;Usuarios&quot;</code> antes de borrarlo, en bloque de código.</li>
+<li>Tres <strong>diferencias entre Windows y Linux</strong> que te hayan sorprendido, explicadas con tus palabras.</li>
+</ol>
+<p>Es <strong>Apto</strong> cuando están las cuatro partes y las respuestas son de <strong>tu</strong> equipo (se nota en las
+capturas: nombre del equipo, versión, tamaños).</p>
+<p><strong>Antes de entregar, comprueba:</strong></p>
+<ul>
+<li style="list-style:none;margin-left:-1.2em">☐ Las 11 filas tienen herramienta, respuesta y equivalente en Linux.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Cada captura tiene su pie.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Los comandos están en texto, no en captura.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Has borrado los usuarios de prueba de tu máquina.</li>
+</ul>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Guía</p></div>
+</body>
+</html>

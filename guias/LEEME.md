@@ -35,8 +35,8 @@ guias/
 │       └── images/           ← capturas y diagramas SVG del tema
 ├── 2-intermedio/
 ├── 3-avanzado/
-├── _moodle/                  ← HTML generados, listos para subir (no se editan a mano)
-├── _herramientas/            ← md2html.py (exportador)
+├── _moodle/                  ← HTML y PDF (en pdf/) generados, listos para subir (no se editan a mano)
+├── _herramientas/            ← exportar.ps1 (HTML + PDF), md2html.js y md2html.py
 ├── _docente/                 ← decisiones, errores corregidos y pendientes (no se publica)
 └── _obsoleto/                ← versiones anteriores
 ```
@@ -173,7 +173,20 @@ preguntas de repaso, nunca en las que puntúan.
 
 El exportador genera **un HTML por página**, con las imágenes incrustadas en base64 y todo el
 estilo **en línea** (Moodle elimina los `<style>` al pegar en una Página, pero respeta los
-`style="..."`).
+`style="..."`), y **un PDF por página** en `_moodle/pdf/`.
+
+**Sin instalar nada** (recomendado): usa el Node que trae VS Code y Edge para imprimir los PDF.
+Desde la carpeta `guias`, en PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File _herramientas\exportar.ps1                # todo
+powershell -ExecutionPolicy Bypass -File _herramientas\exportar.ps1 -Solo "09-*"   # PDF de un tema
+```
+
+Los HTML se regeneran siempre todos (tarda unos segundos); `-Solo` limita los PDF, que son lo
+lento. El conversor es `_herramientas/md2html.js`, con sus librerías en `_herramientas/vendor/`.
+
+**Con Python** (el exportador original, sólo HTML):
 
 ```bash
 pip install markdown-it-py beautifulsoup4 pygments      # una vez
@@ -183,7 +196,10 @@ python3 _herramientas/md2html.py 2-intermedio/09-permisos/1-guia.md -o permisos.
 
 Los ficheros salen con nombre único y ordenado: `02-instalar-mint-virtualbox-1-explicacion.html`,
 `02-instalar-mint-virtualbox-2-chuleta.html`, `02-instalar-mint-virtualbox-3-ejercicios.html`.
-Una guía única sale como `09-permisos-1-guia.html`.
+Una guía única sale como `09-permisos-1-guia.html` (y `pdf/09-permisos-1-guia.pdf`).
+
+> **Nota.** En el PDF las respuestas de los «🧠 ¿Lo has pillado?» salen desplegadas, porque en
+> papel no se puede hacer clic. En el HTML siguen plegadas.
 
 Para publicarlos:
 
@@ -192,7 +208,7 @@ Para publicarlos:
    **Código fuente** y pega el contenido del `<body>`.
 2. **Tarea** (ejercicios): pega el HTML de `3-ejercicios` en la descripción de la tarea, o adjúntalo
    como fichero.
-3. **Recurso Fichero**: sube el `.html` tal cual; se abre en el navegador con todo su formato.
+3. **Recurso Fichero**: sube el `.html` o el `.pdf` tal cual; se abren con todo su formato.
 
 > ⚠️ **Los enlaces entre páginas** apuntan al nombre del HTML exportado. Si los subes como
 > Páginas de Moodle, esos enlaces no funcionarán: sustitúyelos por el enlace de la Página o

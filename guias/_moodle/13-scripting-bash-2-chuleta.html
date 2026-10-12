@@ -18,24 +18,25 @@
 <li><a href="#esqueleto-de-un-script" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Esqueleto de un script</a></li>
 <li><a href="#variables-y-entrada" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Variables y entrada</a></li>
 <li><a href="#condiciones" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Condiciones</a></li>
-<li><a href="#case" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">case</code></a></li>
+<li><a href="#case" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">case</code></a></li>
 <li><a href="#bucles" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Bucles</a></li>
 <li><a href="#funciones-y-redirección" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Funciones y redirección</a></li>
 <li><a href="#cron" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Cron</a></li>
 </ul>
 </li>
 </ul>
-<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0"/>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
 <h2 id="esqueleto-de-un-script" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Esqueleto de un script</h2>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #75715e">#!/bin/bash</span>
-<span style="color: #75715e"># Nombre: copia.sh · Uso: ./copia.sh &lt;origen&gt; &lt;destino&gt;</span>
-<span style="color: #f8f8f2">set</span> -u                                  <span style="color: #75715e"># error si usas una variable sin definir</span>
-<span style="color: #f8f8f2">ORIGEN</span><span style="color: #f92672">=</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">$1</span><span style="color: #e6db74">"</span>
-<span style="color: #f8f8f2">DESTINO</span><span style="color: #f92672">=</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">$2</span><span style="color: #e6db74">"</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#8f8a75">#!/bin/bash</span>
+<span style="color:#8f8a75"># Nombre: copia.sh · Uso: ./copia.sh &lt;origen&gt; &lt;destino&gt;</span>
+<span style="color:#66d9ef">set</span> -u                                  <span style="color:#8f8a75"># error si usas una variable sin definir</span>
+
+ORIGEN=<span style="color:#e6db74">&quot;<span style="color:#fd971f">$1</span>&quot;</span>
+DESTINO=<span style="color:#e6db74">&quot;<span style="color:#fd971f">$2</span>&quot;</span>
 </code></pre>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">chmod +x script.sh     <span style="color: #75715e"># darle permiso de ejecución</span>
-./script.sh            <span style="color: #75715e"># ejecutarlo (shell nuevo)</span>
-bash -x script.sh      <span style="color: #75715e"># ejecutarlo mostrando cada línea (depurar)</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">chmod</span> +x script.sh     <span style="color:#8f8a75"># darle permiso de ejecución</span>
+./script.sh            <span style="color:#8f8a75"># ejecutarlo (shell nuevo)</span>
+bash -x script.sh      <span style="color:#8f8a75"># ejecutarlo mostrando cada línea (depurar)</span>
 </code></pre>
 <h2 id="variables-y-entrada" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Variables y entrada</h2>
 <div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
@@ -47,47 +48,48 @@ bash -x script.sh      <span style="color: #75715e"># ejecutarlo mostrando cada 
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">NOMBRE="Ana"</code></td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Asignar (<strong>sin espacios</strong> alrededor del <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">=</code>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">NOMBRE=&quot;Ana&quot;</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Asignar (<strong>sin espacios</strong> alrededor del <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">=</code>)</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">"$NOMBRE"</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">&quot;$NOMBRE&quot;</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Usar el valor (entre comillas dobles, siempre)</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$(comando)</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$(comando)</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">La salida de un comando</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$((A + B))</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$((A + B))</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Aritmética entera</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">read -p "Nombre: " N</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">read -p &quot;Nombre: &quot; N</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Pedir un dato</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$1 $2 …</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$1 $2 …</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Argumentos</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$#</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$#</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Cuántos argumentos</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$@</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$@</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Todos los argumentos</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$?</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$?</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Código de salida del último comando (0 = bien)</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$0</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$0</code></td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Nombre del script</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 <h2 id="condiciones" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Condiciones</h2>
 <div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
 <thead>
@@ -99,72 +101,73 @@ bash -x script.sh      <span style="color: #75715e"># ejecutarlo mostrando cada 
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-eq</code> igual</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">=</code> igual</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-e</code> existe</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-eq</code> igual</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">=</code> igual</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-e</code> existe</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-ne</code> distinto</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">!=</code> distinto</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-f</code> es fichero</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-ne</code> distinto</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">!=</code> distinto</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-f</code> es fichero</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-lt</code> menor</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-z</code> vacío</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-d</code> es directorio</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-lt</code> menor</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-z</code> vacío</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-d</code> es directorio</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-le</code> menor o igual</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-n</code> no vacío</td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-r</code> <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-w</code> <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-x</code> permisos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-le</code> menor o igual</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-n</code> no vacío</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-r</code> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-w</code> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-x</code> permisos</td>
 </tr>
 <tr>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-gt</code> mayor · <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-ge</code> mayor o igual</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-gt</code> mayor · <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-ge</code> mayor o igual</td>
 <td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"></td>
-<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-s</code> no está vacío</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">-s</code> no está vacío</td>
 </tr>
 </tbody>
-</table></div>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #66d9ef">if</span> <span style="color: #f92672">[</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$#</span><span style="color: #e6db74">"</span> -ne <span style="color: #ae81ff">2</span> <span style="color: #f92672">]</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">then</span>
-<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"Uso: </span><span style="color: #f8f8f2">$0</span><span style="color: #e6db74"> &lt;origen&gt; &lt;destino&gt;"</span> &gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">2</span>
-<span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span>
-<span style="color: #66d9ef">elif</span> <span style="color: #f92672">[</span> ! -d <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$1</span><span style="color: #e6db74">"</span> <span style="color: #f92672">]</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">then</span>
-<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"No existe </span><span style="color: #f8f8f2">$1</span><span style="color: #e6db74">"</span> &gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">2</span>
-<span style="color: #66d9ef">else</span>
-<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"Todo bien"</span>
-<span style="color: #66d9ef">fi</span>
+</table>
+</div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#f92672">if</span> [ <span style="color:#e6db74">&quot;<span style="color:#fd971f">$#</span>&quot;</span> -ne 2 ]; <span style="color:#f92672">then</span>
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Uso: <span style="color:#fd971f">$0</span> &lt;origen&gt; &lt;destino&gt;&quot;</span> &gt;&amp;2
+    <span style="color:#66d9ef">exit</span> 1
+<span style="color:#f92672">elif</span> [ ! -d <span style="color:#e6db74">&quot;<span style="color:#fd971f">$1</span>&quot;</span> ]; <span style="color:#f92672">then</span>
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;No existe <span style="color:#fd971f">$1</span>&quot;</span> &gt;&amp;2; <span style="color:#66d9ef">exit</span> 2
+<span style="color:#f92672">else</span>
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Todo bien&quot;</span>
+<span style="color:#f92672">fi</span>
 </code></pre>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
-<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Espacios dentro de los corchetes.</strong> <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">[ "$A" -eq 1 ]</code> funciona;
-<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">["$A" -eq 1]</code> no.</p>
+<p style="margin:.45em 0">⚠️ <strong style="color:#b3261e">Espacios dentro de los corchetes.</strong> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">[ &quot;$A&quot; -eq 1 ]</code> funciona;
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">[&quot;$A&quot; -eq 1]</code> no.</p>
 </div>
-<h2 id="case" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">case</code></h2>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #66d9ef">case</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$OPCION</span><span style="color: #e6db74">"</span> <span style="color: #66d9ef">in</span>
-<span style="color: #ae81ff">1</span><span style="color: #f8f8f2">|</span>alta<span style="color: #f92672">)</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"Alta"</span> <span style="color: #f8f8f2">;;</span>
-<span style="color: #ae81ff">2</span><span style="color: #f8f8f2">|</span>baja<span style="color: #f92672">)</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"Baja"</span> <span style="color: #f8f8f2">;;</span>
-    *<span style="color: #f92672">)</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"Opción no válida"</span> <span style="color: #f8f8f2">;;</span>
-<span style="color: #66d9ef">esac</span>
+<h2 id="case" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">case</code></h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#f92672">case</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$OPCION</span>&quot;</span> <span style="color:#f92672">in</span>
+    1|alta)  <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Alta&quot;</span> ;;
+    2|baja)  <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Baja&quot;</span> ;;
+    *)       <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Opción no válida&quot;</span> ;;
+<span style="color:#f92672">esac</span>
 </code></pre>
 <h2 id="bucles" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Bucles</h2>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #66d9ef">for</span> DEP <span style="color: #66d9ef">in</span> direccion ventas tecnicos<span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">do</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$DEP</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">done</span>
-<span style="color: #66d9ef">for</span> F <span style="color: #66d9ef">in</span> *.txt<span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">do</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"Fichero: </span><span style="color: #f8f8f2">$F</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">done</span>
-<span style="color: #66d9ef">for</span> <span style="color: #f92672">((</span><span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">;</span> i &lt;<span style="color: #f92672">=</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">;</span> i++<span style="color: #f92672">))</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">do</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$i</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">done</span>
-<span style="color: #66d9ef">while</span> <span style="color: #f92672">[</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$N</span><span style="color: #e6db74">"</span> -gt <span style="color: #ae81ff">0</span> <span style="color: #f92672">]</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">do</span> <span style="color: #f8f8f2">N</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$((</span>N <span style="color: #f92672">-</span> <span style="color: #ae81ff">1</span><span style="color: #66d9ef">))</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">done</span>
-<span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">read</span> -r LINEA<span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">do</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$LINEA</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">done</span> &lt; usuarios.txt
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#f92672">for</span> DEP <span style="color:#f92672">in</span> direccion ventas tecnicos; <span style="color:#f92672">do</span> <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$DEP</span>&quot;</span>; <span style="color:#f92672">done</span>
+<span style="color:#f92672">for</span> F <span style="color:#f92672">in</span> *.txt; <span style="color:#f92672">do</span> <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Fichero: <span style="color:#fd971f">$F</span>&quot;</span>; <span style="color:#f92672">done</span>
+<span style="color:#f92672">for</span> ((i = <span style="color:#ae81ff">1</span>; i &lt;= <span style="color:#ae81ff">5</span>; i++)); <span style="color:#f92672">do</span> <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$i</span>&quot;</span>; <span style="color:#f92672">done</span>
+<span style="color:#f92672">while</span> [ <span style="color:#e6db74">&quot;<span style="color:#fd971f">$N</span>&quot;</span> -gt 0 ]; <span style="color:#f92672">do</span> N=$((N - <span style="color:#ae81ff">1</span>)); <span style="color:#f92672">done</span>
+<span style="color:#f92672">while</span> <span style="color:#66d9ef">read</span> -r LINEA; <span style="color:#f92672">do</span> <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LINEA</span>&quot;</span>; <span style="color:#f92672">done</span> &lt; usuarios.txt
 </code></pre>
 <h2 id="funciones-y-redirección" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Funciones y redirección</h2>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">saludar<span style="color: #f92672">()</span> <span style="color: #f92672">{</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">"Hola, </span><span style="color: #f8f8f2">$1</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">return</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #f92672">}</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#e6e9ee"><span style="color:#a6e22e">saludar</span></span>() { <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Hola, <span style="color:#fd971f">$1</span>&quot;</span>; <span style="color:#66d9ef">return</span> 0; }
 saludar Ana
 
-comando &gt; salida.txt       <span style="color: #75715e"># sobrescribe</span>
-comando &gt;&gt; salida.txt      <span style="color: #75715e"># añade al final</span>
-comando <span style="color: #ae81ff">2</span>&gt; errores.txt     <span style="color: #75715e"># sólo los errores</span>
-comando &gt; todo.log <span style="color: #ae81ff">2</span>&gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">1</span> <span style="color: #75715e"># salida y errores al mismo sitio</span>
+comando &gt; salida.txt       <span style="color:#8f8a75"># sobrescribe</span>
+comando &gt;&gt; salida.txt      <span style="color:#8f8a75"># añade al final</span>
+comando 2&gt; errores.txt     <span style="color:#8f8a75"># sólo los errores</span>
+comando &gt; todo.log 2&gt;&amp;1    <span style="color:#8f8a75"># salida y errores al mismo sitio</span>
 </code></pre>
 <h2 id="cron" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Cron</h2>
-<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">crontab -e     <span style="color: #75715e"># editar · crontab -l para ver</span>
-<span style="color: #75715e"># minuto hora día mes día_semana  comando</span>
-<span style="color: #ae81ff">0</span> <span style="color: #ae81ff">14</span> * * <span style="color: #ae81ff">1</span>-5   /home/alumno/bin/copia.sh /home/alumno/docs /copias &gt;&gt; /home/alumno/copia.log <span style="color: #ae81ff">2</span>&gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">1</span>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">crontab -e     <span style="color:#8f8a75"># editar · crontab -l para ver</span>
+<span style="color:#8f8a75"># minuto hora día mes día_semana  comando</span>
+0 14 * * 1-5   /home/alumno/bin/copia.sh /home/alumno/docs /copias &gt;&gt; /home/alumno/copia.log 2&gt;&amp;1
 </code></pre>
 <p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Chuleta</p></div>
 </body>

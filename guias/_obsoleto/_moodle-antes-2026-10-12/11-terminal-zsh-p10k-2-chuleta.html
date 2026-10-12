@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chuleta · Personalización del intérprete de comandos y del entorno de trabajo</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="chuleta--personalización-del-intérprete-de-comandos-y-del-entorno-de-trabajo" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Chuleta · Personalización del intérprete de comandos y del entorno de trabajo</h1><div><span style="display:inline-block;background:#1c6b4a;color:#fff;border:1px solid #1c6b4a;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Chuleta</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 3 · Avanzado</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 11</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM4 (parcialmente)</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 10 h</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> H2 (CMD/PowerShell), H4 (terminal Linux y Bash)</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <strong style="color:#1d4ed8">Nota.</strong> Esta página acompaña a la <a href="11-terminal-zsh-p10k-1-explicacion.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">explicación del tema</a>. Tenla a mano mientras trabajas.</p>
+</div>
+<h2 id="índice" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Índice</h2>
+<ul style="background:#f6f7f9;border:1px solid #e2e5e9;border-radius:8px;padding:14px 18px 14px 34px;font-size:.93em">
+<li><a href="#chuleta--personalización-del-intérprete-de-comandos-y-del-entorno-de-trabajo" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Chuleta · Personalización del intérprete de comandos y del entorno de trabajo</a>
+<ul style="padding-left:18px">
+<li><a href="#índice" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Índice</a></li>
+<li><a href="#qué-fichero-se-lee-y-cuándo" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Qué fichero se lee y cuándo</a></li>
+<li><a href="#aplicar-y-comprobar" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Aplicar y comprobar</a></li>
+<li><a href="#zsh-y-powerlevel10k" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Zsh y Powerlevel10k</a></li>
+<li><a href="#piezas-habituales" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Piezas habituales</a></li>
+<li><a href="#powershell" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">PowerShell</a></li>
+<li><a href="#dotfiles" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">Dotfiles</a></li>
+</ul>
+</li>
+</ul>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0"/>
+<h2 id="qué-fichero-se-lee-y-cuándo" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Qué fichero se lee y cuándo</h2>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Shell</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Fichero</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Bash</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.bash_profile</code> (o <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.profile</code>)</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Al iniciar sesión (consola, SSH)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Bash</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.bashrc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Cada terminal interactivo que abres</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Zsh</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.zprofile</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Al iniciar sesión</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Zsh</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.zshrc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Cada terminal interactivo que abres</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Todos</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/profile</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/zsh/zshrc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Para todos los usuarios</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Nuevos usuarios</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/etc/skel/</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Se copia al <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">home</code> de cada usuario que se crea</td>
+</tr>
+</tbody>
+</table></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">💡 <strong style="color:#1c6b4a">Regla práctica.</strong> Alias, prompt y funciones → <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.bashrc</code> o <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.zshrc</code>.
+Variables que tienen que heredar todos los programas (<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">PATH</code>, <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">EDITOR</code>) → también ahí, con <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">export</code>.</p>
+</div>
+<h2 id="aplicar-y-comprobar" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Aplicar y comprobar</h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #f8f8f2">source</span> ~/.zshrc       <span style="color: #75715e"># aplicar sin cerrar el terminal</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #f8f8f2">$0</span> <span style="color: #75715e"># el shell que se ejecuta ahora</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #f8f8f2">$SHELL</span> <span style="color: #75715e"># el shell asignado al usuario</span>
+<span style="color: #f8f8f2">alias</span> <span style="color: #75715e"># ver los alias activos</span>
+<span style="color: #f8f8f2">type</span> ll               <span style="color: #75715e"># qué es ll: alias, función o programa</span>
+</code></pre>
+<h2 id="zsh-y-powerlevel10k" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Zsh y Powerlevel10k</h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">sudo pacman -S zsh zsh-autosuggestions zsh-syntax-highlighting
+chsh -s /bin/zsh                     <span style="color: #75715e"># cambiar tu shell (cierra sesión y vuelve a entrar)</span>
+git clone --depth<span style="color: #f92672">=</span><span style="color: #ae81ff">1</span> https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">'source ~/.powerlevel10k/powerlevel10k.zsh-theme'</span> &gt;&gt; ~/.zshrc
+p10k configure                       <span style="color: #75715e"># asistente; se guarda en ~/.p10k.zsh</span>
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">💡 <strong style="color:#1c6b4a">Orden en <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.zshrc</code>.</strong> El <em>instant prompt</em> de p10k va <strong>lo primero</strong> y
+<code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">zsh-syntax-highlighting</code> <strong>el último</strong> de los plugins.</p>
+</div>
+<h2 id="piezas-habituales" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Piezas habituales</h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit"><span style="color: #f8f8f2">alias</span> <span style="color: #f8f8f2">ll</span><span style="color: #f92672">=</span><span style="color: #e6db74">'ls -lah'</span>
+<span style="color: #f8f8f2">alias</span> ..<span style="color: #f92672">=</span><span style="color: #e6db74">'cd ..'</span>
+<span style="color: #f8f8f2">alias</span> <span style="color: #f8f8f2">rm</span><span style="color: #f92672">=</span><span style="color: #e6db74">'rm -i'</span> <span style="color: #75715e"># red de seguridad</span>
+<span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">PATH</span><span style="color: #f92672">=</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">$HOME</span><span style="color: #e6db74">/bin:</span><span style="color: #f8f8f2">$PATH</span><span style="color: #e6db74">"</span> <span style="color: #75715e"># tus scripts, antes que los del sistema</span>
+<span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">EDITOR</span><span style="color: #f92672">=</span>nano
+<span style="color: #f8f8f2">HISTSIZE</span><span style="color: #f92672">=</span><span style="color: #ae81ff">10000</span> <span style="color: #75715e"># historial más largo</span>
+mkcd<span style="color: #f92672">()</span> <span style="color: #f92672">{</span> mkdir -p <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$1</span><span style="color: #e6db74">"</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">cd</span> <span style="color: #e6db74">"</span><span style="color: #f8f8f2">$1</span><span style="color: #e6db74">"</span><span style="color: #f8f8f2">;</span> <span style="color: #f92672">}</span> <span style="color: #75715e"># función: crear y entrar</span>
+</code></pre>
+<h2 id="powershell" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">PowerShell</h2>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">Linux</th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600">PowerShell</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.bashrc</code> / <code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.zshrc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">$PROFILE</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">source ~/.zshrc</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">. $PROFILE</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">alias ll='ls -l'</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Set-Alias ll Get-ChildItem</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">PS1=...</code></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">function prompt { ... }</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">—</td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top"><code style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="dotfiles" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Dotfiles</h2>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:'Cascadia Code',Consolas,'SF Mono',Menlo,monospace;background:none;color:inherit">mkdir -p ~/dotfiles <span style="color: #f92672">&amp;&amp;</span> cp ~/.zshrc ~/.p10k.zsh ~/dotfiles/
+<span style="color: #f8f8f2">cd</span> ~/dotfiles <span style="color: #f92672">&amp;&amp;</span> git init <span style="color: #f92672">&amp;&amp;</span> git add . <span style="color: #f92672">&amp;&amp;</span> git commit -m <span style="color: #e6db74">"Mi configuración"</span>
+</code></pre>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Chuleta</p></div>
+</body>
+</html>
