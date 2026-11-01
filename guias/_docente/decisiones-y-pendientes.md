@@ -122,33 +122,34 @@ de equipo en ese orden; y que `omarchy pkg add` e *Install → TUI* funcionen co
 **Tarea nueva 17: Tu ordenador en el bolsillo** (2026-11-01). Tarea suelta
 (`1-basico/17-claude-y-drive/1-tarea-tu-ordenador-en-el-bolsillo.md`, Apto / No apto, 6 h en
 tres sesiones), detrás de Omarchy y antes de Arch. Reproduce el montaje de Mikel con un agente
-gratuito: **Antigravity CLI** (`agy`, de Google, con la cuenta de Google que ya usan para Drive y
-Tailscale) en la Omarchy de Isard, entrada desde el móvil por **Tailscale SSH + Termius** (en vez
-de Remote Control, que es de Claude Code y de pago), Tailscale en los dos aparatos, rclone con
-`bisync` cada 5 min por `cronie` (`~/Drive/.sync.sh` con la
-lista `~/Drive/.carpetas`, flags `--resilient --recover --max-lock 2m --conflict-resolve newer
---drive-skip-gdocs`, como en la Pi), y dos skills personales en `~/.gemini/skills/` (formato
-Agent Skills, el mismo que leen Claude Code y Codex), creadas con ayuda del agente pero con el
-script dado en la guía para que funcionen a la primera: `carpeta-compartida` (crear.sh NOMBRE) y
-`descargar` (descargar.sh [--audio] URL…, con el yt-dlp que trae Omarchy). Cierre: pedir la
-descarga desde el móvil (Termius → `agy`) y verla en la app de Drive. Entrega: seis capturas y los
-ficheros de las dos skills; Apto si funcionan y saben explicar cada línea. Tres SVG propios
-(mapa, bisync, anatomía de una skill).
-**Por qué Antigravity y qué queda por resolver.** Claude Code necesita plan de pago y claude.ai
-exige 18 años; Qwen cerró su acceso gratuito en abril de 2026. Antigravity es gratis con cuenta
-de Google y lee skills, pero **su FAQ dice que no está disponible para menores de 18**: Mikel lo
-sabe y decidió seguir con él el 01/11. Si en el aula no les deja entrar, las alternativas que
-admiten desde 13 años con permiso familiar y leen el mismo `SKILL.md` son Codex CLI (cuenta de
-ChatGPT gratuita, límites cortos, skills en `~/.codex/skills`) y GitHub Copilot CLI (plan Free,
-skills en `.agents/skills`); cambiarían el apartado 2 y las rutas de las skills, nada más.
-Además, rclone retira su `client_id` compartido de Drive en 2026, así que la guía dice que el
-profesor da un `client_id` y `client_secret` del aula: hay que crearlos en Google Cloud
+gratuito: **Codex** (OpenAI; cuenta de ChatGPT gratuita, que admite desde 13 años con permiso
+familiar) en la Omarchy de Isard, **Codex en remoto desde la app de ChatGPT** con
+`codex remote-control start` + `pair` la primera vez y `codex remote-control` cada día (Mikel lo
+tiene así en su Raspberry; OpenAI lo marca como experimental y su guía de conexiones remotas aún
+habla sólo de macOS y Windows con la app de escritorio, pero el comando de la CLI está
+documentado en «Developer commands»), Tailscale en los dos aparatos (con Tailscale SSH + Termius
+como reto y como camino alternativo si el remoto falla), rclone con `bisync` cada 5 min por
+`cronie` (`~/Drive/.sync.sh` con la lista `~/Drive/.carpetas`, flags `--resilient --recover
+--max-lock 2m --conflict-resolve newer --drive-skip-gdocs`, como en la Pi), y dos skills en
+`~/.agents/skills/` (formato Agent Skills, el mismo que leen Claude Code y otros), creadas con
+ayuda de Codex pero con el script dado en la guía para que funcionen a la primera:
+`carpeta-compartida` (crear.sh NOMBRE) y `descargar` (descargar.sh [--audio] URL…, con el yt-dlp
+que trae Omarchy). Cierre: pedir la descarga desde el móvil y verla en la app de Drive. Entrega:
+seis capturas y los ficheros de las dos skills; Apto si funcionan y saben explicar cada línea.
+Tres SVG propios (mapa, bisync, anatomía de una skill).
+**Por qué Codex y qué queda por resolver.** Claude Code necesita plan de pago y claude.ai exige
+18 años; Antigravity (Google) es gratis pero su FAQ lo cierra a menores de 18; Qwen cerró su
+gratis en abril de 2026. Codex funciona con ChatGPT Free (límites cortos por ventanas de cinco
+horas: la guía avisa de no gastar el cupo) y lee el mismo `SKILL.md`. Si Codex fallara en el
+aula, GitHub Copilot CLI (plan Free, 13+, skills en `.agents/skills`) es el recambio con menos
+cambios. Además, rclone retira su `client_id` compartido de Drive en 2026, así que la guía dice
+que el profesor da un `client_id` y `client_secret` del aula: hay que crearlos en Google Cloud
 (proyecto, API de Drive, pantalla de consentimiento externa, cliente OAuth de tipo «Desktop
 app») y **publicar la app**, porque en modo prueba los permisos caducan a la semana; una misma
 clave sirve hasta 100 usuarios. Sin probar en Isard: que el lanzador de Omarchy
-(`Super+Mayús+Ctrl+A`) instale `agy`, el flujo de entrada con Google y la revisión con `Ctrl+R`,
-que `tailscale ping` llegue al móvil (la app del móvil tiene que estar conectada) y que Termius
-entre por Tailscale SSH sin más configuración.
+(`Super+Mayús+Ctrl+A`) instale `codex`, el emparejamiento «Pair manually» en la app de ChatGPT de
+Android, que `tailscale ping` llegue al móvil (la app del móvil tiene que estar conectada) y que
+Termius entre por Tailscale SSH sin más configuración.
 
 **La guía de comandos se redujo al mínimo** (navegar, rutas, crear, ver, copiar/mover/borrar,
 comodines, ayuda). `find`, `grep`, tuberías, enlaces, `tar`, `rsync`, disco y equivalencias con
