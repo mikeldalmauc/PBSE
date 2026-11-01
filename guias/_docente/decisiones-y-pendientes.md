@@ -119,7 +119,7 @@ Monitors* y *Setup → Look & Feel*; que el instalador pida teclado, usuario, co
 de equipo en ese orden; y que `omarchy pkg add` e *Install → TUI* funcionen como dice el manual
 (omarchy.org/manual, versión 4.0.6).
 
-**Tarea nueva 17: Tu ordenador en el bolsillo** (2026-11-01). Tarea suelta
+**Tarea nueva 17: Tu ordenador en el bolsillo** (2026-11-01; **se dará en el segundo trimestre**, decidido el mismo día). Tarea suelta
 (`1-basico/17-claude-y-drive/1-tarea-tu-ordenador-en-el-bolsillo.md`, Apto / No apto, 6 h en
 tres sesiones), detrás de Omarchy y antes de Arch. Reproduce el montaje de Mikel con un agente
 gratuito: **Codex** (OpenAI; cuenta de ChatGPT gratuita, que admite desde 13 años con permiso
