@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="380" viewBox="0 0 880 380" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Cuatro formas de instalar un programa en Omarchy</title>
+  <desc id="d">Cuatro cajas en fila: paquete oficial, de los repositorios de Arch y revisado; AUR, de la comunidad y sin revisar; web app, una página web en su propia ventana; y TUI, un programa de terminal con icono. Las cuatro salen del menú Install y acaban en la rejilla de aplicaciones.</desc>
+  <rect x="0.5" y="0.5" width="879" height="379" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Cuatro formas de pedir fuera de carta</text>
+
+  <!-- Origen: el menú -->
+  <rect x="320" y="58" width="240" height="40" rx="10" fill="#1e2227"/>
+  <text x="440" y="85" font-size="16" font-weight="700" text-anchor="middle" fill="#e6e9ee" font-family="Consolas, 'DejaVu Sans Mono', monospace">Super + Espacio → Install</text>
+
+  <!-- Bus superior -->
+  <g stroke="#8a8f98" stroke-width="2">
+    <line x1="440" y1="98" x2="440" y2="118"/>
+    <line x1="130" y1="118" x2="750" y2="118"/>
+    <line x1="130" y1="118" x2="130" y2="140"/>
+    <line x1="337" y1="118" x2="337" y2="140"/>
+    <line x1="543" y1="118" x2="543" y2="140"/>
+    <line x1="750" y1="118" x2="750" y2="140"/>
+  </g>
+
+  <!-- Caja 1: Paquete -->
+  <rect x="40" y="140" width="180" height="130" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="130" y="170" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">Paquete</text>
+  <text x="130" y="196" font-size="14" text-anchor="middle" fill="#52514e">Repositorios de Arch</text>
+  <text x="130" y="216" font-size="14" text-anchor="middle" fill="#52514e">Revisado por Arch</text>
+  <text x="130" y="250" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b" font-family="Consolas, 'DejaVu Sans Mono', monospace">omarchy pkg add</text>
+
+  <!-- Caja 2: AUR -->
+  <rect x="247" y="140" width="180" height="130" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <text x="337" y="170" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">AUR</text>
+  <text x="337" y="196" font-size="14" text-anchor="middle" fill="#52514e">Lo sube la comunidad</text>
+  <text x="337" y="216" font-size="14" text-anchor="middle" fill="#52514e">Nadie lo revisa: ojo</text>
+  <text x="337" y="250" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b" font-family="Consolas, 'DejaVu Sans Mono', monospace">pacman -Qm</text>
+
+  <!-- Caja 3: Web app -->
+  <rect x="453" y="140" width="180" height="130" rx="12" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+  <text x="543" y="170" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">Web app</text>
+  <text x="543" y="196" font-size="14" text-anchor="middle" fill="#52514e">Una web en su ventana</text>
+  <text x="543" y="216" font-size="14" text-anchor="middle" fill="#52514e">Sin pestañas ni barra</text>
+  <text x="543" y="250" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">Nombre + dirección</text>
+
+  <!-- Caja 4: TUI -->
+  <rect x="660" y="140" width="180" height="130" rx="12" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <text x="750" y="170" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">TUI</text>
+  <text x="750" y="196" font-size="14" text-anchor="middle" fill="#52514e">Programa de terminal</text>
+  <text x="750" y="216" font-size="14" text-anchor="middle" fill="#52514e">con icono y ventana</text>
+  <text x="750" y="250" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">Nombre + comando</text>
+
+  <!-- Bus inferior -->
+  <g stroke="#8a8f98" stroke-width="2">
+    <line x1="130" y1="270" x2="130" y2="292"/>
+    <line x1="337" y1="270" x2="337" y2="292"/>
+    <line x1="543" y1="270" x2="543" y2="292"/>
+    <line x1="750" y1="270" x2="750" y2="292"/>
+    <line x1="130" y1="292" x2="750" y2="292"/>
+    <line x1="440" y1="292" x2="440" y2="312"/>
+  </g>
+  <rect x="190" y="312" width="500" height="44" rx="10" fill="#e4e0f8" stroke="#6250d6" stroke-width="2"/>
+  <text x="440" y="340" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">Las cuatro acaban en la rejilla: Super + Alt + Espacio</text>
+</svg>

@@ -65,6 +65,58 @@ LXQt e i3) y el taller da equivalencias para todas. El número 06, libre desde q
 ampliación de ficheros, lo ocupa «Windows por dentro» (diferencias con Linux y herramientas de
 administración), con entrega Apto / No apto y competencias por asignar.
 
+**Revisión «como un chaval de 16 años»** (2026-10-31). Las siete guías únicas (03, 04, 06, 07,
+08, 09 y 12) se han reescrito para que se entiendan a la primera: el ejemplo o el dibujo antes
+que la definición, un «🧪 Pruébalo» en cada apartado (ejercicio en el momento, no al final),
+repetición de las palabras clave, «📌 En una frase» al cerrar cada apartado y una Parte 2 nueva,
+«Lo que te llevas» (resumen en frases + chuleta mínima), en lugar de la chuleta de tablas. Se han
+quitado las tablas que no comparaban nada (de 14 a 21 por guía a 8 como mucho), los glosarios y
+los términos que no hacen falta para la práctica ni el examen (van a «Para saber más» o fuera).
+Resultado (líneas · tablas, antes → después): 03 procesos 678·22 → 542·8; 04 comandos 1104·21 →
+603·8; 06 Windows 546·16 → 449·4; 07 Ventoy 757·20 → 597·3; 08 Arch 1005·14 → 706·3; 09 permisos
+884·20 → 564·5; 12 taller 954·7 → 558·3. Lo que se evalúa no cambia, salvo que la radiografía de
+Windows (06) pasa de 11 a 8 preguntas y la práctica sigue siendo Apto / No apto. El contrato de
+estilo está en `../CLAUDE.md` (raíz de PBSE) y la guía modelo es la del tema 03. Las versiones
+anteriores están en `_obsoleto/antes-de-simplificar-2026-10-31/`. Pendiente: cuando Mikel dé el
+visto bueno al estilo, crear una skill para generar guías y prácticas nuevas con él.
+
+**Tarea nueva 16: Omarchy** (2026-11-01). Tarea suelta (`1-basico/16-omarchy/1-tarea-omarchy.md`,
+Apto / No apto, 4 h) sobre Omarchy 4, el Arch con instalador y escritorio Hyprland de DHH. **Va
+antes que la guía de Arch** (nivel básico, tras Mint y comandos): es para que vean un sistema
+moderno y divertido; Arch a mano llega el trimestre siguiente. Por eso no depende de la guía 08:
+compara con Mint (tabla final Mint frente a Omarchy), explica `pacman` como el `apt` de Arch y
+AUR desde cero, y presenta Arch como «lo que instalarás pieza a pieza el trimestre que viene». Por
+petición de Mikel la instalación va corta (un apartado) y el peso está en: qué se puede hacer
+con él (teclado, mosaico y escritorios, temas, capturas y OCR, portapapeles con historial,
+extras del terminal), el estilo a mano (huecos, bordes y esquinas en `looknfeel.lua`, fondo
+propio, letra, marca en el salvapantallas; tema propio y Aether como reto) y cómo se instalan
+programas por cuatro vías (paquete oficial, AUR, web app y TUI), más quitar y actualizar con
+`omarchy update`. Se hace en **Isard VDI**, no en VirtualBox: el alumnado ya tiene la ISO con
+permiso de uso; crea el escritorio desde ella eligiendo núcleos (4), RAM (4 GB) y disco (40 GB), y
+después cambia el arranque a disco duro. Aviso de que la tecla `Super` se la queda Windows en el
+visor del navegador: usar el visor SPICE a pantalla completa. Enlaza los vídeos de DHH (Omarchy
+Quattro, youtu.be/F7fe9pa8OeE) y de NetworkChuck (youtu.be/9SDkU5VDQEQ). Tono más vivo por
+petición de Mikel: emojis en el texto (nunca en encabezados), un cuadro con la idea de DHH del
+ordenador «tuyo de verdad» y seis capturas reales de Omarchy en `images/` (webp): tres previsualizaciones
+de temas (Tokyo Night, Hackerman, Retro 82), el instalador, el mosaico a cuatro y el historial
+del portapapeles. Vienen del repositorio `omacom/omarchy` y de su manual (omarchy.org/manual),
+licencia MIT; se bajaron el 01/11/2026. En la cabecera va el logotipo oficial (`logo.svg` del
+repositorio), no una captura. Los vídeos son la referencia del apartado 2: un cuadro mapea los
+capítulos del de NetworkChuck (minutos sacados de la página del vídeo) a cada apartado, y el 2.8
+«Lo que enseñan los vídeos y no cabe aquí» (no puntúa) recoge juegos, Windows dentro de Omarchy,
+el agente de IA y los plugins. El vídeo de DHH no tiene capítulos y se cita en general; no se
+pudieron bajar los subtítulos. Reutiliza el diagrama de capas de la guía 08 y enlaza al nivel 0
+del taller 12. Decisiones sin datos de Mikel: número 16 (10 y 15 están retirados), CM1 y
+CM4, cifrado de disco activado por defecto y escala
+`omarchy_gdk_scale = 1` para la MV. Fuera: cambiar atajos en `bindings.lua` (reto) y restaurar
+instantáneas de Limine. **No se ha probado en Isard**: comprobar antes de darla que el escritorio
+creado desde la ISO arranca en UEFI (Omarchy lo necesita) y si el modelo de vídeo por defecto (QXL)
+arranca Hyprland (las guías de Omarchy para QEMU/KVM recomiendan virtio y hablan de cuelgues con
+QXL); que en el visor SPICE la tecla `Super` llegue a la MV; las rutas de menú *Setup →
+Monitors* y *Setup → Look & Feel*; que el instalador pida teclado, usuario, contraseña y nombre
+de equipo en ese orden; y que `omarchy pkg add` e *Install → TUI* funcionen como dice el manual
+(omarchy.org/manual, versión 4.0.6).
+
 **La guía de comandos se redujo al mínimo** (navegar, rutas, crear, ver, copiar/mover/borrar,
 comodines, ayuda). `find`, `grep`, tuberías, enlaces, `tar`, `rsync`, disco y equivalencias con
 Windows se retiraron a `_obsoleto/retirados-2026-09-23/` (tema 06), junto con los trucos de la
@@ -95,6 +147,8 @@ consola (tema 10), por resultar demasiado complejos para el nivel.
 | Taller | Cron con sólo `DISPLAY=:0` | `xfconf-query`, `gsettings` y `notify-send` necesitan también `DBUS_SESSION_BUS_ADDRESS` |
 | Taller | `pacman -Qqe` para la lista de paquetes oficiales | Incluye los de AUR y `pacman -S` falla: `-Qqen` (oficiales) y `-Qqem` (AUR) |
 | Taller | Copiaba `~/.config/xfce4/xfconf` y lo restauraba en `~/.config/xfconf` | Se copia `~/.config/xfce4` entero |
+| Comandos | `touch` «si ya existe, no lo toca» | Sí lo toca: le cambia la fecha de modificación |
+| Taller | Enlace a «opción G» de la guía de Arch, que ya no existe | Apunta al paso 16, donde está la tabla de escritorios |
 | Scripting | `elif [$ADINA -ge 18]` | `elif [ "$EDAD" -ge 18 ]` |
 | Scripting | `eq`, `ne`, `lt`… | `-eq`, `-ne`, `-lt`… |
 | Scripting | Variables sin comillas | Regla de entrecomillar y su motivo |

@@ -36,8 +36,8 @@ guias/
 ├── 2-intermedio/
 ├── 3-avanzado/
 ├── _moodle/                  ← HTML y PDF (en pdf/) generados, listos para subir (no se editan a mano)
-├── _herramientas/            ← exportar.ps1 (HTML + PDF), md2html.js y md2html.py
-├── _docente/                 ← decisiones, errores corregidos y pendientes (no se publica)
+├── _herramientas/            ← exportar.ps1 (HTML + PDF), render-svg.ps1 (revisar diagramas), md2html.js y md2html.py
+├── _docente/                 ← decisiones, pendientes y exámenes con su solucionario (no se publica)
 └── _obsoleto/                ← versiones anteriores
 ```
 
@@ -46,10 +46,14 @@ Cada tema es una carpeta autocontenida: sus páginas y sus imágenes. Hay dos fo
 - **Tres páginas** (`1-explicacion`, `2-chuleta`, `3-ejercicios`). En Moodle, un tema encaja como
   **una sección** con dos Páginas (explicación y chuleta) y una Tarea (ejercicios).
 - **Guía única** (`1-guia.md`), en los temas 03, 04, 06, 07, 08, 09 y 12. Todo va en un fichero
-  dividido en partes: *Aprende*, *Chuleta*, *Practica* y *Entrega* (en la de Arch, las tres partes
-  de la instalación, la chuleta y la entrega), con diagramas SVG, cuadros de colores y preguntas de
-  autocomprobación. En Moodle: una Página con la guía y una Tarea con la entrega copiada en la
-  descripción.
+  dividido en partes: *Aprende*, *Lo que te llevas* (resumen y chuleta mínima), *Practica* y
+  *Entrega* (en la de Arch, las tres fases de la instalación, el resumen y la entrega), con
+  diagramas SVG, cuadros de colores, un «🧪 Pruébalo» por apartado y preguntas de autocomprobación.
+  En Moodle: una Página con la guía y una Tarea con la entrega copiada en la descripción.
+
+**Cómo se escribe una guía** (para quién, las reglas, el esqueleto, las marcas, cuándo sí y
+cuándo no una tabla) está en [`../CLAUDE.md`](../CLAUDE.md). La guía modelo es la del
+[tema 03](1-basico/03-procesos/1-guia.md).
 
 Los ficheros `notas-docente.md` que hay en algunos temas son para el profesor y **no se exportan**.
 
@@ -60,17 +64,19 @@ Los ficheros `notas-docente.md` que hay en algunos temas son para el profesor y 
 | **Nivel 1 · Básico** | | | | | |
 | 01 | Markdown para documentar | [explicación](1-basico/01-markdown/1-explicacion.md) | [chuleta](1-basico/01-markdown/2-chuleta.md) | [práctica](1-basico/01-markdown/3-ejercicios.md) | transversal |
 | 02 | Instalar Linux Mint en VirtualBox | [explicación](1-basico/02-instalar-mint-virtualbox/1-explicacion.md) | [chuleta](1-basico/02-instalar-mint-virtualbox/2-chuleta.md) | [entregable](1-basico/02-instalar-mint-virtualbox/3-ejercicios.md) | CM1 |
-| 03 | Procesos, hilos y planificación | [guía única](1-basico/03-procesos/1-guia.md) | [↳ parte 2](1-basico/03-procesos/1-guia.md#parte-2--chuleta) | [↳ partes 3 y 4](1-basico/03-procesos/1-guia.md#parte-3--practica) | — |
-| 04 | Comandos y ficheros en Linux | [guía única](1-basico/04-comandos-y-ficheros/1-guia.md) | [↳ parte 2](1-basico/04-comandos-y-ficheros/1-guia.md#parte-2--chuleta) | [↳ partes 3 y 4](1-basico/04-comandos-y-ficheros/1-guia.md#parte-3--practica) | CM3, CM4 |
+| 03 | Procesos, hilos y planificación | [guía única](1-basico/03-procesos/1-guia.md) | [↳ lo que te llevas](1-basico/03-procesos/1-guia.md#parte-2--lo-que-te-llevas) | [↳ partes 3 y 4](1-basico/03-procesos/1-guia.md#parte-3--practica) | — |
+| 04 | Comandos y ficheros en Linux | [guía única](1-basico/04-comandos-y-ficheros/1-guia.md) | [↳ lo que te llevas](1-basico/04-comandos-y-ficheros/1-guia.md#parte-2--lo-que-te-llevas) | [↳ partes 3 y 4](1-basico/04-comandos-y-ficheros/1-guia.md#parte-3--practica) | CM3, CM4 |
 | 05 | Explorar el sistema desde el terminal | — | — | [ficha](1-basico/05-explorar-el-sistema/3-ejercicios.md) · [tarea: mapa de directorios](1-basico/05-explorar-el-sistema/4-tarea-directorios-linux.md) | CM3, CM4 |
-| 06 | Windows por dentro: diferencias con Linux y herramientas | [guía única](1-basico/06-windows-por-dentro/1-guia.md) | [↳ parte 2](1-basico/06-windows-por-dentro/1-guia.md#parte-2--chuleta) | [↳ partes 3 y 4](1-basico/06-windows-por-dentro/1-guia.md#parte-3--practica) | — |
+| 06 | Windows por dentro: diferencias con Linux y herramientas | [guía única](1-basico/06-windows-por-dentro/1-guia.md) | [↳ lo que te llevas](1-basico/06-windows-por-dentro/1-guia.md#parte-2--lo-que-te-llevas) | [↳ partes 3 y 4](1-basico/06-windows-por-dentro/1-guia.md#parte-3--practica) | — |
+| 16 | Omarchy en Isard VDI: un Linux moderno para usar con el teclado, poner a tu estilo e instalar programas (antes de Arch) | — | — | [tarea](1-basico/16-omarchy/1-tarea-omarchy.md) | CM1, CM4 |
+| 99 | Repaso para el examen de los temas 02 a 05 | [hoja de repaso](1-basico/99-repaso-examen/1-hoja-repaso.md) | — | [↳ checklist](1-basico/99-repaso-examen/1-hoja-repaso.md#6-checklist-de-verificación) | CM1, CM3, CM4 |
 | **Nivel 2 · Intermedio** | | | | | |
-| 07 | USB multiarranque con Ventoy | [guía única](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md) | [↳ parte 2](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md#parte-2--chuleta) | [↳ entregable](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md#parte-4--entrega) | CM2 |
-| 08 | Instalar Arch Linux (UEFI + GPT) | [guía única](2-intermedio/08-instalar-arch-uefi/1-guia.md) | [↳ parte 4](2-intermedio/08-instalar-arch-uefi/1-guia.md#parte-4--chuleta) | [↳ entregables](2-intermedio/08-instalar-arch-uefi/1-guia.md#parte-5--entrega) | CM1, CM2 |
-| 09 | Permisos en Linux, root y sudo | [guía única](2-intermedio/09-permisos/1-guia.md) | [↳ parte 2](2-intermedio/09-permisos/1-guia.md#parte-2--chuleta) | [↳ partes 3 y 4](2-intermedio/09-permisos/1-guia.md#parte-3--practica) | CM6 |
+| 07 | USB multiarranque con Ventoy | [guía única](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md) | [↳ lo que te llevas](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md#parte-2--lo-que-te-llevas) | [↳ entregable](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md#parte-4--entrega) | CM2 |
+| 08 | Instalar Arch Linux (UEFI + GPT) | [guía única](2-intermedio/08-instalar-arch-uefi/1-guia.md) | [↳ lo que te llevas](2-intermedio/08-instalar-arch-uefi/1-guia.md#parte-4--lo-que-te-llevas) | [↳ entregables](2-intermedio/08-instalar-arch-uefi/1-guia.md#parte-5--entrega) | CM1, CM2 |
+| 09 | Permisos en Linux, root y sudo | [guía única](2-intermedio/09-permisos/1-guia.md) | [↳ lo que te llevas](2-intermedio/09-permisos/1-guia.md#parte-2--lo-que-te-llevas) | [↳ partes 3 y 4](2-intermedio/09-permisos/1-guia.md#parte-3--practica) | CM6 |
 | **Nivel 3 · Avanzado** | | | | | |
 | 11 | Personalizar el terminal (zsh + Powerlevel10k) | [explicación](3-avanzado/11-terminal-zsh-p10k/1-explicacion.md) | [chuleta](3-avanzado/11-terminal-zsh-p10k/2-chuleta.md) | [entregable](3-avanzado/11-terminal-zsh-p10k/3-ejercicios.md) | CM4 |
-| 12 | Taller: personaliza tu Linux | [guía única](3-avanzado/12-taller-personalizar-linux/1-guia.md) | [↳ parte 2](3-avanzado/12-taller-personalizar-linux/1-guia.md#parte-2--chuleta) | [↳ concurso y entrega](3-avanzado/12-taller-personalizar-linux/1-guia.md#parte-3--practica-el-concurso-de-escritorios) | CM4 |
+| 12 | Taller: personaliza tu Linux | [guía única](3-avanzado/12-taller-personalizar-linux/1-guia.md) | [↳ lo que te llevas](3-avanzado/12-taller-personalizar-linux/1-guia.md#parte-2--lo-que-te-llevas) | [↳ concurso y entrega](3-avanzado/12-taller-personalizar-linux/1-guia.md#parte-3--practica-el-concurso-de-escritorios) | CM4 |
 | 13 | Scripting básico en Bash | [explicación](3-avanzado/13-scripting-bash/1-explicacion.md) | [chuleta](3-avanzado/13-scripting-bash/2-chuleta.md) | [ejercicios y proyecto](3-avanzado/13-scripting-bash/3-ejercicios.md) | CM4 |
 | 14 | Arch Linux sobre RAID 0 (opcional) | [explicación](3-avanzado/14-arch-sobre-raid0/1-explicacion.md) | [chuleta](3-avanzado/14-arch-sobre-raid0/2-chuleta.md) | [entregable](3-avanzado/14-arch-sobre-raid0/3-ejercicios.md) | CM2 |
 
@@ -164,6 +170,9 @@ Normas para que se vean bien en VS Code (tema claro u oscuro), en GitHub y en Mo
 - Paleta común en este orden: azul `#2a78d6`, naranja `#eb6834`, aqua `#1baf7a`, amarillo
   `#eda100`, rosa `#e87ba4`, verde `#008300`, violeta `#6250d6`; el texto siempre en negro o gris.
 - `<title>` y `<desc>` dentro del SVG, y texto alternativo completo en el Markdown.
+- Antes de darlos por buenos se renderizan y se miran:
+  `powershell -ExecutionPolicy Bypass -File _herramientas\render-svg.ps1 "1-basico\03-procesos\images\*.svg"`
+  deja los PNG en `%TEMP%\guias-render\`.
 
 Las preguntas **«🧠 ¿Lo has pillado?»** llevan la respuesta plegada con `<details>`. Si Moodle
 elimina esa etiqueta al pegar, la respuesta queda visible justo debajo: por eso sólo se usa en

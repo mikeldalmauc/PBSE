@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="360" viewBox="0 0 880 360" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Arch a la carta frente a Omarchy, el menú del chef</title>
+  <desc id="d">A la izquierda, Arch a mano, el trimestre que viene: 18 pasos, GRUB, XFCE y lo eliges todo tú. A la derecha, Omarchy: un instalador de un minuto, Limine, Hyprland y viene elegido. Los dos están sobre la misma base: Arch Linux y pacman.</desc>
+  <rect x="0.5" y="0.5" width="879" height="359" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Mismo restaurante, dos formas de pedir</text>
+
+  <!-- Columna izquierda: Arch a la carta -->
+  <rect x="40" y="62" width="370" height="196" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <text x="225" y="92" font-size="18" font-weight="700" text-anchor="middle" fill="#0b0b0b">Arch a la carta (próximo trimestre)</text>
+  <g font-size="15" fill="#0b0b0b">
+    <text x="66" y="128">🕒  3 sesiones, 18 pasos a mano</text>
+    <text x="66" y="160">🚀  Arranque: GRUB, lo instalas tú</text>
+    <text x="66" y="192">🖥️  Escritorio: XFCE, lo eliges tú</text>
+    <text x="66" y="224">💽  4 particiones, hechas con fdisk</text>
+  </g>
+
+  <!-- Columna derecha: Omarchy -->
+  <rect x="470" y="62" width="370" height="196" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="655" y="92" font-size="18" font-weight="700" text-anchor="middle" fill="#0b0b0b">Omarchy, menú del chef</text>
+  <g font-size="15" fill="#0b0b0b">
+    <text x="496" y="128">🕒  1 minuto, 4 preguntas</text>
+    <text x="496" y="160">🚀  Arranque: Limine, ya viene</text>
+    <text x="496" y="192">🖥️  Escritorio: Hyprland, ya viene</text>
+    <text x="496" y="224">💽  Disco entero, cifrado</text>
+  </g>
+
+  <!-- Base común -->
+  <path d="M225 258 V 282" stroke="#8a8f98" stroke-width="2"/>
+  <path d="M655 258 V 282" stroke="#8a8f98" stroke-width="2"/>
+  <rect x="40" y="282" width="800" height="54" rx="12" fill="#1e2227"/>
+  <text x="440" y="316" font-size="17" font-weight="700" text-anchor="middle" fill="#e6e9ee" font-family="Consolas, 'DejaVu Sans Mono', monospace">La misma cocina debajo: Arch Linux + pacman</text>
+</svg>

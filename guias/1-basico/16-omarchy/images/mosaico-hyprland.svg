@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="400" viewBox="0 0 880 400" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Ventanas en mosaico y escritorios en Hyprland</title>
+  <desc id="d">Una pantalla de Omarchy con la barra arriba, que marca el escritorio 2 de cuatro. Debajo, tres ventanas en mosaico que no se solapan: la primera ocupa la mitad izquierda; la segunda y la tercera se reparten la mitad derecha, porque cada ventana nueva parte en dos la que tenía el foco. A la derecha, las teclas: Super más número para ir a un escritorio y Super más Mayús más número para llevarse la ventana.</desc>
+  <rect x="0.5" y="0.5" width="879" height="399" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Las ventanas son baldosas: no se solapan</text>
+
+  <!-- Pantalla -->
+  <rect x="40" y="60" width="540" height="316" rx="10" fill="#1e2227"/>
+  <!-- Barra superior -->
+  <rect x="40" y="60" width="540" height="30" rx="10" fill="#2b3038"/>
+  <g font-size="14" font-weight="700" fill="#e6e9ee" font-family="Consolas, 'DejaVu Sans Mono', monospace">
+    <text x="62" y="81">1</text>
+    <rect x="80" y="65" width="20" height="20" rx="5" fill="#2a78d6"/>
+    <text x="90" y="81" text-anchor="middle" fill="#ffffff">2</text>
+    <text x="114" y="81">3</text>
+    <text x="134" y="81">4</text>
+    <text x="520" y="81" text-anchor="end" font-weight="400">12:30</text>
+  </g>
+  <!-- Ventanas -->
+  <rect x="50" y="100" width="258" height="266" rx="8" fill="#cde2fb" stroke="#2a78d6" stroke-width="3"/>
+  <text x="179" y="240" font-size="18" font-weight="700" text-anchor="middle" fill="#0b0b0b">1.ª ventana</text>
+  <rect x="316" y="100" width="254" height="129" rx="8" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+  <text x="443" y="170" font-size="18" font-weight="700" text-anchor="middle" fill="#0b0b0b">2.ª ventana</text>
+  <rect x="316" y="237" width="254" height="129" rx="8" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <text x="443" y="307" font-size="18" font-weight="700" text-anchor="middle" fill="#0b0b0b">3.ª ventana</text>
+
+  <!-- Explicación a la derecha -->
+  <g font-size="14" fill="#52514e">
+    <text x="606" y="118" font-weight="700" fill="#0b0b0b">Cada ventana nueva parte en dos</text>
+    <text x="606" y="138">la que tenía el foco. La 3.ª ha partido</text>
+    <text x="606" y="158">la 2.ª; la 1.ª no se ha movido.</text>
+
+    <text x="606" y="206" font-weight="700" fill="#0b0b0b">Diez escritorios, uno visible:</text>
+    <text x="606" y="232" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">Super + 3</text>
+    <text x="606" y="252">ir al escritorio 3</text>
+    <text x="606" y="282" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">Super + Mayús + 3</text>
+    <text x="606" y="302">llevarse la ventana al 3</text>
+    <text x="606" y="332" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">Super + Flechas</text>
+    <text x="606" y="352">cambiar de ventana</text>
+  </g>
+</svg>
