@@ -35,9 +35,9 @@ programas** 📦.
 | | |
 |---|---|
 | 🎯 **Qué vas a conseguir** | Moverte por Omarchy sin ratón, dejarlo a tu estilo y añadirle programas de cuatro maneras |
-| 🧰 **Qué necesitas** | Tu cuenta de Isard VDI, la ISO de Omarchy (ya la tienes ahí) y tu `Mint-SMR` para comparar |
+| 🧰 **Qué necesitas** | Tu cuenta de Isard VDI y la ISO de Omarchy (ya la tienes ahí) |
 | ⏱️ **Tiempo** | 4 horas, en dos sesiones: una para instalar, moverte y el estilo; otra para instalar programas |
-| 📦 **Qué entregas** | `omarchy.pdf` en Moodle |
+| 📦 **Qué entregas** | Seis capturas de tu Omarchy en Moodle ([4. Entrega](#4-entrega)) |
 | ✅ **Calificación** | Apto / No apto |
 
 ## Índice
@@ -45,15 +45,12 @@ programas** 📦.
 - [1. Instálalo en un minuto](#1-instálalo-en-un-minuto)
 - [2. Qué se puede hacer con él](#2-qué-se-puede-hacer-con-él)
 - [3. Instala programas de cuatro maneras](#3-instala-programas-de-cuatro-maneras)
-- [4. La tabla final](#4-la-tabla-final)
-- [5. Plantilla del documento](#5-plantilla-del-documento)
-- [6. Lo que despista](#6-lo-que-despista)
-- [7. Entrega](#7-entrega)
-- [8. Si vas rápido](#8-si-vas-rápido)
+- [4. Entrega](#4-entrega)
+- [5. Si vas rápido](#5-si-vas-rápido)
 
-En cada apartado haz lo mismo que en la tarea de los directorios: **ejecuta** lo que te damos,
-**copia** el comando y lo que sale (o una captura) en tu documento y **contesta** cada ❓ en una o
-dos frases con tus palabras.
+En cada apartado **haz** lo que te damos y **mira** lo que pasa. Las ❓ son para pensar y
+comentarlas en clase: no hay que escribir nada. Lo que se entrega son **capturas** de tu Omarchy
+que demuestren que has pasado por todo ([4. Entrega](#4-entrega)): ve haciéndolas por el camino.
 
 > **Por qué a su creador le brillan los ojos.** DHH dice que un ordenador tiene que ser
 > **tuyo de verdad**: que puedas abrir cualquier ajuste, leerlo, cambiarlo, romperlo y arreglarlo.
@@ -202,7 +199,7 @@ Super + Ctrl + Impr Pant lee el texto de una zona de la pantalla y lo copia 🪄
 ```
 
 Las capturas se guardan en `~/Pictures/Screenshots` y se copian al portapapeles. Pruébalo con
-una captura de este propio documento abierto en el navegador: selecciona un párrafo con
+esta misma guía abierta en el navegador: selecciona un párrafo con
 `Super` + `Ctrl` + `Impr Pant` y pégalo en el terminal con `Super` + `V`.
 
 ❓ Pega el texto que ha leído. ¿Ha acertado todo? ¿Para qué te serviría en clase?
@@ -274,9 +271,9 @@ cambia en **Appearance → Font** (hay más en **Install → Style → Font**) y
 barra y menús. Y tu marca: **Appearance → Branding → Screensaver → Edit Text** pone tu nombre en
 el salvapantallas (es el fichero `~/.config/omarchy/branding/screensaver.txt`).
 
-❓ Captura tu escritorio con los huecos, el borde, el fondo y la letra cambiados. Anota en una
-tabla de tres columnas **qué has cambiado, en qué fichero o menú y por qué**. ¿Por qué `Super` +
-`Mayús` + `Retroceso` no cambia el fichero `looknfeel.lua`?
+❓ Captura tu escritorio con los huecos, el borde, el fondo y la letra cambiados. ¿Sabrías decir,
+de cada cambio, **en qué fichero o menú** está? ¿Por qué `Super` + `Mayús` + `Retroceso` no
+cambia el fichero `looknfeel.lua`?
 
 > **Reto.** Un tema propio: copia uno de `/usr/share/omarchy/themes/` a `~/.config/omarchy/themes/`
 > con otro nombre, edita sus colores en `colors.toml` y elígelo con `Super` + `Ctrl` + `T`. Si
@@ -390,87 +387,34 @@ instantánea)*. No hace falta que actualices.
 
 ---
 
-## 4. La tabla final
+## 4. Entrega
 
-Al final del documento, compara tu Mint con Omarchy. **Cinco palabras como mucho** por casilla.
+Entrega en Moodle **«Tarea · Omarchy»** estas **seis capturas** de tu Omarchy, hechas con
+`Impr Pant` (se guardan en `~/Pictures/Screenshots`). En cada una tiene que verse la **barra de
+arriba** y en alguna el nombre `omarchy-smr`:
 
-| | Mint (guía 02) | Omarchy |
-|---|---|---|
-| Tiempo de instalación | | |
-| Cómo abres un programa | | |
-| Cómo se colocan las ventanas | | |
-| Disco: particiones y cifrado | | |
-| Cómo se instala un programa | | |
-| Cómo se deshace un error | | |
+1. 🖥️ **Recién instalado**: el escritorio con un terminal y la salida de `fastfetch`.
+2. 🧱 **Mosaico**: tres ventanas en mosaico, y en la barra se ve que estás en el escritorio 2.
+3. 🎨 **Tema y fondo**: un tema que no sea el de serie y un fondo que hayas elegido tú.
+4. 🧙 **A tu estilo**: huecos o bordes cambiados en `looknfeel.lua`, la letra cambiada y tu
+   nombre en el salvapantallas.
+5. 📦 **Programas**: `cmatrix` funcionando y VS Code abierto.
+6. 🌐 **Web app y TUI**: la rejilla de aplicaciones con tu web app y tu `Matrix` dentro.
 
-> **Ejemplo.** Así quedaría una fila: Cómo abres un programa · Menú y ratón · Atajo de teclado.
+Ponle a cada captura una línea diciendo qué enseña. Sin documento, sin PDF: las seis imágenes y
+sus seis líneas.
 
-## 5. Plantilla del documento
-
-Copia esto en VS Code como `omarchy.md` y rellénalo:
-
-````markdown
-# Omarchy, un Linux moderno y divertido
-
-**Autor:** Nombre Apellido · **Fecha:** AAAA-MM-DD
-
-## 1 · Instalación
-
-```bash
-alumno@omarchy-smr:~$ lsblk -f
-(lo que sale)
-```
-
-**Respuestas:** (una o dos frases por ❓)
-
-## 2.1 · Todo con el teclado
-
-(…lo mismo en los 14 apartados: comando o captura + respuestas…)
-
-## Tabla final
-
-(la tabla del apartado 4, rellena)
-````
-
-## 6. Lo que despista
-
-> [!WARNING]
-> **`Super` + `W` no minimiza: cierra.** En Omarchy no hay ventanas minimizadas. Si quieres
-> quitar algo de en medio, llévatelo a otro escritorio con `Super` + `Mayús` + número.
-
-> [!WARNING]
-> **`pacman -Syu` está prohibido aquí.** Es el `apt upgrade` de Arch y sigue ahí, pero las
-> actualizaciones van por `omarchy update`, que primero hace la instantánea.
-
-> [!NOTE]
-> **Dos sitios para la configuración.** Lo que trae Omarchy está en `/usr/share/omarchy` y las
-> actualizaciones lo sobreescriben: no lo toques. Lo tuyo va en `~/.config` y gana. Lo verás a
-> fondo en el [taller de personalización](../../3-avanzado/12-taller-personalizar-linux/1-guia.md#nivel-0--dónde-vive-la-configuración).
-
-## 7. Entrega
-
-Entrega en Moodle **«Tarea · Omarchy»** el fichero `omarchy.pdf` (Markdown All in One → exportar a
-HTML → abrir en el navegador → imprimir como PDF).
-
-Es **Apto** si:
-
-| # | Criterio |
-|---|---|
-| 1 | Están los **14 apartados** (1, 2.1 a 2.7 y 3.1 a 3.6), cada uno con su comando o captura **de tu máquina** y sus respuestas |
-| 2 | Las respuestas están escritas **con tus palabras**, no copiadas del manual |
-| 3 | Has instalado algo por las **cuatro vías**: paquete, AUR, web app y TUI, y se ve en las capturas |
-| 4 | La tabla de cambios de estilo (2.7) dice **en qué fichero o menú** está cada cambio |
-| 5 | La **tabla final** está rellena y lo que pone de Mint coincide con lo que hiciste en la guía 02 |
+Es **Apto** si están las seis capturas, son **de tu máquina** (se ve la barra y el nombre
+`omarchy-smr`) y cada una enseña lo que se pide.
 
 **Antes de entregar, comprueba:**
 
-- [ ] Hay 14 apartados, cada uno con comando o captura y respuesta.
-- [ ] Las capturas son de Omarchy (se ve la barra de arriba), no fotos del móvil.
-- [ ] En la tabla final no hay casillas vacías.
+- [ ] Son seis capturas, con la barra de arriba a la vista.
+- [ ] En la de programas se ve `cmatrix` y VS Code; en la de la rejilla, tu web app y `Matrix`.
+- [ ] Cada captura lleva su línea de explicación.
 - [ ] Sabes abrir el terminal, cerrar una ventana y cambiar de escritorio sin mirar la chuleta.
-- [ ] El PDF se lee bien.
 
-## 8. Si vas rápido
+## 5. Si vas rápido
 
 > **Reto.** Tu propio atajo. Abre `Super` + `Espacio` → **Setup → Bindings** y añade al final una
 > línea que abra la wiki de Arch con `Super` + `Mayús` + `Alt` + `W`:

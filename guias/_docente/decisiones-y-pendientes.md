@@ -81,7 +81,9 @@ anteriores están en `_obsoleto/antes-de-simplificar-2026-10-31/`. Pendiente: cu
 visto bueno al estilo, crear una skill para generar guías y prácticas nuevas con él.
 
 **Tarea nueva 16: Omarchy** (2026-11-01). Tarea suelta (`1-basico/16-omarchy/1-tarea-omarchy.md`,
-Apto / No apto, 4 h) sobre Omarchy 4, el Arch con instalador y escritorio Hyprland de DHH. **Va
+Apto / No apto, 4 h; la entrega son seis capturas del sistema con una línea cada una, sin
+documento: Mikel quitó la tabla final, la plantilla y «Lo que despista», y las ❓ quedan como
+preguntas para comentar en clase) sobre Omarchy 4, el Arch con instalador y escritorio Hyprland de DHH. **Va
 antes que la guía de Arch** (nivel básico, tras Mint y comandos): es para que vean un sistema
 moderno y divertido; Arch a mano llega el trimestre siguiente. Por eso no depende de la guía 08:
 compara con Mint (tabla final Mint frente a Omarchy), explica `pacman` como el `apt` de Arch y
