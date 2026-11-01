@@ -166,6 +166,31 @@ Debian/Mint); en Arch es `useradd -m -s /bin/bash`. Sin probar: la consola de te
 `Ctrl+Alt+F3` en Omarchy dentro del visor de Isard (la guía dice que si el visor se queda las
 teclas se use SPICE) y en qué tty vuelve el escritorio.
 
+**Guías reescritas publicadas en Moodle** (2026-11-01). Las siete guías del 31/10 están en el
+curso 513 (PBSE-1MS2A2627) con sus títulos nuevos. Cinco Páginas llevan la guía entera: 6.1
+Windows por dentro (id 109027), 7.1 Tu navaja suiza USB con Ventoy (107408), 8.1 Instalar Arch
+Linux desde la consola (107412), 9.1 Permisos en Linux, root y sudo (107416) y 12.1 Taller:
+personaliza tu Linux (107425). Siete Tareas: la 3 (107397) y la 4 (107399) no tienen Página y
+llevan la guía entera en la descripción; la 6 (109028), 7 (107411), 8 (107415), 9 (107418) y 12
+(107427) llevan la portada, una nota con el enlace a su Página y la Parte 4 · Entrega (en Arch, la
+Parte 5). Los nombres de los módulos cambian con el título de cada guía («Tarea 9 · Permisos en
+Linux, root y sudo» en vez de «…notación octal y simbólica…»); lo que se evalúa y cuánto puntúa
+no cambia. Los HTML exportados están en la carpeta oculta «_Fuentes HTML de las guías (uso
+interno)» (107378), de donde se copiaron al editor; el `paginas-html.zip` que había allí es del
+12/10 y está desfasado. Moodle convierte las imágenes incrustadas en ficheros propios al guardar,
+así que en las páginas no queda base64. No se tocaron la Tarea 5 (mapa de directorios), las
+tareas sueltas «explora archivos» y «El boss», el resumen del examen, los temas 11, 13 y 14 ni el
+examen 1. Las tareas 17 y 18 siguen sin publicar.
+
+**Tarea 16 Omarchy publicada en Moodle como «Tarea 9»** (2026-11-01, a petición de Mikel, que
+renumeró antes las tareas del curso). Va en la subsección «Configuración» del 1.º trimestre (id
+del módulo 110246), con la tarea entera en la descripción, escala «Apto-es» y aprobado en 1 como
+la tarea «Explora el sistema de archivos», entrega de ficheros y de texto en línea y sin fecha
+límite. Los enlaces a Mint y a la guía 04 apuntan a sus actividades de Moodle y el nombre de la
+entrega dice «Tarea 9 · Omarchy» (sólo en Moodle; el Markdown sigue diciendo «Tarea · Omarchy»).
+La subsección estaba oculta: se mostró y la Página y la Tarea de Windows (109027 y 109028) siguen
+ocultas. La tarea sigue sin probar en Isard (ver la entrada de la tarea 16).
+
 **La guía de comandos se redujo al mínimo** (navegar, rutas, crear, ver, copiar/mover/borrar,
 comodines, ayuda). `find`, `grep`, tuberías, enlaces, `tar`, `rsync`, disco y equivalencias con
 Windows se retiraron a `_obsoleto/retirados-2026-09-23/` (tema 06), junto con los trucos de la

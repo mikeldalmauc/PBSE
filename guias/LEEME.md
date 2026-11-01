@@ -212,18 +212,21 @@ Una guía única sale como `09-permisos-1-guia.html` (y `pdf/09-permisos-1-guia.
 > **Nota.** En el PDF las respuestas de los «🧠 ¿Lo has pillado?» salen desplegadas, porque en
 > papel no se puede hacer clic. En el HTML siguen plegadas.
 
-Para publicarlos:
+Para publicarlos (así está montado el curso de Moodle desde el 01/11/2026):
 
-1. **Página de Moodle** (recomendado para explicación y chuleta): abre el HTML en el navegador,
-   selecciona todo (`Ctrl` + `A`), copia y pega en el editor de la Página. O, en el editor, botón
-   **Código fuente** y pega el contenido del `<body>`.
-2. **Tarea** (ejercicios): pega el HTML de `3-ejercicios` en la descripción de la tarea, o adjúntalo
-   como fichero.
-3. **Recurso Fichero**: sube el `.html` o el `.pdf` tal cual; se abren con todo su formato.
+1. **Página «N.1 · Título»** con la guía entera: en el editor de la Página, botón **Código
+   fuente**, pega el contenido del `<body>` del HTML exportado y guarda. Moodle convierte las
+   imágenes incrustadas en ficheros propios al guardar.
+2. **Tarea «Tarea N · Título»** con la entrega: en la descripción van la portada, una nota con el
+   enlace a la Página («la explicación, el resumen y la práctica están en la página N.1…») y la
+   Parte 4 · Entrega (en Arch, la Parte 5). Las tareas 3 y 4 no tienen Página: llevan la guía
+   entera en la descripción.
+3. La carpeta oculta **«_Fuentes HTML de las guías (uso interno)»** del curso guarda los HTML
+   exportados tal cual, para copiar de ahí sin pelearse con el portapapeles.
+4. **Recurso Fichero**: sube el `.html` o el `.pdf` tal cual; se abren con todo su formato.
 
-> ⚠️ **Los enlaces entre páginas** apuntan al nombre del HTML exportado. Si los subes como
-> Páginas de Moodle, esos enlaces no funcionarán: sustitúyelos por el enlace de la Página o
-> quítalos.
+> ⚠️ **Los enlaces entre guías** apuntan al nombre del HTML exportado. Dentro de Moodle no
+> funcionan: sustitúyelos por el enlace de la Página o quítalos.
 
 ## Añadir un tema nuevo
 
