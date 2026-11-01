@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="420" viewBox="0 0 880 420" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El edificio de la empresa: casero, departamentos y despachos</title>
+  <desc id="d">Arriba, el casero: root, con el llavero de todas las puertas; alumno y ane tienen una copia de su llave, que es sudo, porque están en el grupo wheel. Debajo, tres plantas: dirección, con el despacho de ane; ventas, con los despachos de jon y unai; técnicos, con el despacho de maite. Cada planta tiene la sala del departamento, que sólo abre la llave del grupo, y cada despacho es la carpeta personal de su dueño en /home.</desc>
+  <rect x="0.5" y="0.5" width="879" height="419" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El edificio: un casero, tres plantas, cinco despachos</text>
+
+  <!-- Casero -->
+  <rect x="300" y="58" width="280" height="54" rx="12" fill="#1e2227"/>
+  <text x="440" y="82" font-size="16" font-weight="700" text-anchor="middle" fill="#e6e9ee">🔑 root, el casero</text>
+  <text x="440" y="102" font-size="13" text-anchor="middle" fill="#e6e9ee">abre todas las puertas</text>
+  <rect x="600" y="66" width="250" height="38" rx="10" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <text x="725" y="90" font-size="13" text-anchor="middle" fill="#0b0b0b">copia de su llave = sudo (grupo wheel)</text>
+  <path d="M580 85 H 600" stroke="#eda100" stroke-width="2"/>
+  <rect x="60" y="66" width="200" height="40" rx="8" fill="#ffffff" stroke="#8a8f98" stroke-width="2"/>
+  <text x="160" y="91" font-size="14" text-anchor="middle" fill="#0b0b0b">🚪 alumno <tspan fill="#52514e" font-size="12">/home/alumno · sudo</tspan></text>
+  <path d="M260 85 H 300" stroke="#eda100" stroke-width="2"/>
+
+  <!-- Plantas -->
+  <g font-size="14" fill="#0b0b0b">
+    <!-- dirección -->
+    <rect x="40" y="130" width="800" height="78" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <text x="60" y="160" font-weight="700">Planta dirección</text>
+    <rect x="60" y="170" width="200" height="28" rx="8" fill="#ffffff" stroke="#2a78d6"/>
+    <text x="160" y="189" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace">/srv/empresa/direccion</text>
+    <text x="290" y="189" fill="#52514e">sala: llave del grupo</text>
+    <rect x="620" y="150" width="200" height="40" rx="8" fill="#ffffff" stroke="#2a78d6"/>
+    <text x="720" y="175" text-anchor="middle">🚪 ane  <tspan fill="#52514e" font-size="12">/home/ane · sudo</tspan></text>
+
+    <!-- ventas -->
+    <rect x="40" y="220" width="800" height="78" rx="12" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="60" y="250" font-weight="700">Planta ventas</text>
+    <rect x="60" y="260" width="200" height="28" rx="8" fill="#ffffff" stroke="#1baf7a"/>
+    <text x="160" y="279" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace">/srv/empresa/ventas</text>
+    <text x="290" y="279" fill="#52514e">sala: llave del grupo</text>
+    <rect x="500" y="240" width="150" height="40" rx="8" fill="#ffffff" stroke="#1baf7a"/>
+    <text x="575" y="265" text-anchor="middle">🚪 jon</text>
+    <rect x="670" y="240" width="150" height="40" rx="8" fill="#ffffff" stroke="#1baf7a"/>
+    <text x="745" y="265" text-anchor="middle">🚪 unai</text>
+
+    <!-- técnicos -->
+    <rect x="40" y="310" width="800" height="78" rx="12" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+    <text x="60" y="340" font-weight="700">Planta técnicos</text>
+    <rect x="60" y="350" width="200" height="28" rx="8" fill="#ffffff" stroke="#eb6834"/>
+    <text x="160" y="369" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace">/srv/empresa/tecnicos</text>
+    <text x="290" y="369" fill="#52514e">sala: llave del grupo</text>
+    <rect x="500" y="330" width="150" height="40" rx="8" fill="#ffffff" stroke="#eb6834"/>
+    <text x="575" y="355" text-anchor="middle">🚪 maite</text>
+  </g>
+  <text x="24" y="408" font-size="13" fill="#52514e">Despacho = carpeta personal (/home/nombre). Sala = carpeta del grupo. Llave del casero = sudo.</text>
+</svg>

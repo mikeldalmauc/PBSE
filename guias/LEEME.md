@@ -70,6 +70,7 @@ Los ficheros `notas-docente.md` que hay en algunos temas son para el profesor y 
 | 06 | Windows por dentro: diferencias con Linux y herramientas | [guía única](1-basico/06-windows-por-dentro/1-guia.md) | [↳ lo que te llevas](1-basico/06-windows-por-dentro/1-guia.md#parte-2--lo-que-te-llevas) | [↳ partes 3 y 4](1-basico/06-windows-por-dentro/1-guia.md#parte-3--practica) | — |
 | 16 | Omarchy en Isard VDI: un Linux moderno para usar con el teclado, poner a tu estilo e instalar programas (antes de Arch) | — | — | [tarea](1-basico/16-omarchy/1-tarea-omarchy.md) | CM1, CM4 |
 | 17 | Tu ordenador en el bolsillo: Codex en Omarchy y en remoto desde el móvil, Tailscale, Drive con rclone y tus dos primeras skills (para el segundo trimestre) | — | — | [tarea](1-basico/17-claude-y-drive/1-tarea-tu-ordenador-en-el-bolsillo.md) | CM4 |
+| 18 | Una máquina para toda la empresa: usuarios, grupos, sudo y bajas en Omarchy | — | — | [tarea](1-basico/18-usuarios-y-grupos/1-tarea-una-maquina-para-todos.md) | CM6 |
 | 99 | Repaso para el examen de los temas 02 a 05 | [hoja de repaso](1-basico/99-repaso-examen/1-hoja-repaso.md) | — | [↳ checklist](1-basico/99-repaso-examen/1-hoja-repaso.md#6-checklist-de-verificación) | CM1, CM3, CM4 |
 | **Nivel 2 · Intermedio** | | | | | |
 | 07 | USB multiarranque con Ventoy | [guía única](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md) | [↳ lo que te llevas](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md#parte-2--lo-que-te-llevas) | [↳ entregable](2-intermedio/07-usb-multiarranque-ventoy/1-guia.md#parte-4--entrega) | CM2 |

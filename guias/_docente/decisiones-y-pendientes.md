@@ -151,6 +151,21 @@ clave sirve hasta 100 usuarios. Sin probar en Isard: que el lanzador de Omarchy
 Android, que `tailscale ping` llegue al móvil (la app del móvil tiene que estar conectada) y que
 Termius entre por Tailscale SSH sin más configuración.
 
+**Tarea nueva 18: Una máquina para toda la empresa** (2026-11-01). Tarea suelta
+(`1-basico/18-usuarios-y-grupos/1-tarea-una-maquina-para-todos.md`, Apto / No apto, 3 h en dos
+sesiones), para después de Omarchy en este trimestre. Sólo «las personas»: `id` y `/etc/passwd`,
+`useradd -m -s` y `passwd` (en Arch no hay `adduser`), `groupadd` y `usermod -aG` con el aviso de
+la `-a`, `su -` y los dos «denied», la receta `chgrp` + `chmod 2770` para la sala de cada
+departamento (el porqué se remite a la guía 09), `wheel` para dar `sudo`, y la baja en dos pasos
+(`passwd -l`, `userdel -r`) con el dueño que queda como número. Empresa de las convenciones
+(dirección, ventas, técnicos) con ane, jon, maite y unai. Entrega: seis capturas. Dibujo propio
+del edificio; reutiliza `passwd-campos.svg` del repaso 99 y `sgid-herencia.svg` del 09. Retos:
+`/etc/skel` y la carpeta común con sticky. Se pide instantánea de Isard antes de empezar. Ojo
+para cuando se revise la guía 09: su práctica usa `sudo adduser`, que no existe en Arch (es de
+Debian/Mint); en Arch es `useradd -m -s /bin/bash`. Sin probar: la consola de texto con
+`Ctrl+Alt+F3` en Omarchy dentro del visor de Isard (la guía dice que si el visor se queda las
+teclas se use SPICE) y en qué tty vuelve el escritorio.
+
 **La guía de comandos se redujo al mínimo** (navegar, rutas, crear, ver, copiar/mover/borrar,
 comodines, ayuda). `find`, `grep`, tuberías, enlaces, `tar`, `rsync`, disco y equivalencias con
 Windows se retiraron a `_obsoleto/retirados-2026-09-23/` (tema 06), junto con los trucos de la
