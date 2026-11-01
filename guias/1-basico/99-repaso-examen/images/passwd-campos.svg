@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Una línea de /etc/passwd, campo a campo</title>
+  <desc id="d">La línea alumno:x:1000:1000:Alumno SMR,,,:/home/alumno:/bin/bash tiene siete campos separados por dos puntos. Campo 1, usuario: el nombre con el que entras (alumno). Campo 2, contraseña: la x dice que la contraseña está guardada en /etc/shadow. Campo 3, UID: el número del usuario (1000 es el primer usuario normal). Campo 4, GID: el número de su grupo. Campo 5, nombre: el nombre completo o comentario. Campo 6, carpeta: su carpeta personal, /home/alumno. Campo 7, shell: el programa que lee tus órdenes, /bin/bash.</desc>
+  <rect x="0.5" y="0.5" width="899" height="299" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Una línea de /etc/passwd, campo a campo</text>
+  <text x="24" y="60" font-size="14" fill="#52514e">Hay una línea por usuario. Los 7 campos van separados por dos puntos ( : ).</text>
+
+  <rect x="24" y="76" width="852" height="58" rx="10" fill="#1e2227"/>
+  <g font-size="11" font-weight="700" text-anchor="middle" fill="#8a8f98">
+    <text x="181" y="92">1</text><text x="230.5" y="92">2</text><text x="269" y="92">3</text><text x="324" y="92">4</text>
+    <text x="428.5" y="92">5</text><text x="577" y="92">6</text><text x="703.5" y="92">7</text>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="20" fill="#e6e9ee" lengthAdjust="spacingAndGlyphs">
+    <text x="148" y="114" textLength="66">alumno</text>
+    <text x="225" y="114" textLength="11">x</text>
+    <text x="247" y="114" textLength="44">1000</text>
+    <text x="302" y="114" textLength="44">1000</text>
+    <text x="357" y="114" textLength="143">Alumno SMR,,,</text>
+    <text x="511" y="114" textLength="132">/home/alumno</text>
+    <text x="654" y="114" textLength="99">/bin/bash</text>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="20" font-weight="700" fill="#8a8f98">
+    <text x="214" y="114">:</text><text x="236" y="114">:</text><text x="291" y="114">:</text>
+    <text x="346" y="114">:</text><text x="500" y="114">:</text><text x="643" y="114">:</text>
+  </g>
+  <rect x="148" y="121" width="66" height="4" rx="2" fill="#2a78d6"/>
+  <rect x="225" y="121" width="11" height="4" rx="2" fill="#eb6834"/>
+  <rect x="247" y="121" width="44" height="4" rx="2" fill="#1baf7a"/>
+  <rect x="302" y="121" width="44" height="4" rx="2" fill="#eda100"/>
+  <rect x="357" y="121" width="143" height="4" rx="2" fill="#e87ba4"/>
+  <rect x="511" y="121" width="132" height="4" rx="2" fill="#008300"/>
+  <rect x="654" y="121" width="99" height="4" rx="2" fill="#6250d6"/>
+
+  <g stroke="#52514e" stroke-width="1.5">
+    <line x1="181" y1="134" x2="81" y2="172"/><line x1="230.5" y1="134" x2="203" y2="172"/>
+    <line x1="269" y1="134" x2="325" y2="172"/><line x1="324" y1="134" x2="447" y2="172"/>
+    <line x1="428.5" y1="134" x2="569" y2="172"/><line x1="577" y1="134" x2="691" y2="172"/>
+    <line x1="703.5" y1="134" x2="813" y2="172"/>
+  </g>
+
+  <g stroke-width="2">
+    <rect x="24" y="172" width="114" height="108" rx="10" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="146" y="172" width="114" height="108" rx="10" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="268" y="172" width="114" height="108" rx="10" fill="#d3f2e6" stroke="#1baf7a"/>
+    <rect x="390" y="172" width="114" height="108" rx="10" fill="#fdefcc" stroke="#eda100"/>
+    <rect x="512" y="172" width="114" height="108" rx="10" fill="#fbe3ec" stroke="#e87ba4"/>
+    <rect x="634" y="172" width="114" height="108" rx="10" fill="#d6efd6" stroke="#008300"/>
+    <rect x="756" y="172" width="114" height="108" rx="10" fill="#e4e0f8" stroke="#6250d6"/>
+  </g>
+  <g text-anchor="middle">
+    <g font-size="11" fill="#52514e">
+      <text x="81" y="191">campo 1</text><text x="203" y="191">campo 2</text><text x="325" y="191">campo 3</text><text x="447" y="191">campo 4</text>
+      <text x="569" y="191">campo 5</text><text x="691" y="191">campo 6</text><text x="813" y="191">campo 7</text>
+    </g>
+    <g font-size="14.5" font-weight="700" fill="#0b0b0b">
+      <text x="81" y="211">Usuario</text><text x="203" y="211">Contraseña</text><text x="325" y="211">UID</text><text x="447" y="211">GID</text>
+      <text x="569" y="211">Nombre</text><text x="691" y="211">Carpeta</text><text x="813" y="211">Shell</text>
+    </g>
+    <g font-size="12" fill="#0b0b0b">
+      <text x="81" y="232">el nombre con</text><text x="81" y="248">el que entras</text>
+      <text x="203" y="232">la «x» dice que</text><text x="203" y="248">está guardada en</text><text x="203" y="264">/etc/shadow</text>
+      <text x="325" y="232">el número</text><text x="325" y="248">del usuario</text><text x="325" y="264">(1000 = el 1.º)</text>
+      <text x="447" y="232">el número</text><text x="447" y="248">de su grupo</text>
+      <text x="569" y="232">el nombre</text><text x="569" y="248">completo</text>
+      <text x="691" y="232">su carpeta</text><text x="691" y="248">personal (~)</text>
+      <text x="813" y="232">el programa</text><text x="813" y="248">que lee tus</text><text x="813" y="264">órdenes</text>
+    </g>
+  </g>
+</svg>

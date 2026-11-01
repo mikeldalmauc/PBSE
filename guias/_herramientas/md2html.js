@@ -38,7 +38,7 @@ const PALABRAS = [
   [/^(ampliacion|para saber mas|extra|reto|si vas rapido|actividad opcional)/, 'ampliacion'],
   [/^ejemplo/, 'ejemplo'],
 ];
-const COLORES_TIPO = { 'Explicación': '#1d4ed8', 'Chuleta': '#1c6b4a', 'Ejercicios': '#b45309', 'Guía': '#6b3fa0', 'Tarea': '#0e7490' };
+const COLORES_TIPO = { 'Explicación': '#1d4ed8', 'Chuleta': '#1c6b4a', 'Ejercicios': '#b45309', 'Guía': '#6b3fa0', 'Tarea': '#0e7490', 'Repaso': '#b3261e' };
 const HL = { // colores tipo monokai, como el pygments del exportador original
   keyword: '#f92672', 'selector-tag': '#f92672', literal: '#ae81ff', built_in: '#66d9ef', type: '#66d9ef',
   string: '#e6db74', regexp: '#e6db74', number: '#ae81ff', symbol: '#ae81ff', bullet: '#ae81ff',

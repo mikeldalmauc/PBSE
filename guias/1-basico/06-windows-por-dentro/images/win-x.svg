@@ -41,14 +41,14 @@
   <text x="380" y="84" font-size="14" fill="#0b0b0b">Ábrelo con <tspan font-weight="700">Win + X</tspan> o con <tspan font-weight="700">clic derecho en Inicio</tspan>.</text>
   <text x="380" y="106" font-size="14" fill="#0b0b0b">Las opciones en negrita las verás en esta guía:</text>
   <g font-size="13.5" fill="#0b0b0b">
-    <circle cx="390" cy="139" r="7" fill="#2a78d6"/><text x="406" y="144">Visor de eventos · apartado 8</text>
+    <circle cx="390" cy="139" r="7" fill="#2a78d6"/><text x="406" y="144">Visor de eventos · apartado 7</text>
     <circle cx="390" cy="169" r="7" fill="#eb6834"/><text x="406" y="174">Administrador de dispositivos · apartado 4</text>
     <circle cx="390" cy="199" r="7" fill="#1baf7a"/><text x="406" y="204">Administración de discos · apartado 5</text>
-    <circle cx="390" cy="229" r="7" fill="#eda100"/><text x="406" y="234">Administración de equipos · apartado 10</text>
+    <circle cx="390" cy="229" r="7" fill="#eda100"/><text x="406" y="234">Administración de equipos · Parte 2</text>
     <circle cx="390" cy="259" r="7" fill="#e87ba4"/><text x="406" y="264">Terminal (Administrador) · PowerShell con permisos</text>
     <circle cx="390" cy="289" r="7" fill="#008300"/><text x="406" y="294">Administrador de tareas · apartado 3</text>
     <circle cx="390" cy="319" r="7" fill="#6250d6"/><text x="406" y="324">Configuración · apartado 2</text>
-    <circle cx="390" cy="349" r="7" fill="#8a8f98"/><text x="406" y="354">Ejecutar (Win + R) · la chuleta de la Parte 2</text>
+    <circle cx="390" cy="349" r="7" fill="#8a8f98"/><text x="406" y="354">Ejecutar (Win + R) · apartado 2</text>
   </g>
   <rect x="380" y="384" width="456" height="72" rx="10" fill="#fdefcc" stroke="#eda100"/>
   <text x="396" y="410" font-size="13.5" font-weight="700" fill="#0b0b0b">Truco</text>

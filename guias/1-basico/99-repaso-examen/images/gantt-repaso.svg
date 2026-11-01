@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="440" viewBox="0 0 900 440" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Tres formas de repartir la CPU</title>
+  <desc id="d">Ejemplo: A necesita 5 unidades de CPU, B necesita 2 y C necesita 3, y llegan los tres en el instante 0. FCFS, por orden de llegada: A de 0 a 5, B de 5 a 7, C de 7 a 10; esperas A 0, B 5, C 7; espera media 4. SJF, el más corto primero: B de 0 a 2, C de 2 a 5, A de 5 a 10; esperas B 0, C 2, A 5; espera media 2,33, la mejor. Round Robin con cuanto 2: A de 0 a 2, B de 2 a 4, C de 4 a 6, A de 6 a 8, C de 8 a 9, A de 9 a 10; esperas A 5, B 2, C 6; espera media 4,33. Espera de cada proceso = cuándo termina menos lo que necesitaba.</desc>
+  <rect x="0.5" y="0.5" width="899" height="439" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Tres formas de repartir la CPU</text>
+  <text x="24" y="60" font-size="14" fill="#52514e">Mismo ejemplo para las tres: A necesita 5, B necesita 2 y C necesita 3. Llegan los tres a la vez (instante 0).</text>
+
+  <!-- FCFS -->
+  <g>
+    <text x="24" y="104" font-size="17" font-weight="700" fill="#0b0b0b">FCFS</text>
+    <text x="24" y="124" font-size="12.5" fill="#52514e">El primero que llega,</text>
+    <text x="24" y="140" font-size="12.5" fill="#52514e">primero se atiende</text>
+    <rect x="210" y="84" width="270" height="40" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <rect x="480" y="84" width="108" height="40" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+    <rect x="588" y="84" width="162" height="40" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <g font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+      <text x="345" y="110">A</text><text x="534" y="110">B</text><text x="669" y="110">C</text>
+    </g>
+    <g font-size="12" text-anchor="middle" fill="#52514e">
+      <text x="210" y="142">0</text><text x="480" y="142">5</text><text x="588" y="142">7</text><text x="750" y="142">10</text>
+    </g>
+    <text x="210" y="166" font-size="12.5" fill="#52514e">Esperas:  A 0  ·  B 5  ·  C 7</text>
+    <rect x="772" y="84" width="104" height="60" rx="10" fill="#eef0f3" stroke="#8a8f98"/>
+    <text x="824" y="104" font-size="12" text-anchor="middle" fill="#52514e">espera media</text>
+    <text x="824" y="132" font-size="22" font-weight="700" text-anchor="middle" fill="#0b0b0b">4</text>
+  </g>
+
+  <!-- SJF -->
+  <g>
+    <text x="24" y="216" font-size="17" font-weight="700" fill="#0b0b0b">SJF</text>
+    <text x="24" y="236" font-size="12.5" fill="#52514e">El más corto, primero</text>
+    <text x="24" y="252" font-size="12.5" fill="#52514e">(la mejor espera media)</text>
+    <rect x="210" y="196" width="108" height="40" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+    <rect x="318" y="196" width="162" height="40" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <rect x="480" y="196" width="270" height="40" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <g font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+      <text x="264" y="222">B</text><text x="399" y="222">C</text><text x="615" y="222">A</text>
+    </g>
+    <g font-size="12" text-anchor="middle" fill="#52514e">
+      <text x="210" y="254">0</text><text x="318" y="254">2</text><text x="480" y="254">5</text><text x="750" y="254">10</text>
+    </g>
+    <text x="210" y="278" font-size="12.5" fill="#52514e">Esperas:  B 0  ·  C 2  ·  A 5</text>
+    <rect x="772" y="196" width="104" height="60" rx="10" fill="#d6efd6" stroke="#008300" stroke-width="2"/>
+    <text x="824" y="216" font-size="12" text-anchor="middle" fill="#52514e">espera media</text>
+    <text x="824" y="244" font-size="22" font-weight="700" text-anchor="middle" fill="#0b0b0b">2,33</text>
+  </g>
+
+  <!-- Round Robin -->
+  <g>
+    <text x="24" y="328" font-size="17" font-weight="700" fill="#0b0b0b">Round Robin</text>
+    <text x="24" y="348" font-size="12.5" fill="#52514e">Turnos de 2 (el cuanto); si no</text>
+    <text x="24" y="364" font-size="12.5" fill="#52514e">acabas, al final de la cola</text>
+    <rect x="210" y="308" width="108" height="40" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <rect x="318" y="308" width="108" height="40" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+    <rect x="426" y="308" width="108" height="40" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <rect x="534" y="308" width="108" height="40" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <rect x="642" y="308" width="54" height="40" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <rect x="696" y="308" width="54" height="40" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <g font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+      <text x="264" y="334">A</text><text x="372" y="334">B</text><text x="480" y="334">C</text>
+      <text x="588" y="334">A</text><text x="669" y="334">C</text><text x="723" y="334">A</text>
+    </g>
+    <g font-size="12" text-anchor="middle" fill="#52514e">
+      <text x="210" y="366">0</text><text x="318" y="366">2</text><text x="426" y="366">4</text><text x="534" y="366">6</text>
+      <text x="642" y="366">8</text><text x="696" y="366">9</text><text x="750" y="366">10</text>
+    </g>
+    <text x="210" y="390" font-size="12.5" fill="#52514e">Esperas:  A 5  ·  B 2  ·  C 6</text>
+    <rect x="772" y="308" width="104" height="60" rx="10" fill="#eef0f3" stroke="#8a8f98"/>
+    <text x="824" y="328" font-size="12" text-anchor="middle" fill="#52514e">espera media</text>
+    <text x="824" y="356" font-size="22" font-weight="700" text-anchor="middle" fill="#0b0b0b">4,33</text>
+  </g>
+
+  <text x="24" y="422" font-size="13.5" fill="#0b0b0b"><tspan font-weight="700">Espera = cuándo termina − lo que necesitaba.</tspan>  Ejemplo en FCFS: C termina en 10 y necesitaba 3, así que esperó 7.</text>
+</svg>

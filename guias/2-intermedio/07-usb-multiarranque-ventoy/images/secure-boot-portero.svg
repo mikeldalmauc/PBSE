@@ -65,7 +65,7 @@
     <text x="640" y="256">✕ 1.ª vez: error 0x1A</text>
   </g>
   <g font-size="12" fill="#52514e">
-    <text x="640" y="276">registras su clave MOK (6.2)</text>
+    <text x="640" y="276">registras su clave MOK</text>
     <text x="640" y="294">y desde entonces ✓ arranca</text>
   </g>
   <text x="24" y="330" font-size="12" fill="#52514e">MOK = Machine Owner Key: la clave que añade el dueño de la máquina. Se registra una vez por equipo.</text>

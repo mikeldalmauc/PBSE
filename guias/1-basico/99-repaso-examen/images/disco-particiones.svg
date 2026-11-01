@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="404" viewBox="0 0 900 404" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Tu disco de 25 GB, partido en 4 particiones</title>
+  <desc id="d">Una barra representa el disco /dev/sda de 25 GB dividido en cuatro trozos (no está a escala). sda1, 512 MB: partición EFI, formato FAT32, se monta en /boot/efi, sirve para arrancar porque la UEFI busca aquí el arranque. sda2, 15 GB: raíz, formato ext4, se monta en /, guarda Linux y todos los programas. sda3, 2 GB: swap, formato swap, no se monta, es RAM de reserva que se usa si la RAM se llena. sda4, unos 9 GB: home, formato ext4, se monta en /home, guarda tus datos. Abajo: /home va aparte porque si reinstalas Linux formateas / y no tocas /home, así tus archivos se salvan. Se comprueba con lsblk -f.</desc>
+  <defs>
+    <clipPath id="barra"><rect x="24" y="102" width="852" height="56" rx="10"/></clipPath>
+  </defs>
+  <rect x="0.5" y="0.5" width="899" height="403" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Tu disco de 25 GB, partido en 4 particiones</text>
+  <text x="24" y="60" font-size="14" fill="#52514e">Cada partición tiene un formato (cómo se ordena por dentro) y un punto de montaje (por qué carpeta entras).</text>
+
+  <text x="24" y="94" font-size="13" fill="#52514e"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">/dev/sda</tspan> = el disco entero  ·  el dibujo no está a escala</text>
+
+  <g clip-path="url(#barra)">
+    <rect x="24" y="102" width="72" height="56" fill="#fbe3ec"/>
+    <rect x="96" y="102" width="420" height="56" fill="#cde2fb"/>
+    <rect x="516" y="102" width="110" height="56" fill="#fdefcc"/>
+    <rect x="626" y="102" width="250" height="56" fill="#d3f2e6"/>
+  </g>
+  <g stroke="#ffffff" stroke-width="3">
+    <line x1="96" y1="102" x2="96" y2="158"/><line x1="516" y1="102" x2="516" y2="158"/><line x1="626" y1="102" x2="626" y2="158"/>
+  </g>
+  <rect x="24" y="102" width="852" height="56" rx="10" fill="none" stroke="#52514e" stroke-width="2"/>
+  <g text-anchor="middle">
+    <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="14" font-weight="700" fill="#0b0b0b">
+      <text x="60" y="126">sda1</text><text x="306" y="126">sda2</text><text x="571" y="126">sda3</text><text x="751" y="126">sda4</text>
+    </g>
+    <g font-size="12" fill="#52514e">
+      <text x="60" y="146">512 MB</text><text x="306" y="146">15 GB</text><text x="571" y="146">2 GB</text><text x="751" y="146">el resto (≈ 9 GB)</text>
+    </g>
+  </g>
+
+  <g stroke="#52514e" stroke-width="1.5">
+    <line x1="60" y1="158" x2="124.5" y2="186"/><line x1="306" y1="158" x2="341.5" y2="186"/>
+    <line x1="571" y1="158" x2="558.5" y2="186"/><line x1="751" y1="158" x2="775.5" y2="186"/>
+  </g>
+
+  <!-- Tarjetas -->
+  <g>
+    <rect x="24" y="186" width="201" height="154" rx="12" fill="#fbe3ec" stroke="#e87ba4" stroke-width="2"/>
+    <text x="38" y="212" font-size="15.5" font-weight="700" fill="#0b0b0b">1 · EFI</text>
+    <text x="38" y="240" font-size="12.5" fill="#52514e">Formato:</text>
+    <text x="104" y="240" font-size="13.5" font-weight="700" fill="#0b0b0b">FAT32</text>
+    <text x="38" y="264" font-size="12.5" fill="#52514e">Montaje:</text>
+    <text x="104" y="264" font-size="13.5" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">/boot/efi</text>
+    <text x="38" y="290" font-size="12.5" fill="#52514e">Para qué:</text>
+    <text x="38" y="310" font-size="13" fill="#0b0b0b">Arrancar: la UEFI</text>
+    <text x="38" y="328" font-size="13" fill="#0b0b0b">busca aquí el arranque</text>
+
+    <rect x="241" y="186" width="201" height="154" rx="12" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <text x="255" y="212" font-size="15.5" font-weight="700" fill="#0b0b0b">2 · Raíz</text>
+    <text x="255" y="240" font-size="12.5" fill="#52514e">Formato:</text>
+    <text x="321" y="240" font-size="13.5" font-weight="700" fill="#0b0b0b">ext4</text>
+    <text x="255" y="264" font-size="12.5" fill="#52514e">Montaje:</text>
+    <text x="321" y="264" font-size="13.5" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">/</text>
+    <text x="255" y="290" font-size="12.5" fill="#52514e">Para qué:</text>
+    <text x="255" y="310" font-size="13" fill="#0b0b0b">Linux y todos</text>
+    <text x="255" y="328" font-size="13" fill="#0b0b0b">los programas</text>
+
+    <rect x="458" y="186" width="201" height="154" rx="12" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+    <text x="472" y="212" font-size="15.5" font-weight="700" fill="#0b0b0b">3 · Swap</text>
+    <text x="472" y="240" font-size="12.5" fill="#52514e">Formato:</text>
+    <text x="538" y="240" font-size="13.5" font-weight="700" fill="#0b0b0b">swap</text>
+    <text x="472" y="264" font-size="12.5" fill="#52514e">Montaje:</text>
+    <text x="538" y="264" font-size="13.5" font-weight="700" fill="#0b0b0b">no se monta</text>
+    <text x="472" y="290" font-size="12.5" fill="#52514e">Para qué:</text>
+    <text x="472" y="310" font-size="13" fill="#0b0b0b">RAM de reserva: se usa</text>
+    <text x="472" y="328" font-size="13" fill="#0b0b0b">si la RAM se llena</text>
+
+    <rect x="675" y="186" width="201" height="154" rx="12" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="689" y="212" font-size="15.5" font-weight="700" fill="#0b0b0b">4 · Home</text>
+    <text x="689" y="240" font-size="12.5" fill="#52514e">Formato:</text>
+    <text x="755" y="240" font-size="13.5" font-weight="700" fill="#0b0b0b">ext4</text>
+    <text x="689" y="264" font-size="12.5" fill="#52514e">Montaje:</text>
+    <text x="755" y="264" font-size="13.5" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">/home</text>
+    <text x="689" y="290" font-size="12.5" fill="#52514e">Para qué:</text>
+    <text x="689" y="310" font-size="13" fill="#0b0b0b">Tus datos: documentos,</text>
+    <text x="689" y="328" font-size="13" fill="#0b0b0b">fotos, descargas…</text>
+  </g>
+
+  <text x="24" y="368" font-size="13.5" fill="#0b0b0b"><tspan font-weight="700">¿Por qué /home aparte?</tspan> Si reinstalas Linux, formateas / y no tocas /home: tus archivos se salvan.</text>
+  <text x="24" y="390" font-size="13.5" fill="#52514e">Compruébalo en el terminal con <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">lsblk -f</tspan></text>
+</svg>

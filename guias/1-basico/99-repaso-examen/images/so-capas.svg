@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="488" viewBox="0 0 900 488" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El sistema operativo y sus seis trabajos</title>
+  <desc id="d">A la izquierda, cuatro capas de arriba abajo: tú (el usuario), los programas, el sistema operativo con su núcleo (kernel) y el hardware. Cada capa pide cosas a la de abajo. A la derecha, los seis trabajos del sistema operativo: gestionar procesos (reparte la CPU; se ve con ps aux o top), gestionar la memoria (reparte la RAM; free -h), gestionar ficheros (guarda los datos en carpetas; ls y cd), gestionar dispositivos (teclado, pantalla, USB; lsblk), usuarios y seguridad (quién entra y qué puede tocar; whoami) e interfaz (ventanas o terminal; bash).</desc>
+  <defs>
+    <marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#52514e"/></marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="899" height="487" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El sistema operativo: el encargado del ordenador</text>
+  <text x="24" y="60" font-size="14" fill="#52514e">Tú usas programas; los programas le piden cosas al sistema operativo; y él manda en el hardware.</text>
+
+  <g font-size="12" font-weight="700" fill="#52514e" letter-spacing="1">
+    <text x="24" y="90">QUIÉN HABLA CON QUIÉN</text>
+    <text x="360" y="90">SUS 6 TRABAJOS</text>
+  </g>
+
+  <!-- Capas -->
+  <g text-anchor="middle">
+    <rect x="24" y="100" width="306" height="50" rx="10" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+    <text x="177" y="122" font-size="15" font-weight="700" fill="#0b0b0b">Tú, el usuario</text>
+    <text x="177" y="141" font-size="12.5" fill="#52514e">haces clic o escribes órdenes</text>
+
+    <rect x="24" y="166" width="306" height="56" rx="10" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="177" y="190" font-size="15" font-weight="700" fill="#0b0b0b">Programas</text>
+    <text x="177" y="210" font-size="12.5" fill="#52514e">navegador, juegos, editor de texto…</text>
+
+    <rect x="24" y="238" width="306" height="128" rx="10" fill="#cde2fb" stroke="#2a78d6" stroke-width="3"/>
+    <text x="177" y="268" font-size="18" font-weight="700" fill="#0b0b0b">Sistema operativo</text>
+    <text x="177" y="290" font-size="12.5" fill="#52514e">Linux Mint, Windows, macOS, Android…</text>
+    <rect x="58" y="306" width="238" height="44" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-dasharray="5 4"/>
+    <text x="177" y="333" font-size="13.5" font-weight="700" fill="#0b0b0b">su corazón: el núcleo (kernel)</text>
+
+    <rect x="24" y="382" width="306" height="82" rx="10" fill="#eef0f3" stroke="#8a8f98" stroke-width="2"/>
+    <text x="177" y="408" font-size="15" font-weight="700" fill="#0b0b0b">Hardware</text>
+    <text x="177" y="429" font-size="12.5" fill="#52514e">CPU · RAM · disco</text>
+    <text x="177" y="447" font-size="12.5" fill="#52514e">teclado · pantalla · USB</text>
+  </g>
+  <g stroke="#52514e" stroke-width="2" marker-end="url(#f)">
+    <line x1="177" y1="151" x2="177" y2="164"/>
+    <line x1="177" y1="223" x2="177" y2="236"/>
+    <line x1="177" y1="367" x2="177" y2="380"/>
+  </g>
+  <g font-size="11.5" fill="#52514e">
+    <text x="190" y="162">pides</text>
+    <text x="190" y="234">piden</text>
+    <text x="190" y="378">manda</text>
+  </g>
+
+  <!-- Conector -->
+  <g stroke="#2a78d6" stroke-width="2.5" fill="none">
+    <line x1="330" y1="302" x2="346" y2="302"/>
+    <line x1="346" y1="127" x2="346" y2="437"/>
+    <line x1="346" y1="127" x2="360" y2="127"/><line x1="346" y1="189" x2="360" y2="189"/>
+    <line x1="346" y1="251" x2="360" y2="251"/><line x1="346" y1="313" x2="360" y2="313"/>
+    <line x1="346" y1="375" x2="360" y2="375"/><line x1="346" y1="437" x2="360" y2="437"/>
+  </g>
+
+  <!-- Trabajos -->
+  <g>
+    <rect x="360" y="100" width="516" height="54" rx="10" fill="#ffffff" stroke="#eb6834" stroke-width="2"/>
+    <circle cx="388" cy="127" r="14" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+    <text x="388" y="132" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">1</text>
+    <text x="414" y="123" font-size="15" font-weight="700" fill="#0b0b0b">Gestionar procesos</text>
+    <text x="414" y="143" font-size="13" fill="#52514e">Reparte la CPU: un turno para cada programa</text>
+    <rect x="730" y="113" width="132" height="28" rx="6" fill="#1e2227"/>
+    <text x="796" y="132" font-size="13.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" text-anchor="middle" fill="#e6e9ee">ps aux · top</text>
+
+    <rect x="360" y="162" width="516" height="54" rx="10" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/>
+    <circle cx="388" cy="189" r="14" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="388" y="194" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">2</text>
+    <text x="414" y="185" font-size="15" font-weight="700" fill="#0b0b0b">Gestionar la memoria</text>
+    <text x="414" y="205" font-size="13" fill="#52514e">Da RAM a cada programa y la libera al cerrarlo</text>
+    <rect x="730" y="175" width="132" height="28" rx="6" fill="#1e2227"/>
+    <text x="796" y="194" font-size="13.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" text-anchor="middle" fill="#e6e9ee">free -h</text>
+
+    <rect x="360" y="224" width="516" height="54" rx="10" fill="#ffffff" stroke="#eda100" stroke-width="2"/>
+    <circle cx="388" cy="251" r="14" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+    <text x="388" y="256" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">3</text>
+    <text x="414" y="247" font-size="15" font-weight="700" fill="#0b0b0b">Gestionar ficheros</text>
+    <text x="414" y="267" font-size="13" fill="#52514e">Guarda tus datos en carpetas dentro del disco</text>
+    <rect x="730" y="237" width="132" height="28" rx="6" fill="#1e2227"/>
+    <text x="796" y="256" font-size="13.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" text-anchor="middle" fill="#e6e9ee">ls · cd</text>
+
+    <rect x="360" y="286" width="516" height="54" rx="10" fill="#ffffff" stroke="#e87ba4" stroke-width="2"/>
+    <circle cx="388" cy="313" r="14" fill="#fbe3ec" stroke="#e87ba4" stroke-width="2"/>
+    <text x="388" y="318" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">4</text>
+    <text x="414" y="309" font-size="15" font-weight="700" fill="#0b0b0b">Gestionar dispositivos</text>
+    <text x="414" y="329" font-size="13" fill="#52514e">Habla con el teclado, la pantalla, los USB…</text>
+    <rect x="730" y="299" width="132" height="28" rx="6" fill="#1e2227"/>
+    <text x="796" y="318" font-size="13.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" text-anchor="middle" fill="#e6e9ee">lsblk</text>
+
+    <rect x="360" y="348" width="516" height="54" rx="10" fill="#ffffff" stroke="#6250d6" stroke-width="2"/>
+    <circle cx="388" cy="375" r="14" fill="#e4e0f8" stroke="#6250d6" stroke-width="2"/>
+    <text x="388" y="380" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">5</text>
+    <text x="414" y="371" font-size="15" font-weight="700" fill="#0b0b0b">Usuarios y seguridad</text>
+    <text x="414" y="391" font-size="13" fill="#52514e">Decide quién entra y qué puede tocar cada uno</text>
+    <rect x="730" y="361" width="132" height="28" rx="6" fill="#1e2227"/>
+    <text x="796" y="380" font-size="13.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" text-anchor="middle" fill="#e6e9ee">whoami</text>
+
+    <rect x="360" y="410" width="516" height="54" rx="10" fill="#ffffff" stroke="#008300" stroke-width="2"/>
+    <circle cx="388" cy="437" r="14" fill="#d6efd6" stroke="#008300" stroke-width="2"/>
+    <text x="388" y="442" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">6</text>
+    <text x="414" y="433" font-size="15" font-weight="700" fill="#0b0b0b">Interfaz</text>
+    <text x="414" y="453" font-size="13" fill="#52514e">Te deja dar órdenes: con ventanas o con el terminal</text>
+    <rect x="730" y="423" width="132" height="28" rx="6" fill="#1e2227"/>
+    <text x="796" y="442" font-size="13.5" font-family="Consolas, 'DejaVu Sans Mono', monospace" text-anchor="middle" fill="#e6e9ee">bash</text>
+  </g>
+</svg>

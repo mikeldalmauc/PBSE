@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="380" viewBox="0 0 900 380" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Plantilla para dibujar los diagramas de Gantt</title>
+  <desc id="d">Tres barras vacías, una para FCFS, otra para SJF y otra para Round Robin con cuanto 2, cada una dividida en 14 unidades de tiempo numeradas del 0 al 14. Debajo de cada barra hay huecos para escribir la espera de P1, P2, P3 y P4 y la espera media.</desc>
+  <defs>
+    <pattern id="rejilla" x="200" y="0" width="45" height="40" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="40" stroke="#c9ccd1" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect x="0.5" y="0.5" width="899" height="379" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="19" font-weight="700" fill="#0b0b0b">Dibuja aquí tus diagramas de Gantt</text>
+  <text x="24" y="58" font-size="13" fill="#52514e">Cada cuadradito es 1 unidad de tiempo. Colorea o escribe dentro qué proceso usa la CPU.</text>
+
+  <g>
+    <text x="24" y="104" font-size="16" font-weight="700" fill="#0b0b0b">FCFS</text>
+    <rect x="200" y="80" width="630" height="40" fill="url(#rejilla)"/>
+    <rect x="200" y="80" width="630" height="40" fill="none" stroke="#52514e" stroke-width="2"/>
+    <g font-size="11.5" text-anchor="middle" fill="#52514e">
+      <text x="200" y="136">0</text><text x="245" y="136">1</text><text x="290" y="136">2</text><text x="335" y="136">3</text><text x="380" y="136">4</text>
+      <text x="425" y="136">5</text><text x="470" y="136">6</text><text x="515" y="136">7</text><text x="560" y="136">8</text><text x="605" y="136">9</text>
+      <text x="650" y="136">10</text><text x="695" y="136">11</text><text x="740" y="136">12</text><text x="785" y="136">13</text><text x="830" y="136">14</text>
+    </g>
+    <text x="200" y="160" font-size="13" fill="#0b0b0b" xml:space="preserve">Esperas:  P1 ______   P2 ______   P3 ______   P4 ______        Media: ________</text>
+  </g>
+
+  <g>
+    <text x="24" y="204" font-size="16" font-weight="700" fill="#0b0b0b">SJF</text>
+    <rect x="200" y="180" width="630" height="40" fill="url(#rejilla)"/>
+    <rect x="200" y="180" width="630" height="40" fill="none" stroke="#52514e" stroke-width="2"/>
+    <g font-size="11.5" text-anchor="middle" fill="#52514e">
+      <text x="200" y="236">0</text><text x="245" y="236">1</text><text x="290" y="236">2</text><text x="335" y="236">3</text><text x="380" y="236">4</text>
+      <text x="425" y="236">5</text><text x="470" y="236">6</text><text x="515" y="236">7</text><text x="560" y="236">8</text><text x="605" y="236">9</text>
+      <text x="650" y="236">10</text><text x="695" y="236">11</text><text x="740" y="236">12</text><text x="785" y="236">13</text><text x="830" y="236">14</text>
+    </g>
+    <text x="200" y="260" font-size="13" fill="#0b0b0b" xml:space="preserve">Esperas:  P1 ______   P2 ______   P3 ______   P4 ______        Media: ________</text>
+  </g>
+
+  <g>
+    <text x="24" y="304" font-size="16" font-weight="700" fill="#0b0b0b">Round Robin</text>
+    <text x="24" y="322" font-size="12.5" fill="#52514e">cuanto = 2</text>
+    <rect x="200" y="280" width="630" height="40" fill="url(#rejilla)"/>
+    <rect x="200" y="280" width="630" height="40" fill="none" stroke="#52514e" stroke-width="2"/>
+    <g font-size="11.5" text-anchor="middle" fill="#52514e">
+      <text x="200" y="336">0</text><text x="245" y="336">1</text><text x="290" y="336">2</text><text x="335" y="336">3</text><text x="380" y="336">4</text>
+      <text x="425" y="336">5</text><text x="470" y="336">6</text><text x="515" y="336">7</text><text x="560" y="336">8</text><text x="605" y="336">9</text>
+      <text x="650" y="336">10</text><text x="695" y="336">11</text><text x="740" y="336">12</text><text x="785" y="336">13</text><text x="830" y="336">14</text>
+    </g>
+    <text x="200" y="360" font-size="13" fill="#0b0b0b" xml:space="preserve">Esperas:  P1 ______   P2 ______   P3 ______   P4 ______        Media: ________</text>
+  </g>
+</svg>

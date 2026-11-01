@@ -8,692 +8,532 @@ herramientas: Ventoy 1.1.17, H4 (terminal Linux) y PowerShell para las comprobac
 duracion: 5 h (2 sesiones en el aula + descargas)
 ---
 
-# USB multiarranque con Ventoy: la navaja suiza del técnico
+# Tu navaja suiza USB con Ventoy
 
-> **Antes de empezar.** Es el paso previo a [instalar Arch Linux](../08-instalar-arch-uefi/1-guia.md): ahí
-> arrancarás desde una ISO, y aquí aprendes qué pasa entre que pulsas el botón de encendido y
-> aparece el instalador.
+> **Antes de empezar.** Necesitas un pendrive de 64 GB que se pueda borrar, un PC con Windows donde
+> seas administrador y un equipo del aula para probar. Es el paso previo a [instalar Arch Linux](../08-instalar-arch-uefi/1-guia.md).
 
-Imagina que llega a tu mesa un portátil que no arranca. Otro va lentísimo. A un tercero hay que
-instalarle Linux. Un técnico no lleva una caja llena de pinchos: lleva **uno solo** que lo
-arranca todo. Al terminar esta guía tendrás el tuyo.
+Llega a tu mesa un portátil que no arranca. Otro va lentísimo. A un tercero hay que instalarle Linux.
+Un técnico no lleva una caja llena de pinchos: lleva **uno solo** que lo arranca todo. Al terminar
+esta guía tendrás el tuyo, y sabrás qué sacar de él en cada caso.
+
+> **Analogía.** Tu pincho va a ser una **navaja suiza**. Cada fichero `.iso` que copies es una hoja:
+> una instala Windows, otra rescata ficheros, otra prueba la memoria. Ventoy es el mango que las
+> sujeta todas y te deja elegir una al encender. Volveremos a la navaja toda la guía.
 
 | | |
 |---|---|
-| 🎯 **Qué vas a conseguir** | Un pendrive que arranca una docena de sistemas y herramientas, elegidos desde un menú |
-| 🧰 **Qué necesitas** | Un pendrive de 64 GB, un PC con Windows y permisos de administrador ([apartado 0](#0-qué-necesitas)) |
+| 🎯 **Qué vas a conseguir** | Un pendrive que arranca una docena de sistemas y herramientas desde un menú |
+| 🧰 **Qué necesitas** | Un pendrive de 64 GB, un PC con Windows (administrador) y un equipo del aula para probar |
 | ⏱️ **Tiempo** | 5 horas: 2 sesiones en el aula + las descargas |
 | 📦 **Qué entregas** | La tarea «Mi navaja suiza USB» y una defensa en el aula ([Parte 4](#parte-4--entrega)) |
 
 **Tu misión, paso a paso:**
 
-- [ ] Entender cómo arranca un equipo desde un pincho y qué hace Ventoy.
-- [ ] Instalar Ventoy y comprobar las dos particiones que crea.
-- [ ] Descargar y **verificar** las ISO de la navaja.
-- [ ] Organizar el pincho con carpetas y un `ventoy.json`.
-- [ ] Arrancar tres ISO en un equipo real, registrando la clave de Secure Boot si hace falta.
+- [ ] Instalar Ventoy en el pincho y comprobar las dos particiones que crea.
+- [ ] Descargar las ISO de la web oficial, **comprobar su huella** y ordenarlas con un `ventoy.json`.
+- [ ] Arrancar tres ISO en un equipo real y pasar la pantalla azul de Secure Boot.
 - [ ] Saber qué herramienta sacar en cada situación.
 
 ## Índice
 
-- [USB multiarranque con Ventoy: la navaja suiza del técnico](#usb-multiarranque-con-ventoy-la-navaja-suiza-del-técnico)
-  - [Índice](#índice)
-  - [Parte 1 · Aprende y monta tu navaja](#parte-1--aprende-y-monta-tu-navaja)
-    - [0. Qué necesitas](#0-qué-necesitas)
-    - [1. Cómo funciona Ventoy por dentro](#1-cómo-funciona-ventoy-por-dentro)
-    - [2. Descargar Ventoy](#2-descargar-ventoy)
-    - [3. Instalar Ventoy en el pincho](#3-instalar-ventoy-en-el-pincho)
-    - [4. Las ISO de la navaja](#4-las-iso-de-la-navaja)
-    - [5. Organizar el pincho](#5-organizar-el-pincho)
-    - [6. Arrancar desde el pincho](#6-arrancar-desde-el-pincho)
-    - [7. Qué herramienta saco en cada situación](#7-qué-herramienta-saco-en-cada-situación)
-    - [8. Mantener la navaja afilada](#8-mantener-la-navaja-afilada)
-    - [9. Lo que despista](#9-lo-que-despista)
-    - [10. Problemas frecuentes](#10-problemas-frecuentes)
-  - [Parte 2 · Chuleta](#parte-2--chuleta)
-  - [Parte 3 · Practica](#parte-3--practica)
-  - [Parte 4 · Entrega](#parte-4--entrega)
+- [Parte 1 · Aprende](#parte-1--aprende)
+  - [1. Un pincho que lo arranca todo](#1-un-pincho-que-lo-arranca-todo)
+  - [2. Instalar Ventoy en el pincho](#2-instalar-ventoy-en-el-pincho)
+  - [3. Mira lo que ha hecho en el pincho](#3-mira-lo-que-ha-hecho-en-el-pincho)
+  - [4. Las ISO de la navaja](#4-las-iso-de-la-navaja)
+  - [5. Ordenar el pincho](#5-ordenar-el-pincho)
+  - [6. Secure Boot, el portero con lista](#6-secure-boot-el-portero-con-lista)
+  - [7. Arrancar desde el pincho](#7-arrancar-desde-el-pincho)
+  - [8. Qué herramienta saco en cada situación](#8-qué-herramienta-saco-en-cada-situación)
+  - [9. Para saber más](#9-para-saber-más)
+- [Parte 2 · Lo que te llevas](#parte-2--lo-que-te-llevas)
+- [Parte 3 · Practica](#parte-3--practica)
+- [Parte 4 · Entrega](#parte-4--entrega)
 
 ---
 
-## Parte 1 · Aprende y monta tu navaja
+## Parte 1 · Aprende
 
-> **Analogía.** Con las herramientas clásicas (Rufus, balenaEtcher, `dd`), un pincho es como un
-> **DVD**: grabas **una** ISO y el pincho *se convierte* en ella. Para tener cinco sistemas
-> necesitas cinco pinchos.
->
-> Ventoy convierte el pincho en una **estantería con conserje**. Tú copias los ficheros `.iso` en
-> la estantería como copiarías fotos, y al encender el equipo el conserje (el cargador de arranque
-> de Ventoy) te enseña la lista y arranca el que elijas. ¿Nueva versión de Ubuntu? Borras la ISO
-> vieja y copias la nueva. No se reinstala nada.
+### 1. Un pincho que lo arranca todo
+
+Para instalar Mint grabaste una ISO en un pincho con Rufus. Una **ISO** es un fichero que contiene un
+DVD entero, copiado tal cual. Y el pincho grabado **se convierte** en ese DVD: sólo sirve para ese
+sistema. ¿Cinco sistemas? Cinco pinchos.
 
 ![Con Rufus cada pincho es un sistema; con Ventoy un pincho guarda muchas ISO y se elige en un menú](images/dvd-vs-ventoy.svg)
 
-Por el camino vas a tocar con las manos lo que en la teoría del arranque son sólo palabras:
-**UEFI y BIOS**, **tabla de particiones**, **partición EFI**, **sistemas de archivos** y
-**Secure Boot**.
+Con Ventoy el pincho es una estantería: copias los ficheros `.iso` como copiarías fotos y, al
+encender, Ventoy te enseña la lista y arranca el que elijas. ¿Ubuntu nuevo? Borras la ISO vieja y
+copias la nueva. No se graba nada. Esto es lo que pasa entre que pulsas el botón y sale el instalador:
 
-### 0. Qué necesitas
+![Seis pasos desde que pulsas encender hasta que arranca la ISO, con el control de Secure Boot en medio](images/camino-arranque.svg)
 
-| Qué | Detalle |
-|---|---|
-| 💾 **Pendrive** | **64 GB recomendado** (32 GB vale con la lista reducida del [apartado 4.2](#42-cuánto-ocupa-todo)). Mejor USB 3: con USB 2 arrancar Windows tarda una eternidad |
-| 🪟 **Equipo Windows** | Con permisos de administrador: Ventoy tiene que escribir en el disco a bajo nivel |
-| 📥 **Descargas** | Unos 30 GB de ISO. Si el profesor las ha dejado en la carpeta compartida del aula, cópialas de ahí |
-| 🖥️ **Un equipo donde probar** | Uno del aula que te indique el profesor, con permiso para abrir su menú de arranque |
+El **firmware** (la **UEFI**, la «BIOS» de hoy) es el primer programa que se enciende. Con la tecla
+del **menú de arranque** le dices «arranca desde el pincho». Ahí encuentra el **cargador de arranque**
+de Ventoy, que te enseña el menú de ISO. Antes de dejarlo pasar, **Secure Boot** comprueba que el
+cargador está firmado: lo verás en el apartado 6.
+
+**🧪 Pruébalo.** Busca en tu PC la ISO de Mint de la máquina virtual (o descárgala de
+https://linuxmint.com/download.php). Clic derecho → **Propiedades**. 👀 Un solo fichero `.iso` de
+unos 2,8 GB: un DVD entero metido en un fichero. Ese es el que vas a copiar al pincho.
+
+**📌 En una frase:** con Ventoy el pincho no se convierte en un sistema: guarda muchas ISO y eliges
+una en un menú al encender.
+
+### 2. Instalar Ventoy en el pincho
+
+Ventoy se instala con un programa de Windows, `Ventoy2Disk.exe`. Mira sus cinco zonas:
+
+![Esquema de la ventana de Ventoy2Disk con las cinco zonas que tienes que mirar](images/ventoy2disk-ventana.svg)
+
+1. Descarga **`ventoy-1.1.17-windows.zip`** (o la más nueva) de https://www.ventoy.net/en/download.html.
+   **Sólo de ahí**: una copia de otra web podría venir modificada, y algunos antivirus lo marcan como
+   sospechoso porque escribe en el disco a bajo nivel.
+2. Clic derecho → **Extraer todo**. Abre **`Ventoy2Disk.exe`**, acepta el aviso de administrador y
+   pon **Language → Español**.
+3. En **Opción**, deja marcado **Soporte Secure Boot** y el estilo de partición en **MBR**. Nada más.
+4. **Desconecta cualquier disco externo** y copia lo que tengas en el pendrive: se va a borrar entero.
+5. En **Dispositivo** elige tu pendrive. Fíjate en la **capacidad**: así no lo confundes con otro disco.
+6. Pulsa **Instalar**. Ventoy avisa **dos veces** de que borrará todo. Lee la letra y el tamaño antes
+   de aceptar la segunda.
+
+> [!IMPORTANT]
+> **«¿MBR? ¡Pero si en el curso todo es GPT!»** No hay contradicción. La **tabla de particiones**
+> (MBR o GPT) es de **cada disco**, no del ordenador. Tu portátil puede tener su disco en GPT y
+> arrancar desde un pincho MBR, que además arranca en equipos nuevos y viejos. Pregunta de examen.
+
+Cuando salga una versión nueva de Ventoy volverás a esta ventana. Fíjate en qué botón pulsas:
 
 > [!WARNING]
-> **Instalar Ventoy borra el pendrive entero.** Copia antes lo que tengas en él. Y comprueba
-> **tres veces** qué disco eliges: Ventoy te enseña los discos USB, pero si hay un disco externo
-> conectado también aparecerá. **Desconéctalo antes de empezar.**
+> **Instalar ≠ Actualizar.** **Instalar** formatea el pincho y borra las ISO. **Actualizar** sólo
+> cambia la partición `VTOYEFI` y **no toca** tus ficheros. Para una versión nueva: **Actualizar**.
 
-### 1. Cómo funciona Ventoy por dentro
+**🧪 Pruébalo.** Al terminar, mira la columna **Ventoy en dispositivo**. 👀 Pone `1.1.17` y un
+escudo: el soporte de Secure Boot está activo. Si pone `—`, no se ha instalado.
 
-#### 1.1 Del botón al instalador
+**📌 En una frase:** Ventoy2Disk → Opción: Secure Boot y MBR → el pincho por su capacidad →
+Instalar (dos avisos); a partir de ahí, siempre Actualizar.
 
-Antes de tocar nada, mira el camino completo que recorre el equipo cuando arranca desde tu
-pincho. Cada caja es un apartado de esta guía:
+### 3. Mira lo que ha hecho en el pincho
 
-![Seis pasos desde que pulsas encender hasta que arranca la ISO, con el control de Secure Boot](images/camino-arranque.svg)
-
-#### 1.2 Las dos particiones del pincho
-
-Cuando instalas Ventoy, el pincho queda así:
+No te fíes: **mira**. Clic derecho en Inicio → **Administración de discos**. El pincho tiene ahora
+**dos particiones**:
 
 ![El pincho tiene una tabla MBR, una partición grande exFAT llamada Ventoy y una pequeña de 32 MB llamada VTOYEFI](images/particiones-ventoy.svg)
 
-- La **partición 2 (`VTOYEFI`)** es la que busca el firmware al arrancar. En un equipo UEFI hace
-  de **partición EFI** (la misma idea que la partición de 512 MB de tu MV de Mint); en un equipo
-  antiguo con BIOS, el arranque empieza en el **MBR** del pincho y salta a ella.
-- La **partición 1 (`Ventoy`)** es un almacén normal. Windows la ve como una unidad USB cualquiera
-  y puedes guardar en ella también documentos, drivers o instaladores de programas.
+- **`Ventoy`**, la grande: un almacén normal. Windows la ve como una unidad USB cualquiera. Aquí
+  copias las ISO (y lo que quieras: drivers, programas, documentos).
+- **`VTOYEFI`**, la pequeña de 32 MB: el cargador de arranque, lo que busca el firmware al encender.
+  Hace de **partición EFI**, como la de 512 MB de tu MV de Mint. Windows no le da letra: no la ves
+  en el Explorador.
 
-> [!NOTE]
-> Cuando eliges una ISO en el menú, Ventoy **no la descomprime ni la copia**: la abre
-> directamente y le hace creer al sistema que arranca que está leyendo un DVD. Por eso basta con
-> copiar el fichero.
+> [!WARNING]
+> **«Windows me pide formatear el pincho».** Es `VTOYEFI`, que Windows no entiende del todo.
+> **Cancela** siempre. Si la formateas, Ventoy deja de arrancar (se arregla con **Actualizar**).
 
-#### 1.3 Por qué exFAT y no FAT32
-
-**FAT32 no admite ficheros de 4 GB o más.** Y mira cuánto ocupan algunas ISO:
+¿Y por qué la grande está en **exFAT** y no en FAT32, como un pincho normal? Porque el **sistema de
+archivos** FAT32 no admite ficheros de 4 GB o más, y mira cuánto ocupan algunas ISO. exFAT no tiene
+ese límite y lo leen Windows, macOS y Linux:
 
 ![Gráfico de barras: Windows 11, Ubuntu y Kali superan el límite de 4 GB de FAT32](images/fat32-vs-exfat.svg)
 
-En FAT32 ni siquiera se podrían copiar. **exFAT** no tiene ese límite y lo leen Windows, macOS y
-Linux.
-
 > [!TIP]
-> **Para comparar.** Herramientas como Rufus en modo FAT32 tienen que **partir** el fichero
-> `install.wim` de Windows para que quepa. Con Ventoy ese problema no existe: la ISO viaja
-> entera.
-
-#### 1.4 Secure Boot en dos minutos
-
-**Secure Boot** es una función de UEFI que sólo deja arrancar programas **firmados** con una
-clave en la que el firmware confía. Los fabricantes traen de serie las claves de **Microsoft**, y
-Microsoft firma también un pequeño programa llamado **shim** que usan casi todas las
-distribuciones Linux para arrancar con Secure Boot activo.
-
-![Secure Boot como portero: Windows y Linux con shim pasan; Ventoy necesita registrar su clave MOK la primera vez](images/secure-boot-portero.svg)
-
-> **Analogía.** Secure Boot es el **portero de una discoteca con lista**. La lista de fábrica sólo
-> tiene a Microsoft y a quien Microsoft avala. Ventoy no está en la lista, así que la primera vez
-> tienes que **apuntarlo tú**: eso es la pantalla azul de *MOK* del
-> [apartado 6.2](#62-primer-arranque-con-secure-boot-registrar-la-clave). MOK significa *Machine
-> Owner Key*: la clave que añade el dueño de la máquina.
-
-> [!IMPORTANT]
-> **Lo que tienes que saber en 2026.** Los certificados de Microsoft de 2011 que firmaban esos
-> shim caducaron en junio de 2026 y se están sustituyendo por los de 2023. Por eso **Ventoy 1.1.14
-> cambió su clave**. En la práctica:
+> **🧪 Pruébalo.** PowerShell como administrador (clic derecho en Inicio → **Terminal (administrador)**):
 >
-> - Usa **Ventoy 1.1.14 o posterior** (en esta guía, la 1.1.17).
-> - Un pincho con un Ventoy antiguo hay que **actualizarlo**, y el equipo te pedirá registrar la
->   clave nueva **aunque ya tuviera la vieja**.
+> ```powershell
+> Get-Disk | Where-Object BusType -eq 'USB'     # el pincho y su número de disco
+> Get-Partition -DiskNumber 1                   # cambia 1 por el número que te ha salido
+> Get-Volume | Where-Object FileSystemLabel -in 'Ventoy','VTOYEFI'
+> ```
+>
+> 👀 Dos particiones: una grande y una de 32 MB; `Ventoy` con sistema de archivos `exFAT`. Guarda
+> esta salida: va en la entrega.
 
-> [!CAUTION]
-> **La otra cara.** Una vez registrada su clave, Ventoy por defecto **se salta** Secure Boot para
-> las ISO que arranca: por eso arrancan también las que no están firmadas (Arch, Memtest86+…). Es
-> cómodo, pero es un agujero: en un equipo con la clave de Ventoy registrada, cualquiera con un
-> pincho Ventoy arranca lo que quiera. Lo comentaremos en clase.
-
-**🧠 ¿Lo has pillado?**
-
-1. ¿En qué partición del pincho copias las ISO? ¿Y cuál busca el firmware al arrancar?
-2. Tienes un pincho FAT32 con 40 GB libres. ¿Por qué no puedes copiar la ISO de Windows 11?
+**🧠 ¿Lo has pillado?** ¿En qué partición copias las ISO y cuál busca el firmware al arrancar? Y
+tienes un pincho FAT32 con 40 GB libres: ¿por qué no puedes copiar la ISO de Windows 11?
 
 <details>
 <summary>Ver respuestas</summary>
 
-1. Las ISO van en la partición grande, **`Ventoy`** (exFAT). El firmware busca la pequeña,
-   **`VTOYEFI`**, que hace de partición EFI.
-2. Porque el problema no es el espacio libre sino el **tamaño de cada fichero**: FAT32 no admite
-   ficheros de 4 GB o más, y la ISO de Windows 11 pasa de 7 GB.
+1. Las ISO van en la grande, **`Ventoy`**. El firmware busca la pequeña, **`VTOYEFI`**.
+2. No es el espacio libre sino el **tamaño de cada fichero**: FAT32 no admite 4 GB o más y la ISO
+   de Windows 11 pasa de 7 GB.
 
 </details>
 
-### 2. Descargar Ventoy
-
-1. Entra en la web oficial, https://www.ventoy.net/en/download.html, o en la página de versiones
-   de GitHub, https://github.com/ventoy/Ventoy/releases.
-2. Descarga **`ventoy-1.1.17-windows.zip`** (o la versión más reciente que aparezca).
-3. **Descomprime la carpeta entera** (clic derecho → *Extraer todo*). No lo ejecutes desde dentro
-   del zip: el programa necesita los ficheros que lo acompañan.
-
-> [!TIP]
-> **Buena costumbre profesional.** Comprueba la huella SHA-256 del zip con la que publica la
-> página de descarga, igual que hiciste con la ISO de Mint:
->
-> ```powershell
-> Get-FileHash .\ventoy-1.1.17-windows.zip -Algorithm SHA256
-> ```
->
-> Algunos antivirus marcan Ventoy como sospechoso porque escribe en el disco a bajo nivel, que es
-> justo lo que hace el malware. Por eso importa descargarlo **sólo** de la web oficial o de su
-> GitHub y verificar la huella.
-
-### 3. Instalar Ventoy en el pincho
-
-Abre **`Ventoy2Disk.exe`** y acepta el aviso de administrador. Si sale en inglés: menú
-**Language → Español**.
-
-#### 3.1 Conoce la ventana
-
-![Esquema de la ventana de Ventoy2Disk con las cinco zonas que tienes que mirar](images/ventoy2disk-ventana.svg)
-
-#### 3.2 Opciones antes de instalar
-
-Antes de pulsar nada, revisa el menú **Opción** (zona 1):
-
-| Opción | Qué elegir | Por qué |
-|---|---|---|
-| **Soporte Secure Boot** (*Secure Boot Support*) | ✅ **Marcada** | Sin ella, en los equipos con Secure Boot activo tendrías que entrar en la BIOS a desactivarlo |
-| **Estilo de partición** (*Partition Style*) | **MBR** (el predeterminado) | Un pincho MBR arranca en UEFI y en BIOS; algunos equipos viejos no arrancan pinchos GPT |
-| **Configuración de partición** (*Partition Configuration*) | Sin espacio reservado | Sirve para dejar hueco al final del pincho para otra partición. No lo necesitas |
-
-> [!IMPORTANT]
-> **«¿MBR? ¡Pero si en el curso todo es GPT!»** No hay contradicción: la tabla de particiones es
-> una propiedad **de cada disco**, no del ordenador. Tu portátil puede tener el disco interno en
-> GPT y arrancar sin problema desde un pincho MBR. Es una buena pregunta de examen.
-
-#### 3.3 Instalar
-
-1. En **Dispositivo** (zona 2), elige tu pendrive. Fíjate en la **capacidad**: es la forma de
-   distinguirlo de otros discos.
-2. Pulsa **Instalar** (zona 4). Ventoy avisa **dos veces** de que borrará todo. Lee la letra y el
-   tamaño antes de aceptar la segunda.
-3. Al terminar, la columna **Ventoy en dispositivo** (zona 3) muestra la versión, y aparece un
-   escudo si el soporte de Secure Boot está activo.
-
-> [!WARNING]
-> **Instalar ≠ Actualizar.** **Instalar** formatea el pincho y borra las ISO. **Actualizar** sólo
-> cambia la partición `VTOYEFI` y **no toca** tus ficheros. Cuando salga una versión nueva de
-> Ventoy, el botón que quieres es **Actualizar**.
-
-#### 3.4 Comprobar lo que ha hecho
-
-No te fíes: **mira**. En Windows, clic derecho en Inicio → **Administración de discos**, o en
-PowerShell como administrador:
-
-```powershell
-Get-Disk | Where-Object BusType -eq 'USB'
-Get-Partition -DiskNumber N          # N = el número de disco del pincho
-Get-Volume | Where-Object FileSystemLabel -in 'Ventoy','VTOYEFI'
-```
-
-Tienes que ver **dos particiones**: una grande exFAT llamada `Ventoy` y una de 32 MB llamada
-`VTOYEFI`. El Explorador de Windows sólo te enseña la primera; la segunda no tiene letra, igual
-que la partición EFI de tu disco interno.
-
-> [!TIP]
-> Si conectas el pincho a tu MV de Mint (menú **Dispositivos → USB** de VirtualBox), también lo
-> puedes ver con la herramienta que ya conoces:
->
-> ```bash
-> lsblk -f /dev/sdb      # o la letra que tenga el pincho
-> ```
+**📌 En una frase:** `Ventoy` (exFAT, grande) guarda las ISO; `VTOYEFI` (32 MB) arranca; exFAT
+porque FAT32 no admite ficheros de 4 GB.
 
 ### 4. Las ISO de la navaja
 
-#### 4.1 La lista
-
-Estas son las «hojas» de tu navaja, agrupadas por lo que resuelven:
+Estas son las hojas de tu navaja, agrupadas por lo que resuelven. Descárgalas **sólo de la web
+oficial** (versiones de septiembre de 2026):
 
 ![Las ISO agrupadas en cuatro hojas: instalar, rescatar, discos y hardware, seguridad y red](images/navaja-suiza.svg)
 
-Versiones vigentes en septiembre de 2026.
+**🔵 Instalar un sistema**
+- **Windows 11**: instalar o reinstalar Windows. https://www.microsoft.com/es-es/software-download/windows11 → *Descargar imagen de disco (ISO)*
+- **Ubuntu**: instalar Ubuntu o probar si un portátil va bien con Linux. https://ubuntu.com/download/desktop
+- **Linux Mint**: la distribución del curso; revive equipos viejos. https://linuxmint.com/download.php
+- **Arch Linux**: la [instalación de Arch](../08-instalar-arch-uefi/1-guia.md). Sale una ISO nueva cada mes. https://archlinux.org/download/
 
-> [!WARNING]
-> **Descarga siempre desde la web oficial.** Una ISO de una web de descargas cualquiera puede
-> venir modificada, y es un sistema que vas a arrancar **con todos los permisos sobre el equipo**.
+**🟠 Rescatar un equipo que no arranca**
+- **Hiren's BootCD PE**: un Windows que arranca desde el pincho con decenas de utilidades: explorador, antivirus, recuperar ficheros. https://www.hirensbootcd.org/download/
+- **SystemRescue**: lo mismo en Linux: reparar GRUB, montar discos, `testdisk`. https://www.system-rescue.org/Download/
 
-**🔵 Instalar sistemas**
-
-| ISO | Para qué | Fichero (versión actual) | Tamaño | Web oficial |
-|---|---|---|---|---|
-| **Windows 11** | Instalar o reinstalar Windows | ISO multiedición x64, versión 25H2 | ~7 GB | https://www.microsoft.com/es-es/software-download/windows11 → *Descargar imagen de disco (ISO)* |
-| **Ubuntu** | Instalar Ubuntu o probar si el hardware funciona con Linux | `ubuntu-26.04.1-desktop-amd64.iso` | 6,0 GB | https://ubuntu.com/download/desktop |
-| **Linux Mint** | La distribución del curso; ideal para revivir equipos viejos | `linuxmint-22.3-xfce-64bit.iso` | 2,8 GB | https://linuxmint.com/download.php |
-| **Arch Linux** | La [instalación de Arch](../08-instalar-arch-uefi/1-guia.md) | `archlinux-2026.09.01-x86_64.iso` (sale una nueva cada mes) | 1,5 GB | https://archlinux.org/download/ |
-
-**🟠 Rescatar y reparar**
-
-| ISO | Para qué | Fichero (versión actual) | Tamaño | Web oficial |
-|---|---|---|---|---|
-| **Hiren's BootCD PE** | Un Windows 11 que arranca desde el pincho con decenas de utilidades: explorador, antivirus, recuperación de ficheros, diagnóstico de discos, edición del registro | `HBCD_PE_x64.iso` (v1.0.8) | ~3,1 GB | https://www.hirensbootcd.org/download/ |
-| **SystemRescue** | El equivalente en Linux: reparar GRUB, montar discos, `chroot`, `fsck`, `testdisk` | `systemrescue-13.02-amd64.iso` | ~1,3 GB | https://www.system-rescue.org/Download/ |
-
-**🟢 Clonar, particionar, diagnosticar, borrar**
-
-| ISO | Para qué | Fichero (versión actual) | Tamaño | Web oficial |
-|---|---|---|---|---|
-| **Clonezilla** | Clonar un disco entero o guardar una imagen del sistema. En modo texto, muy fiable | `clonezilla-live-3.3.3-37-amd64.iso` | ~0,5 GB | https://clonezilla.org/downloads.php |
-| **Rescuezilla** | Lo mismo que Clonezilla pero con ventanas; compatible con sus imágenes | `rescuezilla-2.6.2-64bit.resolute.iso` | ~1,3 GB | https://rescuezilla.com/download |
-| **GParted Live** | Crear, mover y redimensionar particiones de forma gráfica | `gparted-live-1.8.1-6-amd64.iso` | ~0,6 GB | https://gparted.org/download.php |
-| **Memtest86+** | Probar la memoria RAM durante horas | `mt86plus_8.10_x86_64.iso` (viene en un **.zip**: descomprímelo) | < 50 MB | https://www.memtest.org/ |
-| **ShredOS** | Borrar un disco de forma segura con `nwipe` antes de vender o reciclar el equipo | la `.iso` de x86-64 más reciente | < 200 MB | https://github.com/PartialVolume/shredos.x86_64/releases |
+**🟢 Discos y hardware**
+- **Clonezilla**: clonar un disco entero o guardar una imagen. En modo texto, muy fiable. https://clonezilla.org/downloads.php
+- **Rescuezilla**: Clonezilla con ventanas. https://rescuezilla.com/download
+- **GParted Live**: crear, mover y cambiar de tamaño particiones. https://gparted.org/download.php
+- **Memtest86+**: probar la memoria RAM durante horas. Viene en un `.zip`: descomprímelo y copia la `.iso`. https://www.memtest.org/
+- **ShredOS**: borrar un disco para siempre antes de vender o reciclar. https://github.com/PartialVolume/shredos.x86_64/releases
 
 **🟣 Seguridad y red**
-
-| ISO | Para qué | Fichero (versión actual) | Tamaño | Web oficial |
-|---|---|---|---|---|
-| **Kali Linux** (*Live*) | Auditoría de seguridad. La usarás en el ciclo; aquí, para conocerla | la ISO **Live** más reciente (2026.x) | ~4,5 GB | https://www.kali.org/get-kali/ → *Live Boot* |
-| **netboot.xyz** | Una ISO diminuta que descarga por red el instalador de decenas de sistemas | `netboot.xyz.iso` | < 5 MB | https://netboot.xyz/downloads/ |
+- **Kali Linux** (*Live*): auditoría de seguridad. La usarás en el ciclo. https://www.kali.org/get-kali/ → *Live Boot*
+- **netboot.xyz**: una ISO diminuta que descarga por red el instalador de decenas de sistemas. https://netboot.xyz/downloads/
 
 > [!CAUTION]
-> **Kali y las herramientas de contraseñas no son juguetes.** Kali trae herramientas de ataque y
-> Hiren's trae utilidades para quitar la contraseña de una cuenta local de Windows. Úsalas **sólo
-> en equipos tuyos o en los que te hayan autorizado por escrito**. Entrar en un sistema ajeno sin
-> permiso es delito en España (artículo 197 bis del Código Penal), aunque «sólo estuvieras
-> mirando». En el aula: sólo en tus máquinas virtuales.
+> **Kali y Hiren's no son juguetes.** Traen herramientas de ataque y para quitar contraseñas de
+> Windows. Úsalas **sólo en equipos tuyos o con permiso por escrito**: entrar en un sistema ajeno es
+> delito (artículo 197 bis del Código Penal). En el aula, sólo en tus máquinas virtuales.
+
+**Cuánto ocupa todo.** Las trece ISO suman **unos 29 GB** (las gordas: Windows 11, 7 GB; Ubuntu,
+6 GB; Kali, 4,5 GB; Hiren's, 3,1 GB). Hace falta un pincho de **64 GB**. En uno de 32 GB cabe la
+lista corta, unos 15 GB: Windows 11, Mint, Hiren's, SystemRescue, Clonezilla, GParted y Memtest86+.
 
 > [!NOTE]
-> **¿Y Windows 10?** Perdió el soporte gratuito en octubre de 2025. Si te lo piden para un equipo
-> concreto, añádelo, pero no forma parte de la navaja estándar.
+> **¿Por qué un pincho «de 32 GB» tiene 29,8?** El fabricante cuenta 1 GB = 1 000 000 000 bytes.
+> Windows cuenta 1 GB = 1 073 741 824 bytes (aunque ponga «GB»). 32 000 000 000 ÷ 1 073 741 824
+> ≈ **29,8**. Nadie te ha timado: son los mismos bytes contados con otra unidad.
 
-#### 4.2 Cuánto ocupa todo
+**Comprueba cada descarga.** Cada web oficial publica la **huella SHA-256** de sus ISO: un número
+largo que sólo sale de ese fichero exacto; si cambia un solo bit, cambia la huella entera. Es el
+**precinto** del bote: si tu número no coincide con el de la web, alguien ha abierto el bote o la
+descarga se ha roto. Y aquí importa más que nunca: una ISO arranca **antes** que Windows, con acceso
+total a todos los discos. Una ISO con la huella mal no se arranca nunca.
 
-| Conjunto | Tamaño aproximado | Pincho |
-|---|---|---|
-| Todo lo del apartado 4.1 | ~29 GB | **64 GB** (un pincho «de 32 GB» tiene unos 29,8 GB útiles: no cabe con margen) |
-| Lista reducida: Windows 11, Mint, Hiren's, SystemRescue, Clonezilla, GParted, Memtest86+ | ~15 GB | 32 GB |
+> [!TIP]
+> **🧪 Pruébalo.** En PowerShell, dentro de la carpeta donde descargas:
+>
+> ```powershell
+> Get-FileHash .\linuxmint-22.3-xfce-64bit.iso -Algorithm SHA256                           # una ISO
+> Get-ChildItem *.iso | Get-FileHash -Algorithm SHA256 | Format-Table Hash, Path -AutoSize   # todas
+> ```
+>
+> 👀 Una ristra de 64 letras y números. Compárala con la de la web (en Mint, el fichero
+> `sha256sum.txt` junto a la descarga): tiene que coincidir **entera**. Guarda la salida de la
+> segunda orden: va en la entrega.
 
-**¿Por qué un pincho de 32 GB no tiene 32 GB?** Porque el fabricante y Windows cuentan distinto:
+**📌 En una frase:** trece ISO en cuatro grupos (instalar, rescatar, discos, seguridad), siempre de
+la web oficial y siempre con la huella SHA-256 comprobada.
 
-| Quién | Cómo cuenta | 1 «giga» son… |
-|---|---|---|
-| El fabricante | **GB decimales** | 1 000 000 000 bytes |
-| Windows | **GiB binarios** (aunque ponga «GB») | 1 073 741 824 bytes |
+### 5. Ordenar el pincho
 
-32 000 000 000 ÷ 1 073 741 824 ≈ **29,8**. No te han timado: es la misma cantidad de bytes contada
-con otra unidad. Es lo mismo que pasaba con tu disco de 25 GB, que salía como 26 843 MB en el
-instalador de Mint, pero al revés.
-
-#### 4.3 Verificar cada descarga
-
-Cada web oficial publica la huella SHA-256 de sus ISO (un fichero `SHA256SUMS`, `sha256sum.txt` o
-la propia cifra junto al botón de descarga). Compruébala **antes** de copiar la ISO al pincho:
-
-```powershell
-Get-FileHash .\archlinux-2026.09.01-x86_64.iso -Algorithm SHA256
-```
-
-Para verificar todas las ISO de una carpeta de una vez y copiar el resultado al entregable:
-
-```powershell
-Get-ChildItem *.iso | Get-FileHash -Algorithm SHA256 | Format-Table Hash, Path -AutoSize
-```
-
-> [!IMPORTANT]
-> **Por qué importa aquí más que nunca.** Un programa normal se ejecuta dentro de Windows, con sus
-> permisos y su antivirus vigilando. Una ISO de arranque se ejecuta **antes** que Windows, con
-> acceso total a todos los discos. Es la puerta de atrás perfecta, y la huella es la única manera
-> de saber que el fichero es el que publicó el autor.
-
-> **Analogía.** La huella SHA-256 es como el **precinto** de un bote de comida: si el número que
-> calculas no coincide con el de la web, alguien ha abierto el bote (o la descarga se ha roto).
-> Basta con que cambie un solo bit para que la huella sea completamente distinta.
-
-### 5. Organizar el pincho
-
-#### 5.1 Carpetas
-
-Ventoy busca ISO **en todo el pincho**, también dentro de carpetas. Aprovéchalo para que el menú
+Ventoy busca ISO en **todo el pincho**, también dentro de carpetas. Aprovéchalo para que el menú
 tenga orden:
 
 ```text
 Ventoy (E:)
 ├── ISO/
-│   ├── 1-instalar/
-│   │   ├── Win11_25H2_Spanish_x64.iso
-│   │   ├── ubuntu-26.04.1-desktop-amd64.iso
-│   │   ├── linuxmint-22.3-xfce-64bit.iso
-│   │   └── archlinux-2026.09.01-x86_64.iso
-│   ├── 2-rescate/
-│   │   ├── HBCD_PE_x64.iso
-│   │   └── systemrescue-13.02-amd64.iso
-│   ├── 3-discos/
-│   │   ├── clonezilla-live-3.3.3-37-amd64.iso
-│   │   ├── rescuezilla-2.6.2-64bit.resolute.iso
-│   │   ├── gparted-live-1.8.1-6-amd64.iso
-│   │   ├── mt86plus_8.10_x86_64.iso
-│   │   └── shredos-...-x86-64.iso
-│   └── 4-seguridad-y-red/
-│       ├── kali-linux-2026.x-live-amd64.iso
-│       └── netboot.xyz.iso
-├── ventoy/
-│   └── ventoy.json          ← configuración (apartado 5.2)
-└── LEEME.txt                ← qué hay, qué versión y cuándo lo actualizaste
+│   ├── 1-instalar/            ← Windows 11, Ubuntu, Mint, Arch
+│   ├── 2-rescate/             ← Hiren's, SystemRescue
+│   ├── 3-discos/              ← Clonezilla, Rescuezilla, GParted, Memtest86+, ShredOS
+│   └── 4-seguridad-y-red/     ← Kali, netboot.xyz
+├── ventoy/ventoy.json         ← la configuración
+└── LEEME.txt                  ← qué hay, qué versión y cuándo lo revisaste
 ```
 
-Normas:
+Dos normas: carpetas **sin espacios ni tildes**, y las ISO con su **nombre original**, que ya dice
+la versión. No hay botón de «grabar»: las ISO se **copian** como cualquier fichero.
 
-- Nombres de carpeta **sin espacios ni tildes** (como en la guía de Markdown).
-- Las ISO con su **nombre original**, que ya dice la versión.
+**El fichero `ventoy.json`.** Ventoy funciona sin configurar nada. Pero con este fichero de texto le
+cambias dos cosas: que el menú se abra en **vista de árbol** con tus carpetas (`"1"`; `"0"` es la
+lista plana) y que enseñe un nombre claro en vez del nombre del fichero (`menu_alias`; la ruta
+empieza en la raíz del pincho y lleva barras `/`, aunque estés en Windows). Escríbelo en VS Code:
+
+```json
+{
+    "control": [ { "VTOY_DEFAULT_MENU_MODE": "1" } ],
+    "menu_alias": [
+        { "image": "/ISO/1-instalar/linuxmint-22.3-xfce-64bit.iso", "alias": "Linux Mint 22.3 Xfce (la del curso)" },
+        { "image": "/ISO/2-rescate/HBCD_PE_x64.iso", "alias": "Hiren's BootCD PE (rescate Windows)" },
+        { "image": "/ISO/3-discos/mt86plus_8.10_x86_64.iso", "alias": "Memtest86+ (probar la RAM)" }
+    ]
+}
+```
+
+> [!TIP]
+> **¿Te da error?** Es JSON: nada de comentarios, y cuidado con las comas. VS Code subraya en rojo lo
+> que está mal. El fallo típico es una coma después del **último** elemento de una lista.
+
+**🧪 Pruébalo.** Crea las carpetas, copia la ISO de Mint a `ISO/1-instalar/`, guarda el `ventoy.json`
+de arriba en `ventoy/` y escribe tu `LEEME.txt`. 👀 En VS Code, el JSON sin subrayados rojos. En el
+Explorador, el pincho con sus carpetas y la ISO dentro, sin grabar nada.
 
 > [!WARNING]
 > **Espera a que termine la copia y usa «Expulsar»** antes de sacar el pincho. Con ficheros de
 > varios GB, sacarlo a lo bruto deja ISO a medias que luego «no arrancan sin motivo».
 
-#### 5.2 El fichero ventoy.json
+**📌 En una frase:** carpetas sin espacios, ISO con su nombre original, un `ventoy.json` con árbol
+y alias, un `LEEME.txt`, y Expulsar antes de sacar el pincho.
 
-Ventoy funciona sin configurar nada. Pero con un fichero `/ventoy/ventoy.json` puedes cambiar su
-comportamiento con **plugins**. Hay dos formas de escribirlo:
+### 6. Secure Boot, el portero con lista
 
-| Forma | Cómo | Ojo con |
-|---|---|---|
-| ✍️ **A mano** | En VS Code | Es JSON puro: cuidado con las comas y **sin comentarios** (JSON no los admite) |
-| 🖱️ **Con VentoyPlugson.exe** | Viene en la misma carpeta que Ventoy2Disk. Abre un formulario en el navegador y escribe el fichero por ti | Guarda una copia `ventoy_backup.json` |
+**Secure Boot** es una función de la UEFI que sólo deja arrancar programas **firmados** con una
+clave de confianza. De fábrica, la única clave de la lista es la de **Microsoft**. Microsoft firma
+Windows y también un programita, *shim*, con el que arrancan casi todos los Linux.
 
-Un ejemplo razonable para empezar:
+![Secure Boot como portero: Windows y Linux con shim pasan; Ventoy necesita registrar su clave MOK la primera vez](images/secure-boot-portero.svg)
 
-```json
-{
-    "control": [
-        { "VTOY_DEFAULT_MENU_MODE": "1" }
-    ],
-    "menu_alias": [
-        { "image": "/ISO/1-instalar/linuxmint-22.3-xfce-64bit.iso",
-          "alias": "Linux Mint 22.3 Xfce (la del curso)" },
-        { "image": "/ISO/2-rescate/HBCD_PE_x64.iso",
-          "alias": "Hiren's BootCD PE (rescate Windows)" },
-        { "image": "/ISO/3-discos/mt86plus_8.10_x86_64.iso",
-          "alias": "Memtest86+ (probar la RAM)" }
-    ]
-}
-```
+> **Analogía.** Secure Boot es el **portero de una discoteca con lista**. En la lista están
+> Microsoft y quien Microsoft avala. Ventoy no está, así que la primera vez tienes que **apuntarlo
+> tú**. Esa clave que añade el dueño de la máquina se llama **MOK** (*Machine Owner Key*), y la
+> apuntas en una pantalla azul que verás en el apartado 7. Se hace **una vez por equipo**.
 
-| Clave | Qué hace |
+Desde Ventoy 1.1.14 la clave es otra: los certificados antiguos de Microsoft caducaron en 2026. Si
+actualizas un pincho viejo, el equipo te pedirá la clave nueva aunque ya tuviera la vieja.
+
+> [!CAUTION]
+> **La otra cara.** Una vez registrada su clave, Ventoy **se salta** Secure Boot para las ISO que
+> arranca: por eso arrancan también las que no están firmadas (Arch, Memtest86+…). Es cómodo, pero
+> es un agujero: en ese equipo, cualquiera con un pincho Ventoy arranca lo que quiera. Lo
+> comentaremos en clase, y es la pregunta 4 de la entrega.
+
+**🧪 Pruébalo.** En Windows, pulsa `Win` + `R`, escribe `msinfo32` y acepta. 👀 Busca las filas
+**Modo de BIOS** (tiene que poner *UEFI*) y **Estado de arranque seguro**: *Activado* o *Desactivado*.
+Así sabes si ese equipo te va a enseñar la pantalla azul la primera vez.
+
+**🧠 ¿Lo has pillado?** ¿Por qué Windows arranca con Secure Boot sin que registres nada? ¿Y qué es
+la clave MOK?
+
+<details>
+<summary>Ver respuestas</summary>
+
+1. Porque está firmado por Microsoft, que ya está en la lista de fábrica.
+2. La clave que el **dueño de la máquina** añade a la lista de Secure Boot. Ventoy te pide registrar
+   la suya la primera vez.
+
+</details>
+
+**📌 En una frase:** Secure Boot sólo deja arrancar lo firmado; Ventoy no está en la lista y la
+primera vez registras su clave MOK, una vez por equipo.
+
+### 7. Arrancar desde el pincho
+
+**La tecla del menú de arranque.** No cambies el orden de arranque en la UEFI: casi todos los equipos
+tienen un menú de arranque de un solo uso. Pulsa la tecla **repetidamente** nada más encender, como
+quien llama a un ascensor con prisa.
+
+| Fabricante | Tecla |
 |---|---|
-| `VTOY_DEFAULT_MENU_MODE` | `1` abre el menú en **vista de árbol**, con las carpetas del apartado anterior. `0` es la lista plana. También se cambia al vuelo con `F3` |
-| `menu_alias` | Sustituye el nombre del fichero por un texto descriptivo en el menú. La ruta empieza en la raíz del pincho, **con barras `/`** aunque estés en Windows |
-
-> [!TIP]
-> **¿Te da error el JSON?** Ábrelo en VS Code: las comas que faltan o sobran salen subrayadas en
-> rojo. Un error típico es dejar una coma después del **último** elemento de una lista.
-
-> [!NOTE]
-> **Lo que Ventoy ya hace por ti con Windows 11.** Por defecto tiene activada la opción
-> `VTOY_WIN11_BYPASS_CHECK`, que salta las comprobaciones de TPM, Secure Boot, RAM y procesador
-> del instalador de Windows 11. Útil en el aula con equipos antiguos; recuerda que un Windows 11
-> instalado así en hardware no compatible **no tiene garantizadas las actualizaciones**.
-
-#### 5.3 Persistencia: un Linux que recuerda (ampliación)
-
-> **Ampliación.** Un Linux *live* arrancado desde el pincho lo olvida todo al apagar. Con
-> **persistencia**, los cambios (programas instalados, ficheros, ajustes) se guardan en un fichero
-> `.dat` dentro del pincho. Es como darle al sistema *live* una **mochila**.
-
-1. Crea el fichero de persistencia **desde tu MV de Mint**, con el paquete de Linux de Ventoy
-   (`ventoy-1.1.17-linux.tar.gz`), y déjalo en la carpeta compartida con Windows:
-
-   ```bash
-   tar xf ventoy-1.1.17-linux.tar.gz
-   cd ventoy-1.1.17
-   sudo ./CreatePersistentImg.sh -s 4096 -l casper-rw -o mint-persistencia.dat
-   ```
-
-   `-s` es el tamaño en MB y `-l` la etiqueta, que **depende de la distribución**: `casper-rw`
-   para Ubuntu y Mint, `persistence` para Kali, `vtoycow` para Arch.
-2. Copia `mint-persistencia.dat` al pincho, en una carpeta `/persistence/`.
-3. Añade al `ventoy.json`, al mismo nivel que `menu_alias`:
-
-   ```json
-   "persistence": [
-       { "image": "/ISO/1-instalar/linuxmint-22.3-xfce-64bit.iso",
-         "backend": "/persistence/mint-persistencia.dat" }
-   ]
-   ```
-
-Al arrancar Mint, Ventoy preguntará si quieres usar la persistencia o arrancar limpio.
-
-### 6. Arrancar desde el pincho
-
-#### 6.1 El menú de arranque del equipo
-
-No hace falta cambiar el orden de arranque en la BIOS. Casi todos los equipos tienen un **menú de
-arranque de un solo uso** al que se entra pulsando una tecla nada más encender:
-
-| Fabricante | Tecla habitual |
-|---|---|
-| Dell, Lenovo, Acer, Gigabyte, Toshiba | `F12` (en Acer hay que activarlo antes en la BIOS) |
+| Dell, Lenovo, Acer, Gigabyte, Toshiba | `F12` (en Acer, actívalo antes en la UEFI) |
 | HP | `F9` (o `Esc` y luego `F9`) |
 | ASUS | `F8` en sobremesa, `Esc` en portátil |
 | MSI, ASRock | `F11` |
 
-> [!TIP]
-> **Pulsa la tecla repetidamente** desde que enciendes, como quien llama a un ascensor con prisa.
+El pincho puede salir **dos veces**: con `UEFI:` delante y sin ella. Elige la de **UEFI**, el modo
+del curso.
 
 > [!WARNING]
-> **Si Windows arranca igualmente**, no lo has apagado de verdad: el apagado normal de Windows
-> 10/11 es en realidad una hibernación y se salta el firmware. Apágalo con **Mayús + Apagar** o,
-> desde Windows, *Configuración → Sistema → Recuperación → Inicio avanzado → Usar un
-> dispositivo*.
+> **Si Windows arranca igualmente**, no estaba apagado de verdad: el apagado normal de Windows 10/11
+> es una hibernación y se salta el menú. Apaga con **Mayús + Apagar**.
 
-En el menú puede aparecer el pincho **dos veces**: una con `UEFI:` delante y otra sin ella. Elige
-**la de UEFI**, que es el modo en que trabajamos todo el curso.
-
-#### 6.2 Primer arranque con Secure Boot: registrar la clave
-
-Si el equipo tiene Secure Boot activo, la **primera vez** no aparece Ventoy sino una pantalla azul
-en inglés, sin ratón. Es el portero preguntando por el nuevo de la lista. Se maneja con las
-**flechas** y **Enter**:
+**La primera vez: la pantalla azul.** Con Secure Boot activo, la primera vez no sale Ventoy sino una
+pantalla azul en inglés, sin ratón: el portero preguntando por el nuevo de la lista. Flechas y **Enter**:
 
 ![Las seis pantallas de MokManager para registrar la clave de Ventoy, en orden](images/pasos-mok.svg)
 
-1. Sale un aviso **`Verification failed: (0x1A) Security Violation`**. Es lo esperado. Pulsa
-   **OK**.
-2. Pulsa una tecla para entrar en **Perform MOK management**. **Hazlo rápido**: hay una cuenta
-   atrás de unos segundos y, si se acaba, el equipo sigue arrancando sin registrar nada.
+1. `Verification failed: (0x1A) Security Violation`. Es lo esperado. Pulsa **OK**.
+2. Pulsa una tecla para entrar en **Perform MOK management**. **Rápido**: hay una cuenta atrás de
+   unos segundos y, si se acaba, el equipo arranca sin registrar nada.
 3. Elige **Enroll key from disk**.
-4. Selecciona el volumen **`VTOYEFI`** y dentro el fichero **`ENROLL_THIS_KEY_IN_MOKMANAGER.cer`**.
+4. Entra en **`VTOYEFI`** y elige **`ENROLL_THIS_KEY_IN_MOKMANAGER.cer`**.
 5. **Continue** → **Yes**.
-6. **Reboot**. Vuelve a abrir el menú de arranque y elige otra vez el pincho. Ahora sí sale Ventoy.
+6. **Reboot**. Vuelve a abrir el menú de arranque y elige el pincho. Ahora sí sale Ventoy.
 
 > [!NOTE]
-> Esto se hace **una vez por equipo**. Si en lugar de la pantalla azul aparece un error y el
-> equipo no deja registrar claves, la salida es desactivar Secure Boot en la BIOS para la práctica
-> (y volver a activarlo al terminar).
+> Si en vez de la pantalla azul sale un error y el equipo no deja registrar claves, desactiva Secure
+> Boot en la UEFI para la práctica y vuelve a activarlo al terminar.
 
-#### 6.3 El menú de Ventoy
+**El menú de Ventoy.** Verás tus carpetas (o la lista de ISO). Cuatro teclas:
 
-Verás la lista de ISO (o el árbol de carpetas). Se maneja con el teclado:
-
-| Tecla | Qué hace |
-|---|---|
-| `Enter` | Abre el submenú de la ISO; elige **Boot in normal mode** |
-| `F3` | Cambia entre vista de lista y de árbol |
-| `F5` | Herramientas: comprobar la ISO, ajustes temporales (por ejemplo, desactivar el salto de comprobaciones de Windows 11 para un arranque) |
-| `F6` | Menú personalizado, si lo has creado |
-| `Esc` | Volver atrás |
-
-En el submenú de cada ISO hay otros modos para cuando el normal falla:
-
-| Modo | Atajo | Cuándo |
-|---|---|---|
-| **GRUB2** | `Ctrl` + `R` | Algunas distribuciones Linux que no arrancan en modo normal |
-| **WIMBOOT** | `Ctrl` + `W` | Imágenes de Windows |
-| **MEMDISK** | `Ctrl` + `D` | Carga la ISO entera en RAM; para imágenes pequeñas como Memtest86+ en equipos BIOS |
-
-**🎯 Prueba mínima de la práctica**: arranca tres ISO y llega hasta su pantalla principal, **sin
-instalar nada**:
-
-1. **Linux Mint** hasta el escritorio *live*.
-2. **Hiren's BootCD PE** hasta su escritorio.
-3. **El instalador de Windows 11** hasta la pantalla de idioma. Ahí, **apaga**.
+```text
+Enter    abre la ISO: elige «Boot in normal mode»
+F3       cambia entre lista y árbol de carpetas
+Ctrl+R   si un Linux no arranca en modo normal: modo GRUB2
+Esc      volver atrás
+```
 
 > [!CAUTION]
-> **En un equipo real no pulses «Instalar»** en ningún instalador ni «Start» en ShredOS o
-> Clonezilla: borrarías el disco del equipo del aula. Las instalaciones de verdad se hacen en
-> máquinas virtuales.
+> **En un equipo real no pulses «Instalar»** en ningún instalador, ni «Start» en ShredOS o Clonezilla:
+> borrarías el disco del equipo del aula. Ventoy sólo **arranca** el instalador; lo que borra discos
+> es lo que haces después. Las instalaciones de verdad, en máquinas virtuales.
 
-### 7. Qué herramienta saco en cada situación
+**🧪 Pruébalo: las tres pruebas de la entrega.** Arranca tres ISO hasta su pantalla principal, **sin
+instalar nada**, y haz una foto de cada una con el móvil:
 
-Tener las ISO no te hace técnico: lo que te hace técnico es saber **qué hoja de la navaja abrir**.
+1. **Linux Mint** hasta el escritorio *live* (un sistema que funciona desde el pincho sin instalarse).
+   👀 El escritorio de Mint con el icono *Install Linux Mint*.
+2. **Hiren's BootCD PE** hasta su escritorio. 👀 Un escritorio tipo Windows lleno de utilidades.
+3. **El instalador de Windows 11** hasta la pantalla de idioma. 👀 *Configuración de Windows*. Ahí, **apaga**.
 
-| Situación | Herramienta | Qué harías |
-|---|---|---|
-| Windows no arranca y hay que salvar las fotos del usuario | **Hiren's** | Arrancar, abrir el explorador, copiar la carpeta del usuario a un disco externo |
-| El portátil va lentísimo y quieres pasar el sistema a un SSD nuevo | **Clonezilla** o **Rescuezilla** | Clonar disco a disco (*device-device*) |
-| Pantallazos azules al azar, sin patrón | **Memtest86+** | Dejarlo varias pasadas; un solo error ya significa RAM defectuosa |
-| Quieres instalar Linux junto a Windows y no hay espacio libre | **GParted Live** | Reducir la partición de Windows (desfragmentada y sin hibernar antes) |
-| Tras instalar Windows, desaparece el GRUB de Arch | **SystemRescue** o **Arch** *live* | Montar las particiones, `arch-chroot` y reinstalar GRUB |
-| Vas a donar un equipo con disco mecánico | **ShredOS** | `nwipe` con una pasada; con discos SSD, mejor el borrado seguro del fabricante (un SSD reparte las escrituras y sobrescribir no garantiza nada) |
-| Ordenador de 2012 que ya no mueve Windows | **Linux Mint** | Probar en *live*; si va fino, instalar |
-| Quieres saber si la wifi de un portátil funciona en Linux antes de instalar | **Ubuntu** *live* | Arrancar y probar sin tocar el disco |
-| Hay que hacer una copia completa del sistema antes de tocar nada | **Clonezilla** | Guardar una imagen del disco en un disco externo (*device-image*) |
+**Si algo falla:**
+
+- El pincho no sale en el menú de arranque → otro puerto USB (en sobremesa, uno trasero) y activa *USB Boot* en la UEFI.
+- Ventoy2Disk no ve el pincho → ábrelo como administrador.
+- Pantalla azul `Verification failed` → es Secure Boot: los seis pasos de arriba.
+- Después de actualizar Ventoy vuelve a pedir la clave → normal, la clave es nueva: regístrala.
+- Una ISO se queda en negro o da error → comprueba su huella SHA-256; si es correcta, prueba `Ctrl` + `R`.
+
+**🧠 ¿Lo has pillado?** Arrancas un HP y aparece Windows en lugar del menú de arranque: ¿qué dos
+cosas pudieron fallar? Y en la pantalla azul se acaba la cuenta atrás antes de que pulses: ¿qué pasa?
+
+<details>
+<summary>Ver respuestas</summary>
+
+1. No pulsaste `F9` a tiempo, o Windows estaba **hibernado**: apaga con **Mayús + Apagar**.
+2. El equipo arranca sin registrar nada. Reinicia, vuelve al menú de arranque y pulsa antes.
+
+</details>
+
+**📌 En una frase:** tecla del menú de arranque → `UEFI: pincho` → (la primera vez) los seis pasos
+de la pantalla azul → menú de Ventoy → Enter → *Boot in normal mode*.
+
+### 8. Qué herramienta saco en cada situación
+
+Tener las ISO no te hace técnico. Lo que te hace técnico es saber **qué hoja de la navaja abrir**:
+
+- **Windows no arranca y hay que salvar las fotos del usuario** → **Hiren's** → arrancar, abrir el explorador y copiar la carpeta del usuario a un disco externo.
+- **El portátil va lentísimo y quieres pasar el sistema a un SSD nuevo** → **Clonezilla** o **Rescuezilla** → clonar disco a disco (*device-device*).
+- **Pantallazos azules al azar, sin patrón** → **Memtest86+** → dejarlo varias pasadas; un solo error ya es RAM defectuosa.
+- **Quieres instalar Linux junto a Windows y no hay espacio libre** → **GParted Live** → reducir la partición de Windows (antes, desfragmentar y quitar la hibernación).
+- **Tras instalar Windows, desaparece el GRUB de Arch** → **SystemRescue** o **Arch** *live* → montar las particiones, `arch-chroot` y reinstalar GRUB.
+- **Vas a donar un equipo con disco mecánico** → **ShredOS** → `nwipe`, una pasada. Con un SSD, mejor el borrado seguro del fabricante.
+- **Ordenador de 2012 que ya no mueve Windows** → **Linux Mint** → probar en *live*; si va fino, instalar.
+- **¿Funciona la wifi de este portátil en Linux?** → **Ubuntu** *live* → arrancar y probar sin tocar el disco.
+- **Copia completa del sistema antes de tocar nada** → **Clonezilla** → guardar una imagen del disco en un disco externo (*device-image*).
 
 > [!TIP]
 > **Regla del técnico:** antes de cualquier operación que pueda borrar algo (particionar, reparar,
-> reinstalar), **primero una copia** con Clonezilla o Hiren's. Cinco minutos de copia te ahorran
-> un disgusto enorme.
+> reinstalar), **primero una copia** con Clonezilla o Hiren's. Cinco minutos de copia te ahorran un
+> disgusto enorme.
 
-### 8. Mantener la navaja afilada
+**🧪 Pruébalo.** Tapa con la mano lo que va después de cada primera flecha y, situación por situación,
+di en voz alta qué hoja sacas y qué harías. 👀 Si fallas más de dos, vuelve al apartado 4: en la
+entrega tendrás tres situaciones nuevas, y en la defensa, tres minutos.
 
-- 🔁 **Actualizar una ISO**: borras la vieja, copias la nueva y cambias el alias en
-  `ventoy.json` si lo tenía. Nada más.
-- ⬆️ **Actualizar Ventoy**: descargas la versión nueva, abres Ventoy2Disk y pulsas
-  **Actualizar** (no Instalar). Las ISO se quedan donde estaban.
-- 📝 **`LEEME.txt` en la raíz del pincho**, con qué hay, qué versión y cuándo lo revisaste. Un
-  técnico que abre tu pincho dentro de un año tiene que saber de un vistazo si el Windows es el de
-  2026 o el de 2031.
-- 📅 **Revisión trimestral**: Arch publica una ISO al mes y Kali una por trimestre. Un instalador
-  viejo funciona, pero luego descarga cientos de actualizaciones.
+**📌 En una frase:** Hiren's para rescatar Windows, SystemRescue para Linux, Clonezilla para copiar
+discos, GParted para particiones, Memtest86+ para la RAM, ShredOS para borrar, Mint y Ubuntu *live*
+para probar.
 
-### 9. Lo que despista
+### 9. Para saber más
 
-| Lo que pasa | Lo que significa |
-|---|---|
-| «Windows me dice que formatee el pincho» | Es la partición `VTOYEFI`, que Windows no entiende del todo. **Cancela**. Si la formateas, Ventoy deja de arrancar (se arregla con *Actualizar*) |
-| «He copiado una ISO de 7 GB y no ha dado error» | Correcto: es exFAT. Si alguna vez da error de «archivo demasiado grande», alguien ha reformateado la partición a FAT32 |
-| «He copiado Memtest86+ y no sale en el menú» | Viene dentro de un `.zip`. Ventoy no ve los zip: descomprímelo y copia la `.iso` |
-| «Pendrive MBR, pero el curso dice UEFI + GPT» | El pincho y el disco del equipo son discos distintos, cada uno con su tabla. Ver [apartado 3.2](#32-opciones-antes-de-instalar) |
-| «¿Dónde está el botón de grabar?» | No hay: las ISO no se «graban», se **copian**, como cualquier fichero |
-| «Ventoy me ha borrado el disco del equipo» | No: Ventoy sólo **arranca** el instalador. Lo que pasa después (particionar, formatear) es cosa de cada sistema, y ahí es donde se borran discos |
+Lo que no hace falta para la práctica ni para el examen.
 
-### 10. Problemas frecuentes
+**Mantener la navaja afilada.** Para cambiar una ISO: borras la vieja, copias la nueva y cambias el
+alias si lo tenía. Arch saca una ISO al mes y Kali una por trimestre: revisa el pincho cada
+trimestre y apúntalo en `LEEME.txt`. Para Ventoy, siempre el botón **Actualizar**.
 
-| Síntoma | Causa habitual | Solución |
-|---|---|---|
-| El pincho no aparece en el menú de arranque del equipo | Arranque desde USB desactivado en la BIOS, o puerto USB 3 que el firmware no ve | Probar otro puerto (mejor uno trasero en sobremesa); activar *USB Boot* en la BIOS |
-| Pantalla azul `Verification failed (0x1A)` | Secure Boot activo y clave de Ventoy sin registrar | Registrar la clave ([apartado 6.2](#62-primer-arranque-con-secure-boot-registrar-la-clave)) |
-| Después de actualizar Ventoy vuelve a pedir la clave | Desde la 1.1.14 la clave es distinta | Normal: registrar la nueva una vez |
-| Sale un error en lugar de la pantalla de MOK | El firmware no acepta la gestión de claves | Desactivar Secure Boot en la BIOS para la práctica |
-| Una ISO concreta se queda en negro o da error al arrancar | Descarga corrupta, o modo de arranque no compatible | Comprobar SHA-256; si está bien, probar el modo **GRUB2** (`Ctrl` + `R`) o **MEMDISK** (`Ctrl` + `D`) |
-| Una ISO no aparece en el menú | Está comprimida (`.zip`, `.7z`) o tiene una extensión rara | Descomprimirla; Ventoy lista `.iso`, `.wim`, `.img`, `.vhd(x)` y `.efi` |
-| Windows arranca sin enseñar el menú de arranque | Inicio rápido de Windows (hibernación) | Apagar con **Mayús + Apagar** o usar *Inicio avanzado* |
-| Ventoy2Disk no ve el pincho | Es un disco que Windows identifica como fijo, o falta permiso de administrador | Ejecutar como administrador; *Opción → Mostrar todos los dispositivos* **con muchísimo cuidado** |
-| El pincho «de 64 GB» se llena con 20 GB o las ISO salen corruptas al copiar | Pendrive falsificado que miente sobre su capacidad | Comprobarlo con H2testw (Windows) o `f3` (Linux) y tirarlo |
-| Mint *live* arranca pero la persistencia no guarda nada | Etiqueta del `.dat` incorrecta | Recrearlo con `-l casper-rw` (Kali: `persistence`) |
+**Persistencia: un Linux que recuerda.** Un Linux *live* lo olvida todo al apagar. Con un fichero
+`.dat` de **persistencia** en el pincho, Mint guarda lo que instales y cambies, como una mochila. Se
+crea desde tu MV con el script `CreatePersistentImg.sh` del paquete de Ventoy para Linux (`-s` tamaño
+en MB, `-l casper-rw` para Mint y Ubuntu) y se enlaza con la ISO en `ventoy.json`, sección
+`persistence`. Al arrancar, Ventoy pregunta si quieres usarla. Detalles: documentación de Ventoy
+(menú *Document* de ventoy.net, plugin *Persistence*).
+
+**Otras cosas que verás.** Ventoy salta por defecto las comprobaciones de TPM y procesador del
+instalador de Windows 11 (`VTOY_WIN11_BYPASS_CHECK`); un Windows instalado así en un equipo viejo
+no tiene garantizadas las actualizaciones. Y si un pincho «de 64 GB» se llena con 20, es falso:
+compruébalo con H2testw.
 
 ---
 
-## Parte 2 · Chuleta
+## Parte 2 · Lo que te llevas
 
-**La práctica en 8 pasos**
+**🎒 Si sólo te quedas con diez cosas:**
 
-1. Descargar `ventoy-1.1.17-windows.zip`, verificar SHA-256 y descomprimir.
-2. Desconectar otros discos externos.
-3. `Ventoy2Disk.exe` → **Opción**: Secure Boot ✅, estilo **MBR**.
-4. Elegir el pincho **por su capacidad** → **Instalar** (acepta dos avisos).
-5. Comprobar las dos particiones (`Ventoy` y `VTOYEFI`) en Administración de discos.
-6. Descargar las ISO **de la web oficial**, verificar SHA-256 y copiarlas en carpetas.
-7. Escribir `ventoy/ventoy.json` y el `LEEME.txt`.
-8. Arrancar en un equipo real con la tecla del menú de arranque → registrar MOK si lo pide.
+1. Una **ISO** es un DVD entero en un fichero. Con Rufus el pincho **se convierte** en esa ISO; con
+   Ventoy el pincho **guarda** muchas y eliges una en el menú.
+2. El **firmware** (UEFI) es lo primero que se enciende; con la tecla del **menú de arranque** le
+   dices que arranque desde el pincho.
+3. Ventoy2Disk: **Opción** → Secure Boot ✅ y **MBR**; el pincho **por su capacidad**; **Instalar**
+   borra todo (dos avisos).
+4. **Instalar ≠ Actualizar**: Actualizar cambia sólo `VTOYEFI` y no toca tus ISO.
+5. Dos particiones: **`Ventoy`** (exFAT, grande, las ISO) y **`VTOYEFI`** (32 MB, el cargador de
+   arranque, hace de **partición EFI**).
+6. **exFAT** porque **FAT32** no admite ficheros de 4 GB o más. Si Windows pide formatear `VTOYEFI`, **cancela**.
+7. La **tabla de particiones** (MBR o GPT) es de cada disco: un pincho MBR arranca en un equipo con disco GPT.
+8. Las ISO, **sólo de la web oficial** y con la **huella SHA-256** comprobada (`Get-FileHash`). Un
+   pincho «de 32 GB» tiene 29,8 porque Windows cuenta 1 GB = 1 073 741 824 bytes.
+9. **Secure Boot** sólo deja arrancar lo firmado. Ventoy no está en la lista: la primera vez registras
+   su clave **MOK** en la pantalla azul (seis pasos, una vez por equipo).
+10. Antes de cualquier cosa que pueda borrar: **primero una copia** (Clonezilla o Hiren's).
 
-**Teclas**
+**Chuleta**
 
-| Dónde | Tecla | Qué hace |
-|---|---|---|
-| Al encender | `F12` / `F9` / `F11` / `F8` / `Esc` | Menú de arranque (según fabricante) |
-| Menú de Ventoy | `Enter` → *Boot in normal mode* | Arrancar la ISO |
-| Menú de Ventoy | `F3` | Lista ↔ árbol |
-| Menú de Ventoy | `F5` | Herramientas |
-| Submenú de la ISO | `Ctrl` + `R` / `W` / `D` | Modo GRUB2 / WIMBOOT / MEMDISK |
-| MokManager | flechas + `Enter` | Navegar (no hay ratón) |
+```text
+# La práctica en 8 pasos
+1  ventoy-1.1.17-windows.zip → Get-FileHash → Extraer todo
+2  desconecta otros discos externos
+3  Ventoy2Disk.exe → Opción: Secure Boot ✅, MBR
+4  Dispositivo: el pincho (por capacidad) → Instalar → dos avisos
+5  Administración de discos: Ventoy (exFAT) + VTOYEFI (32 MB)
+6  ISO de la web oficial → Get-FileHash → carpetas ISO/1-instalar…
+7  ventoy/ventoy.json (árbol + alias) y LEEME.txt → Expulsar
+8  tecla del menú de arranque → UEFI: pincho → pantalla azul MOK (1.ª vez) → Ventoy
 
-**Comprobaciones en PowerShell (como administrador)**
-
-```powershell
-Get-Disk | Where-Object BusType -eq 'USB'                             # ver el pincho
-Get-Partition -DiskNumber N                                           # sus particiones
-Get-ChildItem *.iso | Get-FileHash -Algorithm SHA256 | Format-Table Hash, Path -AutoSize
+# Teclas
+F12 / F9 / F11 / F8 / Esc     menú de arranque, según el fabricante
+Enter → Boot in normal mode   arrancar la ISO elegida
+F3                            lista ↔ árbol        Ctrl+R   modo GRUB2 si un Linux no arranca
+flechas + Enter               pantalla azul de MOK (no hay ratón)
 ```
-
-**Las tres ideas clave**
-
-| Idea | En una frase |
-|---|---|
-| exFAT | Porque FAT32 no admite ficheros de 4 GB o más |
-| MBR en el pincho | La tabla de particiones es de cada disco, no del ordenador |
-| MOK | La clave del dueño de la máquina: apunta a Ventoy en la lista de Secure Boot |
 
 ---
 
 ## Parte 3 · Practica
 
-Antes de la práctica real, comprueba que lo tienes claro. **No cuentan para nota**: son para ti.
+> [!TIP]
+> Esto **no cuenta para nota**: es para comprobar que lo tienes claro antes de la práctica real y de
+> la defensa. Lo que puntúa está en la [Parte 4](#parte-4--entrega).
 
 **Calentamiento**
 
-1. Te dan un pincho de 64 GB. ¿Cuántos GB verá Windows, aproximadamente? Haz la cuenta.
-2. Sale Ventoy 1.1.18 y quieres ponerla en tu pincho sin perder las ISO. ¿Qué botón pulsas?
-3. Arrancas un HP y aparece Windows en lugar del menú de arranque. ¿Qué dos cosas pudieron fallar?
-4. Has calculado la SHA-256 de una ISO y no coincide con la de la web. ¿Qué haces?
+1. Te dan un pincho de 128 GB. ¿Cuántos GB verá Windows, aproximadamente? Haz la cuenta.
+2. Un compañero dice que Ventoy le ha borrado el disco del portátil al «probar» el instalador de
+   Windows. ¿Es posible? ¿Qué ha pasado de verdad?
+3. ¿Por qué Linux Mint arranca con Secure Boot activo sin registrar nada, y Ventoy no?
 
 <details>
 <summary>Ver respuestas</summary>
 
-1. 64 000 000 000 ÷ 1 073 741 824 ≈ **59,6 GB**.
-2. **Actualizar**. Instalar formatearía el pincho y borraría las ISO.
-3. No pulsaste la tecla correcta a tiempo (en HP es `F9`, o `Esc` y luego `F9`), o Windows estaba
-   **hibernado** en lugar de apagado: hay que apagar con **Mayús + Apagar**.
-4. **No la uses.** Bórrala y vuelve a descargarla de la web oficial. Si vuelve a no coincidir, no
-   la arranques nunca.
+1. 128 000 000 000 ÷ 1 073 741 824 ≈ **119,2 GB**.
+2. Ventoy sólo **arranca** el instalador. El disco se borra si dentro del instalador se pulsa
+   «Instalar» y se eligen particiones. Por eso en el aula: hasta la pantalla de idioma y apagar.
+3. Mint arranca con *shim*, firmado por Microsoft, que está en la lista de fábrica. Ventoy va firmado
+   con su propia clave, que no está: hay que registrarla (MOK).
 
 </details>
 
-**Situaciones de práctica** (como las que te pondrá el profesor en la entrega): para cada una,
-¿qué herramienta sacas y qué pasos das?
+**Situaciones** (como las tres que te pondrá el profesor en la entrega): ¿qué hoja sacas y qué pasos das?
 
-1. Un compañero ha borrado sin querer la partición de Linux de su portátil y ahora el equipo
-   arranca directamente en una pantalla negra con `grub rescue>`.
+1. Un compañero ha borrado sin querer la partición de Linux de su portátil y ahora el equipo arranca
+   en una pantalla negra con `grub rescue>`.
 2. Una empresa te pide revisar 10 ordenadores que se van a reciclar: no puede quedar ni un dato.
    Tienen discos mecánicos.
-3. Un cliente dice que su ordenador «se reinicia solo cuando juega», y ya ha cambiado la fuente de
-   alimentación.
+3. Un cliente dice que su ordenador «se reinicia solo cuando juega», y ya ha cambiado la fuente.
 
 <details>
 <summary>Ver respuestas</summary>
 
-1. **SystemRescue** (o la ISO de Arch *live*): arrancar, montar las particiones que queden,
-   `chroot` y reinstalar GRUB. Si la partición está borrada del todo, `testdisk` (incluido en
-   SystemRescue) puede intentar recuperarla. **Antes de tocar nada**, imagen del disco con
-   Clonezilla.
-2. **ShredOS** con `nwipe`, una pasada por disco, y apuntar el número de serie de cada disco
-   borrado como justificante.
-3. **Memtest86+** varias pasadas para descartar la RAM. Si la RAM está bien, seguiría por la
-   temperatura (con Hiren's se pueden ver los sensores).
+1. **SystemRescue** (o la ISO de Arch *live*): arrancar, montar las particiones que queden, `chroot` y
+   reinstalar GRUB. Si la partición está borrada del todo, `testdisk` puede intentar recuperarla.
+   **Antes de tocar nada**, imagen del disco con Clonezilla.
+2. **ShredOS** con `nwipe`, una pasada por disco, y apuntar el número de serie de cada disco borrado
+   como justificante.
+3. **Memtest86+** varias pasadas para descartar la RAM. Si está bien, seguiría por la temperatura
+   (con Hiren's se ven los sensores).
 
 </details>
 
@@ -716,8 +556,8 @@ Entrega un **PDF exportado desde Markdown** (como en la
    SHA-256** (la salida de `Get-FileHash` en texto, no en captura).
 4. Tu **`ventoy.json`** con al menos `VTOY_DEFAULT_MENU_MODE` y tres `menu_alias`.
 5. **Prueba de arranque** en un equipo real: foto con el móvil del menú de Ventoy y de las tres
-   pantallas del [apartado 6.3](#63-el-menú-de-ventoy). Indica el modelo del equipo, la tecla del
-   menú de arranque y si tuviste que registrar la clave MOK.
+   pantallas del [apartado 7](#7-arrancar-desde-el-pincho). Indica el modelo del equipo, la tecla
+   del menú de arranque y si tuviste que registrar la clave MOK.
 6. **Cuatro preguntas**, con tus palabras:
    1. ¿Por qué Ventoy formatea en exFAT y no en FAT32?
    2. ¿Por qué un pincho con tabla MBR puede arrancar en un equipo UEFI con disco GPT?
@@ -725,7 +565,7 @@ Entrega un **PDF exportado desde Markdown** (como en la
    4. Ventoy se salta Secure Boot una vez registrada su clave. ¿Qué riesgo supone eso en los
       equipos de una empresa?
 7. **Tres situaciones** que te dará el profesor en Moodle, del estilo de las del
-   [apartado 7](#7-qué-herramienta-saco-en-cada-situación): qué herramienta sacas y qué pasos
+   [apartado 8](#8-qué-herramienta-saco-en-cada-situación): qué herramienta sacas y qué pasos
    darías.
 8. **Incidencias**: qué se torció y cómo lo resolviste.
 
@@ -747,7 +587,7 @@ Entrega un **PDF exportado desde Markdown** (como en la
 > aula en menos de **tres minutos**, desde el equipo apagado. Practica antes: ¿sabes la tecla del
 > menú de arranque de los equipos del aula?
 
-**Antes de entregar, comprueba:**
+**✅ Antes de entregar, comprueba:**
 
 - [ ] La ficha explica por qué la capacidad real es menor que la anunciada.
 - [ ] Se ven las **dos** particiones y explicas cada una.

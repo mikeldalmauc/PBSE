@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="500" viewBox="0 0 860 500" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El menú Win + X</title>
+  <desc id="d">Esquema del menú que aparece con Win + X o con clic derecho en Inicio. Contiene, entre otros, Visor de eventos, Administrador de dispositivos, Administración de discos, Administración de equipos, Terminal (Administrador), Administrador de tareas, Configuración y Ejecutar, que se explican en esta guía.</desc>
+  <rect x="0.5" y="0.5" width="859" height="499" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Win + X: el menú del técnico</text>
+
+  <!-- menú -->
+  <rect x="40" y="58" width="300" height="428" rx="8" fill="#f3f3f3" stroke="#c9ccd1"/>
+  <g font-size="13.5" fill="#0b0b0b">
+    <text x="60" y="84">Aplicaciones instaladas</text>
+    <text x="60" y="106">Opciones de energía</text>
+    <text x="60" y="128" font-weight="700">Visor de eventos</text>
+    <text x="60" y="150">Sistema</text>
+    <text x="60" y="172" font-weight="700">Administrador de dispositivos</text>
+    <text x="60" y="194">Conexiones de red</text>
+    <text x="60" y="216" font-weight="700">Administración de discos</text>
+    <text x="60" y="238" font-weight="700">Administración de equipos</text>
+    <text x="60" y="260">Terminal</text>
+    <text x="60" y="282" font-weight="700">Terminal (Administrador)</text>
+    <text x="60" y="314" font-weight="700">Administrador de tareas</text>
+    <text x="60" y="336" font-weight="700">Configuración</text>
+    <text x="60" y="358">Explorador de archivos</text>
+    <text x="60" y="380">Buscar</text>
+    <text x="60" y="402" font-weight="700">Ejecutar</text>
+    <text x="60" y="434">Apagar o cerrar sesión</text>
+    <text x="60" y="456">Escritorio</text>
+  </g>
+  <text x="320" y="434" font-size="13" text-anchor="end" fill="#52514e">›</text>
+  <g stroke="#c9ccd1"><line x1="50" y1="294" x2="330" y2="294"/><line x1="50" y1="414" x2="330" y2="414"/></g>
+
+  <!-- marcas -->
+  <g>
+    <circle cx="316" cy="124" r="9" fill="#2a78d6"/><circle cx="316" cy="168" r="9" fill="#eb6834"/>
+    <circle cx="316" cy="212" r="9" fill="#1baf7a"/><circle cx="316" cy="234" r="9" fill="#eda100"/>
+    <circle cx="316" cy="278" r="9" fill="#e87ba4"/><circle cx="316" cy="310" r="9" fill="#008300"/>
+    <circle cx="316" cy="332" r="9" fill="#6250d6"/><circle cx="316" cy="398" r="9" fill="#8a8f98"/>
+  </g>
+
+  <!-- explicación -->
+  <text x="380" y="84" font-size="14" fill="#0b0b0b">Ábrelo con <tspan font-weight="700">Win + X</tspan> o con <tspan font-weight="700">clic derecho en Inicio</tspan>.</text>
+  <text x="380" y="106" font-size="14" fill="#0b0b0b">Las opciones en negrita las verás en esta guía:</text>
+  <g font-size="13.5" fill="#0b0b0b">
+    <circle cx="390" cy="139" r="7" fill="#2a78d6"/><text x="406" y="144">Visor de eventos · apartado 8</text>
+    <circle cx="390" cy="169" r="7" fill="#eb6834"/><text x="406" y="174">Administrador de dispositivos · apartado 4</text>
+    <circle cx="390" cy="199" r="7" fill="#1baf7a"/><text x="406" y="204">Administración de discos · apartado 5</text>
+    <circle cx="390" cy="229" r="7" fill="#eda100"/><text x="406" y="234">Administración de equipos · apartado 10</text>
+    <circle cx="390" cy="259" r="7" fill="#e87ba4"/><text x="406" y="264">Terminal (Administrador) · PowerShell con permisos</text>
+    <circle cx="390" cy="289" r="7" fill="#008300"/><text x="406" y="294">Administrador de tareas · apartado 3</text>
+    <circle cx="390" cy="319" r="7" fill="#6250d6"/><text x="406" y="324">Configuración · apartado 2</text>
+    <circle cx="390" cy="349" r="7" fill="#8a8f98"/><text x="406" y="354">Ejecutar (Win + R) · la chuleta de la Parte 2</text>
+  </g>
+  <rect x="380" y="384" width="456" height="72" rx="10" fill="#fdefcc" stroke="#eda100"/>
+  <text x="396" y="410" font-size="13.5" font-weight="700" fill="#0b0b0b">Truco</text>
+  <text x="396" y="430" font-size="13" fill="#0b0b0b">Con el menú abierto, pulsa la letra subrayada de cada opción</text>
+  <text x="396" y="446" font-size="13" fill="#0b0b0b">y se abre sin usar el ratón.</text>
+</svg>

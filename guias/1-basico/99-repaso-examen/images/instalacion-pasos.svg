@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Instalar Linux Mint en 8 pasos</title>
+  <desc id="d">Ocho tarjetas en orden. 1, descarga la ISO de Linux Mint Xfce de 64 bits: un DVD de instalación metido en un fichero. 2, crea la máquina virtual con 4 GB de RAM, 2 CPU y 25 GB de disco; trampa: marca Habilitar EFI y desmarca la instalación desatendida. 3, arranca la sesión live: Linux funciona desde la ISO sin tocar el disco; sirve para probar y para rescatar equipos. 4, instala con doble clic en Install Linux Mint; trampa: tipo de instalación Más opciones, nunca Borrar disco. 5, particiona: EFI, raíz, swap y home; trampa: el cargador de arranque va en /dev/sda, el disco entero. 6, crea tu usuario alumno en el equipo mint-smr, con contraseña al iniciar sesión. 7, reinicia; si vuelve el instalador, quita la ISO. 8, comprueba en el terminal con lsblk -f, df -h, free -h y swapon --show.</desc>
+  <defs>
+    <marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#52514e"/></marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="899" height="419" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Instalar Linux Mint en 8 pasos</text>
+  <text x="24" y="60" font-size="14" fill="#52514e">Los recuadros naranjas son las trampas: ahí es donde falla casi todo el mundo.</text>
+
+  <!-- flechas -->
+  <g stroke="#52514e" stroke-width="2" marker-end="url(#f)" fill="none">
+    <line x1="226" y1="146" x2="239" y2="146"/><line x1="443" y1="146" x2="456" y2="146"/><line x1="660" y1="146" x2="673" y2="146"/>
+    <path d="M 775.5 217 V 236 H 124.5 V 254"/>
+    <line x1="226" y1="326" x2="239" y2="326"/><line x1="443" y1="326" x2="456" y2="326"/><line x1="660" y1="326" x2="673" y2="326"/>
+  </g>
+
+  <!-- Fila 1 -->
+  <g>
+    <rect x="24" y="76" width="201" height="140" rx="12" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+    <circle cx="48" cy="102" r="14" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <text x="48" y="107" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">1</text>
+    <text x="70" y="107" font-size="15" font-weight="700" fill="#0b0b0b">Descarga la ISO</text>
+    <text x="40" y="136" font-size="12.5" fill="#52514e">Linux Mint Xfce, 64 bits</text>
+    <text x="40" y="154" font-size="12.5" fill="#52514e">Un fichero .iso de 2,8 GB</text>
+    <rect x="34" y="166" width="181" height="40" rx="7" fill="#eef0f3" stroke="#8a8f98"/>
+    <text x="44" y="182" font-size="12" fill="#0b0b0b">La ISO es un DVD de</text>
+    <text x="44" y="199" font-size="12" fill="#0b0b0b">instalación en un fichero</text>
+
+    <rect x="241" y="76" width="201" height="140" rx="12" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+    <circle cx="265" cy="102" r="14" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <text x="265" y="107" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">2</text>
+    <text x="287" y="107" font-size="15" font-weight="700" fill="#0b0b0b">Crea la MV</text>
+    <text x="257" y="136" font-size="12.5" fill="#52514e">4 GB de RAM · 2 CPU</text>
+    <text x="257" y="154" font-size="12.5" fill="#52514e">Disco de 25 GB</text>
+    <rect x="251" y="166" width="181" height="40" rx="7" fill="#fde4d8" stroke="#eb6834"/>
+    <text x="261" y="182" font-size="12" fill="#0b0b0b">✔ Marca «Habilitar EFI»</text>
+    <text x="261" y="199" font-size="12" fill="#0b0b0b">✘ Desmarca «desatendida»</text>
+
+    <rect x="458" y="76" width="201" height="140" rx="12" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/>
+    <circle cx="482" cy="102" r="14" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="482" y="107" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">3</text>
+    <text x="504" y="107" font-size="15" font-weight="700" fill="#0b0b0b">Arranca (live)</text>
+    <text x="474" y="136" font-size="12.5" fill="#52514e">Linux funciona desde la ISO</text>
+    <text x="474" y="154" font-size="12.5" fill="#52514e">sin tocar el disco todavía</text>
+    <rect x="468" y="166" width="181" height="40" rx="7" fill="#eef0f3" stroke="#8a8f98"/>
+    <text x="478" y="182" font-size="12" fill="#0b0b0b">Sirve para probar Linux</text>
+    <text x="478" y="199" font-size="12" fill="#0b0b0b">y para rescatar equipos</text>
+
+    <rect x="675" y="76" width="201" height="140" rx="12" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/>
+    <circle cx="699" cy="102" r="14" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="699" y="107" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">4</text>
+    <text x="721" y="107" font-size="15" font-weight="700" fill="#0b0b0b">Instala</text>
+    <text x="691" y="136" font-size="12.5" fill="#52514e">Doble clic en</text>
+    <text x="691" y="154" font-size="12.5" fill="#52514e">«Install Linux Mint»</text>
+    <rect x="685" y="166" width="181" height="40" rx="7" fill="#fde4d8" stroke="#eb6834"/>
+    <text x="695" y="182" font-size="12" fill="#0b0b0b">✔ Tipo: «Más opciones»</text>
+    <text x="695" y="199" font-size="12" fill="#0b0b0b">✘ Nunca «Borrar disco»</text>
+  </g>
+
+  <!-- Fila 2 -->
+  <g>
+    <rect x="24" y="256" width="201" height="140" rx="12" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/>
+    <circle cx="48" cy="282" r="14" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+    <text x="48" y="287" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">5</text>
+    <text x="70" y="287" font-size="15" font-weight="700" fill="#0b0b0b">Particiona</text>
+    <text x="40" y="316" font-size="12.5" fill="#52514e">EFI · / · swap · /home</text>
+    <text x="40" y="334" font-size="12.5" fill="#52514e">(mira el dibujo siguiente)</text>
+    <rect x="34" y="346" width="181" height="40" rx="7" fill="#fde4d8" stroke="#eb6834"/>
+    <text x="44" y="362" font-size="12" fill="#0b0b0b">Cargador de arranque:</text>
+    <text x="44" y="379" font-size="12" fill="#0b0b0b">en <tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700">/dev/sda</tspan>, el disco</text>
+
+    <rect x="241" y="256" width="201" height="140" rx="12" fill="#ffffff" stroke="#eda100" stroke-width="2"/>
+    <circle cx="265" cy="282" r="14" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+    <text x="265" y="287" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">6</text>
+    <text x="287" y="287" font-size="15" font-weight="700" fill="#0b0b0b">Tu usuario</text>
+    <text x="257" y="316" font-size="12.5" fill="#52514e">Usuario: alumno</text>
+    <text x="257" y="334" font-size="12.5" fill="#52514e">Equipo: mint-smr</text>
+    <rect x="251" y="346" width="181" height="40" rx="7" fill="#eef0f3" stroke="#8a8f98"/>
+    <text x="261" y="362" font-size="12" fill="#0b0b0b">Que pida la contraseña</text>
+    <text x="261" y="379" font-size="12" fill="#0b0b0b">al iniciar sesión</text>
+
+    <rect x="458" y="256" width="201" height="140" rx="12" fill="#ffffff" stroke="#eda100" stroke-width="2"/>
+    <circle cx="482" cy="282" r="14" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+    <text x="482" y="287" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">7</text>
+    <text x="504" y="287" font-size="15" font-weight="700" fill="#0b0b0b">Reinicia</text>
+    <text x="474" y="316" font-size="12.5" fill="#52514e">Tarda de 10 a 20 minutos</text>
+    <text x="474" y="334" font-size="12.5" fill="#52514e">y después reinicias</text>
+    <rect x="468" y="346" width="181" height="40" rx="7" fill="#eef0f3" stroke="#8a8f98"/>
+    <text x="478" y="362" font-size="12" fill="#0b0b0b">¿Vuelve el instalador?</text>
+    <text x="478" y="379" font-size="12" fill="#0b0b0b">Quita la ISO de la MV</text>
+
+    <rect x="675" y="256" width="201" height="140" rx="12" fill="#ffffff" stroke="#008300" stroke-width="2"/>
+    <circle cx="699" cy="282" r="14" fill="#d6efd6" stroke="#008300" stroke-width="2"/>
+    <text x="699" y="287" font-size="14" font-weight="700" text-anchor="middle" fill="#0b0b0b">8</text>
+    <text x="721" y="287" font-size="15" font-weight="700" fill="#0b0b0b">Comprueba</text>
+    <text x="691" y="316" font-size="12.5" fill="#52514e">Abre el terminal:</text>
+    <text x="691" y="334" font-size="12.5" fill="#52514e">Ctrl + Alt + T</text>
+    <rect x="685" y="346" width="181" height="40" rx="7" fill="#d6efd6" stroke="#008300"/>
+    <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#0b0b0b">
+      <text x="695" y="362">lsblk -f · df -h</text>
+      <text x="695" y="379">free -h · swapon --show</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="528" viewBox="0 0 900 528" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El mapa de la raíz /</title>
+  <desc id="d">De la raíz / cuelgan doce carpetas importantes, en el orden en que salen con ls /. /bin: programas básicos como ls, cp o mkdir; es un atajo a /usr/bin. /boot: arranque; aquí está el núcleo de Linux, vmlinuz. /dev: dispositivos; el disco es /dev/sda y sus trozos sda1, sda2... /etc: configuración del sistema; passwd, hostname, hosts, fstab. /home: casas de los usuarios; la tuya es /home/alumno, o sea, ~. /media: pendrives y discos que pinchas, por ejemplo /media/alumno/MI-USB. /mnt: discos que montas a mano, por ejemplo /mnt/cdrom. /proc: información del sistema en directo; cpuinfo y meminfo, no está en el disco. /root: casa del administrador; no es la raíz /. /tmp: temporales; se vacía al reiniciar. /usr: programas instalados; /usr/bin; no significa user. /var: datos que cambian; los registros están en /var/log. Los colores agrupan: programas, configuración, casas, datos que cambian, hardware y núcleo, arranque, pendrives y discos.</desc>
+  <rect x="0.5" y="0.5" width="899" height="527" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El mapa de la raíz /</text>
+  <text x="24" y="60" font-size="14" fill="#52514e">Las 12 carpetas que tienes que conocer, en el mismo orden en que salen con ls /.</text>
+
+  <rect x="24" y="76" width="852" height="40" rx="10" fill="#1e2227"/>
+  <text x="44" y="105" font-size="26" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#ffffff">/</text>
+  <text x="74" y="102" font-size="14" fill="#c9ccd1">la raíz: de aquí cuelga todo, también los pendrives  ·  ¡no la confundas con /root!</text>
+
+  <!-- troncos -->
+  <g stroke="#1e2227" stroke-width="2">
+    <line x1="44" y1="116" x2="44" y2="460"/>
+    <line x1="464" y1="116" x2="464" y2="460"/>
+    <line x1="44" y1="150" x2="62" y2="150"/><line x1="44" y1="212" x2="62" y2="212"/><line x1="44" y1="274" x2="62" y2="274"/>
+    <line x1="44" y1="336" x2="62" y2="336"/><line x1="44" y1="398" x2="62" y2="398"/><line x1="44" y1="460" x2="62" y2="460"/>
+    <line x1="464" y1="150" x2="482" y2="150"/><line x1="464" y1="212" x2="482" y2="212"/><line x1="464" y1="274" x2="482" y2="274"/>
+    <line x1="464" y1="336" x2="482" y2="336"/><line x1="464" y1="398" x2="482" y2="398"/><line x1="464" y1="460" x2="482" y2="460"/>
+  </g>
+
+  <!-- chips -->
+  <g stroke-width="2">
+    <rect x="62" y="135" width="84" height="30" rx="15" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="62" y="197" width="84" height="30" rx="15" fill="#fbe3ec" stroke="#e87ba4"/>
+    <rect x="62" y="259" width="84" height="30" rx="15" fill="#e4e0f8" stroke="#6250d6"/>
+    <rect x="62" y="321" width="84" height="30" rx="15" fill="#fde4d8" stroke="#eb6834"/>
+    <rect x="62" y="383" width="84" height="30" rx="15" fill="#d3f2e6" stroke="#1baf7a"/>
+    <rect x="62" y="445" width="84" height="30" rx="15" fill="#d6efd6" stroke="#008300"/>
+    <rect x="482" y="135" width="84" height="30" rx="15" fill="#d6efd6" stroke="#008300"/>
+    <rect x="482" y="197" width="84" height="30" rx="15" fill="#e4e0f8" stroke="#6250d6"/>
+    <rect x="482" y="259" width="84" height="30" rx="15" fill="#d3f2e6" stroke="#1baf7a"/>
+    <rect x="482" y="321" width="84" height="30" rx="15" fill="#fdefcc" stroke="#eda100"/>
+    <rect x="482" y="383" width="84" height="30" rx="15" fill="#cde2fb" stroke="#2a78d6"/>
+    <rect x="482" y="445" width="84" height="30" rx="15" fill="#fdefcc" stroke="#eda100"/>
+  </g>
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="15" font-weight="700" text-anchor="middle" fill="#0b0b0b">
+    <text x="104" y="155">/bin</text><text x="104" y="217">/boot</text><text x="104" y="279">/dev</text>
+    <text x="104" y="341">/etc</text><text x="104" y="403">/home</text><text x="104" y="465">/media</text>
+    <text x="524" y="155">/mnt</text><text x="524" y="217">/proc</text><text x="524" y="279">/root</text>
+    <text x="524" y="341">/tmp</text><text x="524" y="403">/usr</text><text x="524" y="465">/var</text>
+  </g>
+
+  <!-- descripciones -->
+  <g font-size="14.5" font-weight="700" fill="#0b0b0b">
+    <text x="160" y="147">Programas básicos</text>
+    <text x="160" y="209">Arranque</text>
+    <text x="160" y="271">Dispositivos (el hardware)</text>
+    <text x="160" y="333">Configuración del sistema</text>
+    <text x="160" y="395">Casas de los usuarios</text>
+    <text x="160" y="457">Pendrives y discos que pinchas</text>
+    <text x="580" y="147">Discos que montas a mano</text>
+    <text x="580" y="209">Info del sistema en directo</text>
+    <text x="580" y="271">Casa del administrador (root)</text>
+    <text x="580" y="333">Temporales</text>
+    <text x="580" y="395">Programas instalados</text>
+    <text x="580" y="457">Datos que cambian</text>
+  </g>
+  <g font-size="12.5" fill="#52514e">
+    <text x="160" y="166">ls, cp, mkdir… (es un atajo a /usr/bin)</text>
+    <text x="160" y="228">el núcleo de Linux: vmlinuz-…</text>
+    <text x="160" y="290">tu disco: /dev/sda · sus trozos: sda1, sda2…</text>
+    <text x="160" y="352">passwd · hostname · hosts · fstab</text>
+    <text x="160" y="414">la tuya: /home/alumno (o sea, ~)</text>
+    <text x="160" y="476">/media/alumno/MI-USB</text>
+    <text x="580" y="166">/mnt/cdrom</text>
+    <text x="580" y="228">cpuinfo · meminfo (no está en el disco)</text>
+    <text x="580" y="290">¡ojo! no es la raíz /</text>
+    <text x="580" y="352">se vacía al reiniciar</text>
+    <text x="580" y="414">/usr/bin · ojo: no significa «user»</text>
+    <text x="580" y="476">los registros (logs): /var/log</text>
+  </g>
+
+  <!-- leyenda -->
+  <g font-size="12.5" fill="#52514e" stroke-width="2">
+    <circle cx="30" cy="505" r="6" fill="#cde2fb" stroke="#2a78d6"/><text x="40" y="509" stroke="none">programas</text>
+    <circle cx="128" cy="505" r="6" fill="#fde4d8" stroke="#eb6834"/><text x="138" y="509" stroke="none">configuración</text>
+    <circle cx="251" cy="505" r="6" fill="#d3f2e6" stroke="#1baf7a"/><text x="261" y="509" stroke="none">casas</text>
+    <circle cx="324" cy="505" r="6" fill="#fdefcc" stroke="#eda100"/><text x="334" y="509" stroke="none">datos que cambian</text>
+    <circle cx="472" cy="505" r="6" fill="#e4e0f8" stroke="#6250d6"/><text x="482" y="509" stroke="none">hardware y núcleo</text>
+    <circle cx="620" cy="505" r="6" fill="#fbe3ec" stroke="#e87ba4"/><text x="630" y="509" stroke="none">arranque</text>
+    <circle cx="713" cy="505" r="6" fill="#d6efd6" stroke="#008300"/><text x="723" y="509" stroke="none">pendrives y discos</text>
+  </g>
+</svg>
