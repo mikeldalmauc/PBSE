@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="380" viewBox="0 0 880 380" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Anatomía de una skill</title>
+  <desc id="d">A la izquierda, la carpeta ~/.claude/skills/descargar con dos ficheros: SKILL.md, con una cabecera que lleva el nombre y la descripción y debajo los pasos, y el script descargar.sh. A la derecha, el flujo: tú pides «bájame este vídeo», Claude lee la descripción de todas las skills, elige la que encaja y sigue sus pasos ejecutando el script.</desc>
+  <rect x="0.5" y="0.5" width="879" height="379" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Una skill es una receta en una carpeta</text>
+
+  <!-- Carpeta -->
+  <text x="40" y="76" font-size="14" font-family="Consolas, 'DejaVu Sans Mono', monospace" font-weight="700" fill="#0b0b0b">~/.claude/skills/descargar/</text>
+  <rect x="40" y="90" width="400" height="190" rx="12" fill="#e4e0f8" stroke="#6250d6" stroke-width="2"/>
+  <text x="60" y="118" font-size="15" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">SKILL.md</text>
+  <rect x="60" y="128" width="360" height="56" rx="8" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+  <g font-size="13" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="72" y="148">name: descargar</text>
+    <text x="72" y="168">description: cuándo usarla  ← Claude lee esto</text>
+  </g>
+  <g font-size="13" fill="#0b0b0b">
+    <text x="72" y="208">1. Saca las URL de lo que pide el usuario</text>
+    <text x="72" y="228">2. Ejecuta descargar.sh con ellas</text>
+    <text x="72" y="248">3. Responde con el nombre del fichero</text>
+  </g>
+  <text x="60" y="272" font-size="15" font-weight="700" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">descargar.sh</text>
+
+  <!-- Flujo -->
+  <g font-size="14" fill="#0b0b0b">
+    <rect x="500" y="90" width="340" height="40" rx="10" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+    <text x="670" y="116" text-anchor="middle">Tú: «bájame este vídeo: https://…»</text>
+    <rect x="500" y="160" width="340" height="40" rx="10" fill="#fde4d8" stroke="#eb6834" stroke-width="2"/>
+    <text x="670" y="186" text-anchor="middle">Claude lee las descripciones y elige «descargar»</text>
+    <rect x="500" y="230" width="340" height="40" rx="10" fill="#e4e0f8" stroke="#6250d6" stroke-width="2"/>
+    <text x="670" y="256" text-anchor="middle">Sigue los pasos: ejecuta descargar.sh</text>
+    <rect x="500" y="300" width="340" height="40" rx="10" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+    <text x="670" y="326" text-anchor="middle">El vídeo está en ~/Drive/Descargas y en Drive</text>
+  </g>
+  <g stroke="#8a8f98" stroke-width="2" fill="none">
+    <path d="M670 130 V 160"/><path d="M663 150 L 670 160 L 677 150"/>
+    <path d="M670 200 V 230"/><path d="M663 220 L 670 230 L 677 220"/>
+    <path d="M670 270 V 300"/><path d="M663 290 L 670 300 L 677 290"/>
+  </g>
+  <text x="40" y="320" font-size="13" fill="#52514e">Sin la descripción, Claude no sabe cuándo usarla.</text>
+  <text x="40" y="342" font-size="13" fill="#52514e">Sin el script, tendría que inventarse los comandos cada vez.</text>
+</svg>

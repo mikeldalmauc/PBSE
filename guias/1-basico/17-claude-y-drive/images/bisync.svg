@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="340" viewBox="0 0 880 340" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">rclone bisync: una carpeta en dos sitios</title>
+  <desc id="d">A la izquierda, la carpeta local ~/Drive/Fotos en Omarchy; a la derecha, la carpeta Fotos de Google Drive. Entre ellas, rclone bisync cada cinco minutos: lo nuevo en un lado se copia al otro, lo borrado en un lado se borra en el otro, y si un fichero cambió en los dos sitios gana el más nuevo. La primera vez se ejecuta con la opción resync.</desc>
+  <rect x="0.5" y="0.5" width="879" height="339" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">El cartero: la misma carpeta en dos sitios</text>
+
+  <!-- Local -->
+  <rect x="40" y="70" width="250" height="180" rx="14" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+  <text x="165" y="100" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">💻 Omarchy</text>
+  <text x="165" y="124" font-size="14" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">~/Drive/Fotos</text>
+  <g font-size="14" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="70" y="166">LEEME.txt</text>
+    <text x="70" y="192">foto-movil.jpg</text>
+    <text x="70" y="218">apuntes.md  (nuevo)</text>
+  </g>
+
+  <!-- Drive -->
+  <rect x="590" y="70" width="250" height="180" rx="14" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <text x="715" y="100" font-size="16" font-weight="700" text-anchor="middle" fill="#0b0b0b">☁️ Google Drive</text>
+  <text x="715" y="124" font-size="14" text-anchor="middle" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">drive:Fotos</text>
+  <g font-size="14" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="620" y="166">LEEME.txt</text>
+    <text x="620" y="192">foto-movil.jpg  (nuevo)</text>
+    <text x="620" y="218">apuntes.md</text>
+  </g>
+
+  <!-- Flechas -->
+  <g stroke="#2a78d6" stroke-width="3" fill="none">
+    <path d="M290 140 H 590"/>
+    <path d="M580 133 L 590 140 L 580 147"/>
+    <path d="M590 190 H 290"/>
+    <path d="M300 183 L 290 190 L 300 197"/>
+  </g>
+  <text x="440" y="130" font-size="13" text-anchor="middle" fill="#52514e">apuntes.md sube</text>
+  <text x="440" y="212" font-size="13" text-anchor="middle" fill="#52514e">foto-movil.jpg baja</text>
+  <rect x="300" y="150" width="280" height="26" rx="13" fill="#1e2227"/>
+  <text x="440" y="168" font-size="14" font-weight="700" text-anchor="middle" fill="#e6e9ee" font-family="Consolas, 'DejaVu Sans Mono', monospace">rclone bisync · cada 5 min</text>
+
+  <g font-size="14" fill="#0b0b0b">
+    <text x="40" y="288" font-weight="700">Primera vez:</text>
+    <text x="150" y="288" font-family="Consolas, 'DejaVu Sans Mono', monospace">--resync</text>
+    <text x="232" y="288" fill="#52514e">copia lo que hay en cada lado al otro. Después, nunca más.</text>
+    <text x="40" y="316" font-weight="700">Si cambió en los dos:</text>
+    <text x="206" y="316" font-family="Consolas, 'DejaVu Sans Mono', monospace">--conflict-resolve newer</text>
+    <text x="418" y="316" fill="#52514e">gana el más nuevo; el otro queda renombrado.</text>
+  </g>
+</svg>

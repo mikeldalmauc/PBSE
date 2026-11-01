@@ -119,6 +119,27 @@ Monitors* y *Setup → Look & Feel*; que el instalador pida teclado, usuario, co
 de equipo en ese orden; y que `omarchy pkg add` e *Install → TUI* funcionen como dice el manual
 (omarchy.org/manual, versión 4.0.6).
 
+**Tarea nueva 17: Tu ordenador en el bolsillo** (2026-11-01). Tarea suelta
+(`1-basico/17-claude-y-drive/1-tarea-tu-ordenador-en-el-bolsillo.md`, Apto / No apto, 6 h en
+tres sesiones), detrás de Omarchy y antes de Arch. Reproduce el montaje de Mikel: Claude Code en
+la Omarchy de Isard, Remote Control desde la app del móvil, Tailscale en los dos aparatos (con
+Tailscale SSH como reto), rclone con `bisync` cada 5 min por `cronie` (`~/Drive/.sync.sh` con la
+lista `~/Drive/.carpetas`, flags `--resilient --recover --max-lock 2m --conflict-resolve newer
+--drive-skip-gdocs`, como en la Pi), y dos skills personales creadas con ayuda de Claude pero con
+el script dado en la guía para que funcionen a la primera: `carpeta-compartida` (crear.sh NOMBRE)
+y `descargar` (descargar.sh [--audio] URL…, con el yt-dlp que trae Omarchy). Cierre: pedir la
+descarga desde el móvil y verla en la app de Drive. Entrega: seis capturas y los ficheros de las
+dos skills; Apto si funcionan y saben explicar cada línea. Tres SVG propios (mapa, bisync,
+anatomía de una skill). **Dos cosas que tiene que resolver Mikel antes de darla:** (1) cada
+alumno necesita una cuenta de claude.ai con Claude Code (Pro, Max, Team…; la gratuita no vale y
+Remote Control tampoco va con clave de API); (2) rclone retira su `client_id` compartido de Drive
+en 2026, así que la guía dice que el profesor da un `client_id` y `client_secret` del aula: hay
+que crearlos en Google Cloud (proyecto, API de Drive, pantalla de consentimiento externa, cliente
+OAuth de tipo «Desktop app») y **publicar la app**, porque en modo prueba los permisos caducan a
+la semana; una misma clave sirve hasta 100 usuarios. Sin probar en Isard: rutas de menú de Omarchy
+(Install → AI), que `tailscale ping` llegue al móvil (la app del móvil tiene que estar conectada) y
+que el QR de `claude remote-control` salga con la barra espaciadora en la versión que instalen.
+
 **La guía de comandos se redujo al mínimo** (navegar, rutas, crear, ver, copiar/mover/borrar,
 comodines, ayuda). `find`, `grep`, tuberías, enlaces, `tar`, `rsync`, disco y equivalencias con
 Windows se retiraron a `_obsoleto/retirados-2026-09-23/` (tema 06), junto con los trucos de la

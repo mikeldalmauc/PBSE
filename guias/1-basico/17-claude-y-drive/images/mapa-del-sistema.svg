@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="400" viewBox="0 0 880 400" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">El mapa de la tarea</title>
+  <desc id="d">A la izquierda, tu móvil con las apps de Claude, Drive y Tailscale. En el centro, tu Omarchy en Isard, con Claude Code en remoto, rclone, yt-dlp y tus dos skills. A la derecha, Google Drive. El móvil habla con Omarchy por internet a través de Claude; rclone lleva y trae las carpetas a Drive; Tailscale une el móvil y el ordenador en un pasillo privado.</desc>
+  <rect x="0.5" y="0.5" width="879" height="399" rx="14" fill="#fcfcfb" stroke="#e2e5e9"/>
+  <text x="24" y="38" font-size="21" font-weight="700" fill="#0b0b0b">Cinco piezas, una petición: «bájame este vídeo»</text>
+
+  <!-- Móvil -->
+  <rect x="40" y="90" width="170" height="220" rx="18" fill="#cde2fb" stroke="#2a78d6" stroke-width="2"/>
+  <text x="125" y="122" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">📱 Tu móvil</text>
+  <g font-size="14" fill="#0b0b0b">
+    <text x="60" y="160">App de Claude</text>
+    <text x="60" y="190">App de Drive</text>
+    <text x="60" y="220">App de Tailscale</text>
+  </g>
+  <text x="125" y="290" font-size="13" text-anchor="middle" fill="#52514e">donde estés</text>
+
+  <!-- Omarchy -->
+  <rect x="310" y="90" width="260" height="220" rx="18" fill="#d3f2e6" stroke="#1baf7a" stroke-width="2"/>
+  <text x="440" y="122" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">💻 Tu Omarchy (en Isard)</text>
+  <g font-size="14" fill="#0b0b0b">
+    <text x="330" y="160">Claude Code en remoto</text>
+    <text x="330" y="190">rclone: el cartero</text>
+    <text x="330" y="220">yt-dlp: descarga</text>
+    <text x="330" y="250">Skills: tus recetas</text>
+  </g>
+  <text x="440" y="290" font-size="13" text-anchor="middle" fill="#52514e">siempre encendido</text>
+
+  <!-- Drive -->
+  <rect x="670" y="90" width="170" height="220" rx="18" fill="#fdefcc" stroke="#eda100" stroke-width="2"/>
+  <text x="755" y="122" font-size="17" font-weight="700" text-anchor="middle" fill="#0b0b0b">☁️ Google Drive</text>
+  <g font-size="14" font-family="Consolas, 'DejaVu Sans Mono', monospace" fill="#0b0b0b">
+    <text x="690" y="160">Fotos/</text>
+    <text x="690" y="190">Clase/</text>
+    <text x="690" y="220">Descargas/</text>
+  </g>
+  <text x="755" y="290" font-size="13" text-anchor="middle" fill="#52514e">la copia en la nube</text>
+
+  <!-- Flechas -->
+  <g stroke="#2a78d6" stroke-width="3" fill="none">
+    <path d="M210 165 H 310"/>
+    <path d="M300 158 L 310 165 L 300 172"/>
+  </g>
+  <text x="260" y="152" font-size="13" text-anchor="middle" fill="#52514e">1. la petición</text>
+
+  <g stroke="#eda100" stroke-width="3" fill="none">
+    <path d="M570 190 H 670"/>
+    <path d="M660 183 L 670 190 L 660 197"/>
+    <path d="M580 183 L 570 190 L 580 197"/>
+  </g>
+  <text x="620" y="176" font-size="13" text-anchor="middle" fill="#52514e">2. rclone</text>
+  <text x="620" y="212" font-size="13" text-anchor="middle" fill="#52514e">cada 5 min</text>
+
+  <g stroke="#eda100" stroke-width="3" fill="none">
+    <path d="M755 310 V 350 H 125 V 310"/>
+    <path d="M118 320 L 125 310 L 132 320"/>
+  </g>
+  <text x="440" y="368" font-size="13" text-anchor="middle" fill="#52514e">3. el vídeo aparece en la app de Drive</text>
+
+  <!-- Tailscale -->
+  <rect x="40" y="56" width="530" height="22" rx="11" fill="#e4e0f8" stroke="#6250d6" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="305" y="72" font-size="13" font-weight="700" text-anchor="middle" fill="#0b0b0b">Tailscale: el pasillo privado entre el móvil y el ordenador</text>
+</svg>

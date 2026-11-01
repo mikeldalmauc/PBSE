@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarea · Tu ordenador en el bolsillo</title>
+</head>
+<body style="margin:0;background:#f6f7f9">
+<div style="max-width:900px;margin:0 auto;background:#fff;padding:8px clamp(16px,5vw,56px) 48px;font-family:'Segoe UI',-apple-system,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1c1e21"><div style="border-bottom:3px solid #7a3e1d;padding:28px 0 18px;margin-bottom:10px"><p style="font-size:.78em;letter-spacing:.09em;text-transform:uppercase;color:#7a3e1d;font-weight:700;margin:0 0 8px">Sistemas Operativos Monopuesto (SMR 1.º)</p><h1 id="tarea--tu-ordenador-en-el-bolsillo" style="font-size:2em;line-height:1.2;margin:0 0 14px;color:#1c1e21">Tarea · Tu ordenador en el bolsillo</h1><div><span style="display:inline-block;background:#0e7490;color:#fff;border:1px solid #0e7490;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tipo</b> Tarea</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Nivel</b> 1 · Básico</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Tema</b> 17</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>CM</b> CM4</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Duración</b> 6 h (tres sesiones)</span><span style="display:inline-block;background:#f6f7f9;color:#5b6168;border:1px solid #e2e5e9;border-radius:999px;padding:3px 11px;font-size:.8em;margin:0 6px 6px 0"><b>Herramientas</b> Isard VDI, H4 (terminal Linux), móvil</span></div></div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #475569;background:#f1f5f9;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧭 <strong style="color:#475569">Antes de empezar.</strong> Necesitas tu <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Omarchy-SMR</code> de la <a href="16-omarchy-1-tarea-omarchy.html" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">tarea 16</a>
+funcionando, tu móvil, una cuenta de Google y una cuenta de claude.ai con Claude Code (el
+profesor te dirá cómo entras). El profesor te dará también dos claves para Google Drive
+(<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">client_id</code> y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">client_secret</code>): las usarás en el apartado 4.</p>
+</div>
+<p>Al final de esta tarea vas a poder sacar el móvil en el autobús, escribirle a tu ordenador
+«bájame este vídeo» y, cuando llegues a casa, el vídeo estará en tu Google Drive 📱➡️💻➡️☁️. Por el
+camino montas lo mismo que usa el profesor cada día: <strong>Claude</strong> como ayudante que trabaja en tu
+máquina, <strong>Claude en remoto</strong> para hablarle desde el móvil, <strong>Tailscale</strong> para que tus aparatos se
+vean entre ellos estén donde estén, <strong>rclone</strong> para que una carpeta de tu ordenador y una de Drive
+sean la misma, y tus <strong>dos primeras skills</strong>: pequeñas instrucciones que enseñan a Claude a hacer
+algo nuevo.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #6b3fa0;background:#f5f0fb;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🧩 <strong style="color:#6b3fa0">Analogía.</strong> Tu ordenador es una <strong>casa</strong> y Claude, el <strong>mayordomo</strong> que vive en ella. Claude
+en remoto es el <strong>teléfono del mayordomo</strong>: le llamas desde donde estés. Tailscale es un
+<strong>pasillo privado</strong> entre tu casa, tu móvil y lo que quieras. rclone es el <strong>cartero</strong> que lleva
+y trae lo de una carpeta a Drive. Y una skill es una <strong>receta</strong> que le dejas al mayordomo
+escrita en la cocina: la próxima vez no hace falta explicarle nada.</p>
+</div>
+<div style="overflow-x:auto;margin:1.2em 0"><table style="border-collapse:collapse;width:100%;font-size:.93em">
+<thead>
+<tr>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+<th style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#f6f7f9;font-weight:600"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">🎯 <strong>Qué vas a conseguir</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Pedir desde el móvil que tu ordenador descargue algo y verlo aparecer en tu Drive</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">🧰 <strong>Qué necesitas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc"><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Omarchy-SMR</code>, tu móvil, cuenta de Google, cuenta de claude.ai y las claves de Drive del aula</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">⏱️ <strong>Tiempo</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">6 horas en tres sesiones: Claude y el móvil · Tailscale y Drive · las dos skills</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">📦 <strong>Qué entregas</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top;background:#fbfbfc">Seis capturas y tus dos skills (<a href="#7-entrega" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">7. Entrega</a>)</td>
+</tr>
+<tr>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">✅ <strong>Calificación</strong></td>
+<td style="border:1px solid #e2e5e9;padding:7px 10px;text-align:left;vertical-align:top">Apto / No apto</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="índice" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">Índice</h2>
+<ul style="background:#f6f7f9;border:1px solid #e2e5e9;border-radius:8px;padding:14px 18px 14px 34px;font-size:.93em">
+<li><a href="#1-el-mapa" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">1. El mapa</a></li>
+<li><a href="#2-claude-en-tu-omarchy" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">2. Claude en tu Omarchy</a></li>
+<li><a href="#3-claude-en-remoto-desde-el-móvil" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">3. Claude en remoto desde el móvil</a></li>
+<li><a href="#4-tailscale-tus-aparatos-se-ven" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">4. Tailscale: tus aparatos se ven</a></li>
+<li><a href="#5-drive-con-rclone-una-carpeta-en-dos-sitios" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">5. Drive con rclone: una carpeta en dos sitios</a></li>
+<li><a href="#6-tus-dos-primeras-skills" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">6. Tus dos primeras skills</a></li>
+<li><a href="#7-entrega" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">7. Entrega</a></li>
+<li><a href="#8-si-vas-rápido" style="color:#7a3e1d;text-decoration:none;border-bottom:1px solid rgba(122,62,29,.3)">8. Si vas rápido</a></li>
+</ul>
+<p>En cada apartado <strong>haz</strong> lo que te damos y <strong>mira</strong> lo que pasa. Las ❓ son para pensar y
+comentarlas en clase. Lo que se entrega son <strong>capturas</strong> de que cada pieza funciona y tus dos
+skills: ve haciendo las capturas por el camino.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b45309;background:#fff7ed;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b45309">❗ Importante</p><p style="margin:.45em 0"><strong>Cuentas y contraseñas.</strong> Todo lo de esta tarea entra con <strong>tu</strong> cuenta de Google y <strong>tu</strong>
+cuenta de claude.ai. No las compartas con nadie ni las pegues en ningún fichero. Las dos claves
+de Drive del aula sólo van en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rclone config</code>, donde te las pida.</p>
+</div>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="1-el-mapa" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">1. El mapa</h2>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4ODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgODgwIDQwMCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5FbCBtYXBhIGRlIGxhIHRhcmVhPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+QSBsYSBpenF1aWVyZGEsIHR1IG3Ds3ZpbCBjb24gbGFzIGFwcHMgZGUgQ2xhdWRlLCBEcml2ZSB5IFRhaWxzY2FsZS4gRW4gZWwgY2VudHJvLCB0dSBPbWFyY2h5IGVuIElzYXJkLCBjb24gQ2xhdWRlIENvZGUgZW4gcmVtb3RvLCByY2xvbmUsIHl0LWRscCB5IHR1cyBkb3Mgc2tpbGxzLiBBIGxhIGRlcmVjaGEsIEdvb2dsZSBEcml2ZS4gRWwgbcOzdmlsIGhhYmxhIGNvbiBPbWFyY2h5IHBvciBpbnRlcm5ldCBhIHRyYXbDqXMgZGUgQ2xhdWRlOyByY2xvbmUgbGxldmEgeSB0cmFlIGxhcyBjYXJwZXRhcyBhIERyaXZlOyBUYWlsc2NhbGUgdW5lIGVsIG3Ds3ZpbCB5IGVsIG9yZGVuYWRvciBlbiB1biBwYXNpbGxvIHByaXZhZG8uPC9kZXNjPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODc5IiBoZWlnaHQ9IjM5OSIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPkNpbmNvIHBpZXphcywgdW5hIHBldGljacOzbjogwqtiw6FqYW1lIGVzdGUgdsOtZGVvwrs8L3RleHQ+CgogIDwhLS0gTcOzdmlsIC0tPgogIDxyZWN0IHg9IjQwIiB5PSI5MCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIyMjAiIHJ4PSIxOCIgZmlsbD0iI2NkZTJmYiIgc3Ryb2tlPSIjMmE3OGQ2IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIxMjUiIHk9IjEyMiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzBiMGIwYiI+8J+TsSBUdSBtw7N2aWw8L3RleHQ+CiAgPGcgZm9udC1zaXplPSIxNCIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI2MCIgeT0iMTYwIj5BcHAgZGUgQ2xhdWRlPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjE5MCI+QXBwIGRlIERyaXZlPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjIyMCI+QXBwIGRlIFRhaWxzY2FsZTwvdGV4dD4KICA8L2c+CiAgPHRleHQgeD0iMTI1IiB5PSIyOTAiIGZvbnQtc2l6ZT0iMTMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1MjUxNGUiPmRvbmRlIGVzdMOpczwvdGV4dD4KCiAgPCEtLSBPbWFyY2h5IC0tPgogIDxyZWN0IHg9IjMxMCIgeT0iOTAiIHdpZHRoPSIyNjAiIGhlaWdodD0iMjIwIiByeD0iMTgiIGZpbGw9IiNkM2YyZTYiIHN0cm9rZT0iIzFiYWY3YSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHRleHQgeD0iNDQwIiB5PSIxMjIiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwYjBiMGIiPvCfkrsgVHUgT21hcmNoeSAoZW4gSXNhcmQpPC90ZXh0PgogIDxnIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iMzMwIiB5PSIxNjAiPkNsYXVkZSBDb2RlIGVuIHJlbW90bzwvdGV4dD4KICAgIDx0ZXh0IHg9IjMzMCIgeT0iMTkwIj5yY2xvbmU6IGVsIGNhcnRlcm88L3RleHQ+CiAgICA8dGV4dCB4PSIzMzAiIHk9IjIyMCI+eXQtZGxwOiBkZXNjYXJnYTwvdGV4dD4KICAgIDx0ZXh0IHg9IjMzMCIgeT0iMjUwIj5Ta2lsbHM6IHR1cyByZWNldGFzPC90ZXh0PgogIDwvZz4KICA8dGV4dCB4PSI0NDAiIHk9IjI5MCIgZm9udC1zaXplPSIxMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzUyNTE0ZSI+c2llbXByZSBlbmNlbmRpZG88L3RleHQ+CgogIDwhLS0gRHJpdmUgLS0+CiAgPHJlY3QgeD0iNjcwIiB5PSI5MCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIyMjAiIHJ4PSIxOCIgZmlsbD0iI2ZkZWZjYyIgc3Ryb2tlPSIjZWRhMTAwIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSI3NTUiIHk9IjEyMiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzBiMGIwYiI+4piB77iPIEdvb2dsZSBEcml2ZTwvdGV4dD4KICA8ZyBmb250LXNpemU9IjE0IiBmb250LWZhbWlseT0iQ29uc29sYXMsICdEZWphVnUgU2FucyBNb25vJywgbW9ub3NwYWNlIiBmaWxsPSIjMGIwYjBiIj4KICAgIDx0ZXh0IHg9IjY5MCIgeT0iMTYwIj5Gb3Rvcy88L3RleHQ+CiAgICA8dGV4dCB4PSI2OTAiIHk9IjE5MCI+Q2xhc2UvPC90ZXh0PgogICAgPHRleHQgeD0iNjkwIiB5PSIyMjAiPkRlc2Nhcmdhcy88L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9Ijc1NSIgeT0iMjkwIiBmb250LXNpemU9IjEzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTI1MTRlIj5sYSBjb3BpYSBlbiBsYSBudWJlPC90ZXh0PgoKICA8IS0tIEZsZWNoYXMgLS0+CiAgPGcgc3Ryb2tlPSIjMmE3OGQ2IiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiPgogICAgPHBhdGggZD0iTTIxMCAxNjUgSCAzMTAiLz4KICAgIDxwYXRoIGQ9Ik0zMDAgMTU4IEwgMzEwIDE2NSBMIDMwMCAxNzIiLz4KICA8L2c+CiAgPHRleHQgeD0iMjYwIiB5PSIxNTIiIGZvbnQtc2l6ZT0iMTMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1MjUxNGUiPjEuIGxhIHBldGljacOzbjwvdGV4dD4KCiAgPGcgc3Ryb2tlPSIjZWRhMTAwIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiPgogICAgPHBhdGggZD0iTTU3MCAxOTAgSCA2NzAiLz4KICAgIDxwYXRoIGQ9Ik02NjAgMTgzIEwgNjcwIDE5MCBMIDY2MCAxOTciLz4KICAgIDxwYXRoIGQ9Ik01ODAgMTgzIEwgNTcwIDE5MCBMIDU4MCAxOTciLz4KICA8L2c+CiAgPHRleHQgeD0iNjIwIiB5PSIxNzYiIGZvbnQtc2l6ZT0iMTMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1MjUxNGUiPjIuIHJjbG9uZTwvdGV4dD4KICA8dGV4dCB4PSI2MjAiIHk9IjIxMiIgZm9udC1zaXplPSIxMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzUyNTE0ZSI+Y2FkYSA1IG1pbjwvdGV4dD4KCiAgPGcgc3Ryb2tlPSIjZWRhMTAwIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiPgogICAgPHBhdGggZD0iTTc1NSAzMTAgViAzNTAgSCAxMjUgViAzMTAiLz4KICAgIDxwYXRoIGQ9Ik0xMTggMzIwIEwgMTI1IDMxMCBMIDEzMiAzMjAiLz4KICA8L2c+CiAgPHRleHQgeD0iNDQwIiB5PSIzNjgiIGZvbnQtc2l6ZT0iMTMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1MjUxNGUiPjMuIGVsIHbDrWRlbyBhcGFyZWNlIGVuIGxhIGFwcCBkZSBEcml2ZTwvdGV4dD4KCiAgPCEtLSBUYWlsc2NhbGUgLS0+CiAgPHJlY3QgeD0iNDAiIHk9IjU2IiB3aWR0aD0iNTMwIiBoZWlnaHQ9IjIyIiByeD0iMTEiIGZpbGw9IiNlNGUwZjgiIHN0cm9rZT0iIzYyNTBkNiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtZGFzaGFycmF5PSI2IDQiLz4KICA8dGV4dCB4PSIzMDUiIHk9IjcyIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMGIwYjBiIj5UYWlsc2NhbGU6IGVsIHBhc2lsbG8gcHJpdmFkbyBlbnRyZSBlbCBtw7N2aWwgeSBlbCBvcmRlbmFkb3I8L3RleHQ+Cjwvc3ZnPgo=" alt="Mapa de la tarea: el móvil, con las apps de Claude, Drive y Tailscale, habla por internet con tu Omarchy en Isard, donde corren Claude Code en remoto, rclone, yt-dlp y tus dos skills; rclone lleva y trae las carpetas a Google Drive; Tailscale une el móvil y el ordenador en un pasillo privado" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<p>Cinco piezas y cada una tiene un apartado. Léelo una vez entero antes de empezar: así sabes para
+qué sirve cada paso. El orden importa: sin Claude no hay remoto, sin rclone no hay Drive, y las
+skills usan todo lo anterior.</p>
+<p>❓ ¿Qué pieza del mapa se encarga de que el vídeo que pides desde el móvil acabe en Drive? ¿Y
+cuál hace que puedas pedirlo desde el autobús?</p>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="2-claude-en-tu-omarchy" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">2. Claude en tu Omarchy</h2>
+<p><strong>Claude Code</strong> es Claude dentro de tu terminal: lee tus ficheros, ejecuta comandos y hace cosas
+en tu máquina, pidiéndote permiso. Omarchy ya trae el lanzador:</p>
+<ol>
+<li>
+<p>Pulsa <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Mayús</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">A</code>, elige <strong>Claude Code</strong> y espera: se instala solo la
+primera vez. Si no sale, en un terminal:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">curl -fsSL https://claude.ai/install.sh | bash     <span style="color:#8f8a75"># instala Claude Code</span>
+claude --version                                    <span style="color:#8f8a75"># tiene que decir un número</span>
+</code></pre>
+</li>
+<li>
+<p>Crea tu carpeta de trabajo y entra en Claude desde ella:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">mkdir</span> -p ~/Drive &amp;&amp; <span style="color:#66d9ef">cd</span> ~/Drive
+claude
+</code></pre>
+</li>
+<li>
+<p>Escribe <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/login</code>, entra con tu cuenta de claude.ai en el navegador y vuelve al terminal. Si
+pregunta si confías en la carpeta, di que sí: es tuya.</p>
+</li>
+</ol>
+<p>Ahora pídele algo de verdad. Escribe en Claude:</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <em>Crea en esta carpeta un fichero <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">hola.md</code> con tres cosas que quiero aprender este curso.</em></p>
+</div>
+<p>👀 Verás que te enseña lo que va a hacer y te pide permiso antes de escribir el fichero. Acepta y
+míralo con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cat ~/Drive/hola.md</code> en otro terminal.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>Tres comandos de Claude que vas a usar siempre:</strong> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/help</code> (qué puede hacer), <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/clear</code> (empezar
+una conversación limpia) y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code> (parar lo que esté haciendo). Para salir, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Ctrl</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">C</code> dos veces
+o <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/exit</code>.</p>
+</div>
+<p>❓ Claude te ha pedido permiso antes de escribir. ¿Por qué crees que no lo hace sin preguntar?
+¿Qué le dejarías hacer sin preguntar y qué no?</p>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="3-claude-en-remoto-desde-el-móvil" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">3. Claude en remoto desde el móvil</h2>
+<p>Claude sigue corriendo <strong>en tu Omarchy</strong>, pero tú le hablas desde el móvil. Eso es <strong>Remote
+Control</strong>: la app es una ventana a la sesión que corre en tu máquina. Si apagas la máquina o
+cierras el terminal, se acabó la ventana.</p>
+<ol>
+<li>
+<p>Instala la app <strong>Claude</strong> en el móvil (Android o iOS) y entra con tu cuenta.</p>
+</li>
+<li>
+<p>En Omarchy, en tu carpeta, arranca Claude en modo servidor con un nombre que reconozcas:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">cd</span> ~/Drive
+claude remote-control --name <span style="color:#e6db74">&quot;Omarchy de Ane&quot;</span>      <span style="color:#8f8a75"># pon tu nombre</span>
+</code></pre>
+<p>La primera vez pregunta <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Enable Remote Control? (y/n)</code>: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">y</code>. Deja ese terminal abierto, en el
+escritorio 3 por ejemplo. Pulsa la <strong>barra espaciadora</strong> y te enseña un <strong>código QR</strong>.</p>
+</li>
+<li>
+<p>En el móvil, abre la app de Claude, toca <strong>Code</strong> y busca tu sesión por nombre (o escanea el
+QR). Un icono de ordenador con un punto verde quiere decir que está conectada.</p>
+</li>
+<li>
+<p>Desde el móvil escribe: <em>¿Qué ficheros hay en mi carpeta?</em> 👀 En el terminal de Omarchy verás
+la actividad; en el móvil, la respuesta con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">hola.md</code>.</p>
+</li>
+</ol>
+<p>❓ Haz una captura del móvil con la respuesta y otra del terminal mientras tanto. ¿Dónde se ha
+ejecutado el comando que ha listado los ficheros: en el móvil o en Omarchy? ¿Qué pasa si cierras
+el terminal?</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1d4ed8">ℹ️ Nota</p><p style="margin:.45em 0"><strong>Servidor y sesión normal.</strong> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">claude remote-control</code> sólo sirve para el móvil: en ese terminal
+no puedes escribir. Si quieres las dos cosas a la vez, usa <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">claude --rc</code> (sesión normal que
+además se ve desde el móvil). Para esta tarea vale el servidor.</p>
+</div>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="4-tailscale-tus-aparatos-se-ven" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">4. Tailscale: tus aparatos se ven</h2>
+<p>Tu Omarchy está en Isard y tu móvil en la red del móvil. No se ven. <strong>Tailscale</strong> crea una <strong>red
+privada</strong> entre tus aparatos: cada uno recibe una dirección que empieza por <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">100.</code> y un nombre, y
+se hablan entre ellos estén donde estén, cifrado. Es lo que usa el profesor para llegar a su
+Raspberry desde cualquier sitio.</p>
+<ol>
+<li>
+<p>En Omarchy:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">omarchy pkg add tailscale
+sudo systemctl <span style="color:#66d9ef">enable</span> --now tailscaled   <span style="color:#8f8a75"># el servicio</span>
+sudo tailscale up                        <span style="color:#8f8a75"># te da una dirección web: ábrela y entra con Google</span>
+</code></pre>
+</li>
+<li>
+<p>En el móvil instala la app <strong>Tailscale</strong> y entra con <strong>la misma</strong> cuenta de Google.</p>
+</li>
+<li>
+<p>Compruébalo en Omarchy:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">tailscale status            <span style="color:#8f8a75"># tus dos aparatos, con su dirección 100.x.x.x y su nombre</span>
+tailscale ping NOMBRE-DEL-MOVIL   <span style="color:#8f8a75"># el nombre que sale en status</span>
+</code></pre>
+</li>
+</ol>
+<p>👀 <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ping</code> responde con el tiempo que tarda: tus dos aparatos se ven aunque uno esté en Isard y el
+otro en el 5G.</p>
+<p>❓ Captura <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tailscale status</code> con los dos aparatos. ¿Qué dirección tiene tu Omarchy en Tailscale y
+cuál en Isard (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ip -br a</code>)? ¿Por qué hacen falta dos?</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #0e7490;background:#ecfeff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🚀 <strong style="color:#0e7490">Reto.</strong> Entra en tu Omarchy <strong>desde el móvil por SSH</strong>: en Omarchy, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">sudo tailscale set --ssh</code>;
+en el móvil, la app Termius (o cualquier cliente SSH) a <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">alumno@omarchy-smr</code>. Tailscale se
+encarga de la contraseña. Dentro, escribe <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">claude</code>: tu mayordomo, en el terminal del móvil.</p>
+</div>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="5-drive-con-rclone-una-carpeta-en-dos-sitios" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">5. Drive con rclone: una carpeta en dos sitios</h2>
+<p>Google no tiene app de Drive para Linux. <strong>rclone</strong> es el cartero: un programa de terminal que
+habla con Drive y con cuarenta nubes más. Vas a hacer que <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive/Fotos</code> en tu Omarchy y la
+carpeta <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Fotos</code> de tu Drive sean <strong>la misma carpeta</strong>, en las dos direcciones, cada cinco minutos.</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4ODAiIGhlaWdodD0iMzQwIiB2aWV3Qm94PSIwIDAgODgwIDM0MCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5yY2xvbmUgYmlzeW5jOiB1bmEgY2FycGV0YSBlbiBkb3Mgc2l0aW9zPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+QSBsYSBpenF1aWVyZGEsIGxhIGNhcnBldGEgbG9jYWwgfi9Ecml2ZS9Gb3RvcyBlbiBPbWFyY2h5OyBhIGxhIGRlcmVjaGEsIGxhIGNhcnBldGEgRm90b3MgZGUgR29vZ2xlIERyaXZlLiBFbnRyZSBlbGxhcywgcmNsb25lIGJpc3luYyBjYWRhIGNpbmNvIG1pbnV0b3M6IGxvIG51ZXZvIGVuIHVuIGxhZG8gc2UgY29waWEgYWwgb3RybywgbG8gYm9ycmFkbyBlbiB1biBsYWRvIHNlIGJvcnJhIGVuIGVsIG90cm8sIHkgc2kgdW4gZmljaGVybyBjYW1iacOzIGVuIGxvcyBkb3Mgc2l0aW9zIGdhbmEgZWwgbcOhcyBudWV2by4gTGEgcHJpbWVyYSB2ZXogc2UgZWplY3V0YSBjb24gbGEgb3BjacOzbiByZXN5bmMuPC9kZXNjPgogIDxyZWN0IHg9IjAuNSIgeT0iMC41IiB3aWR0aD0iODc5IiBoZWlnaHQ9IjMzOSIgcng9IjE0IiBmaWxsPSIjZmNmY2ZiIiBzdHJva2U9IiNlMmU1ZTkiLz4KICA8dGV4dCB4PSIyNCIgeT0iMzgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwYjBiMGIiPkVsIGNhcnRlcm86IGxhIG1pc21hIGNhcnBldGEgZW4gZG9zIHNpdGlvczwvdGV4dD4KCiAgPCEtLSBMb2NhbCAtLT4KICA8cmVjdCB4PSI0MCIgeT0iNzAiIHdpZHRoPSIyNTAiIGhlaWdodD0iMTgwIiByeD0iMTQiIGZpbGw9IiNkM2YyZTYiIHN0cm9rZT0iIzFiYWY3YSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHRleHQgeD0iMTY1IiB5PSIxMDAiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwYjBiMGIiPvCfkrsgT21hcmNoeTwvdGV4dD4KICA8dGV4dCB4PSIxNjUiIHk9IjEyNCIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkNvbnNvbGFzLCAnRGVqYVZ1IFNhbnMgTW9ubycsIG1vbm9zcGFjZSIgZmlsbD0iIzBiMGIwYiI+fi9Ecml2ZS9Gb3RvczwvdGV4dD4KICA8ZyBmb250LXNpemU9IjE0IiBmb250LWZhbWlseT0iQ29uc29sYXMsICdEZWphVnUgU2FucyBNb25vJywgbW9ub3NwYWNlIiBmaWxsPSIjMGIwYjBiIj4KICAgIDx0ZXh0IHg9IjcwIiB5PSIxNjYiPkxFRU1FLnR4dDwvdGV4dD4KICAgIDx0ZXh0IHg9IjcwIiB5PSIxOTIiPmZvdG8tbW92aWwuanBnPC90ZXh0PgogICAgPHRleHQgeD0iNzAiIHk9IjIxOCI+YXB1bnRlcy5tZCAgKG51ZXZvKTwvdGV4dD4KICA8L2c+CgogIDwhLS0gRHJpdmUgLS0+CiAgPHJlY3QgeD0iNTkwIiB5PSI3MCIgd2lkdGg9IjI1MCIgaGVpZ2h0PSIxODAiIHJ4PSIxNCIgZmlsbD0iI2ZkZWZjYyIgc3Ryb2tlPSIjZWRhMTAwIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSI3MTUiIHk9IjEwMCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzBiMGIwYiI+4piB77iPIEdvb2dsZSBEcml2ZTwvdGV4dD4KICA8dGV4dCB4PSI3MTUiIHk9IjEyNCIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkNvbnNvbGFzLCAnRGVqYVZ1IFNhbnMgTW9ubycsIG1vbm9zcGFjZSIgZmlsbD0iIzBiMGIwYiI+ZHJpdmU6Rm90b3M8L3RleHQ+CiAgPGcgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9IkNvbnNvbGFzLCAnRGVqYVZ1IFNhbnMgTW9ubycsIG1vbm9zcGFjZSIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI2MjAiIHk9IjE2NiI+TEVFTUUudHh0PC90ZXh0PgogICAgPHRleHQgeD0iNjIwIiB5PSIxOTIiPmZvdG8tbW92aWwuanBnICAobnVldm8pPC90ZXh0PgogICAgPHRleHQgeD0iNjIwIiB5PSIyMTgiPmFwdW50ZXMubWQ8L3RleHQ+CiAgPC9nPgoKICA8IS0tIEZsZWNoYXMgLS0+CiAgPGcgc3Ryb2tlPSIjMmE3OGQ2IiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiPgogICAgPHBhdGggZD0iTTI5MCAxNDAgSCA1OTAiLz4KICAgIDxwYXRoIGQ9Ik01ODAgMTMzIEwgNTkwIDE0MCBMIDU4MCAxNDciLz4KICAgIDxwYXRoIGQ9Ik01OTAgMTkwIEggMjkwIi8+CiAgICA8cGF0aCBkPSJNMzAwIDE4MyBMIDI5MCAxOTAgTCAzMDAgMTk3Ii8+CiAgPC9nPgogIDx0ZXh0IHg9IjQ0MCIgeT0iMTMwIiBmb250LXNpemU9IjEzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTI1MTRlIj5hcHVudGVzLm1kIHN1YmU8L3RleHQ+CiAgPHRleHQgeD0iNDQwIiB5PSIyMTIiIGZvbnQtc2l6ZT0iMTMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1MjUxNGUiPmZvdG8tbW92aWwuanBnIGJhamE8L3RleHQ+CiAgPHJlY3QgeD0iMzAwIiB5PSIxNTAiIHdpZHRoPSIyODAiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iIzFlMjIyNyIvPgogIDx0ZXh0IHg9IjQ0MCIgeT0iMTY4IiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZTZlOWVlIiBmb250LWZhbWlseT0iQ29uc29sYXMsICdEZWphVnUgU2FucyBNb25vJywgbW9ub3NwYWNlIj5yY2xvbmUgYmlzeW5jIMK3IGNhZGEgNSBtaW48L3RleHQ+CgogIDxnIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMwYjBiMGIiPgogICAgPHRleHQgeD0iNDAiIHk9IjI4OCIgZm9udC13ZWlnaHQ9IjcwMCI+UHJpbWVyYSB2ZXo6PC90ZXh0PgogICAgPHRleHQgeD0iMTUwIiB5PSIyODgiIGZvbnQtZmFtaWx5PSJDb25zb2xhcywgJ0RlamFWdSBTYW5zIE1vbm8nLCBtb25vc3BhY2UiPi0tcmVzeW5jPC90ZXh0PgogICAgPHRleHQgeD0iMjMyIiB5PSIyODgiIGZpbGw9IiM1MjUxNGUiPmNvcGlhIGxvIHF1ZSBoYXkgZW4gY2FkYSBsYWRvIGFsIG90cm8uIERlc3B1w6lzLCBudW5jYSBtw6FzLjwvdGV4dD4KICAgIDx0ZXh0IHg9IjQwIiB5PSIzMTYiIGZvbnQtd2VpZ2h0PSI3MDAiPlNpIGNhbWJpw7MgZW4gbG9zIGRvczo8L3RleHQ+CiAgICA8dGV4dCB4PSIyMDYiIHk9IjMxNiIgZm9udC1mYW1pbHk9IkNvbnNvbGFzLCAnRGVqYVZ1IFNhbnMgTW9ubycsIG1vbm9zcGFjZSI+LS1jb25mbGljdC1yZXNvbHZlIG5ld2VyPC90ZXh0PgogICAgPHRleHQgeD0iNDE4IiB5PSIzMTYiIGZpbGw9IiM1MjUxNGUiPmdhbmEgZWwgbcOhcyBudWV2bzsgZWwgb3RybyBxdWVkYSByZW5vbWJyYWRvLjwvdGV4dD4KICA8L2c+Cjwvc3ZnPgo=" alt="Sincronización en dos direcciones con rclone bisync: la carpeta local en Omarchy y la carpeta de Drive se comparan cada cinco minutos; lo nuevo en un lado se copia al otro; si un fichero cambió en los dos sitios, gana el más nuevo; la primera vez se hace con la opción resync" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<h3 id="51--conectar-rclone-con-tu-drive" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">5.1 · Conectar rclone con tu Drive</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">omarchy pkg add rclone
+rclone config
+</code></pre>
+<p>Contesta así (lo demás, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Enter</code> para dejarlo como viene):</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-text" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">n                      → nuevo remoto
+name&gt; drive            → así lo llamaremos siempre
+Storage&gt; drive         → Google Drive
+client_id&gt;             → la clave del aula que te ha dado el profesor
+client_secret&gt;         → la otra clave del aula
+scope&gt; 1               → acceso completo
+Edit advanced config?  → n
+Use web browser?       → y   (se abre el navegador: entra con TU cuenta de Google y acepta)
+Shared Drive?          → n
+</code></pre>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Las claves del aula no son tu cuenta.</strong> Sólo le dicen a Google «este programa es rclone, de la
+clase de Zornotza». Lo que da acceso a <strong>tu</strong> Drive es la ventana del navegador en la que entras
+tú. Por eso nunca se las des a nadie ni las subas a ningún sitio.</p>
+</div>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">rclone lsd drive:        <span style="color:#8f8a75"># las carpetas de la raíz de tu Drive 👀</span>
+</code></pre>
+<h3 id="52--la-primera-carpeta-en-dos-sitios" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">5.2 · La primera carpeta en dos sitios</h3>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">mkdir</span> -p ~/Drive/Fotos
+<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Carpeta creada el <span style="color:#e6e9ee">$(date)</span>&quot;</span> &gt; ~/Drive/Fotos/LEEME.txt
+rclone <span style="color:#66d9ef">mkdir</span> drive:Fotos
+rclone bisync ~/Drive/Fotos drive:Fotos --resync -v        <span style="color:#8f8a75"># SÓLO la primera vez</span>
+</code></pre>
+<p><strong><code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">bisync</code></strong> es «sincroniza en las dos direcciones». <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--resync</code> es «es la primera vez: copia lo que
+hay en cada lado al otro». A partir de ahora, <strong>sin</strong> <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--resync</code>:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">rclone bisync ~/Drive/Fotos drive:Fotos --resilient --recover --max-lock 2m --conflict-resolve newer --drive-skip-gdocs -v
+</code></pre>
+<p>👀 Abre la app de Drive en el móvil: ahí está <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Fotos/LEEME.txt</code>. Sube una foto desde el móvil a
+esa carpeta, repite el <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">bisync</code> y mira <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">ls ~/Drive/Fotos</code>. El cartero ha vuelto con la foto.</p>
+<h3 id="53--que-se-haga-solo-cada-cinco-minutos" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">5.3 · Que se haga solo, cada cinco minutos</h3>
+<p>Un cartero que sólo sale cuando tú se lo dices no sirve. Arch no trae <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">cron</code>, el programador de
+tareas: instálalo y deja escrito el guion del cartero.</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">omarchy pkg add cronie
+sudo systemctl <span style="color:#66d9ef">enable</span> --now cronie
+</code></pre>
+<p>Crea el fichero <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive/.sync.sh</code> (con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">nano</code> o pidiéndoselo a Claude) con esto:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#8f8a75">#!/bin/bash</span>
+<span style="color:#8f8a75"># .sync.sh — sincroniza con Drive cada carpeta apuntada en ~/Drive/.carpetas (una por línea)</span>
+<span style="color:#8f8a75"># Uso: .sync.sh            → todas</span>
+<span style="color:#8f8a75">#      .sync.sh Fotos      → sólo esa</span>
+LISTA=<span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/.carpetas&quot;</span>
+LOG=<span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/.sync.log&quot;</span>
+[ -f <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LISTA</span>&quot;</span> ] || <span style="color:#66d9ef">exit</span> 0
+<span style="color:#f92672">while</span> <span style="color:#66d9ef">read</span> -r carpeta; <span style="color:#f92672">do</span>
+  [ -z <span style="color:#e6db74">&quot;<span style="color:#fd971f">$carpeta</span>&quot;</span> ] &amp;&amp; <span style="color:#66d9ef">continue</span>
+  [ -n <span style="color:#e6db74">&quot;<span style="color:#fd971f">$1</span>&quot;</span> ] &amp;&amp; [ <span style="color:#e6db74">&quot;<span style="color:#fd971f">$1</span>&quot;</span> != <span style="color:#e6db74">&quot;<span style="color:#fd971f">$carpeta</span>&quot;</span> ] &amp;&amp; <span style="color:#66d9ef">continue</span>
+  rclone bisync <span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/<span style="color:#fd971f">$carpeta</span>&quot;</span> <span style="color:#e6db74">&quot;drive:<span style="color:#fd971f">$carpeta</span>&quot;</span> \
+    --resilient --recover --max-lock 2m --conflict-resolve newer --drive-skip-gdocs \
+    &gt;&gt; <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LOG</span>&quot;</span> 2&gt;&amp;1 || <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;<span style="color:#e6e9ee">$(date)</span> ERROR en <span style="color:#fd971f">$carpeta</span>&quot;</span> &gt;&gt; <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LOG</span>&quot;</span>
+<span style="color:#f92672">done</span> &lt; <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LISTA</span>&quot;</span>
+<span style="color:#66d9ef">tail</span> -n 500 <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LOG</span>&quot;</span> &gt; <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LOG</span>.tmp&quot;</span> &amp;&amp; <span style="color:#66d9ef">mv</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LOG</span>.tmp&quot;</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$LOG</span>&quot;</span>
+</code></pre>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#66d9ef">chmod</span> +x ~/Drive/.sync.sh
+<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Fotos&quot;</span> &gt;&gt; ~/Drive/.carpetas
+~/Drive/.sync.sh                       <span style="color:#8f8a75"># a mano, para ver que funciona</span>
+(crontab -l 2&gt;/dev/null; <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;*/5 * * * * <span style="color:#fd971f">$HOME</span>/Drive/.sync.sh&quot;</span>) | crontab -
+crontab -l                             <span style="color:#8f8a75"># 👀 la línea del cartero: cada 5 minutos</span>
+</code></pre>
+<p>❓ Deja un fichero nuevo en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive/Fotos</code>, espera cinco minutos y mira el móvil. Captura
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">crontab -l</code> y el <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tail ~/Drive/.sync.log</code>. ¿Qué pasa si cambias el mismo fichero en el móvil y
+en Omarchy a la vez? <em>(pista: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--conflict-resolve newer</code>)</em></p>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="6-tus-dos-primeras-skills" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">6. Tus dos primeras skills</h2>
+<p>Hasta ahora, cada vez que quieras una carpeta nueva en dos sitios tendrías que repetir cinco
+comandos. Una <strong>skill</strong> es una receta que le dejas escrita a Claude: una carpeta con un fichero
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">SKILL.md</code> que dice <strong>cuándo</strong> usarla y <strong>qué pasos</strong> seguir, y, si hace falta, un script con los
+comandos. Claude lee la descripción de todas tus skills y, cuando le pides algo que encaja, usa la
+receta.</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4ODAiIGhlaWdodD0iMzgwIiB2aWV3Qm94PSIwIDAgODgwIDM4MCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIFJvYm90bywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InQgZCI+CiAgPHRpdGxlIGlkPSJ0Ij5BbmF0b23DrWEgZGUgdW5hIHNraWxsPC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+QSBsYSBpenF1aWVyZGEsIGxhIGNhcnBldGEgfi8uY2xhdWRlL3NraWxscy9kZXNjYXJnYXIgY29uIGRvcyBmaWNoZXJvczogU0tJTEwubWQsIGNvbiB1bmEgY2FiZWNlcmEgcXVlIGxsZXZhIGVsIG5vbWJyZSB5IGxhIGRlc2NyaXBjacOzbiB5IGRlYmFqbyBsb3MgcGFzb3MsIHkgZWwgc2NyaXB0IGRlc2Nhcmdhci5zaC4gQSBsYSBkZXJlY2hhLCBlbCBmbHVqbzogdMO6IHBpZGVzIMKrYsOhamFtZSBlc3RlIHbDrWRlb8K7LCBDbGF1ZGUgbGVlIGxhIGRlc2NyaXBjacOzbiBkZSB0b2RhcyBsYXMgc2tpbGxzLCBlbGlnZSBsYSBxdWUgZW5jYWphIHkgc2lndWUgc3VzIHBhc29zIGVqZWN1dGFuZG8gZWwgc2NyaXB0LjwvZGVzYz4KICA8cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9Ijg3OSIgaGVpZ2h0PSIzNzkiIHJ4PSIxNCIgZmlsbD0iI2ZjZmNmYiIgc3Ryb2tlPSIjZTJlNWU5Ii8+CiAgPHRleHQgeD0iMjQiIHk9IjM4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGIwYjBiIj5VbmEgc2tpbGwgZXMgdW5hIHJlY2V0YSBlbiB1bmEgY2FycGV0YTwvdGV4dD4KCiAgPCEtLSBDYXJwZXRhIC0tPgogIDx0ZXh0IHg9IjQwIiB5PSI3NiIgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9IkNvbnNvbGFzLCAnRGVqYVZ1IFNhbnMgTW9ubycsIG1vbm9zcGFjZSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBiMGIwYiI+fi8uY2xhdWRlL3NraWxscy9kZXNjYXJnYXIvPC90ZXh0PgogIDxyZWN0IHg9IjQwIiB5PSI5MCIgd2lkdGg9IjQwMCIgaGVpZ2h0PSIxOTAiIHJ4PSIxMiIgZmlsbD0iI2U0ZTBmOCIgc3Ryb2tlPSIjNjI1MGQ2IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSI2MCIgeT0iMTE4IiBmb250LXNpemU9IjE1IiBmb250LXdlaWdodD0iNzAwIiBmb250LWZhbWlseT0iQ29uc29sYXMsICdEZWphVnUgU2FucyBNb25vJywgbW9ub3NwYWNlIiBmaWxsPSIjMGIwYjBiIj5TS0lMTC5tZDwvdGV4dD4KICA8cmVjdCB4PSI2MCIgeT0iMTI4IiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjU2IiByeD0iOCIgZmlsbD0iI2ZkZTRkOCIgc3Ryb2tlPSIjZWI2ODM0IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8ZyBmb250LXNpemU9IjEzIiBmb250LWZhbWlseT0iQ29uc29sYXMsICdEZWphVnUgU2FucyBNb25vJywgbW9ub3NwYWNlIiBmaWxsPSIjMGIwYjBiIj4KICAgIDx0ZXh0IHg9IjcyIiB5PSIxNDgiPm5hbWU6IGRlc2NhcmdhcjwvdGV4dD4KICAgIDx0ZXh0IHg9IjcyIiB5PSIxNjgiPmRlc2NyaXB0aW9uOiBjdcOhbmRvIHVzYXJsYSAg4oaQIENsYXVkZSBsZWUgZXN0bzwvdGV4dD4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxMyIgZmlsbD0iIzBiMGIwYiI+CiAgICA8dGV4dCB4PSI3MiIgeT0iMjA4Ij4xLiBTYWNhIGxhcyBVUkwgZGUgbG8gcXVlIHBpZGUgZWwgdXN1YXJpbzwvdGV4dD4KICAgIDx0ZXh0IHg9IjcyIiB5PSIyMjgiPjIuIEVqZWN1dGEgZGVzY2FyZ2FyLnNoIGNvbiBlbGxhczwvdGV4dD4KICAgIDx0ZXh0IHg9IjcyIiB5PSIyNDgiPjMuIFJlc3BvbmRlIGNvbiBlbCBub21icmUgZGVsIGZpY2hlcm88L3RleHQ+CiAgPC9nPgogIDx0ZXh0IHg9IjYwIiB5PSIyNzIiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtZmFtaWx5PSJDb25zb2xhcywgJ0RlamFWdSBTYW5zIE1vbm8nLCBtb25vc3BhY2UiIGZpbGw9IiMwYjBiMGIiPmRlc2Nhcmdhci5zaDwvdGV4dD4KCiAgPCEtLSBGbHVqbyAtLT4KICA8ZyBmb250LXNpemU9IjE0IiBmaWxsPSIjMGIwYjBiIj4KICAgIDxyZWN0IHg9IjUwMCIgeT0iOTAiIHdpZHRoPSIzNDAiIGhlaWdodD0iNDAiIHJ4PSIxMCIgZmlsbD0iI2NkZTJmYiIgc3Ryb2tlPSIjMmE3OGQ2IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgIDx0ZXh0IHg9IjY3MCIgeT0iMTE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Uw7o6IMKrYsOhamFtZSBlc3RlIHbDrWRlbzogaHR0cHM6Ly/igKbCuzwvdGV4dD4KICAgIDxyZWN0IHg9IjUwMCIgeT0iMTYwIiB3aWR0aD0iMzQwIiBoZWlnaHQ9IjQwIiByeD0iMTAiIGZpbGw9IiNmZGU0ZDgiIHN0cm9rZT0iI2ViNjgzNCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICA8dGV4dCB4PSI2NzAiIHk9IjE4NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q2xhdWRlIGxlZSBsYXMgZGVzY3JpcGNpb25lcyB5IGVsaWdlIMKrZGVzY2FyZ2Fywrs8L3RleHQ+CiAgICA8cmVjdCB4PSI1MDAiIHk9IjIzMCIgd2lkdGg9IjM0MCIgaGVpZ2h0PSI0MCIgcng9IjEwIiBmaWxsPSIjZTRlMGY4IiBzdHJva2U9IiM2MjUwZDYiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgPHRleHQgeD0iNjcwIiB5PSIyNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlNpZ3VlIGxvcyBwYXNvczogZWplY3V0YSBkZXNjYXJnYXIuc2g8L3RleHQ+CiAgICA8cmVjdCB4PSI1MDAiIHk9IjMwMCIgd2lkdGg9IjM0MCIgaGVpZ2h0PSI0MCIgcng9IjEwIiBmaWxsPSIjZmRlZmNjIiBzdHJva2U9IiNlZGExMDAiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgPHRleHQgeD0iNjcwIiB5PSIzMjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkVsIHbDrWRlbyBlc3TDoSBlbiB+L0RyaXZlL0Rlc2NhcmdhcyB5IGVuIERyaXZlPC90ZXh0PgogIDwvZz4KICA8ZyBzdHJva2U9IiM4YThmOTgiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSI+CiAgICA8cGF0aCBkPSJNNjcwIDEzMCBWIDE2MCIvPjxwYXRoIGQ9Ik02NjMgMTUwIEwgNjcwIDE2MCBMIDY3NyAxNTAiLz4KICAgIDxwYXRoIGQ9Ik02NzAgMjAwIFYgMjMwIi8+PHBhdGggZD0iTTY2MyAyMjAgTCA2NzAgMjMwIEwgNjc3IDIyMCIvPgogICAgPHBhdGggZD0iTTY3MCAyNzAgViAzMDAiLz48cGF0aCBkPSJNNjYzIDI5MCBMIDY3MCAzMDAgTCA2NzcgMjkwIi8+CiAgPC9nPgogIDx0ZXh0IHg9IjQwIiB5PSIzMjAiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiM1MjUxNGUiPlNpbiBsYSBkZXNjcmlwY2nDs24sIENsYXVkZSBubyBzYWJlIGN1w6FuZG8gdXNhcmxhLjwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iMzQyIiBmb250LXNpemU9IjEzIiBmaWxsPSIjNTI1MTRlIj5TaW4gZWwgc2NyaXB0LCB0ZW5kcsOtYSBxdWUgaW52ZW50YXJzZSBsb3MgY29tYW5kb3MgY2FkYSB2ZXouPC90ZXh0Pgo8L3N2Zz4K" alt="Anatomía de una skill: la carpeta ~/.claude/skills/descargar contiene SKILL.md, con una cabecera de nombre y descripción y los pasos, y el script descargar.sh; Claude lee la descripción, decide que encaja con lo que le has pedido y sigue los pasos" style="max-width:100%;height:auto;display:block;margin:1.3em auto;border:1px solid #e2e5e9;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)" /></p>
+<p>Las skills personales viven en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.claude/skills/&lt;nombre&gt;/SKILL.md</code>. Vas a crear dos <strong>con ayuda
+de Claude</strong>, pero leyendo cada línea: en el concurso de la entrega te preguntarán qué hace cada
+una.</p>
+<h3 id="61--skill-carpeta-compartida" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6.1 · Skill <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">carpeta-compartida</code></h3>
+<p>Abre Claude en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive</code> y pídele, con tus palabras, esto:</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <em>Crea una skill personal llamada <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">carpeta-compartida</code> en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.claude/skills/</code>. Tiene que servir
+cuando yo diga «crea una carpeta compartida llamada X» o «/carpeta-compartida X». Su script
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">crear.sh NOMBRE</code> tiene que: crear <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive/NOMBRE</code> con un <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">LEEME.txt</code> con la fecha, crear
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">drive:NOMBRE</code> con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rclone mkdir</code>, hacer el primer <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">rclone bisync --resync</code> entre las dos, y
+añadir NOMBRE a <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive/.carpetas</code> si no está. Al acabar, la skill me dice la ruta local y la
+de Drive.</em></p>
+</div>
+<p>Claude te enseñará los dos ficheros antes de escribirlos. Compara <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">SKILL.md</code> con este, que es
+el mínimo que tiene que tener:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-markdown" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">---
+name: carpeta-compartida
+description: Crea una carpeta en ~/Drive sincronizada con la carpeta del mismo nombre en Google Drive (rclone bisync cada 5 min). Úsala cuando el usuario diga &quot;crea una carpeta compartida&quot;, &quot;nueva carpeta en Drive&quot; o /carpeta-compartida NOMBRE.
+---
+
+# carpeta-compartida
+
+1. Saca el NOMBRE de lo que pide el usuario (sin espacios ni barras).
+2. Ejecuta `bash ~/.claude/skills/carpeta-compartida/crear.sh NOMBRE`.
+3. Responde con la ruta local (`~/Drive/NOMBRE`) y la de Drive (`drive:NOMBRE`), y recuerda que el cron la sincroniza cada 5 minutos.
+</code></pre>
+<p>Y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">crear.sh</code>, que tiene que hacer exactamente lo de 5.2 pero con el nombre que le pasen:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#8f8a75">#!/bin/bash</span>
+<span style="color:#8f8a75"># crear.sh NOMBRE — carpeta en ~/Drive sincronizada con drive:NOMBRE</span>
+<span style="color:#66d9ef">set</span> -e
+n=<span style="color:#e6db74">&quot;<span style="color:#fd971f">$1</span>&quot;</span>; [ -z <span style="color:#e6db74">&quot;<span style="color:#fd971f">$n</span>&quot;</span> ] &amp;&amp; { <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Uso: crear.sh NOMBRE&quot;</span>; <span style="color:#66d9ef">exit</span> 1; }
+<span style="color:#66d9ef">mkdir</span> -p <span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/<span style="color:#fd971f">$n</span>&quot;</span>
+[ -f <span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/<span style="color:#fd971f">$n</span>/LEEME.txt&quot;</span> ] || <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Carpeta creada el <span style="color:#e6e9ee">$(date)</span>&quot;</span> &gt; <span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/<span style="color:#fd971f">$n</span>/LEEME.txt&quot;</span>
+rclone <span style="color:#66d9ef">mkdir</span> <span style="color:#e6db74">&quot;drive:<span style="color:#fd971f">$n</span>&quot;</span>
+rclone bisync <span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/<span style="color:#fd971f">$n</span>&quot;</span> <span style="color:#e6db74">&quot;drive:<span style="color:#fd971f">$n</span>&quot;</span> --resync --resilient --drive-skip-gdocs -v
+grep -qx <span style="color:#e6db74">&quot;<span style="color:#fd971f">$n</span>&quot;</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/.carpetas&quot;</span> 2&gt;/dev/null || <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$n</span>&quot;</span> &gt;&gt; <span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/.carpetas&quot;</span>
+<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Lista: ~/Drive/<span style="color:#fd971f">$n</span>  &lt;-&gt;  drive:<span style="color:#fd971f">$n</span>&quot;</span>
+</code></pre>
+<p>Pruébala: sal de Claude, vuelve a entrar (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">claude</code>) y escribe <em>crea una carpeta compartida llamada
+Clase</em>. 👀 En el móvil, en Drive, aparece <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Clase/LEEME.txt</code>.</p>
+<p>❓ ¿Qué parte del <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">SKILL.md</code> hace que Claude elija esta skill y no otra cuando dices «carpeta
+compartida»? ¿Qué pasaría si dos skills tuvieran descripciones casi iguales?</p>
+<h3 id="62--skill-descargar" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6.2 · Skill <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">descargar</code></h3>
+<p>Omarchy trae <strong>yt-dlp</strong>, un programa que descarga vídeo o audio de YouTube, Instagram, TikTok y
+cientos de sitios más (si no está: <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">omarchy pkg add yt-dlp</code>). Pruébalo a mano primero:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">yt-dlp -P ~/Drive/Descargas <span style="color:#e6db74">&quot;URL-DE-UN-VIDEO-CORTO&quot;</span>      <span style="color:#8f8a75"># -P: la carpeta donde lo deja</span>
+yt-dlp -P ~/Drive/Descargas -x --audio-format mp3 <span style="color:#e6db74">&quot;URL&quot;</span>  <span style="color:#8f8a75"># sólo el audio</span>
+</code></pre>
+<p>Antes, crea <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Descargas</code> como carpeta compartida con tu skill nueva (<em>crea una carpeta compartida
+llamada Descargas</em>). Ahora pídele a Claude la segunda skill:</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">ℹ️ <em>Crea una skill personal llamada <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">descargar</code> en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/.claude/skills/</code>. Sirve cuando yo diga
+«descarga este vídeo», «bájame esto», «guarda este reel en Drive» o «/descargar URL», con la
+opción de sólo audio. Su script <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">descargar.sh [--audio] URL...</code> usa yt-dlp para dejar los
+ficheros en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive/Descargas</code> y después ejecuta <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive/.sync.sh Descargas</code> para subirlos a
+Drive al momento. La skill me responde con el nombre del fichero y me recuerda que está en
+Drive, en Descargas.</em></p>
+</div>
+<p>El script, como mínimo:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#8f8a75">#!/bin/bash</span>
+<span style="color:#8f8a75"># descargar.sh [--audio] URL... — descarga con yt-dlp a ~/Drive/Descargas y lo sube a Drive</span>
+<span style="color:#66d9ef">set</span> -e
+destino=<span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/Descargas&quot;</span>
+<span style="color:#66d9ef">mkdir</span> -p <span style="color:#e6db74">&quot;<span style="color:#fd971f">$destino</span>&quot;</span>
+opciones=()
+<span style="color:#f92672">if</span> [ <span style="color:#e6db74">&quot;<span style="color:#fd971f">$1</span>&quot;</span> = <span style="color:#e6db74">&quot;--audio&quot;</span> ]; <span style="color:#f92672">then</span> opciones=(-x --audio-format mp3); <span style="color:#66d9ef">shift</span>; <span style="color:#f92672">fi</span>
+[ <span style="color:#fd971f">$#</span> -eq 0 ] &amp;&amp; { <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&quot;Uso: descargar.sh [--audio] URL...&quot;</span>; <span style="color:#66d9ef">exit</span> 1; }
+yt-dlp -P <span style="color:#e6db74">&quot;<span style="color:#fd971f">$destino</span>&quot;</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">${opciones[@]}</span>&quot;</span> <span style="color:#e6db74">&quot;<span style="color:#fd971f">$@</span>&quot;</span>
+<span style="color:#e6db74">&quot;<span style="color:#fd971f">$HOME</span>/Drive/.sync.sh&quot;</span> Descargas
+<span style="color:#66d9ef">ls</span> -t <span style="color:#e6db74">&quot;<span style="color:#fd971f">$destino</span>&quot;</span> | <span style="color:#66d9ef">head</span> -n <span style="color:#e6db74">&quot;<span style="color:#fd971f">$#</span>&quot;</span>
+</code></pre>
+<p>Pruébala desde el terminal: <em>descarga este vídeo: URL</em>. 👀 Claude ejecuta el script, te dice el
+nombre del fichero y, en el móvil, Drive lo enseña en <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Descargas</code>.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#b3261e">⚠️ Aviso</p><p style="margin:.45em 0"><strong>Lo que no se descarga.</strong> Nada que necesite contraseña, nada de pago y nada que no sea para
+ver y estudiar: lo que bajas es de otra persona. Instagram a veces avisa de «CSRF token»: es un
+aviso, baja igual.</p>
+</div>
+<h3 id="63--el-cierre-desde-el-autobús" style="font-size:1.15em;line-height:1.3;margin:1.8em 0 .6em;color:#1c1e21">6.3 · El cierre: desde el autobús</h3>
+<p>Deja <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">claude remote-control</code> corriendo en Omarchy (apartado 3). Coge el móvil, abre la sesión en
+la app de Claude y escribe: <em>bájame este vídeo</em> con una URL. Espera. Abre la app de Drive.</p>
+<p>🎉 Ahí está. Has pedido algo desde el móvil, lo ha hecho tu ordenador, y te ha llegado a la nube.
+El profesor hace exactamente esto, con una Raspberry en vez de Isard.</p>
+<p>❓ Repasa el mapa del apartado 1 y di por qué pieza ha pasado tu petición, en orden. ¿Qué pieza
+podrías quitar y seguiría funcionando?</p>
+<hr style="border:0;border-top:1px solid #e2e5e9;margin:2.4em 0" />
+<h2 id="7-entrega" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">7. Entrega</h2>
+<p>Entrega en Moodle <strong>«Tarea · Tu ordenador en el bolsillo»</strong>:</p>
+<p><strong>Seis capturas</strong>, cada una con una línea que diga qué enseña:</p>
+<ol>
+<li>🤖 Claude en el terminal de Omarchy después de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/login</code>, con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">hola.md</code> creado.</li>
+<li>📱 El móvil con la sesión de Remote Control respondiendo, y el terminal de Omarchy al lado.</li>
+<li>🔗 <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tailscale status</code> con tus dos aparatos y un <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tailscale ping</code> al móvil.</li>
+<li>☁️ <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">crontab -l</code> con la línea del cartero y la app de Drive del móvil enseñando <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Fotos</code>.</li>
+<li>🧑‍🍳 Claude usando <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">/carpeta-compartida</code> para crear <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Clase</code>, y la carpeta en el móvil.</li>
+<li>🎬 La petición de descarga <strong>hecha desde el móvil</strong> y el vídeo en la app de Drive.</li>
+</ol>
+<p><strong>Y tus dos skills</strong>: los ficheros <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">SKILL.md</code> y los scripts de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">carpeta-compartida</code> y
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">descargar</code>, pegados en un documento o comprimidos (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">tar czf skills.tgz -C ~/.claude skills</code>).</p>
+<p>Es <strong>Apto</strong> si están las seis capturas, son de <strong>tus</strong> aparatos (se ve tu nombre de sesión y
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">omarchy-smr</code>), las dos skills funcionan y <strong>sabes explicar cada línea</strong> de tus scripts cuando se
+te pregunte.</p>
+<p><strong>Antes de entregar, comprueba:</strong></p>
+<ul>
+<li style="list-style:none;margin-left:-1.2em">☐ En la captura 6 la petición sale en el móvil, no en el terminal.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">crontab -l</code> tiene la línea de <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">.sync.sh</code> cada 5 minutos.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Ninguna captura ni fichero enseña una contraseña ni las claves del aula.</li>
+<li style="list-style:none;margin-left:-1.2em">☐ Sabes decir qué hace <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--resync</code> y por qué sólo se usa la primera vez.</li>
+</ul>
+<h2 id="8-si-vas-rápido" style="font-size:1.45em;line-height:1.25;margin:2.2em 0 .7em;padding-bottom:.3em;border-bottom:2px solid #e2e5e9;color:#1c1e21">8. Si vas rápido</h2>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #0e7490;background:#ecfeff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🚀 <strong style="color:#0e7490">Reto.</strong> Mejora <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">descargar</code> con una opción <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">--en SUBCARPETA</code> que deje el fichero en
+<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">~/Drive/Descargas/SUBCARPETA</code>. Pídeselo a Claude, lee el cambio y pruébalo desde el móvil:
+<em>bájame esto en la carpeta musica, sólo el audio</em>.</p>
+</div>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #0e7490;background:#ecfeff;border-radius:0 8px 8px 0">
+<p style="margin:.45em 0">🚀 <strong style="color:#0e7490">Reto.</strong> Una tercera skill tuya. Algo que hagas a menudo en tres o cuatro comandos (hacer una
+copia de una carpeta a Drive, limpiar la carpeta de capturas, ver cuánto ocupa cada carpeta…).
+Escribe primero el <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">SKILL.md</code> a mano, sin Claude, y luego que él te haga el script.</p>
+</div>
+<p style="margin-top:48px;padding-top:14px;border-top:1px solid #e2e5e9;font-size:.8em;color:#5b6168">Sistemas Operativos Monopuesto (SMR 1.º) · Tarea</p></div>
+</body>
+</html>
