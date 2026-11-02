@@ -85,7 +85,8 @@ virtuales del centro, y tú lo ves desde el navegador o desde el visor. En Isard
 <ol>
 <li>Entra en <strong>Medios</strong> y busca la ISO de Omarchy. Pulsa su icono de <strong>crear escritorio</strong>.</li>
 <li>Ponle nombre <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Omarchy-SMR</code> y elige el hardware: <strong>4 núcleos</strong>, <strong>4 GB</strong> de RAM (8 si te deja)
-y <strong>40 GB</strong> de disco. Lo demás, como venga.</li>
+y <strong>40 GB</strong> de disco. En <strong>Vídeo</strong>, elige <strong>virtio</strong>: con el que viene por defecto la pantalla
+se llena de restos de ventanas viejas.</li>
 <li>En <strong>Visores</strong>, marca también el visor <strong>SPICE</strong>. Lo vas a necesitar por la tecla <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code>.</li>
 </ol>
 <div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #b3261e;background:#fdf1f0;border-radius:0 8px 8px 0">
@@ -102,12 +103,38 @@ espera: tarda menos que un café ☕. Al acabar, <strong>apaga</strong> el escri
 cifra el disco entero por defecto; sin esa contraseña, el disco es ruido. Es la misma que pusiste
 al instalar. Después entras directamente: no hay pantalla de usuario como en Mint.</p>
 <p>Si todo se ve <strong>enorme</strong>, es normal: Omarchy está pensado para pantallas de portátil de alta
-resolución, no para una máquina virtual. Pulsa <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Espacio</code>, entra en <strong>Setup → Monitors</strong>
-y cambia esta línea:</p>
+resolución, no para una máquina virtual. Y si en el visor ves <strong>franjas grises</strong> a los lados, es
+que la pantalla de Omarchy no tiene la forma de la tuya. Las dos cosas se arreglan en el mismo
+fichero. Pulsa <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Espacio</code>, entra en <strong>Setup → Monitors</strong> y cambia estas dos líneas:</p>
 <pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-lua" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit"><span style="color:#f92672">local</span> omarchy_gdk_scale = <span style="color:#ae81ff">2</span>     <span style="color:#8f8a75">-- pon 1: la MV es una pantalla normal</span>
+hl.monitor({ <span style="color:#66d9ef">output</span> = <span style="color:#e6db74">&quot;&quot;</span>, mode = <span style="color:#e6db74">&quot;preferred&quot;</span>, position = <span style="color:#e6db74">&quot;auto&quot;</span> ... })
+<span style="color:#8f8a75">-- cámbiala por:</span>
+hl.monitor({ <span style="color:#66d9ef">output</span> = <span style="color:#e6db74">&quot;Virtual-1&quot;</span>, mode = <span style="color:#e6db74">&quot;1600x900@60&quot;</span>, position = <span style="color:#e6db74">&quot;auto&quot;</span>, scale = <span style="color:#ae81ff">1</span> })
 </code></pre>
 <p>Se abre en Neovim: pulsa <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">i</code> para escribir, <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Esc</code> cuando acabes y <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">:wq</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Enter</code> para guardar y
-salir. Al salir, Omarchy aplica el cambio solo.</p>
+salir. Al salir, Omarchy aplica el cambio solo. Después, reinicia (<code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Escape</code> → Restart)
+para que todas las ventanas nazcan ya con el tamaño bueno.</p>
+<div style="margin:1.3em 0;padding:12px 18px;border-left:5px solid #1c6b4a;background:#eff7f2;border-radius:0 8px 8px 0">
+<p style="margin:.2em 0 .4em;font-weight:700;color:#1c6b4a">💡 Consejo</p><p style="margin:.45em 0"><strong>El nombre y los tamaños de tu pantalla</strong> salen con <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">hyprctl monitors all</code>. Si tu monitor es
+como los del aula (16:9), usa 1600x900 o 1920x1080; si es de portátil 16:10, 1680x1050 o 1280x800.
+Las franjas desaparecen cuando las dos formas coinciden.</p>
+</div>
+<p><strong>Va algo lento, y es normal.</strong> Isard no le da a tu máquina una tarjeta gráfica: Omarchy dibuja
+todo con el procesador. Compruébalo y quítale trabajo:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-bash" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">omarchy pkg add mesa-utils
+glxinfo -B | grep renderer      <span style="color:#8f8a75"># 👀 llvmpipe: se dibuja con la CPU, no con una tarjeta</span>
+</code></pre>
+<p>En <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Super</code> + <code style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.88em;background:#f3f4f6;border:1px solid #e2e5e9;border-radius:4px;padding:.1em .35em">Espacio</code> → <strong>Appearance → Animations</strong>, desactiva las animaciones. Si aún va
+pesado, añade al final de <strong>Setup → Look &amp; Feel</strong>:</p>
+<pre style="background:#1e2227;color:#e6e9ee;border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;font-size:.86em;line-height:1.5;white-space:pre-wrap;word-break:break-word"><code class="language-lua" style="font-family:Consolas,'Cascadia Mono','SF Mono',Menlo,monospace;font-variant-ligatures:none;background:none;color:inherit">hl.<span style="color:#66d9ef">config</span>({
+  animations = { enabled = <span style="color:#ae81ff">false</span> },
+  decoration = {
+    blur = { enabled = <span style="color:#ae81ff">false</span> },     <span style="color:#8f8a75">-- el desenfoque de fondos y menús</span>
+    shadow = { enabled = <span style="color:#ae81ff">false</span> },   <span style="color:#8f8a75">-- las sombras de las ventanas</span>
+  },
+})
+</code></pre>
+<p>En un ordenador con tarjeta gráfica nada de esto hace falta: es el precio de la máquina virtual.</p>
 <p>❓ ¿Cuánto has tardado desde que arrancó la ISO hasta ver el escritorio? ¿Qué te pidió el
 instalador y qué <strong>no</strong> te pidió, comparado con la instalación de Mint (particiones, idioma,
 escritorio)?</p>

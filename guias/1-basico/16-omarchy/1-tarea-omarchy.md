@@ -70,7 +70,8 @@ virtuales del centro, y tú lo ves desde el navegador o desde el visor. En Isard
 
 1. Entra en **Medios** y busca la ISO de Omarchy. Pulsa su icono de **crear escritorio**.
 2. Ponle nombre `Omarchy-SMR` y elige el hardware: **4 núcleos**, **4 GB** de RAM (8 si te deja)
-   y **40 GB** de disco. Lo demás, como venga.
+   y **40 GB** de disco. En **Vídeo**, elige **virtio**: con el que viene por defecto la pantalla
+   se llena de restos de ventanas viejas.
 3. En **Visores**, marca también el visor **SPICE**. Lo vas a necesitar por la tecla `Super`.
 
 > [!WARNING]
@@ -90,15 +91,48 @@ cifra el disco entero por defecto; sin esa contraseña, el disco es ruido. Es la
 al instalar. Después entras directamente: no hay pantalla de usuario como en Mint.
 
 Si todo se ve **enorme**, es normal: Omarchy está pensado para pantallas de portátil de alta
-resolución, no para una máquina virtual. Pulsa `Super` + `Espacio`, entra en **Setup → Monitors**
-y cambia esta línea:
+resolución, no para una máquina virtual. Y si en el visor ves **franjas grises** a los lados, es
+que la pantalla de Omarchy no tiene la forma de la tuya. Las dos cosas se arreglan en el mismo
+fichero. Pulsa `Super` + `Espacio`, entra en **Setup → Monitors** y cambia estas dos líneas:
 
 ```lua
 local omarchy_gdk_scale = 2     -- pon 1: la MV es una pantalla normal
+hl.monitor({ output = "", mode = "preferred", position = "auto" ... })
+-- cámbiala por:
+hl.monitor({ output = "Virtual-1", mode = "1600x900@60", position = "auto", scale = 1 })
 ```
 
 Se abre en Neovim: pulsa `i` para escribir, `Esc` cuando acabes y `:wq` + `Enter` para guardar y
-salir. Al salir, Omarchy aplica el cambio solo.
+salir. Al salir, Omarchy aplica el cambio solo. Después, reinicia (`Super` + `Escape` → Restart)
+para que todas las ventanas nazcan ya con el tamaño bueno.
+
+> [!TIP]
+> **El nombre y los tamaños de tu pantalla** salen con `hyprctl monitors all`. Si tu monitor es
+> como los del aula (16:9), usa 1600x900 o 1920x1080; si es de portátil 16:10, 1680x1050 o 1280x800.
+> Las franjas desaparecen cuando las dos formas coinciden.
+
+**Va algo lento, y es normal.** Isard no le da a tu máquina una tarjeta gráfica: Omarchy dibuja
+todo con el procesador. Compruébalo y quítale trabajo:
+
+```bash
+omarchy pkg add mesa-utils
+glxinfo -B | grep renderer      # 👀 llvmpipe: se dibuja con la CPU, no con una tarjeta
+```
+
+En `Super` + `Espacio` → **Appearance → Animations**, desactiva las animaciones. Si aún va
+pesado, añade al final de **Setup → Look & Feel**:
+
+```lua
+hl.config({
+  animations = { enabled = false },
+  decoration = {
+    blur = { enabled = false },     -- el desenfoque de fondos y menús
+    shadow = { enabled = false },   -- las sombras de las ventanas
+  },
+})
+```
+
+En un ordenador con tarjeta gráfica nada de esto hace falta: es el precio de la máquina virtual.
 
 ❓ ¿Cuánto has tardado desde que arrancó la ISO hasta ver el escritorio? ¿Qué te pidió el
 instalador y qué **no** te pidió, comparado con la instalación de Mint (particiones, idioma,
