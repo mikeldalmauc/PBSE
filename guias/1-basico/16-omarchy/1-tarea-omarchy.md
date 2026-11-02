@@ -77,7 +77,9 @@ virtuales del centro, y tú lo ves desde el navegador o desde el visor. En Isard
 > [!WARNING]
 > **La tecla `Super` se la queda Windows.** En el visor del navegador, pulsar `Super` abre el menú
 > de inicio de **tu** equipo, no el de Omarchy. Abre el escritorio con el **visor SPICE** y ponlo a
-> **pantalla completa**: así todas las teclas van a la máquina virtual.
+> **pantalla completa** con `F11`: así todas las teclas van a la máquina virtual. Para salir,
+> `Mayús` + `F12`. Si la barra de tareas de Windows sigue viéndose abajo, ocúltala: clic derecho
+> en ella → Configuración de la barra de tareas → Comportamientos → «Ocultar automáticamente».
 
 ![Pantalla del instalador de Omarchy: el logo en letras pixeladas verdes y una tabla con usuario, contraseña, nombre completo, correo, nombre del equipo, zona horaria y teclado, y la pregunta «Does this look right?» con Yes marcado](images/install-config.webp)
 
@@ -119,20 +121,22 @@ omarchy pkg add mesa-utils
 glxinfo -B | grep renderer      # 👀 llvmpipe: se dibuja con la CPU, no con una tarjeta
 ```
 
-En `Super` + `Espacio` → **Appearance → Animations**, desactiva las animaciones. Si aún va
-pesado, añade al final de **Setup → Look & Feel**:
+Lo que más pesa son las **animaciones**: cada ventana que se abre, se cierra o se mueve se dibuja
+fotograma a fotograma. Apágalas: `Super` + `Espacio` → **Setup → Look & Feel**, busca el bloque
+que dice `Disable all animations` y quítale los `--` del principio de cada línea:
 
 ```lua
 hl.config({
-  animations = { enabled = false },
-  decoration = {
-    blur = { enabled = false },     -- el desenfoque de fondos y menús
-    shadow = { enabled = false },   -- las sombras de las ventanas
+  animations = {
+    -- Disable all animations.
+    enabled = false,
   },
 })
 ```
 
-En un ordenador con tarjeta gráfica nada de esto hace falta: es el precio de la máquina virtual.
+Guarda con `:wq`. 👀 Las ventanas ya no se deslizan: aparecen de golpe, y el ratón va más suelto.
+El desenfoque y las sombras ya vienen apagados de serie en Omarchy. En un ordenador con tarjeta
+gráfica nada de esto hace falta: es el precio de la máquina virtual.
 
 ❓ ¿Cuánto has tardado desde que arrancó la ISO hasta ver el escritorio? ¿Qué te pidió el
 instalador y qué **no** te pidió, comparado con la instalación de Mint (particiones, idioma,

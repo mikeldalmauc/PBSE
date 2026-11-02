@@ -124,9 +124,13 @@ se llenaba de restos de ventanas; con **virtio** se ve limpia, así que la guía
 escritorio. Las franjas grises del visor SPICE salen cuando la resolución de Omarchy (16:10) no
 coincide con la del monitor (16:9): la guía fija `hl.monitor` a 1600x900 en `monitors.lua` junto con
 la escala 1 y manda reiniciar. `glxinfo -B` da `llvmpipe`: Isard no da GPU y Hyprland dibuja con la
-CPU, por eso va lento y el ratón pesa incluso con 4 núcleos y 8 GB; la guía manda apagar animaciones
-(Appearance → Animations) y, si hace falta, desenfoque y sombras en `looknfeel.lua`. Queda por
-confirmar cuánto mejora con eso y si el nombre de salida es siempre `Virtual-1`.
+CPU, por eso va lento y el ratón pesa incluso con 4 núcleos y 8 GB; la guía manda apagar las
+animaciones descomentando el bloque `Disable all animations` que ya trae `~/.config/hypr/looknfeel.lua`
+(en Omarchy 4 no hay interruptor en el menú, aunque el manual lo cite en Appearance; el desenfoque y
+las sombras ya vienen apagados de serie). En los equipos del aula, la pantalla completa del visor
+SPICE (`F11`) no tapa la barra de tareas de Windows y deja franjas grises: la guía manda ocultarla
+automáticamente, que es un ajuste de usuario. Queda por confirmar cuánto mejora la fluidez y si el
+nombre de salida es siempre `Virtual-1`.
 
 **Tarea nueva 17: Tu ordenador en el bolsillo** (2026-11-01; **se dará en el segundo trimestre**, decidido el mismo día). Tarea suelta
 (`1-basico/17-claude-y-drive/1-tarea-tu-ordenador-en-el-bolsillo.md`, Apto / No apto, 6 h en
